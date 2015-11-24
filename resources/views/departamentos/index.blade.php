@@ -26,11 +26,11 @@
                             <td>{{$departamento->id_departamento}}</td>
                             <td>{{$departamento->descrip_departamento}}</td>
                             <td width="60" align="center">
-                                {!! Html::link('departamentos/editar/'.$departamento->id_departamento, 'Editar', array('class' => 'btn btn-warning btn-xs')) !!}
+                                {!! Html::link('departamentos/editar/'.$departamento->id_departamento, 'Editar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}
                             </td>
                             <td width="60" align="center">
                                 {!! Form::open(array('url' =>'departamentos/'.$departamento->id_departamento, 'method' => 'DELETE')) !!}
-                                <button type="submit" class="glyphicon glyphicon-trash"></button>
+                                <button type="submit" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</button>
                                 {!! Form::close() !!}
                             </td>
                         </tr>

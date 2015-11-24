@@ -30,11 +30,11 @@
                             <td style="text-align:center;">{{$almacen->telefono}}</td>
 
                                 <td width="20px" align="center">
-                                    {!! Html::link('almacen/editar/'.$almacen->id_almacen, 'Editar', array('class' => 'btn btn-warning btn-xs')) !!}
+                                    {!! Html::link('almacen/editar/'.$almacen->id_almacen, 'Editar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}
                                 </td>
                                 <td width="20px" align="center">
                                     {!! Form::open(array('url' =>'almacen/eliminar/'.$almacen->id_almacen, 'method' => 'DELETE')) !!}
-                                    <button type="submit" class="glyphicon glyphicon-trash"></button>
+                                    <button type="submit" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</button>
                                 </td>
                         </tr>
                     @endforeach

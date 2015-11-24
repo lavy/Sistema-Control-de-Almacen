@@ -108,7 +108,7 @@
                 });
 
                 $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-                    e.preventDefault(); $(this).parent('.input_group').remove(); x--;
+                    e.preventDefault(); $(this).parent(wrapper).remove(); x--;
                 })
 
                 var sum=1;

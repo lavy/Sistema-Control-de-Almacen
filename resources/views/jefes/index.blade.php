@@ -29,7 +29,7 @@
                             <td style="text-align:center;">{{$jefe->cedula}}</td>
                             <td style="text-align:center;">{{$jefe->fecha_ingreso}}</td>
                             <td width="60" align="center">
-                                {!! Html::link('jefes/editar/'.$jefe->id_jefe, 'Editar', array('class' => 'btn btn-warning btn-xs')) !!}
+                                {!! Html::link('jefes/editar/'.$jefe->id_jefe, 'Editar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}
                             </td>
                         </tr>
                     @endforeach

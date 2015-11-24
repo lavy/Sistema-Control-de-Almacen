@@ -99,7 +99,7 @@
                 </table>
             </div>
         </div>
-                {!!form::submit('Añadir',['class'=>'btn btn-success'])!!}
+                {!!form::submit('Aceptar',['class'=>'btn btn-success'])!!}
     {!!Form::close()!!}
     </div>
 

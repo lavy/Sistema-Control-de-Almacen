@@ -32,11 +32,11 @@
                             <td style="text-align:center;">{{$prov->telef_contacto}}</td>
                             <td style="text-align:center;">{{$prov->email}}</td>
                             <td width="60" align="center">
-                                {!! Html::link('proveedor/editar/'.$prov->id_proveedor, 'Editar', array('class' => 'btn btn-warning btn-xs')) !!}
+                                {!! Html::link('proveedor/editar/'.$prov->id_proveedor, 'Editar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}
                             </td>
                             <td width="60" align="center">
                                 {!! Form::open(array('url' =>'proveedor/eliminar/'.$prov->id_proveedor, 'method' => 'DELETE')) !!}
-                                <button type="submit" class="glyphicon glyphicon-trash"></button>
+                                <button type="submit" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</button>
                                 {!! Form::close() !!}
                             </td>
                         </tr>

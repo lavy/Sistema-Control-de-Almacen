@@ -32,9 +32,6 @@ class DespachosController extends Controller {
             ->join('renglones', 'detalle_planilla_orden.id_renglon', '=', 'renglones.id_renglon')
             ->select('detalle_planilla_orden.*', 'almacen.descrip_almacen', 'renglones.descrip_renglon')
             ->where('id_orden','LIKE','%'.$buscar.'%')->where('detalle_planilla_orden.cod_usua','=',Auth::User()->cod_usua)->paginate(5);
-      /*  $orden=\App\DetalleOrden::where('id_orden','LIKE','%'.$buscar.'%')
-            ->where('cod_usua','=',Auth::User()->cod_usua)
-            ->paginate(5);*/
         $orden->setPath('despacho');
 		return view('despacho.index')->with(['orden'=>$orden]);
 	}
@@ -117,6 +114,7 @@ class DespachosController extends Controller {
         $despacho->id_renglon=\Request::Input('articulo');
         $despacho->id_tecnico=\Request::Input('tecnico');
         $despacho->cantidad=\Request::Input('cantidad');
+        dd($despacho->serial=\Request::Input('serial'));
         if(Auth::User())
         {
             $despacho->cod_usua=Auth::User()->cod_usua;
@@ -137,7 +135,7 @@ class DespachosController extends Controller {
 	}
 
 
-    public function invoice($id)
+    public function planilla($id)
     {
         $despacho=\App\Orden::find($id);
 
@@ -148,16 +146,23 @@ class DespachosController extends Controller {
             ->where('detalle_planilla_orden.id_orden','=',$id)->get();
 
 
-        $jefe=DB::select("SELECT MAX(j.fecha_ingreso) as fecha,j.nombre,j.cedula,o.descrip_oficina
-                          from jefes j
-                          join oficinas o
-                          on j.id_oficina=o.id_oficina;");
+        $jefe=DB::select("SELECT MAX(j.fecha_ingreso) AS fecha,j.nombre,j.cedula,o.descrip_oficina
+                          FROM jefes j
+                          JOIN oficinas o
+                          ON j.id_oficina=o.id_oficina;");
 
         $usuario=DB::select("SELECT u.ci_usua,u.nombre,u.apellido,u.cargo
                             FROM users u
                             JOIN planilla_orden p
                             ON p.cod_usua=u.cod_usua
                             AND p.id_orden=".$id);
+
+        $oficinas=DB::table('planilla_orden')
+            ->join('almacen','planilla_orden.id_almacen','=','almacen.id_almacen')
+            ->join('oficinas','planilla_orden.id_oficina','=','oficinas.id_oficina')
+            ->join('departamentos','planilla_orden.id_departamento','=','departamentos.id_departamento')
+            ->select('almacen.descrip_almacen','oficinas.descrip_oficina','departamentos.descrip_departamento')
+            ->where('planilla_orden.id_orden','=',$id)->get();
 
         $beneficiarios = DB::table('planilla_orden')
             ->join('solicitudes_almacen', 'planilla_orden.id_solicitud', '=', 'solicitudes_almacen.id_solicitud')
@@ -171,12 +176,9 @@ class DespachosController extends Controller {
                 ->where('planilla_orden.id_orden','=',$id)->get();
 
         $view =  \View::make('despacho.acta_entrega')->with(['despacho'=>$despacho,'jefe'=>$jefe,'usuario'=>$usuario,
-            'beneficiario'=>$beneficiarios,'tabla'=>$tabla,'tecnicos'=>$tecnicos])->render();
+            'beneficiario'=>$beneficiarios,'tabla'=>$tabla,'tecnicos'=>$tecnicos,'oficinas'=>$oficinas])->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
-        return $pdf->stream('invoice');
+        return $pdf->stream('planilla');
     }
-
-
-
 }

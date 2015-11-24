@@ -26,11 +26,11 @@
                             <td style="text-align:center;">{{$oficina->id_oficina}}</td>
                             <td>{{$oficina->descrip_oficina}}</td>
                             <td width="60" align="center">
-                                {!! Html::link('oficinas/editar/'.$oficina->id_oficina, 'Editar', array('class' => 'btn btn-warning btn-xs')) !!}
+                                {!! Html::link('oficinas/editar/'.$oficina->id_oficina, 'Editar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}
                             </td>
                             <td width="60" align="center">
                                 {!! Form::open(array('url' =>'oficinas/eliminar/'.$oficina->id_oficina, 'method' => 'DELETE')) !!}
-                                <button type="submit" class="glyphicon glyphicon-trash"></button>
+                                <button type="submit" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</button>
                                 {!! Form::close() !!}
                             </td>
                         </tr>

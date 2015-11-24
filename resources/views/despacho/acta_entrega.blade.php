@@ -59,9 +59,9 @@
                     {
                     ?>
 
-                    <td width="160" class="ws9"><?php echo $beneficiarios->beneficiario?></td>
-                    <td width="152" class="ws9"><?php echo $beneficiarios->telef_beneficiario?></td>
-                    <td width="181" class="ws9"><a href="mailto:<?php echo $beneficiarios->email?>"><?php echo $beneficiarios->email?></td>
+                    <td width="160" class="ws9" style="text-align: center"><?php echo $beneficiarios->beneficiario?></td>
+                    <td width="152" class="ws9" style="text-align: center"><?php echo $beneficiarios->telef_beneficiario?></td>
+                    <td width="181" class="ws9" style="text-align: center"><a href="mailto:<?php echo $beneficiarios->email?>"><?php echo $beneficiarios->email?></td>
                     <?php
                     }
                     ?>
@@ -69,9 +69,59 @@
                 </tbody>
             </table>
         </div>
-    </div></div>
+    </div>
+</div>
 
-<div id="text1" style="position:absolute; overflow:hidden; left:301px; top:205px; width:114px; height:20px; z-index:1">
+<div id="text1" style="position:absolute; overflow:hidden; left:301px; top:380px; width:114px; height:20px; z-index:1">
+    <div class="wpmd">
+        <div style="font-size: 16px">Datos Pedido</div>
+    </div>
+</div>
+
+<div id="table1" style="position:absolute; overflow:hidden; left:25px; top:400px; width:700px; height:52px; z-index:0">
+    <div class="wpmd">
+        <div>
+            <table bordercolorlight="#C0C0C0" bordercolordark="#808080" bgcolor="#FFFFFF" border="1">
+                <tbody>
+                <tr valign="top">
+                    <td width="100"><div class="wpmd">
+                            <div align="center" class="ws9"><b>N° Orden</b></div>
+                        </div>
+                    </td>
+                    <td width="100"><div class="wpmd">
+                            <div align="center" class="ws9"><b>Descripción Articulo</b></div>
+                        </div>
+                    </td>
+                    <td width="160"><div class="wpmd">
+                            <div align="center" class="ws9"><b>Cantidad</b></div>
+                        </div>
+                    </td>
+                    <td width="120"><div class="wpmd">
+                            <div align="center" class="ws9"><b>Medida</b></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <?php
+                    foreach($tabla as $tablas)
+                    {
+                    ?>
+
+                    <td width="100" class="ws9" style="text-align: center"><?php echo $tablas->id_orden?></td>
+                    <td width="100" class="ws9" style="text-align: center"><?php echo $tablas->descrip_renglon?></td>
+                    <td width="160" class="ws9" style="text-align: center"><?php echo $tablas->cantidad?></td>
+                    <td width="120" class="ws9" style="text-align: center"><?php echo $tablas->unidad_medida?></td>
+                    <?php
+                    }
+                    ?>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="text1" style="position:absolute; overflow:hidden; left:301px; top:235px; width:114px; height:20px; z-index:1">
     <div class="wpmd">
         <div style="font-size: 16px">Datos Solicitud</div>
     </div>
@@ -83,7 +133,7 @@
     </div>
 </div>
 
-<div id="text3" style="position:absolute; overflow:hidden;  top:311px; width:706px; height:224px; z-index:3">
+<div id="text3" style="position:absolute; overflow:hidden;  top:500px; width:706px; height:224px; z-index:3">
     <div class="wpmd">
         <div align="justify"><font class="ws10">Los equipos tecnológicos
                 en esta acta señalados, se entregan bajo las siguientes condiciones: 1)
@@ -99,27 +149,29 @@
                 y 54 de la Ley Contra la Corrupción; numeral 2 del artículo 83 y
                 numeral 8 del artículo 86 de la Ley del Estatuto de la Función Pública.
                 Así mismo se obliga a presentar de inmediato, la denuncia, ante los cuerpos judiciales
-                competentes. Se hacen dos (02) ejemplares en Caracas a los Seis(06) dias
-                del mes de Febrero de 2015.</font></div>
+                competentes. Se hacen dos (02) ejemplares en Caracas a los ({{\Carbon\Carbon::now()->format('d')}}) dias
+                del mes de {{\Carbon\Carbon::now()->format('M')}} de {{\Carbon\Carbon::now()->format('Y')}}.</font></div>
     </div>
 </div>
 
 <div id="text4" style="position:absolute; overflow:hidden; left:0px; top:81px; width:177px; height:20px; z-index:4">
     <div class="wpmd">
-        <div><font class="ws10">GDC-OTIT-AE-201511-54</font></div>
+        <div><font class="ws10">GDC-OTIT-AE-{{\Carbon\Carbon::now()->format('Ym')}}-<?php echo $despacho->id_orden ?></font></div>
     </div>
 </div>
 
-<div id="table3" style="position:absolute; overflow:hidden; left:0px; top:224px; width:600px; height:80px; z-index:5">
+<div id="table3" style="position:absolute; overflow:hidden; left:0px; top:255px; width:700px; height:80px; z-index:5">
     <div class="wpmd">
         <div>
             <table bordercolorlight="#C0C0C0" bordercolordark="#808080" bgcolor="#FFFFFF" border="1">
-                <tbody><tr valign="top">
+                <tbody>
+                @foreach($oficinas as $oficina)
+                <tr valign="top">
                     <td width="100"><div class="wpmd">
                             <div align="center" class="ws9"><b>Almacen:</b></div>
                         </div>
                     </td>
-                    <td width="504"><br>
+                    <td width="504"><?php echo $oficina->descrip_almacen ?><br>
                     </td>
                 </tr>
                 <tr valign="top">
@@ -127,7 +179,7 @@
                             <div align="center" class="ws9"><b>Oficina:</b></div>
                         </div>
                     </td>
-                    <td width="504"><br>
+                    <td width="504"><?php echo $oficina->descrip_oficina ?><br>
                     </td>
                 </tr>
                 <tr valign="top">
@@ -135,34 +187,50 @@
                             <div align="center" class="ws9"><b>Departamento:</b></div>
                         </div>
                     </td>
-                    <td width="504"><br>
+                    <td width="504"><?php echo $oficina->descrip_departamento ?><br>
                     </td>
                 </tr>
-                </tbody></table>
+                @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 
-
-<div id="text5" style="position:absolute; overflow:hidden; left:20px; top:550px; width:291px; height:92px; z-index:6">
+<?php
+foreach($jefe as $jefe)
+{
+?>
+<div id="text5" style="position:absolute; overflow:hidden; left:20px; top:700px; width:291px; height:92px; z-index:6">
     <div class="wpmd">
         <div align="center"><font class="ws11">Entrega:</font></div>
-        <div align="center"><font class="ws11"><br></font></div>
-        <div align="center"><font class="ws11">Sheiffield Mejicano</font></div>
-        <div align="center"><font class="ws11">Jefe de la Oficina de Tecnológia, Informática</font></div>
-        <div align="center"><font class="ws11"> y Telecomunicaciones</font></div>
+        <div align="center"><font class="ws10"><?php echo $jefe->nombre ?><br></font></div>
+        <div align="center"><font class="ws10">CI <?php echo $jefe->cedula?></font></div>
+        <div align="center"><font class="ws10">Jefe De La <?php echo $jefe->descrip_oficina?></font></div>
+        <div align="center"><font class="ws11"></font></div>
     </div>
 </div>
+<?php
+}
+?>
 
-<div id="text6" style="position:absolute; overflow:hidden; left:430px; top:550px; width:249px; height:146px; z-index:7">
+
+<?php
+foreach($usuario as $usuario)
+{
+?>
+<div id="text6" style="position:absolute; overflow:hidden; left:430px; top:700px; width:249px; height:146px; z-index:7">
     <div class="wpmd">
         <div align="center" style="font-size: 15px">Recibe:</div>
-        <div align="center" style="font-size: 15px"><br></div>
-        <div align="center" style="font-size: 15px">Wakefield Jose Gregorio Cabrera</div>
-        <div align="center" style="font-size: 15px">Jefe de la Unidad de Tecnológia de la Información y Comunicaciones.</div>
-        <div align="center" style="font-size: 15px">Protección Civil.</div>
+        <div align="center" style="font-size: 13px"><?php echo $usuario->nombre.'  '.$usuario->apellido?><br></div>
+        <div align="center" style="font-size: 13px">CI <?php echo $usuario->ci_usua ?></div>
+        <div align="center" style="font-size: 13px"><?php echo $usuario->cargo ?></div>
+        <div align="center" style="font-size: 13px"></div>
     </div>
 </div>
+<?php
+}
+?>
 
 <div id="text7" style="position:absolute; overflow:hidden; left:285px; top:54px; width:128px; height:19px; z-index:8">
     <div class="wpmd">
@@ -171,27 +239,34 @@
 
 <div id="text8" style="position:absolute; overflow:hidden; left:625px; top:99px; width:70px; height:19px; z-index:9">
     <div class="wpmd">
-        <div>2015-12-11</div>
+        <div><?php echo $despacho->fecha_orden ?></div>
     </div></div>
 
 <div id="text9" style="position:absolute; overflow:hidden; left:637px; top:81px; width:52px; height:17px; z-index:10">
     <div class="wpmd">
-        <div>14:23:25</div>
+        <div><?php echo $despacho->hora_orden ?></div>
     </div>
 </div>
 
-<div id="text10" style="position:absolute; overflow:hidden; left:300px; top:652px; width:126px; height:58px; z-index:11">
+<?php
+foreach($tecnicos as $tec)
+{
+?>
+<div id="text10" style="position:absolute; overflow:hidden; left:300px; top:800px; width:126px; height:58px; z-index:11">
     <div class="wpmd">
         <div align="center" style="font-size: 15px">Técnico:</div>
-        <div align="center" style="font-size: 15px"><br></div>
-        <div align="center" style="font-size: 15px"><font class="ws11">Oswaldo Morgado</font></div>
+        <div align="center" style="font-size: 13px" c>CI <?php echo $tec->cedula?><br></div>
+        <div align="center" style="font-size: 15px"><font class="ws10"><?php echo $tec->nombres_apellidos?></font></div>
     </div></div>
+<?php
+}
+?>
 
-<div id="text11" style="position:absolute; overflow:hidden; left:0px; top:800px; width:441px; height:56px; z-index:12">
+<div id="text11" style="position:absolute; overflow:hidden; left:0px; top:950px; width:441px; height:56px; z-index:12">
     <div class="wpmd">
-        <div align="justify" style="font-size: 15px">Esquina de Torre a Principal, Casa de Gobierno del Distrito Capital.</div>
-        <div align="justify" style="font-size: 15px">frente a la Plaza Bolivar, Parroquia Catedral, Caracas 1010.</div>
-        <div align="justify" style="font-size: 15px"><b>Tlfs:(58-0212)863.26.55-862.15.44</b></div>
+        <div align="justify" class="ws9" >Esquina de Torre a Principal, Casa de Gobierno del Distrito Capital.</div>
+        <div align="justify" style="font-size: 13px">frente a la Plaza Bolivar, Parroquia Catedral, Caracas 1010.</div>
+        <div align="justify" style="font-size: 13px"><em><b>Tlfs:(58-0212)863.26.55-862.15.44</b></em></div>
     </div></div>
 
 </body>

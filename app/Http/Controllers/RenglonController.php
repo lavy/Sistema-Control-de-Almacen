@@ -49,6 +49,7 @@ class RenglonController extends Controller {
         $unidades=\App\Unidades::all()->lists('descrip_unidad','id_unidad');
         array_unshift($unidades,'Por Favor Seleccione una unidad de medida');
         array_unshift($trenglon,'Por Favor Seleccione un Tipo de Articulo');
+        array_unshift($marca,'Por Favor Seleccione una Marca');
 		return view('renglon.crear')->with(['almacen'=>$almacen,'trenglon'=>$trenglon,'marca'=>$marca,'modelo'=>$modelo,
         'unidades'=>$unidades]);
 	}

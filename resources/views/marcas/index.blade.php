@@ -24,11 +24,11 @@
                             <td style="text-align:center;">{{$marca->id_marca}}</td>
                             <td>{{$marca->descrip_marca}}</td>
                             <td width="60" align="center">
-                                {!! Html::link('marcas/editar/'.$marca->id_marca, 'Editar', array('class' => 'btn btn-warning btn-xs')) !!}
+                                {!! Html::link('marcas/editar/'.$marca->id_marca, 'Editar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}
                             </td>
                             <td width="60" align="center">
                                 {!! Form::open(array('url' =>'marcas/eliminar/'.$marca->id_marca, 'method' => 'DELETE')) !!}
-                                <button type="submit" class="glyphicon glyphicon-trash"></button>
+                                <button type="submit" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</button>
                             </td>
                         </tr>
 

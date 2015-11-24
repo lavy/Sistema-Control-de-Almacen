@@ -119,7 +119,7 @@ Route::get('solicitudes_procesadas','SolicitudesController@procesadas');
 
 Route::get('despacho','DespachosController@index');
 Route::get('despacho/detalle/{id}','DespachosController@edit');
-Route::get('despacho/pdf/{id}','DespachosController@invoice');
+Route::get('despacho/pdf/{id}','DespachosController@planilla');
 Route::post('despacho/{id}','DespachosController@update');
 
 Route::get('articulos','ArticulosController@index');

@@ -23,7 +23,7 @@
                     @foreach($modelos as $modelo )
                         <tr>
                             <td style="text-align:center;">{{$modelo->id_modelo}}</td>
-                            <td style="text-align:center;">{{$modelo->id_marca}}</td>
+                            <td style="text-align:center;">{{$modelo->descrip_marca}}</td>
                             <td>{{$modelo->descrip_modelo}}</td>
                         </tr>
                     @endforeach

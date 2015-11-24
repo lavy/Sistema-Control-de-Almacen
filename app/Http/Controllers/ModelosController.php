@@ -4,7 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ModelosForm;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class ModelosController extends Controller {
 
     public function __construct()
@@ -19,7 +19,11 @@ class ModelosController extends Controller {
 	public function index(Request $request)
 	{
         $buscar=$request->input('buscar');
-		$modelos=\App\Modelo::where('descrip_modelo','LIKE','%'.$buscar.'%')->paginate(5);
+		$modelos=DB::table('modelo')
+                    ->join('marca','marca.id_marca','=','modelo.id_marca')
+                    ->select('modelo.*','marca.descrip_marca')
+                    ->where('descrip_modelo','LIKE','%'.$buscar.'%')->paginate(5);
+		/*\App\Modelo::where('descrip_modelo','LIKE','%'.$buscar.'%')->paginate(5);*/
         $modelos->setPath('modelos');
         return view('modelos.index')->with('modelos',$modelos);
 	}
@@ -32,7 +36,7 @@ class ModelosController extends Controller {
 	public function create()
 	{
         $marca=\App\Marca::all()->lists('descrip_marca','id_marca');
-//        array_unshift($marca,'Por Favor Seleccione una marca');
+        array_unshift($marca,'Por Favor Seleccione una marca');
         return view('modelos.crear')->with('marca',$marca);
 	}
 

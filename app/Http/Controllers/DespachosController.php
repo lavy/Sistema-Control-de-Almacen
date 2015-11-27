@@ -114,7 +114,7 @@ class DespachosController extends Controller {
         $despacho->id_renglon=\Request::Input('articulo');
         $despacho->id_tecnico=\Request::Input('tecnico');
         $despacho->cantidad=\Request::Input('cantidad');
-        dd($despacho->serial=\Request::Input('serial'));
+        /*dd($despacho->serial=\Request::Input('serial'));*/
         if(Auth::User())
         {
             $despacho->cod_usua=Auth::User()->cod_usua;
@@ -141,7 +141,7 @@ class DespachosController extends Controller {
 
         $tabla = DB::table('detalle_planilla_orden')
             ->join('renglones', 'detalle_planilla_orden.id_renglon', '=', 'renglones.id_renglon')
-            ->select('detalle_planilla_orden.*', 'renglones.descrip_renglon', 'renglones.cantidad',
+            ->select('detalle_planilla_orden.*', 'renglones.descrip_renglon', 'detalle_planilla_orden.cantidad',
                     'renglones.unidad_medida', 'renglones.descrip_renglon')
             ->where('detalle_planilla_orden.id_orden','=',$id)->get();
 

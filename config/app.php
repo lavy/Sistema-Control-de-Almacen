@@ -149,7 +149,6 @@ return [
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
-        /*'Khill\Lavacharts\Laravel\LavachartsServiceProvider::class'*/
 
 	],
 

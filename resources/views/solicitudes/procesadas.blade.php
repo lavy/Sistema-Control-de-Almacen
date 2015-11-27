@@ -28,10 +28,10 @@
                     <tr>
                         {{--<th width="20px" style="text-align:center;font:bold 14px 'cursive';"># SOLICITUD</th>--}}
                         <th style="text-align:center;font:bold 14px 'cursive';">FECHA SOLICITUD</th>
-                        <th style="text-align:center;font:bold 14px 'cursive';">OFICINA</th>
-                        <th style="text-align:center;font:bold 14px 'cursive';">DEPARTAMENTO</th>
                         <th style="text-align:center;font:bold 14px 'cursive';">BENEFICIARIO</th>
-                        <th style="text-align:center;font:bold 14px 'cursive';">TELEFONOS</th>
+                        {{--<th style="text-align:center;font:bold 14px 'cursive';">DEPARTAMENTO</th>
+                        <th style="text-align:center;font:bold 14px 'cursive';">BENEFICIARIO</th>--}}
+                        <th style="text-align:center;font:bold 14px 'cursive';">TELEFONO</th>
                         <th style="text-align:center;font:bold 14px 'cursive';">DETALLES</th>
                         <th style="text-align:center;font:bold 14px 'cursive';">ESTATUS</th>
                         <th style="text-align:center;font:bold 14px 'cursive';">ACCIONES</th>
@@ -40,8 +40,8 @@
                         <tr>
                             {{--<td style="text-align:center;">{{$solicitud->id_solicitud}}</td>--}}
                             <td style="text-align:center;">{{$solicitud->fecha_solicitud}}</td>
-                            <td>{{$solicitud->descrip_oficina}}</td>
-                            <td>{{$solicitud->descrip_departamento}}</td>
+                           {{-- <td>{{$solicitud->descrip_oficina}}</td>
+                            <td>{{$solicitud->descrip_departamento}}</td>--}}
                             <td>{{$solicitud->beneficiario}}</td>
                             <td>{{$solicitud->telef_beneficiario}}</td>
                             <td>{{$solicitud->pedido}}</td>

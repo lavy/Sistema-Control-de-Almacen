@@ -41,7 +41,7 @@
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('telef_beneficiario','Telefono Beneficiario:')!!}
-                    {!!Form::text('telef_beneficiario',null,['class'=>'form-control','type'=>'text'])!!}
+                    {!!Form::text('telef_beneficiario',null,['class'=>'form-control','type'=>'text','placeholder'=>'0426-256-6545','pattern'=>'\d{4}[\-]\d{3}[\-]\d{4}'])!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('email_beneficiario','Email Beneficiario:')!!}

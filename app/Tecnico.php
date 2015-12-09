@@ -10,4 +10,5 @@ class Tecnico extends Model {
     protected $fillable=[];
     protected $guarded=[];
 
+
 }

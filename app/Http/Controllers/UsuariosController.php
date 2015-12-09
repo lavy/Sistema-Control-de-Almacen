@@ -6,7 +6,7 @@ use App\Http\Requests\UsuariosForm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 class UsuariosController extends Controller {
 
 
@@ -23,9 +23,15 @@ class UsuariosController extends Controller {
 	public function index(Request $request)
 	{
         $buscar=$request->input('buscar');
-        $usuarios=\App\User::where('nombre','LIKE','%'.$buscar.'%')
+        /*$usuarios=\App\User::where('nombre','LIKE','%'.$buscar.'%')
                             ->where('UserLevel','<>',Auth::user()->UserLevel)
-                            ->paginate(5);
+                            ->paginate(5);*/
+        $usuarios=DB::table('users')
+                    ->join('userlevels','users.UserLevel','=','userlevels.UserLevelID')
+                    ->select('users.*','userlevels.UserLevelName')
+                    ->where('nombre','LIKE','%'.$buscar.'%')
+                    ->where('UserLevel','<>',Auth::user()->UserLevel)
+                    ->paginate(5);
         $usuarios->setPath('usuarios');
 		return view('usuarios.index')->with('usuarios',$usuarios);
 	}

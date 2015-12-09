@@ -21,4 +21,9 @@ class Renglon extends Model {
         return $this->belongsToMany('\App\Serial','menu_task_user')
             ->withPivot('user_id','status');
     }*/
+
+    public function unidades()
+    {
+        return $this->belongsTo('\App\Unidades','id_renglon');
+    }
 }

@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use App\Renglon;
+
 class HomeController extends Controller {
 
 	/*
@@ -32,5 +34,11 @@ class HomeController extends Controller {
 	{
 		return view('home');
 	}
+
+    public function app($id)
+    {
+        $renglon=Renglon::find($id);
+        return view('app')->with('renglon',$renglon);
+    }
 
 }

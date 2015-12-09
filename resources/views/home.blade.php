@@ -1,6 +1,12 @@
-@extends('app')
 @section('content')
-
+   {{-- <script>
+        function carga(){
+            $('#myModal').modal('show') // evento que lanza la ventana
+            $('#modalContent').val('');
+            $('#bodys').load($(this).attr('href'));
+            return false;
+        }
+    </script>--}}
     <style>
         .carousel-inner > .item > img,
         .carousel-inner > .item > a > img {
@@ -8,7 +14,22 @@
             margin: auto;
         }
     </style>
-
+    {{--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Seriales</h4>
+                </div>
+                <div class="modal-body" id="bodys">
+                    Moldealos
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>--}}
 
     <div class="container">
         <br>

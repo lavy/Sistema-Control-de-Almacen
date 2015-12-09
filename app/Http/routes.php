@@ -11,10 +11,6 @@
 |
 */
 
-
-
-
-
 Route::get('/', 'HomeController@index');
 Route::get('home', 'HomeController@index');
 
@@ -246,6 +242,9 @@ Route::get('modal/{id}',function($id)
 {
     $seriales=\App\Seriales::where('id_renglon','=',$id)->get();
 
+    $cantidad=count($seriales);
+
+    echo "<b>Cantidad:</b>".$cantidad;
     echo "<table class='table  table-condensed table-striped'>";
       echo "<tr>";
          echo "<td style='text-align:center;'>".'<b>Articulo</b>'."</td>";
@@ -260,6 +259,13 @@ Route::get('modal/{id}',function($id)
     }
       echo "</table>";
 });
+
+Route::get('hola',function(){
+    /*$phone = \App\Unidades::find(1)->renglon();*/
+    $unidades = \App\Unidades::with('renglon')->get();
+    dd($unidades);
+});
+
 
 Route::get('solicitudes/mostrar/{id}',function($id){
 

@@ -83,6 +83,11 @@ class DespachosController extends Controller {
                             AND d.id_transaccion=".$id);
 
 
+        /*$det=DB::table('detalle_planilla_orden')
+                ->join('inventario','detalle_planilla_orden.id_renglon','=','inventario.id_renglon')
+                ->select('inventario.cantidad_existencia','inventario.existencia_minima')
+                ->where('detalle_planilla_orden.id_transaccion','=',$id)->get();
+        */
         /*$solic= DB::table('solicitudes_almacen')
             ->join('detalle_planilla_orden','solicitudes_almacen.id_solicitud','=','detalle_planilla_orden.id_solicitud')
             ->join('oficinas','solicitudes_almacen.id_oficina','=','oficinas.id_oficina')
@@ -93,7 +98,7 @@ class DespachosController extends Controller {
        /* dd($det);*/
         /*$tecnico=Tecnico::only('estatus');*/
         $seriales=Inventario_Seriales::where('estatus','=','Stock')->lists('serial','id_serial');
-        $tecnicos = \App\Tecnico::where('estatus','=','Activo')->lists('nombres_apellidos', 'id_tecnico');
+        $tecnicos = Tecnico::where('estatus','=','Activo')->lists('nombres_apellidos', 'id_tecnico');
         $tecnico=array_unshift($tecnicos,'Seleccione...');
 
         return view('despacho.detalle')->with(['detalles'=>$detalle,'deta'=>$det,'tecnicos'=>$tecnicos,'seriales'=>$seriales]);
@@ -114,7 +119,7 @@ class DespachosController extends Controller {
         $despacho->id_renglon=\Request::Input('articulo');
         $despacho->id_tecnico=\Request::Input('tecnico');
         $despacho->cantidad=\Request::Input('cantidad');
-        /*dd($despacho->serial=\Request::Input('serial'));*/
+
         if(Auth::User())
         {
             $despacho->cod_usua=Auth::User()->cod_usua;
@@ -145,7 +150,6 @@ class DespachosController extends Controller {
                     'renglones.unidad_medida', 'renglones.descrip_renglon')
             ->where('detalle_planilla_orden.id_orden','=',$id)->get();
 
-
         $jefe=DB::select("SELECT MAX(j.fecha_ingreso) AS fecha,j.nombre,j.cedula,o.descrip_oficina
                           FROM jefes j
                           JOIN oficinas o
@@ -174,6 +178,9 @@ class DespachosController extends Controller {
                 ->join('tecnicos','planilla_orden.id_tecnico','=','tecnicos.id_tecnico')
                 ->select('tecnicos.nombres_apellidos','tecnicos.cedula')
                 ->where('planilla_orden.id_orden','=',$id)->get();
+
+        /*$tecnicos = \App\Tecnico::with('planilla_orden')->where('id_orden','=',$id)->where('tecnicos.id_tecnico','=','planilla_orden.id_tecnico')->get();*/
+
 
         $view =  \View::make('despacho.acta_entrega')->with(['despacho'=>$despacho,'jefe'=>$jefe,'usuario'=>$usuario,
             'beneficiario'=>$beneficiarios,'tabla'=>$tabla,'tecnicos'=>$tecnicos,'oficinas'=>$oficinas])->render();

@@ -26,7 +26,9 @@ class RenglonController extends Controller {
             ->join('tipo_renglones', 'renglones.id_tipo_renglon', '=', 'tipo_renglones.id_tipo_renglon')
             ->join('marca', 'renglones.id_marca', '=', 'marca.id_marca')
             ->join('modelo', 'renglones.id_modelo', '=', 'modelo.id_modelo')
-            ->select('renglones.*', 'tipo_renglones.descrip_tipo_renglon', 'marca.descrip_marca','modelo.descrip_modelo')
+            /*->join('unidades_medidas','renglones.id_unidad','=','unidades_medidas.id_unidad')*/
+            ->select('renglones.*', 'tipo_renglones.descrip_tipo_renglon', 'marca.descrip_marca','modelo.descrip_modelo'/*,
+                    'unidades_medidas.descrip_unidad'*/)
             ->where('descrip_renglon','LIKE','%'.$buscar.'%')
             ->where('renglones.id_almacen','=',Auth::User()->id_almacen)
             ->paginate(5);

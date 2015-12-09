@@ -63,8 +63,6 @@
                                 </div>
                             </td>
 
-
-                            {{--<td>{{$renglon->foto_producto}}</td>--}}
                             <td width="60" align="center">
                                 {!! Html::link('renglones/editar/'.$renglon->id_renglon, 'Editar', array('class' => 'btn btn-warning btn-xs')) !!}
                             </td>
@@ -92,20 +90,5 @@
             $('#bodys').load($(this).attr('href'));
             return false;
         });
-        /*$('.modalLoad').click(function(){
-            $('#myModal').modal('show')
-            var dato = $('#boton').val();
-            var url = 'modal/'+dato;
-            $.get({
-                type:'GET',
-                url:url,
-
-
-                success: function(datos){
-                    $('#bodys').html(datos);
-                }
-            });
-            return false;
-        });*/
     </script>
 @endsection

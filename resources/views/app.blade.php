@@ -13,24 +13,34 @@
     <script src="{{asset ('bootstrap/js/collapse.js')}}"></script>
     <script src="{{asset ('datepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
     <link rel="shortcut icon" href="{{asset('images/estrella-trans.ico')}}">
-
     <script src="{{asset('highcharts/highcharts.js')}}"></script>
     <script src="{{asset('highcharts/exporting.js')}}"></script>
 
     {{--<script src="{{asset('datepicker/js/bootstrap-datepicker.js')}}"></script>
     <link href="{{ asset('datepicker/css/datepicker.css')}}" rel="stylesheet" media="screen">--}}
+    <script>
+        function carga(){
+            $('#myModal').modal('show') // evento que lanza la ventana
+            $('#modalContent').val('');
+            $('#bodys').load($(this).attr('href'));
+            return false;
+        }
+    </script>
 
+<body onload="carga()">
 
-<body>
     <div class="container">
         <img src="{{asset('images/banner.png')}}" width="1150px" height="200px" class="img-responsive" usemap="#map">
 
         <map name="map">
-            <area shape="rect" coords="715,50,740,72" href="http://twitter.com/prensacapital" />
-            <area shape="rect" coords="745,50,770,74" href="http://www.facebook.com/gobiernodel.distritocapital" />
-            <area shape="rect" coords="775,49,798,75" href="http://www.youtube.com/channel/UCkSbdOePnjXDHbWJt0rA_mw" />
-            <area shape="rect" coords="802,49,828,75" href="http://instagram.com/prensacapital" />
+            <area shape="rect" coords="715,50,740,72" href="http://twitter.com/prensacapital" title="Twitter"/>
+            <area shape="rect" coords="745,50,770,74" href="http://www.facebook.com/gobiernodel.distritocapital" title="Facebook" />
+            <area shape="rect" coords="775,49,798,75" href="http://www.youtube.com/channel/UCkSbdOePnjXDHbWJt0rA_mw" title="Youtube"/>
+            <area shape="rect" coords="802,49,828,75" href="http://instagram.com/prensacapital" title="Instagram"/>
         </map>
+
+
+
         @if (Auth::check())
             <nav class="navbar navbar-default">
                 <div class="container">
@@ -46,9 +56,74 @@
 
                         <?php App\Menu::menu_complete(Auth::user()->cod_usua)  ?>
 
-                    </div>
-                </div>
-            </nav>
+
+
+
+{{--<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">{{Auth::user()->nombre.'   '.Auth::user()->apellido}}</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Inicio</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Institución
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Jefes</a></li>
+                        <li><a href="#">Tecnicos</a></li>
+                        <li><a href="#">Oficinas</a></li>
+                        <li><a href="#">Departamentos</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tablas Básicas
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Almacenes</a></li>
+                        <li><a href="#">Marcas</a></li>
+                        <li><a href="#">Modelos</a></li>
+                        <li><a href="#">Proveedores</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Insumos
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Articulos</a></li>
+                        <li><a href="#">Tipo de Articulos</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Solicitudes</a></li>
+                <li><a href="#">Despachos</a></li>
+                <li><a href="#">Inventario</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Estadísticas
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Reportes</a></li>
+                        <li><a href="#">Gráficos</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Seguridad
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Reportes</a></li>
+                        <li><a href="#">Gráficos</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>Salir</a></li>
+
+            </ul>
+        </div>
+    </div>
+</nav>--}}
+
+            </div>
+        </div>
+    </nav>
         @endif
         {{--@if(Auth::user()->UserLevel===0)
 
@@ -126,3 +201,68 @@
 </body>
 </html>
 --}}
+
+{{--
+
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">WebSiteName</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Inicio</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Institución
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Jefes</a></li>
+                        <li><a href="#">Tecnicos</a></li>
+                        <li><a href="#">Oficinas</a></li>
+                        <li><a href="#">Departamentos</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tablas Básicas
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Almacenes</a></li>
+                        <li><a href="#">Marcas</a></li>
+                        <li><a href="#">Modelos</a></li>
+                        <li><a href="#">Proveedores</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Insumos
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Articulos</a></li>
+                        <li><a href="#">Tipo de Articulos</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Solicitudes</a></li>
+                <li><a href="#">Despachos</a></li>
+                <li><a href="#">Inventario</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Estadísticas
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Reportes</a></li>
+                        <li><a href="#">Gráficos</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Seguridad
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Reportes</a></li>
+                        <li><a href="#">Gráficos</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>Salir</a></li>
+
+            </ul>
+        </div>
+    </div>
+</nav>--}}

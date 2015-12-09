@@ -135,6 +135,7 @@
 
 <div id="text3" style="position:absolute; overflow:hidden;  top:500px; width:706px; height:224px; z-index:3">
     <div class="wpmd">
+
         <div align="justify"><font class="ws10">Los equipos tecnológicos
                 en esta acta señalados, se entregan bajo las siguientes condiciones: 1)
                 El Equipo(s) ya identificado(s) es propiedad del Gobierno del Distrito
@@ -150,9 +151,15 @@
                 numeral 8 del artículo 86 de la Ley del Estatuto de la Función Pública.
                 Así mismo se obliga a presentar de inmediato, la denuncia, ante los cuerpos judiciales
                 competentes. Se hacen dos (02) ejemplares en Caracas a los ({{\Carbon\Carbon::now()->format('d')}}) dias
-                del mes de {{\Carbon\Carbon::now()->format('M')}} de {{\Carbon\Carbon::now()->format('Y')}}.</font></div>
+                del mes de <?php $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+                echo $meses[date('n')-1];
+                ?>
+                 de {{\Carbon\Carbon::now()->format('Y')}}.</font></div>
     </div>
 </div>
+
+<?php setlocale(LC_ALL,"es_ES");?>
+{{--echo strftime("%A %d de %B del %Y");--}}
 
 <div id="text4" style="position:absolute; overflow:hidden; left:0px; top:81px; width:177px; height:20px; z-index:4">
     <div class="wpmd">

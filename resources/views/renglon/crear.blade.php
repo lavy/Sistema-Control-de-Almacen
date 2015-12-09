@@ -16,7 +16,7 @@
         @endif
 
         <div class="panel panel-primary">
-            <div class="panel-heading" style="text-align:center;">CREAR ARTÍCULO</div>
+            <div class="panel-heading" style="text-align:center;">CREAR ARTÍCULO </div>
             <div class="panel-body">
 
                 {{--<div class="col-md-6">
@@ -53,18 +53,18 @@
                         <div class="col-md-6">
                             <label for="serial[]">Serial</label>
                             <div class="input-group">
-                                <div><input type="text" name="serial[]" class="form-control"></div>
-                                <span class="input-group-btn"><button class="add_field_button btn btn-info">Añadir</button></span>
+                                <div><input type="text" name="serial[]" class="form-control" title="Si quiere agregar otro producto, Presione el boton (+)" data-toggle="tooltip"></div>
+                                <span class="input-group-btn"><button class="add_field_button btn btn-info">+</button></span>
                             </div>
                         </div>
                     </div>
                 <div class="col-md-6">
                     {!!Form::label('unidad_medida','Unidad de Medida:')!!}
-                    {!!Form::select('unidad_medida',$unidades,'',['class'=>'form-control','id'=>'unidades'])!!}
+                    {!!Form::select('unidad_medida',['Kilogramos'=>'Kilogramos','Unidades'=>'Unidades','Litros'=>'Litros','Metros'=>'Metros'],'1',['class'=>'form-control','id'=>'unidades'])!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('cantidad','Cantidad:')!!}
-                    {!!Form::text('cantidad',1,['class'=>'form-control','type'=>'text','id'=>'cantidad'])!!}
+                    {!!Form::text('cantidad',1,['class'=>'form-control','type'=>'text','id'=>'cantidad','readonly'=>'true'])!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('existencia_minima','Existencia Minima:')!!}
@@ -103,21 +103,41 @@
                     e.preventDefault();
                     /*if(x < max_fields){ //max input box allowed*/
                         x++; //text box increment
-                        $(wrapper).append('<div class="col-md-6"><label for="serial[]">Serial '+x+'</label><div class="input-group"><input type="text" name="serial['+x+']" class="form-control"/><span class="input-group-btn"><a href="#" class="remove_field btn btn-danger">Remover</a></span></div></div>'); //add input box
+                        $(wrapper).append('<div class="col-md-6"><label for="serial[]">Serial '+x+'</label><div class="input-group"><input type="text" title="Si quiere quitar este producto, Presione el boton (-)" data-toggle="tooltip" name="serial['+x+']" class="form-control"/></div><a href="#" class="remove_field btn btn-danger">-</a>'); //add input box
                     /*}*/
                 });
 
-                $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-                    e.preventDefault(); $(this).parent(wrapper).remove(); x--;
+                $(wrapper).on("click",".remove_field",function(e){ //user click on remove text
+                    e.preventDefault(); $(this).parent('div').remove(); x--;
+                });
+
+
+                /*var cantidad=('#cantidad').val();
+                if(cantidad <= 0)
+                {
+                    alert('la cantidad no debe ser 0');
+                    cantidad=1;
+                }*/
+
+
+
+                $('.add_field_button').on('click', function () {
+                    var total=$('#cantidad').val()
+                        total++;
+                    $('#cantidad').val(total);
+                });
+
+                $(wrapper).on('click','.remove_field', function(){
+                    var total=$('#cantidad').val();
+                        total--;
+                    $('#cantidad').val(total);
+                });
+
+                $(function () {
+                    $('[data-toggle="tooltip"]').tooltip()
                 })
 
-                var sum=1;
-                $('.add_field_button').on('click', function () {
-                    sum++;
-                    $('#cantidad').val(sum);
-                });
-          });
+        });
     </script>
-
 @endsection
 

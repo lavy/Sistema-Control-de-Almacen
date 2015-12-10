@@ -63,14 +63,4 @@
         </div>
     </div>
     </div>
-    <script>
-        $('.shown').mouseenter(function() {
-            $(this).css("cursor","pointer");
-            $(this).animate({width: "100%", height: "100%"}, 'slow');
-        });
-
-        $('.shown').mouseleave(function() {
-            $(this).animate({width: "30%", height:"30%"}, 'slow');
-        });
-    </script>
 @endsection

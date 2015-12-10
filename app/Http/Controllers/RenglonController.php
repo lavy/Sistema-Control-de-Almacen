@@ -7,6 +7,7 @@ use App\Renglon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class RenglonController extends Controller {
 
@@ -66,6 +67,13 @@ class RenglonController extends Controller {
 		$renglon= new \App\Renglon();
         /*$seriales=$renglon->serial=\Request::Input('serial');
         $cantidad=count($seriales);*/
+
+
+        $foto_producto=Input::file('foto_articulo');
+        $ruta=public_path().'/articulos/';
+        $url_foto=$foto_producto->getClientOriginalName();
+        $subir=$foto_producto->move($ruta,$foto_producto->getClientOriginalName());
+
         $renglon->id_almacen =Auth::User()->id_almacen;
         $renglon->id_tipo_renglon =\Request::Input('tipo_renglon');
         $renglon->descrip_renglon =\Request::Input('descripcion');
@@ -73,6 +81,7 @@ class RenglonController extends Controller {
         $renglon->id_modelo =\Request::Input('modelo');
         $renglon->unidad_medida =\Request::Input('unidad_medida');
         $renglon->cantidad =\Request::input('cantidad');
+        $renglon->foto_producto =$url_foto;
         $renglon->existencia_minima =\Request::Input('existencia_minima');
         if (Auth::User()) {
            $renglon->cod_usua = Auth::User()->cod_usua;

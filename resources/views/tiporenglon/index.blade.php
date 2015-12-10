@@ -25,11 +25,11 @@
                             <td style="text-align:center;">{{$tiporenglon->id_tipo_renglon}}</td>
                             <td>{{$tiporenglon->descrip_tipo_renglon}}</td>
                             <td width="60" align="center">
-                                {!! Html::link('tiporenglon/editar/'.$tiporenglon->id_tipo_renglon, 'Editar', array('class' => 'btn btn-warning btn-xs')) !!}
+                                {!! Html::link('tiporenglon/editar/'.$tiporenglon->id_tipo_renglon, 'Editar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}
                             </td>
                             <td width="60" align="center">
                                 {!! Form::open(array('url' =>'tiporenglon/eliminar/'.$tiporenglon->id_tipo_renglon, 'method' => 'DELETE')) !!}
-                                <button type="submit" class="glyphicon glyphicon-trash"></button>
+                                <button type="submit" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</button>
                                 {!! Form::close() !!}
                             </td>
                         </tr>

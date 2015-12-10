@@ -34,7 +34,7 @@
                         <th style="text-align:center;font:bold 14px 'cursive';">TELEFONO</th>
                         <th style="text-align:center;font:bold 14px 'cursive';">DETALLES</th>
                         <th style="text-align:center;font:bold 14px 'cursive';">ESTATUS</th>
-                        <th style="text-align:center;font:bold 14px 'cursive';">ACCIONES</th>
+                        {{--<th style="text-align:center;font:bold 14px 'cursive';">ACCIONES</th>--}}
                     </tr>
                     @foreach($solicitudes as $solicitud )
                         <tr>
@@ -46,7 +46,7 @@
                             <td>{{$solicitud->telef_beneficiario}}</td>
                             <td>{{$solicitud->pedido}}</td>
                             <td>{{$solicitud->estatus}}</td>
-                            <td>
+                            {{--<td>
 
                                 {!! Html::link('solicitudes/mostrar/'.$solicitud->id_solicitud, 'Ver Solicitud', array('class'=>'modalLoad btn btn-info btn-xs','data-toggle'=>'modal','data-target'=>'#myModal','id'=>'$solicitud->id_solicitud')) !!}
 
@@ -55,7 +55,7 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="myModalLabel">Solicitud{{-- N°{{$solicitud->id_solicitud}}--}}</h4>
+                                                <h4 class="modal-title" id="myModalLabel">Solicitud--}}{{-- N°{{$solicitud->id_solicitud}}--}}{{--</h4>
                                             </div>
                                             <div class="modal-body" id="bodyes">
 
@@ -66,7 +66,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </td>
+                            </td>--}}
 
                         </tr>
                     @endforeach
@@ -78,12 +78,12 @@
     </div>
     </div>
 
-    <script type="text/javascript">
+  {{--  <script type="text/javascript">
         $('.modalLoad').click(function() {
             $('#myModal').modal('show') // evento que lanza la ventana
             $('#modalContent').val('');
             $('#bodyes').load($(this).attr('href'));
             return false;
         });
-    </script>
+    </script>--}}
 @endsection

@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
     <div class="container">
-        {!!Form::open(['action'=>'RenglonController@store'])!!}
+        {!!Form::open(['action'=>'RenglonController@store','files'=>'true'])!!}
 
         @if($errors->has())
             <div class='alert alert-danger'>
@@ -69,6 +69,10 @@
                 <div class="col-md-6">
                     {!!Form::label('existencia_minima','Existencia Minima:')!!}
                     {!!Form::text('existencia_minima',null,['class'=>'form-control','type'=>'text'])!!}
+                </div>
+                <div class="col-md-6">
+                    {!!Form::label('foto_articulo','Foto Articulo:')!!}
+                    {!!Form::file('foto_articulo')!!}
                 </div>
             </div>
             <div class="col-md-offset-5" >

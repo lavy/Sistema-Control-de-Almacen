@@ -19,7 +19,7 @@
                 <table class="table table-bordered">
                     <tr>
                         <th width="20px" style="text-align:center;font:bold 14px 'cursive';">ARTICULO</th>
-                        <th style="text-align:center;font:bold 14px 'cursive';">CANTIDAD</th>
+                        <th style="text-align:center;font:bold 14px 'cursive';">CANTIDAD DE PEDIDOS</th>
                     </tr>
                     @foreach($demandas as $demanda )
                         <tr>

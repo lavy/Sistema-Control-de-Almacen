@@ -19,12 +19,12 @@
     {{--<script src="{{asset('datepicker/js/bootstrap-datepicker.js')}}"></script>
     <link href="{{ asset('datepicker/css/datepicker.css')}}" rel="stylesheet" media="screen">--}}
     <script>
-        function carga(){
+       /* function carga(){
             $('#myModal').modal('show') // evento que lanza la ventana
             $('#modalContent').val('');
             $('#bodys').load($(this).attr('href'));
             return false;
-        }
+        }*/
     </script>
 
 <body onload="carga()">

@@ -119,6 +119,7 @@ class DespachosController extends Controller {
         $despacho->id_renglon=\Request::Input('articulo');
         $despacho->id_tecnico=\Request::Input('tecnico');
         $despacho->cantidad=\Request::Input('cantidad');
+        /*dd($despacho);*/
 
         if(Auth::User())
         {

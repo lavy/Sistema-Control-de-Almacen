@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Symfony\Component\Security\Core\User\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\DetallesForm;
+use Illuminate\Support\Facades\Input;
 
 class DespachosController extends Controller {
 
@@ -119,13 +120,21 @@ class DespachosController extends Controller {
         $despacho->id_renglon=\Request::Input('articulo');
         $despacho->id_tecnico=\Request::Input('tecnico');
         $despacho->cantidad=\Request::Input('cantidad');
-        /*dd($despacho);*/
+        /*dd(Input::get('serial'));
+        dd($despacho);*/
 
         if(Auth::User())
         {
             $despacho->cod_usua=Auth::User()->cod_usua;
         }
         $despacho->save();
+
+        dd($serial=Input::get('serial'));
+
+
+
+        /*$inventario_seriales=Inventario_Seriales::where('id_serial','=',$serial)->update(array('estatus'=>'Prestamo'));*/
+        dd($affectedRows = Inventario_Seriales::where('id_serial', '=', $serial)->update(['estatus' => 'Prestamo']));
         return redirect('despacho')->with('message','Se ha Generado la Planilla de su Orden');
 	}
 

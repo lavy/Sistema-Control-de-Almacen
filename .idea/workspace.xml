@@ -28,14 +28,34 @@
       <file leaf-file-name="DespachosController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DespachosController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.64" vertical-offset="1926" max-vertical-offset="3726">
-              <caret line="131" column="11" selection-start-line="131" selection-start-column="11" selection-end-line="131" selection-end-column="11" />
+            <state vertical-scroll-proportion="0.34666666" vertical-offset="2322" max-vertical-offset="4356">
+              <caret line="142" column="9" selection-start-line="142" selection-start-column="7" selection-end-line="146" selection-end-column="50" />
               <folding>
-                <element signature="e#39#61#0#PHP" expanded="true" />
-                <marker date="1449851482283" expanded="true" signature="1889:2148" placeholder="SELECT i.can..detalle_planilla_orden..." />
-                <marker date="1449851482283" expanded="true" signature="5347:5555" placeholder="SELECT MAX(j..jefes..." />
-                <marker date="1449851482283" expanded="true" signature="5590:5822" placeholder="SELECT u.ci_..users..." />
+                <element signature="e#39#60#0#PHP" expanded="true" />
+                <marker date="1450196872582" expanded="true" signature="1911:2170" placeholder="SELECT i.can..detalle_planilla_orden..." />
+                <marker date="1450196872582" expanded="true" signature="6544:6752" placeholder="SELECT MAX(j..jefes..." />
+                <marker date="1450196872582" expanded="true" signature="6787:7019" placeholder="SELECT u.ci_..users..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="acta_entrega.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/despacho/acta_entrega.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="858" max-vertical-offset="5148">
+              <caret line="112" column="108" selection-start-line="112" selection-start-column="108" selection-end-line="112" selection-end-column="108" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AlmacenController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AlmacenController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2142">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -43,8 +63,38 @@
       <file leaf-file-name="detalle.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/despacho/detalle.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-41.333332" vertical-offset="540" max-vertical-offset="2520">
-              <caret line="92" column="13" selection-start-line="92" selection-start-column="11" selection-end-line="95" selection-end-column="15" />
+            <state vertical-scroll-proportion="-88.0" vertical-offset="0" max-vertical-offset="2574">
+              <caret line="132" column="47" selection-start-line="132" selection-start-column="47" selection-end-line="132" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="crear.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/tecnicos/crear.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-22.0" vertical-offset="0" max-vertical-offset="1224">
+              <caret line="33" column="37" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TecnicosController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TecnicosController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="16.666666" vertical-offset="540" max-vertical-offset="2358">
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="crear.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/solicitudes/crear.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-21.333334" vertical-offset="1944" max-vertical-offset="4734">
+              <caret line="140" column="92" selection-start-line="140" selection-start-column="92" selection-end-line="140" selection-end-column="92" />
               <folding />
             </state>
           </provider>
@@ -80,64 +130,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/tecnicos/index.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="441" max-vertical-offset="1278">
-              <caret line="42" column="142" selection-start-line="42" selection-start-column="142" selection-end-line="42" selection-end-column="142" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="crear.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/tecnicos/crear.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="1224">
-              <caret line="33" column="37" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/proveedores/index.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="990">
-              <caret line="34" column="116" selection-start-line="34" selection-start-column="116" selection-end-line="34" selection-end-column="142" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="crear.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/renglon/crear.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1296" max-vertical-offset="2754">
-              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RenglonController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/RenglonController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1044" max-vertical-offset="3168">
-              <caret line="73" column="58" selection-start-line="73" selection-start-column="58" selection-end-line="73" selection-end-column="58" />
-              <folding>
-                <element signature="e#39#61#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Http/Controllers/DepartamentosController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/MarcasController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/InventarioController.php" />
         <option value="$PROJECT_DIR$/resources/views/inventario/index.blade.php" />
@@ -167,7 +164,6 @@
         <option value="$PROJECT_DIR$/resources/views/oficinas/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/departamentos/index.blade.php" />
         <option value="$PROJECT_DIR$/config/app.php" />
-        <option value="$PROJECT_DIR$/resources/views/solicitudes/crear.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
         <option value="$PROJECT_DIR$/resources/views/home.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/UsuariosController.php" />
@@ -178,7 +174,6 @@
         <option value="$PROJECT_DIR$/app/Orden.php" />
         <option value="$PROJECT_DIR$/resources/views/usuarios/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/despacho/acta_entrega.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/despacho/detalle.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/app.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/tecnicos/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/reportes/productos.blade.php" />
@@ -187,6 +182,9 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/RenglonController.php" />
         <option value="$PROJECT_DIR$/resources/views/renglon/crear.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/renglon/index.blade.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/resources/views/solicitudes/crear.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/despacho/detalle.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/DespachosController.php" />
       </list>
     </option>
@@ -229,7 +227,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -716,6 +713,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -803,7 +801,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="26" width="1442" height="849" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -812,7 +810,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28402779" sideWeight="0.49932706" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2875" sideWeight="0.49932706" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2375" sideWeight="0.50067294" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298969" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -861,27 +859,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config/mail.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="61.962963" vertical-offset="1673" max-vertical-offset="2358">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/filesystems.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="701" max-vertical-offset="1386">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/database.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="593" max-vertical-offset="2358">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/compile.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="846">
@@ -914,13 +891,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1205" max-vertical-offset="1890">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/solicitudes/crear.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="432" max-vertical-offset="4734">
-          <caret line="43" column="167" selection-start-line="43" selection-start-column="167" selection-end-line="43" selection-end-column="167" />
         </state>
       </provider>
     </entry>
@@ -1043,13 +1013,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/despacho/acta_entrega.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.888889" vertical-offset="1668" max-vertical-offset="5148">
-          <caret line="112" column="108" selection-start-line="112" selection-start-column="108" selection-end-line="112" selection-end-column="108" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/usuarios/editar.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1044">
@@ -1141,27 +1104,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TecnicosController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="648" max-vertical-offset="2358">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/tecnicos/crear.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="1224">
-          <caret line="33" column="37" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/proveedores/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="990">
           <caret line="34" column="116" selection-start-line="34" selection-start-column="116" selection-end-line="34" selection-end-column="142" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1215,23 +1161,77 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.025174825" vertical-offset="0" max-vertical-offset="715">
+          <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitattributes">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="715">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/despacho/acta_entrega.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="858" max-vertical-offset="5148">
+          <caret line="112" column="108" selection-start-line="112" selection-start-column="108" selection-end-line="112" selection-end-column="108" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AlmacenController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2142">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/solicitudes/crear.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-21.333334" vertical-offset="1944" max-vertical-offset="4734">
+          <caret line="140" column="92" selection-start-line="140" selection-start-column="92" selection-end-line="140" selection-end-column="92" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/despacho/detalle.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-41.333332" vertical-offset="540" max-vertical-offset="2520">
-          <caret line="92" column="13" selection-start-line="92" selection-start-column="11" selection-end-line="95" selection-end-column="15" />
+        <state vertical-scroll-proportion="-88.0" vertical-offset="0" max-vertical-offset="2574">
+          <caret line="132" column="47" selection-start-line="132" selection-start-column="47" selection-end-line="132" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/tecnicos/crear.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-22.0" vertical-offset="0" max-vertical-offset="1224">
+          <caret line="33" column="37" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TecnicosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="16.666666" vertical-offset="540" max-vertical-offset="2358">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DespachosController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.64" vertical-offset="1926" max-vertical-offset="3726">
-          <caret line="131" column="11" selection-start-line="131" selection-start-column="11" selection-end-line="131" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.34666666" vertical-offset="2322" max-vertical-offset="4356">
+          <caret line="142" column="9" selection-start-line="142" selection-start-column="7" selection-end-line="146" selection-end-column="50" />
           <folding>
-            <element signature="e#39#61#0#PHP" expanded="true" />
-            <marker date="1449851482283" expanded="true" signature="1889:2148" placeholder="SELECT i.can..detalle_planilla_orden..." />
-            <marker date="1449851482283" expanded="true" signature="5347:5555" placeholder="SELECT MAX(j..jefes..." />
-            <marker date="1449851482283" expanded="true" signature="5590:5822" placeholder="SELECT u.ci_..users..." />
+            <element signature="e#39#60#0#PHP" expanded="true" />
+            <marker date="1450196872582" expanded="true" signature="1911:2170" placeholder="SELECT i.can..detalle_planilla_orden..." />
+            <marker date="1450196872582" expanded="true" signature="6544:6752" placeholder="SELECT MAX(j..jefes..." />
+            <marker date="1450196872582" expanded="true" signature="6787:7019" placeholder="SELECT u.ci_..users..." />
           </folding>
         </state>
       </provider>

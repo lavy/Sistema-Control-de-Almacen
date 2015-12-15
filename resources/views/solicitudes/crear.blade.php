@@ -138,7 +138,7 @@
                     {!!Form::text('observaciones',null,['class'=>'form-control','type'=>'text'])!!}
                 </div>
 
-                <div class="col-md-6 col-md-offset-5 col-center-block" >
+                <div class="col-md-6 col-md-offset-5 col-center-block" style="margin-top: 20px">
                     {!!Form::submit('Aceptar',['class'=>'btn btn-primary','name'=>'Aceptar'])!!}
                     {!!link_to('menu','Salir',['class'=>'btn btn-primary'])!!}
                 </div>

@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\DetalleOrden;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Inventario_Seriales;
@@ -98,7 +99,26 @@ class DespachosController extends Controller {
             ->get();*/
        /* dd($det);*/
         /*$tecnico=Tecnico::only('estatus');*/
+        /*$seriales= DB::table('inventario_seriales')
+            ->join('detalle_planilla_orden','inventario_seriales.id_renglon','=','detalle_planilla_orden.id_renglon')
+            ->select('serial','id_serial')
+            ->where('inventario_seriales.estatus','=','Stock')
+            ->where('detalle_planilla_orden.id_transaccion','=',$id)
+            ->get();*/
+        /*dd($seriales);*/
+
+        /*$seriales=DB::select('SELECT i.serial,i.id_serial
+                    FROM inventario_seriales i
+                    JOIN detalle_planilla_orden d
+                    ON d.id_renglon=i.id_renglon
+                    WHERE d.id_orden='.$id);*/
+
+        /*dd($seriales);*/
+
+        /*$transaccion=DB::select('SELECT id_transaccion FROM detalle_planilla_orden WHERE id_transaccion='.$id);
+            dd($transaccion);*/
         $seriales=Inventario_Seriales::where('estatus','=','Stock')->lists('serial','id_serial');
+
         $tecnicos = Tecnico::where('estatus','=','Activo')->lists('nombres_apellidos', 'id_tecnico');
         $tecnico=array_unshift($tecnicos,'Seleccione...');
 
@@ -111,8 +131,31 @@ class DespachosController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id, DetallesForm $detallesForm)
-	{
+	public function update($id, DetallesForm $detallesForm,Request $request)
+    {
+        /*$serial=$request->input('serial');
+        dd($serial);*/
+        /*dd($serial=Input::get('serial'));*/
+
+        $serial = Input::get('serial');
+        $cantidad=count($serial);
+
+       /* $tipo_solicitud = DB::select("SELECT s.tipo_solicitud
+                    FROM solicitudes_almacen s
+                    JOIN detalle_planilla_orden d
+                    ON s.id_solicitud=d.id_solicitud
+                    AND d.id_transaccion=".$id);*/
+
+            for($i=0;$i<=$cantidad;$i++) {
+
+                DB::table('inventario_seriales')
+                    ->where('id_serial', $serial)
+                    ->update(['estatus' => 'Asignacion']);
+            }
+
+
+
+
         $despacho=\App\DetalleOrden::find($id);
         $despacho->id_solicitud=\Request::Input('nro_solicitud');
         $despacho->id_orden=\Request::Input('nro_orden');
@@ -120,8 +163,6 @@ class DespachosController extends Controller {
         $despacho->id_renglon=\Request::Input('articulo');
         $despacho->id_tecnico=\Request::Input('tecnico');
         $despacho->cantidad=\Request::Input('cantidad');
-        /*dd(Input::get('serial'));
-        dd($despacho);*/
 
         if(Auth::User())
         {
@@ -129,12 +170,6 @@ class DespachosController extends Controller {
         }
         $despacho->save();
 
-        dd($serial=Input::get('serial'));
-
-
-
-        /*$inventario_seriales=Inventario_Seriales::where('id_serial','=',$serial)->update(array('estatus'=>'Prestamo'));*/
-        dd($affectedRows = Inventario_Seriales::where('id_serial', '=', $serial)->update(['estatus' => 'Prestamo']));
         return redirect('despacho')->with('message','Se ha Generado la Planilla de su Orden');
 	}
 

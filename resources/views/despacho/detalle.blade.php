@@ -45,6 +45,7 @@
                     </div>
                 </div>
 
+
                 <div class="input_fields_wraps">
                     <div class="form-group">
                         <label for="serial[]" class="control-label col-xs-4">SERIAL</label>
@@ -111,7 +112,8 @@
          $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
          e.preventDefault(); $(this).parent('div').remove(); x--;
          })*/
-        var max_fields      = 10; //maximum input boxes allowed
+        var existencia=$('#existencia_actual').val();
+        var max_fields      = existencia; //maximum input boxes allowed
         var wrapper         = $(".input_fields_wraps"); //Fields wrapper
         var add_button      = $(".add_field_button"); //Add button ID
         var x = 1; //initial text box count
@@ -126,8 +128,9 @@
         $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
             e.preventDefault(); $(this).parent('tr').remove(); x--;
         })
-        var sum=1;
+
         $('.add_field_button').on('click', function () {
+            var sum=$('#cantidad_pedir').val();
             sum++;
             $('#cantidad_pedir').val(sum);
         });

@@ -13,7 +13,7 @@
             <div class="alert alert-success">{{ Session::get('message') }}</div>
         @endif
         <div class="panel panel-primary">
-            <div class="panel-heading" style="text-align:center;">SOLICITUDES REGISTRADAS</div>
+            <div class="panel-heading" style="text-align:center;">SOLICITUDES PROCESADAS</div>
             <div class="panel-body">
                 {!!Form::open(['url'=>'solicitudes','method'=>'GET','class'=>'navbar-form navbar-left pull-right','role'=>'search'])!!}
                 <div class="form-group">

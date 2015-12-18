@@ -133,28 +133,26 @@ class DespachosController extends Controller {
 	 */
 	public function update($id, DetallesForm $detallesForm,Request $request)
     {
-        /*$serial=$request->input('serial');
-        dd($serial);*/
-        /*dd($serial=Input::get('serial'));*/
-
         $serial = Input::get('serial');
-        $cantidad=count($serial);
-
-       /* $tipo_solicitud = DB::select("SELECT s.tipo_solicitud
+        $tipo_solicitud = DB::select("SELECT s.tipo_solicitud
                     FROM solicitudes_almacen s
                     JOIN detalle_planilla_orden d
                     ON s.id_solicitud=d.id_solicitud
-                    AND d.id_transaccion=".$id);*/
+                    AND d.id_transaccion=".$id);
 
-            for($i=0;$i<=$cantidad;$i++) {
+        /*dd($tipo_solicitud[0]->tipo_solicitud);*/
 
-                DB::table('inventario_seriales')
-                    ->where('id_serial', $serial)
-                    ->update(['estatus' => 'Asignacion']);
-            }
+       /* for($i=1;$i<=count($serial);$i++) {
+            DB::table('inventario_seriales')
+            ->where('id_serial', $serial)
+            ->update(['estatus' => $tipo_solicitud[0]->tipo_solicitud]);
+        }*/
 
-
-
+        foreach($serial as $seriales){
+            DB::table('inventario_seriales')
+                ->where('id_serial', $seriales)
+                ->update(['estatus' => $tipo_solicitud[0]->tipo_solicitud,'id_transaccion'=>$id]);
+        }
 
         $despacho=\App\DetalleOrden::find($id);
         $despacho->id_solicitud=\Request::Input('nro_solicitud');

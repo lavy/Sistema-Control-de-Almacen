@@ -14,7 +14,7 @@
                 {!!Form::submit('BUSCAR',['class'=>'btn btn-default'])!!}
                 {!!Form::close()!!}
 
-
+                {!!link_to('menu','<-Atras',['class'=>'btn btn-primary'])!!}
 
                 <table class="table table-bordered">
                     <tr>

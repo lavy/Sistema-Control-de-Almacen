@@ -66,7 +66,7 @@
 
 
 
-                <div class='col-sm-6'>
+                <div class='col-sm-6' style="margin-top: 25px">
                     <div class="form-group">
                         <div class='input-group date' id='datetimepicker5'>
                             {{--{!!Form::label('desde','Fecha De Inicio:')!!}--}}
@@ -80,7 +80,7 @@
 
 
 
-                <div class='col-sm-6'>
+                <div class='col-sm-6' style="margin-top: 25px">
                     <div class="form-group">
                         <div class='input-group date' id='datetimepicker6'>
                             {{--{!!Form::label('hasta','Fecha De Culminación:')!!}--}}
@@ -167,7 +167,7 @@
                 $('#datetimepicker5').datetimepicker({
                     minDate: 0,
                     useCurrent:true,
-                    format:'DD-MM-YYYY'
+                    format:'DD-MM-YYYY',
 
                 });
                 $('#datetimepicker6').datetimepicker({
@@ -178,6 +178,7 @@
                 $("#datetimepicker5").on("dp.change", function (e) {
                     $('#datetimepicker6').data("DateTimePicker").minDate(e.date);
                 });
+
                 $("#datetimepicker6").on("dp.change", function (e) {
                     $('#datetimepicker5').data("DateTimePicker").maxDate(e.date);
                 });

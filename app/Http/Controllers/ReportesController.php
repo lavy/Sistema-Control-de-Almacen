@@ -30,15 +30,6 @@ class ReportesController extends Controller {
                 FROM oficinas ofic
                 ORDER BY cantidad ASC");
 
-        /*$hola=$oficina::where('ofic.descrip_oficina','LIKE','%'.$buscar.'%')->paginate(2);
-
-        dd($hola);*/
-        /*$hola->setPath('reportes/oficinas');*/
-
-		 /* $oficina= DB::select("SELECT s.id_oficina,o.descrip_oficina, COUNT(s.id_oficina) as oficinas
-                          FROM solicitudes s
-                          JOIN oficinas o
-                          on o.id_oficina=s.id_oficina");*/
         return view('reportes.oficina')->with('oficinas',$oficina);
 	}
 
@@ -47,15 +38,17 @@ class ReportesController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function departamentos()
+	public function departamentos(Request $request)
 	{
+        $buscar=$request->input('buscar');
         $departamento =DB::select(" SELECT dept.descrip_departamento as departamento,
-                COALESCE ((SELECT count(id_departamento)
-                     from solicitudes_almacen
-                       Where id_departamento = dept.id_departamento
+                COALESCE ((SELECT COUNT(id_departamento)
+                     FROM solicitudes_almacen
+                       WHERE id_departamento = dept.id_departamento
                        GROUP BY dept.descrip_departamento),
                        0) as cantidad
                 FROM departamentos dept
+                WHERE dept.descrip_departamento='%'.$buscar.'%'
                 ORDER BY departamento ASC");
 
         /*$departamento= DB::select("SELECT s.id_departamento,d.descrip_departamento, COUNT(s.id_departamento) as departamento
@@ -140,9 +133,28 @@ class ReportesController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function asignados(Request $request)
 	{
-		//
+		$buscar=$request->input('buscar');
+        $asignados=DB::table('detalle_planilla_orden')
+            ->join('solicitudes_almacen','detalle_planilla_orden.id_solicitud','=','solicitudes_almacen.id_solicitud')
+            ->select('solicitudes_almacen.*','detalle_planilla_orden.*')
+            ->where('solicitudes_almacen.tipo_solicitud','=','Asignacion')
+            /*->where('solicitudes_almacen.beneficiario','LIKE','%'.$buscar.'%')*/
+            ->get();
+        return view('reportes.asignados')->with('asignados',$asignados);
 	}
+
+    public function prestados(Request $request)
+    {
+        $buscar=$request->input('buscar');
+        $prestados=DB::table('detalle_planilla_orden')
+            ->join('solicitudes_almacen','detalle_planilla_orden.id_solicitud','=','solicitudes_almacen.id_solicitud')
+            ->select('solicitudes_almacen.*','detalle_planilla_orden.*')
+            ->where('solicitudes_almacen.tipo_solicitud','=','Prestamo')
+            /*->where('solicitudes_almacen.beneficiario','LIKE','%'.$buscar.'%')*/
+            ->get();
+        return view('reportes.prestados')->with('prestados',$prestados);
+    }
 
 }

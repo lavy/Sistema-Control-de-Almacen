@@ -47,7 +47,7 @@ class TiporenglonController extends Controller {
         $trenglon->id_almacen=Auth::User()->id_almacen;
         $trenglon->descrip_tipo_renglon=\Request::Input('descripcion');
         $trenglon->save();
-        return redirect('tiporenglon')->with('message','Post Saved');
+        return redirect('tiporenglon')->with('message','Se ha Añadido un Nuevo Tipo de Renglon');
 	}
 
 	/**

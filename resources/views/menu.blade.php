@@ -1,6 +1,15 @@
 @extends('app')
 @section('content')
 
+    <script>
+         function carga(){
+             $('#myModal').modal('show') // evento que lanza la ventana
+             $('#modalContent').val('');
+             $('#bodys').load($(this).attr('href'));
+         return false;
+         }
+    </script>
+
     <style>
         .carousel-inner > .item > img,
         .carousel-inner > .item > a > img {
@@ -10,8 +19,32 @@
     </style>
 
 
-    <div class="container">
+    <div class="container" onload="carga()">
         <br>
+
+        <td width="40" align="center">
+            {{--<a href='modal/'.$renglon->id_renglon id='$renglon->id_renglon' data-toggle='modal'   class='modalLoad btn btn-primary btn-xs' data-target='#myModal'>Detalles</a>;--}}
+            {!! Html::link('proxima_entrega/', '', array('class'=>'modalLoad glyphicon glyphicon-eye-open btn btn-primary btn-xs','data-toggle'=>'modal','data-target'=>'#myModal','id'=>'')) !!}
+
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Articulos Prestados Proximos A Entrega</h4>
+                        </div>
+                        <div class="modal-body" id="bodys">
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">

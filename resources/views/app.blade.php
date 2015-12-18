@@ -18,16 +18,9 @@
 
     {{--<script src="{{asset('datepicker/js/bootstrap-datepicker.js')}}"></script>
     <link href="{{ asset('datepicker/css/datepicker.css')}}" rel="stylesheet" media="screen">--}}
-    <script>
-       /* function carga(){
-            $('#myModal').modal('show') // evento que lanza la ventana
-            $('#modalContent').val('');
-            $('#bodys').load($(this).attr('href'));
-            return false;
-        }*/
-    </script>
 
-<body onload="carga()">
+
+<body>
 
     <div class="container">
         <img src="{{asset('images/banner.png')}}" width="1150px" height="200px" class="img-responsive" usemap="#map">
@@ -38,8 +31,6 @@
             <area shape="rect" coords="775,49,798,75" href="http://www.youtube.com/channel/UCkSbdOePnjXDHbWJt0rA_mw" title="Youtube"/>
             <area shape="rect" coords="802,49,828,75" href="http://instagram.com/prensacapital" title="Instagram"/>
         </map>
-
-
 
         @if (Auth::check())
             <nav class="navbar navbar-default">

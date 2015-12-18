@@ -22,6 +22,7 @@
                         <th style="text-align:center;font:bold 14px 'cursive';">UNIDAD DE MEDIDA</th>
                         <th style="text-align:center;font:bold 14px 'cursive';">CANTIDAD EXISTENCIA</th>
                         <th style="text-align:center;font:bold 14px 'cursive';">EXISTENCIA MINIMA</th>
+                        <th style="text-align:center;font:bold 14px 'cursive';">EXISTENCIA </th>
 
                     </tr>
                     @foreach($inventario as $invent )
@@ -33,6 +34,27 @@
                             <td>{{$invent->unidad_medida}}</td>
                             <td>{{$invent->cantidad_existencia}}</td>
                             <td>{{$invent->existencia_minima}}</td>
+                            <td width="40" align="center">
+                                {{--<a href='modal/'.$renglon->id_renglon id='$renglon->id_renglon' data-toggle='modal'   class='modalLoad btn btn-primary btn-xs' data-target='#myModal'>Detalles</a>;--}}
+                                {!! Html::link('inventario/'.$invent->id_detalle, 'Existencia', array('class'=>'modalLoad glyphicon glyphicon-eye-open btn btn-primary btn-xs','data-toggle'=>'modal','data-target'=>'#myModal','id'=>'$invent->id_detalle')) !!}
+
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">Existencia</h4>
+                                            </div>
+                                            <div class="modal-body" id="bodys">
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                 </table>
@@ -42,4 +64,13 @@
         </div>
     </div>
     </div>
+    <script>
+        $('.modalLoad').click(function() {
+            $('#myModal').modal('show') // evento que lanza la ventana
+            $('#modalContent').val('');
+            $('#bodys').load($(this).attr('href'));
+            return false;
+        });
+    </script>
+
 @endsection

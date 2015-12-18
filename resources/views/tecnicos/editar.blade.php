@@ -20,7 +20,7 @@
 
                 <div class="col-md-6">
                     {!!Form::label('estatus','Estatus:')!!}
-                    {!!Form::select('estatus',$estatus,'',['class'=>'form-control','id'=>'estatus'])!!}
+                    {!!Form::select('estatus',['Activo'=>'Activo','Inactivo'=>'Inactivo'],$tecnicos->estatus,['class'=>'form-control','id'=>'estatus'])!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('foto_t','Foto Tecnico:')!!}

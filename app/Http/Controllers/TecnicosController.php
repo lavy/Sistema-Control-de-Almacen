@@ -77,8 +77,8 @@ class TecnicosController extends Controller {
 	public function edit($id)
 	{
 		$tecnicos=\App\Tecnico::find($id);
-        $estatus=\App\Estatus::all()->lists('descrip_estatus','id_estatus');
-        return view('tecnicos.editar')->with(['tecnicos'=>$tecnicos,'estatus'=>$estatus]);
+        /*$estatus=\App\Estatus::all()->lists('descrip_estatus','id_estatus');*/
+        return view('tecnicos.editar')->with(['tecnicos'=>$tecnicos]);
 	}
 
 	/**

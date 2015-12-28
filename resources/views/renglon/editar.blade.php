@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        {!!Form::open(['url'=>'renglones/'.$renglon->id_renglon])!!}
+        {!!Form::open(['url'=>'renglones/'.$renglon->id_renglon,'files'=>'true'])!!}
         <div class="panel panel-primary">
             <div class="panel-heading" style="text-align:center;">EDITAR ARTÍCULO</div>
             <div class="panel-body">
@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    {!!Form::label('descripcion','Nueva Descripción:')!!}
+                    {!!Form::label('descripcion','Descripción:')!!}
                     {!!Form::text('descripcion',$renglon->descrip_renglon,array('class'=>'form-control'))!!}
                 </div>
                 <div class="col-md-6">
@@ -29,7 +29,9 @@
                     <div class="col-md-6">
                         <label for="serial[]">Serial</label>
                         <div class="input-group">
-                            <div><input type="text" name="serial[]" class="form-control" value="<?php echo $serial->seriales;?>" title="Si quiere agregar otro producto, Presione el boton (+)" data-toggle="tooltip"></div>
+                            <div>
+                                <input type="text" name="serial[]" class="form-control" value="<?php echo $serial->seriales;?>" title="Si quiere agregar otro producto, Presione el boton (+)" data-toggle="tooltip">
+                            </div>
                             {{--<span class="input-group-btn"><button class="add_field_button btn btn-info">+</button></span>--}}
                         </div>
                     </div>
@@ -46,6 +48,10 @@
                 <div class="col-md-6">
                     {!!Form::label('existencia_minima','Existencia Minima:')!!}
                     {!!Form::text('existencia_minima',$renglon->existencia_minima,['class'=>'form-control','type'=>'text'])!!}
+                </div>
+                <div class="col-md-6">
+                    {!!Form::label('foto_articulo','Foto Articulo:')!!}
+                    {!!Form::file('foto_articulo')!!}
                 </div>
             </div>
             <div class="col-md-offset-5">

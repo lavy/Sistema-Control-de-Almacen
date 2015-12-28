@@ -176,7 +176,7 @@ class DespachosController extends Controller {
     {
         DB::table('inventario_seriales')
             ->where('id_transaccion', $id)
-            ->update(['estatus' => 'Stock']);
+            ->update(['estatus' => 'Stock','id_transaccion'=>0]);
 
         return redirect('despacho')->with('message','Se han incorporado nuevamente los articulos al Stock');
     }
@@ -187,7 +187,8 @@ class DespachosController extends Controller {
             ->where('id_transaccion', $id)
             ->update(['cantidad' => 'NULL']);
 
-        return redirect('despacho')->with('message','Se han incorporado nuevamente los articulos al Stock');
+        return redirect('despacho')->with('message','Se han reversado la transacción, si desea hacerla nuevamente, Pulse
+         el Boton Detalles');
     }
 
 	/**

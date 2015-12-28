@@ -132,11 +132,9 @@ class RenglonController extends Controller {
         $modelo=\App\Modelo::all()->lists('descrip_modelo','id_modelo');
         $seriales=DB::table('renglones')
             ->join('seriales','renglones.id_renglon','=','seriales.id_renglon')
-            ->select('seriales.seriales')
+            ->select('seriales.seriales','seriales.id_serial')
             ->where('seriales.id_renglon','=',$id)
             ->get();
-        /*dd($seriales);*/
-
 
         return view('renglon.editar')->with(['renglon'=>$renglon,'marca'=>$marca,'modelo'=>$modelo,'tipo_renglon'=>$trenglon,'seriales'=>$seriales]);
 	}
@@ -150,19 +148,38 @@ class RenglonController extends Controller {
 	public function update($id)
 	{
         $renglon=\App\Renglon::find($id);
-        $renglon->id_tipo_renglon=\Request::Input('tipo_renglon');
-        $renglon->codigo_fabricante=\Request::Input('codigo_fabricante');
-        $renglon->descrip_renglon=\Request::Input('descripcion');
-        $renglon->id_marca=\Request::Input('marca');
-        $renglon->id_modelo=\Request::Input('modelo');
-        $renglon->unidad_medida=\Request::Input('unidad_medida');
-        $renglon->existencia_minima=\Request::Input('existencia_minima');
-        if (auth::User())
-        {
-            $renglon->cod_usua=Auth::User()->cod_usua;
+
+        $foto_producto=Input::file('foto_articulo');
+        $ruta=public_path().'/articulos/';
+        $url_foto=$foto_producto->getClientOriginalName();
+        $subir=$foto_producto->move($ruta,$foto_producto->getClientOriginalName());
+
+        $renglon->id_almacen =Auth::User()->id_almacen;
+        $renglon->id_tipo_renglon =\Request::Input('tipo_renglon');
+        $renglon->descrip_renglon =\Request::Input('descripcion');
+        $renglon->id_marca =\Request::Input('marca');
+        $renglon->id_modelo =\Request::Input('modelo');
+        $renglon->unidad_medida =\Request::Input('unidad_medida');
+        $renglon->cantidad =\Request::input('cantidad');
+        $renglon->foto_producto =$url_foto;
+        $renglon->existencia_minima =\Request::Input('existencia_minima');
+
+        if (Auth::User()) {
+            $renglon->cod_usua = Auth::User()->cod_usua;
         }
         $renglon->save();
-        return redirect('renglones');
+
+        $seriales=Input::get('serial');
+        $ids=Input::get('id');
+        for($i=0;$i<count($seriales);$i++)
+        {
+            /*dd($seriales[6]);*/
+            DB::table('seriales')
+                ->where('id_renglon', $id)
+                ->update(['seriales' => $seriales[$i]]);
+        }
+
+        return redirect('renglones')->with('message','Se ha editado el artículo'.$id);
 	}
 
 	/**

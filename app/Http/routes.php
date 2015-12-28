@@ -89,6 +89,7 @@ Route::get('despacho','DespachosController@index');
 Route::get('despacho/detalle/{id}','DespachosController@edit');
 Route::get('despacho/pdf/{id}','DespachosController@planilla');
 Route::post('despacho/{id}','DespachosController@update');
+Route::get('devolucion/{id}','DespachosController@devolucion');
 
 Route::get('articulos','ArticulosController@index');
 Route::get('articulos/crear','ArticulosController@create');

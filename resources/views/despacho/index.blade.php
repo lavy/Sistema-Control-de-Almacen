@@ -29,6 +29,7 @@
                 <tr>
                     <th style="text-align:center;">PDF</th>
                     <th style="text-align:center;">DETALLE ORDEN</th>
+                    <th style="text-align:center;">DETALLE ORDEN</th>
                     <th style="text-align:center;"># TRANSACCIÓN</th>
                     <th style="text-align:center;">#ORDEN</th>
                     <th style="text-align:center;">ALMACEN</th>
@@ -57,6 +58,19 @@
                             {!! Html::link('#','Detalles',array('class' => 'btn btn-success btn-md','disabled'=>'true')) !!}
                         </td>
                         @endif
+
+                        @if($ord->cantidad ===NULL)
+                        <td width="60" align="center">
+                           {!! Html::link('#','Devolucion',array('class' => 'btn btn-warning btn-md','disabled'=>'true')) !!}
+                        </td>
+                        @else
+                        <td width="60" align="center">
+                            {!! Html::link('devolucion/'.$ord->id_transaccion,'Devolucion',array('class' => 'btn btn-warning btn-md')) !!}
+                        </td>
+                        @endif
+                        {{--<td width="60" align="center">
+                            {!! Html::link('despacho/devolucion/'.$ord->id_transaccion,'Detalles',array('class' => 'btn btn-success btn-md')) !!}
+                        </td>--}}
                         <td style="text-align:center;">{{$ord->id_transaccion}}</td>
                         <td style="text-align:center;">{{$ord->id_orden}}</td>
                         <td style="text-align:center;">{{$ord->descrip_almacen}}</td>

@@ -40,7 +40,7 @@
                             <td style="text-align:center;">{{$tecnico->nombres_apellidos}}</td>
                             <td style="text-align:center;">{{$tecnico->fecha_nacimiento}}</td>
                             <td style="text-align:center;">{{$tecnico->cedula}}</td>
-                            <td style="text-align:center;"><img src="tecnicos/{{$tecnico->foto_tecnico}}" class="shown" width="30%" height="30%" ></td>
+                            <td style="text-align:center;"><img src="tecnicos/{{$tecnico->foto_tecnico}}" class="shown" width="80" height="80" ></td>
                             @if($tecnico->estatus !='Activo')
                             <td style="text-align:center;" class="danger">{{$tecnico->estatus}}</td>
                             @else

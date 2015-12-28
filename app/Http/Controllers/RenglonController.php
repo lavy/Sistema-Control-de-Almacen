@@ -130,7 +130,15 @@ class RenglonController extends Controller {
         $trenglon=\App\TipoRenglon::all()->lists('descrip_tipo_renglon','id_tipo_renglon');
         $marca=\App\Marca::all()->lists('descrip_marca','id_marca');
         $modelo=\App\Modelo::all()->lists('descrip_modelo','id_modelo');
-        return view('renglon.editar')->with(['renglon'=>$renglon,'marca'=>$marca,'modelo'=>$modelo,'tipo_renglon'=>$trenglon]);
+        $seriales=DB::table('renglones')
+            ->join('seriales','renglones.id_renglon','=','seriales.id_renglon')
+            ->select('seriales.seriales')
+            ->where('seriales.id_renglon','=',$id)
+            ->get();
+        /*dd($seriales);*/
+
+
+        return view('renglon.editar')->with(['renglon'=>$renglon,'marca'=>$marca,'modelo'=>$modelo,'tipo_renglon'=>$trenglon,'seriales'=>$seriales]);
 	}
 
 	/**

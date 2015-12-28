@@ -171,6 +171,25 @@ class DespachosController extends Controller {
         return redirect('despacho')->with('message','Se ha Generado la Planilla de su Orden');
 	}
 
+
+    public function devolucion($id)
+    {
+        DB::table('inventario_seriales')
+            ->where('id_transaccion', $id)
+            ->update(['estatus' => 'Stock']);
+
+        return redirect('despacho')->with('message','Se han incorporado nuevamente los articulos al Stock');
+    }
+
+    public function reversar($id)
+    {
+        DB::table('detalle_planilla_orden')
+            ->where('id_transaccion', $id)
+            ->update(['cantidad' => 'NULL']);
+
+        return redirect('despacho')->with('message','Se han incorporado nuevamente los articulos al Stock');
+    }
+
 	/**
 	 * Remove the specified resource from storage.
 	 *

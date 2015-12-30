@@ -117,8 +117,8 @@ class DespachosController extends Controller {
 
         /*$transaccion=DB::select('SELECT id_transaccion FROM detalle_planilla_orden WHERE id_transaccion='.$id);
             dd($transaccion);*/
-        $seriales=Inventario_Seriales::where('estatus','=','Stock')->lists('serial','id_serial');
-
+        $seriales = Inventario_Seriales::join('detalle_planilla_orden','inventario_seriales.id_renglon','=','detalle_planilla_orden.id_renglon')
+                    ->lists('inventario_seriales.serial', 'inventario_seriales.id_serial');
         $tecnicos = Tecnico::where('estatus','=','Activo')->lists('nombres_apellidos', 'id_tecnico');
         $tecnico=array_unshift($tecnicos,'Seleccione...');
 

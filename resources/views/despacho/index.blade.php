@@ -28,6 +28,7 @@
             <table class="table table-bordered">
                 <tr>
                     <th style="text-align:center;">PDF</th>
+                    <th style="text-align:center;">REVERSAR</th>
                     <th style="text-align:center;">DETALLE ORDEN</th>
                     <th style="text-align:center;">DEVOLUCIONES</th>
                     <th style="text-align:center;"># TRANSACCIÓN</th>
@@ -50,7 +51,7 @@
                         @endif
 
                         @if($ord->cantidad !=NULL)
-                            <td>{!!link_to('reversar/'.$ord->id_transaccion,'reversar',['class'=>'btn btn-info btn-md'])!!}</td>
+                            <td>{!!link_to('reversar/'.$ord->id_transaccion,'Reversar',['class'=>'btn btn-info btn-md'])!!}</td>
                         @else
                             <td>{!!link_to('#','Reversar',['class'=>'btn btn-info btn-md','disabled'=>'true'])!!}</td>
                         @endif

@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Requests\SolicitudForm;
 use App\Http\Controllers\Controller;
+use App\Solicitudes_Almacen;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -97,9 +98,10 @@ class SolicitudesController extends Controller {
 	 */
 
 
-   /* public function transferir($id, SolicitudForm $solicitudForm)
+    /*public function transferencia(SolicitudForm $solicitudForm)
     {
-        $solicitud= Solicitudes::find($id);
+        $solicitud=new  Solicitudes_Almacen();
+        $solicitud->id_solicitud=\Request::Input('solicitud');
         $solicitud->id_oficina=\Request::Input('oficina');
         $solicitud->id_departamento=\Request::Input('departamento');
         $solicitud->desde=\Request::Input('desde');
@@ -112,13 +114,13 @@ class SolicitudesController extends Controller {
         $solicitud->id_tipo_renglon=\Request::Input('t_articulos');
         $solicitud->pedido=\Request::Input('detalle');
         $solicitud->observaciones=\Request::Input('observaciones');
-        $solicitud->estatus='RECIBIDO';
+        $solicitud->estatus='asignado';
         if (Auth::User())
         {
             $solicitud->cod_usua=Auth::User()->cod_usua;
         }
         $solicitud->save();
-        return redirect('solicitudes')->with('message','Se Registro su solicitud exitosamente');
+        return redirect('solicitudes')->with('message','Se ha transferido su solicitud exitosamente');
     }*/
 
     public function show($id)

@@ -1,0 +1,42 @@
+<?php namespace App\Http\Requests;
+
+use App\Http\Requests\Request;
+
+class JefesForm extends Request {
+
+	/**
+	 * Determine if the user is authorized to make this request.
+	 *
+	 * @return bool
+	 */
+	public function authorize()
+	{
+		return true;
+	}
+
+	/**
+	 * Get the validation rules that apply to the request.
+	 *
+	 * @return array
+	 */
+	public function rules()
+	{
+		return [
+			'oficina'=>'not_in:0',
+            'nombre'=>'required',
+            'cedula'=>'required',
+            'fecha_ingreso'=>'required|date'
+		];
+	}
+
+    public function message()
+    {
+        return[
+            'oficina'=>'Es requerido especificar la oficina',
+            'nombre'=>'Es requerido especificar el nombre',
+            'cedula'=>'Es requerido especificar la cédula',
+            'fecha_ingreso'=>'Es requerido especificar la fecha ingreso'
+        ];
+    }
+
+}

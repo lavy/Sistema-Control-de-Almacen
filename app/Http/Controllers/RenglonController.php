@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RenglonesForm;
 use App\Renglon;
+use App\Seriales;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -135,7 +136,13 @@ class RenglonController extends Controller {
             ->select('seriales.seriales','seriales.id_serial')
             ->where('seriales.id_renglon','=',$id)
             ->get();
-
+        /*$seriales = Renglon::join('seriales','renglones.id_renglon','=','seriales.id_renglon')
+            ->where('seriales.id_renglon','=',$id)
+            ->lists('seriales.seriales', 'seriales.id_serial');*/
+        /*Friends   // work on friends table
+   ->join('users','users.id','=','friends_table.user_id')  // join users table to..
+    ->where('friends_table.user_id', $user->id)
+        ->lists(DB::raw('concat(first_name," ",last_name)'), 'friend_id')  // ...concatenate its fields*/
         return view('renglon.editar')->with(['renglon'=>$renglon,'marca'=>$marca,'modelo'=>$modelo,'tipo_renglon'=>$trenglon,'seriales'=>$seriales]);
 	}
 
@@ -145,7 +152,7 @@ class RenglonController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, RenglonesForm $renglonesForm)
 	{
         $renglon=\App\Renglon::find($id);
 
@@ -170,12 +177,13 @@ class RenglonController extends Controller {
         $renglon->save();
 
         $seriales=Input::get('serial');
-        $ids=Input::get('id');
+        $ids=Input::get('id_serial');
+
         for($i=0;$i<count($seriales);$i++)
         {
-            /*dd($seriales[6]);*/
             DB::table('seriales')
                 ->where('id_renglon', $id)
+                ->where('id_serial',$ids)
                 ->update(['seriales' => $seriales[$i]]);
         }
 
@@ -194,5 +202,12 @@ class RenglonController extends Controller {
         $renglon->delete();
         return redirect('renglones')->with('message','Borrado');
 	}
+
+    /*public function borrar($id)
+    {
+        $seriales=Seriales::find($id);
+        $seriales->delete();
+        return redirect('')
+    }*/
 
 }

@@ -2,6 +2,17 @@
 
 @section('content')
     <div class="container">
+        @if($errors->has())
+            <div class='alert alert-danger'>
+                @foreach ($errors->all('<p>:message</p>') as $message)
+                    {!! $message !!}
+                @endforeach
+            </div>
+        @endif
+
+        @if (Session::has('message'))
+            <div class="alert alert-success">{{ Session::get('message') }}</div>
+        @endif
         <div class="panel panel-primary">
             <div class="panel-heading" style="text-align:center;">ENTRADA DE ARTÍCULOS</div>
             <div class="panel-body">
@@ -25,7 +36,7 @@
                         <th width="10px" style="text-align:center;font:bold 14px 'cursive';">UNIDAD MEDIDA</th>
                         <th width="10px" style="text-align:center;font:bold 14px 'cursive';">CANTIDAD</th>
                         <th width="10px"style="text-align:center;font:bold 14px 'cursive';">EXISTENCIA MINIMA</th>
-                    <th width="10px" style="text-align:center;font:bold 14px 'cursive';">FOTO PRODUCTO</th>
+                        <th width="10px" style="text-align:center;font:bold 14px 'cursive';">FOTO PRODUCTO</th>
 
                     </tr>
                     @foreach($renglones as $renglon )
@@ -44,7 +55,7 @@
 
                             <td width="40" align="center">
                                 {{--<a href='modal/'.$renglon->id_renglon id='$renglon->id_renglon' data-toggle='modal'   class='modalLoad btn btn-primary btn-xs' data-target='#myModal'>Detalles</a>;--}}
-                                {!! Html::link('modal/'.$renglon->id_renglon, 'Seriales', array('class'=>'modalLoad glyphicon glyphicon-eye-open btn btn-primary btn-xs','data-toggle'=>'modal','data-target'=>'#myModal','id'=>'$renglon->id_renglon')) !!}
+                                {!! Html::link('modal/'.$renglon->id_renglon, '', array('class'=>'modalLoad glyphicon glyphicon-eye-open btn btn-primary btn-xs','data-toggle'=>'modal','data-target'=>'#myModal','id'=>'$renglon->id_renglon')) !!}
 
                                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                     <div class="modal-dialog" role="document">
@@ -62,15 +73,16 @@
                                         </div>
                                     </div>
                                 </div>
-                            </td>
+                            {{--</td>--}}
 
-                            <td width="60" align="center">
+                            {{--<td width="60" align="center">--}}
                                 {!! Html::link('renglones/editar/'.$renglon->id_renglon, '', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}
-                            </td>
-                            <td width="60" align="center">
+                            {{--</td>
+                            <td width="60" align="center">--}}
                                 {!! Form::open(array('url' =>'renglones/eliminar/'.$renglon->id_renglon, 'method' => 'DELETE')) !!}
                                 <button type="submit" class="glyphicon glyphicon-trash btn btn-danger btn-xs"></button>
                                 {!! Form::close() !!}
+
                             </td>
                         </tr>
                     @endforeach

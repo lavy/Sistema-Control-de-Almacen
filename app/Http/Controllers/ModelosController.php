@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ModelosForm;
+use App\Modelo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class ModelosController extends Controller {
@@ -23,7 +24,6 @@ class ModelosController extends Controller {
                     ->join('marca','marca.id_marca','=','modelo.id_marca')
                     ->select('modelo.*','marca.descrip_marca')
                     ->where('descrip_modelo','LIKE','%'.$buscar.'%')->paginate(5);
-		/*\App\Modelo::where('descrip_modelo','LIKE','%'.$buscar.'%')->paginate(5);*/
         $modelos->setPath('modelos');
         return view('modelos.index')->with('modelos',$modelos);
 	}
@@ -51,7 +51,7 @@ class ModelosController extends Controller {
         $modelos->id_marca=\Request::Input('marca');
         $modelos->descrip_modelo=\Request::Input('descripcion');
         $modelos->save();
-        return redirect('modelos')->with('message','Post saved');
+        return redirect('modelos')->with('message','Se ha registrado un nuevo modelo');
     }
 
 	/**
@@ -73,7 +73,9 @@ class ModelosController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+        $modelos=Modelo::find($id);
+        $marca=\App\Marca::all()->lists('descrip_marca','id_marca');
+        return view('modelos.editar')->with(['marca'=>$marca,'modelo'=>$modelos]);
 	}
 
 	/**
@@ -84,7 +86,11 @@ class ModelosController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+        $modelos = Modelo::find($id);
+        $modelos->id_marca=\Request::Input('marca');
+        $modelos->descrip_modelo=\Request::Input('descripcion');
+        $modelos->save();
+        return redirect('modelos')->with('message','Se ha editado un modelo');
 	}
 
 	/**
@@ -97,7 +103,7 @@ class ModelosController extends Controller {
 	{
         $modelos=\App\Modelo::find($id);
         $modelos->delete();
-        return redirect('modelos')->with('message','Borrado');
+        return redirect('modelos')->with('message','Se ha eliminado un modelo');
 	}
 
 }

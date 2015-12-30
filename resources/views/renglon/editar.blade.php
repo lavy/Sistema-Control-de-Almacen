@@ -2,6 +2,13 @@
 
 @section('content')
     <div class="container">
+        @if($errors->has())
+            <div class='alert alert-danger'>
+                @foreach ($errors->all('<p>:message</p>') as $message)
+                    {!! $message !!}
+                @endforeach
+            </div>
+        @endif
         {!!Form::open(['url'=>'renglones/'.$renglon->id_renglon,'files'=>'true'])!!}
         <div class="panel panel-primary">
             <div class="panel-heading" style="text-align:center;">EDITAR ARTÍCULO</div>
@@ -24,13 +31,16 @@
                     {!!Form::select('modelo',$modelo,'',['class'=>'form-control','id'=>'modelo'])!!}
                 </div>
 
+
                 @foreach($seriales as $serial)
                 <div class="input_fields_wrap">
                     <div class="col-md-6">
                         <label for="serial[]">Serial</label>
                         <div class="input-group">
                             <div>
-                                <input type="text" name="serial[]" class="form-control" value="<?php echo $serial->seriales;?>" title="Si quiere agregar otro producto, Presione el boton (+)" data-toggle="tooltip">
+
+                                <input type="hidden" name="id_serial[]" class="form-control" value="<?php echo $serial->id_serial ;?>" id="ids">
+                                <input type="text" name="serial[]" class="form-control" value="<?php echo $serial->seriales;?>" title="Si quiere agregar otro producto, Presione el boton (+)" data-toggle="tooltip" >
                             </div>
                             {{--<span class="input-group-btn"><button class="add_field_button btn btn-info">+</button></span>--}}
                         </div>
@@ -63,9 +73,8 @@
     {!!Form::close()!!}
     </div>
 
-    <script>
+    <script type="text/javascript">
         $(document).ready(function () {
-
             $('#marca').change(function () {
                 $.get("{{ url('articulo')}}",
                         {option: $(this).val()},
@@ -77,6 +86,7 @@
                         });
             });
 
+            $('ids').hide();
 //                var max_fields      = 10; //maximum input boxes allowed
             var wrapper         = $(".input_fields_wrap"); //Fields wrapper
             var add_button      = $(".add_field_button"); //Add button ID

@@ -6,6 +6,7 @@ class Modelo extends Model {
 
     public $timestamps=false;
     protected $table='modelo';
+    protected $primaryKey='id_modelo';
 
 
     public function marcas()

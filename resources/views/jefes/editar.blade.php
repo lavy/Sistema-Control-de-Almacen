@@ -2,13 +2,20 @@
 
 @section('content')
     <div class="container">
+        @if($errors->has())
+            <div class='alert alert-danger'>
+                @foreach ($errors->all('<p>:message</p>') as $message)
+                    {!! $message !!}
+                @endforeach
+            </div>
+        @endif
         {!!Form::open(['url'=>'jefes/'.$jefes->id_jefe])!!}
         <div class="panel panel-primary">
             <div class="panel-heading" style="text-align:center;">EDITAR JEFES</div>
             <div class="panel-body">
                 <div class="col-md-6">
                     {!!Form::label('oficina','Oficina:')!!}
-                    {!!Form::text('oficina',$jefes->id_oficina,array('class'=>'form-control','type'=>'text'))!!}
+                    {!!Form::select('oficina',$oficinas,$jefes->id_oficina,['class'=>'form-control'])!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('nombre','Nombre:')!!}

@@ -2,6 +2,13 @@
 
 @section('content')
     <div class="container">
+        @if($errors->has())
+            <div class='alert alert-danger'>
+                @foreach ($errors->all('<p>:message</p>') as $message)
+                    {!! $message !!}
+                @endforeach
+            </div>
+        @endif
         {!!Form::open(['url'=>'oficinas/'.$oficina->id_oficina])!!}
         <div class="panel panel-primary">
             <div class="panel-heading" style="text-align:center;">EDITAR OFICINA</div>

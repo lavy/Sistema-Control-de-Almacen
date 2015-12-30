@@ -2,13 +2,6 @@
 
 @section('content')
     <div class="container">
-        @if($errors->has())
-            <div class='alert alert-danger'>
-                @foreach ($errors->all('<p>:message</p>') as $message)
-                    {!! $message !!}
-                @endforeach
-            </div>
-        @endif
         {!!Form::open(['url'=>'tiporenglon/'.$trenglon->id_tipo_renglon])!!}
         <div class="panel panel-primary">
             <div class="panel-heading" style="text-align:center;">EDITAR TIPO DE RENGLON</div>

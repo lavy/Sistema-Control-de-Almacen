@@ -61,6 +61,8 @@ Route::post('marcas/{id}',['uses' => 'MarcasController@update', 'middleware' => 
 Route::get('modelos',['uses' => 'ModelosController@index', 'middleware' => ['operador']]);
 Route::get('crear_modelos',['uses' => 'ModelosController@create', 'middleware' => ['operador']]);
 Route::post('modelos',['uses' => 'ModelosController@store', 'middleware' => ['operador']]);
+Route::get('modelos/editar/{id}',['uses'=>'ModelosController@edit','middleware'=> ['operador']]);
+Route::post('modelos/{id}',['uses'=>'ModelosController@update','middleware'=> ['operador']]);
 Route::delete('modelos/{id}',['uses' => 'ModelosController@destroy', 'middleware' => ['operador']]);
 
 Route::get('proveedor','ProveedorController@index');
@@ -111,6 +113,7 @@ Route::get('renglones', ['uses' => 'RenglonController@index', 'middleware' => ['
 Route::get('crear_renglones', ['uses' => 'RenglonController@create', 'middleware' => ['operador']]);
 Route::post('renglones', ['uses' => 'RenglonController@store', 'middleware' => ['operador']]);
 Route::delete('renglones/eliminar/{id}', ['uses' => 'RenglonController@destroy', 'middleware' => ['operador']]);
+/*Route::delete('seriales/eliminar/{id}', ['uses' => 'RenglonController@borrar', 'middleware' => ['operador']]);*/
 Route::get('renglones/editar/{id}', ['uses' => 'RenglonController@edit', 'middleware' => ['operador']]);
 Route::post('renglones/{id}', ['uses' => 'RenglonController@update', 'middleware' => ['operador']]);
 

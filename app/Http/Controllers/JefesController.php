@@ -2,8 +2,10 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Oficinas;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Http\Requests\JefesForm;
 
 class JefesController extends Controller {
 
@@ -42,7 +44,7 @@ class JefesController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(JefesForm $jefesForm)
 	{
 		$jefes= new \App\Jefes();
         $jefes->id_oficina=\Request::input('oficina');
@@ -73,7 +75,8 @@ class JefesController extends Controller {
 	public function edit($id)
 	{
 		$jefes=\App\Jefes::find($id);
-        return view('jefes.editar')->with('jefes',$jefes);
+        $oficinas=Oficinas::all()->lists('descrip_oficina','id_oficina');
+        return view('jefes.editar')->with(['jefes'=>$jefes,'oficinas'=>$oficinas]);
 
 	}
 
@@ -83,7 +86,7 @@ class JefesController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, JefesForm $jefesForm)
     {
         $jefes = \App\Jefes::find($id);
         $jefes->id_oficina = \Request::input('oficina');

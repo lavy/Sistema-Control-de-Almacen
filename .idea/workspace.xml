@@ -62,10 +62,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DespachosController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DespachosController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DespachosController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4437577" vertical-offset="2845" max-vertical-offset="4482">
+            <state vertical-scroll-proportion="-13.296296" vertical-offset="2845" max-vertical-offset="4482">
               <caret line="190" column="29" selection-start-line="190" selection-start-column="29" selection-end-line="190" selection-end-column="29" />
               <folding>
                 <marker date="1451447319853" expanded="true" signature="1911:2170" placeholder="SELECT i.can..detalle_planilla_orden..." />
@@ -73,6 +73,16 @@
                 <marker date="1451447319853" expanded="true" signature="7326:7534" placeholder="SELECT MAX(j..jefes..." />
                 <marker date="1451447319853" expanded="true" signature="7569:7801" placeholder="SELECT u.ci_..users..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="824">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -161,7 +171,6 @@
         <option value="$PROJECT_DIR$/resources/views/usuarios/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/despacho/acta_entrega.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/renglon/crear.blade.php" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/resources/views/reportes/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ReportesController.php" />
         <option value="$PROJECT_DIR$/resources/views/app.blade.php" />
@@ -193,6 +202,7 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/SolicitudesController.php" />
         <option value="$PROJECT_DIR$/resources/views/despacho/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -470,7 +480,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.290625" sideWeight="0.49932706" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.290625" sideWeight="0.49932706" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32974428" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298969" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -661,7 +671,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DespachosController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4437577" vertical-offset="2845" max-vertical-offset="4482">
+        <state vertical-scroll-proportion="-13.296296" vertical-offset="2845" max-vertical-offset="4482">
           <caret line="190" column="29" selection-start-line="190" selection-start-column="29" selection-end-line="190" selection-end-column="29" />
           <folding>
             <marker date="1451447319853" expanded="true" signature="1911:2170" placeholder="SELECT i.can..detalle_planilla_orden..." />
@@ -669,6 +679,14 @@
             <marker date="1451447319853" expanded="true" signature="7326:7534" placeholder="SELECT MAX(j..jefes..." />
             <marker date="1451447319853" expanded="true" signature="7569:7801" placeholder="SELECT u.ci_..users..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="849">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -49,6 +49,12 @@
                             <td>{!!link_to('#','Planilla',['class'=>'btn btn-primary btn-md','disabled'=>'true'])!!}</td>
                         @endif
 
+                        @if($ord->cantidad !=NULL)
+                            <td>{!!link_to('reversar/'.$ord->id_transaccion,'reversar',['class'=>'btn btn-info btn-md'])!!}</td>
+                        @else
+                            <td>{!!link_to('#','Reversar',['class'=>'btn btn-info btn-md','disabled'=>'true'])!!}</td>
+                        @endif
+
                         @if($ord->cantidad ===NULL)
                         <td width="60" align="center">
                             {!! Html::link('despacho/detalle/'.$ord->id_transaccion,'Detalles',array('class' => 'btn btn-success btn-md')) !!}
@@ -68,9 +74,7 @@
                             {!! Html::link('devolucion/'.$ord->id_transaccion,'Devolucion',array('class' => 'btn btn-warning btn-md')) !!}
                         </td>
                         @endif
-                        {{--<td width="60" align="center">
-                            {!! Html::link('despacho/devolucion/'.$ord->id_transaccion,'Detalles',array('class' => 'btn btn-success btn-md')) !!}
-                        </td>--}}
+
                         <td style="text-align:center;">{{$ord->id_transaccion}}</td>
                         <td style="text-align:center;">{{$ord->id_orden}}</td>
                         <td style="text-align:center;">{{$ord->descrip_almacen}}</td>

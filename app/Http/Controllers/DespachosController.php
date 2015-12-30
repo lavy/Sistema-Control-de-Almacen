@@ -250,5 +250,6 @@ class DespachosController extends Controller {
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
         return $pdf->stream('planilla');
+
     }
 }

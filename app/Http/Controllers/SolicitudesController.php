@@ -95,7 +95,33 @@ class SolicitudesController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+
+
+   /* public function transferir($id, SolicitudForm $solicitudForm)
+    {
+        $solicitud= Solicitudes::find($id);
+        $solicitud->id_oficina=\Request::Input('oficina');
+        $solicitud->id_departamento=\Request::Input('departamento');
+        $solicitud->desde=\Request::Input('desde');
+        $solicitud->hasta=\Request::Input('hasta');
+        $solicitud->beneficiario=\Request::Input('nombre_beneficiario');
+        $solicitud->telef_beneficiario=\Request::Input('telef_beneficiario');
+        $solicitud->email_beneficiario=\Request::Input('email_beneficiario');
+        $solicitud->tipo_solicitud=\Request::Input('tipo_solicitud');
+        $solicitud->id_renglon=\Request::Input('articulos');
+        $solicitud->id_tipo_renglon=\Request::Input('t_articulos');
+        $solicitud->pedido=\Request::Input('detalle');
+        $solicitud->observaciones=\Request::Input('observaciones');
+        $solicitud->estatus='RECIBIDO';
+        if (Auth::User())
+        {
+            $solicitud->cod_usua=Auth::User()->cod_usua;
+        }
+        $solicitud->save();
+        return redirect('solicitudes')->with('message','Se Registro su solicitud exitosamente');
+    }*/
+
+    public function show($id)
 	{
 		//
 	}

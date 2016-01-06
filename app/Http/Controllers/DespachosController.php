@@ -178,10 +178,14 @@ class DespachosController extends Controller {
             ->where('id_transaccion', $id)
             ->update(['estatus' => 'Stock','id_transaccion'=>0]);
 
+       /* DB::table('solicitudes_almacen')
+            ->where('id_transaccion', $id)
+            ->update(['estatus' => 'Cerrado']);*/
+
         return redirect('despacho')->with('message','Se han incorporado nuevamente los articulos al Stock');
     }
 
-    public function reversar($id)
+    /*public function reversar($id)
     {
         DB::table('detalle_planilla_orden')
             ->where('id_transaccion', $id)
@@ -189,7 +193,7 @@ class DespachosController extends Controller {
 
         return redirect('despacho')->with('message','Se han reversado la transacción, si desea hacerla nuevamente, Pulse
          el Boton Detalles');
-    }
+    }*/
 
 	/**
 	 * Remove the specified resource from storage.

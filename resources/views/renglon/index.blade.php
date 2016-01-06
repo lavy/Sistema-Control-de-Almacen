@@ -77,6 +77,7 @@
 
                             {{--<td width="60" align="center">--}}
                                 {!! Html::link('renglones/editar/'.$renglon->id_renglon, '', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}
+                                {!! Html::link('seriales/'.$renglon->id_renglon, '', array('class' => 'glyphicon glyphicon-zoom-in btn btn-info btn-xs')) !!}
                             {{--</td>
                             <td width="60" align="center">--}}
                                 {!! Form::open(array('url' =>'renglones/eliminar/'.$renglon->id_renglon, 'method' => 'DELETE')) !!}

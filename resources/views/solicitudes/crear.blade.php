@@ -116,17 +116,6 @@
                         <option>Debe Seleccionar una Subcategoria</option>
                     </select>
                 </div>--}}
-                {{--<div class="col-md-6">
-                    {!! Form::label('marca','Marca:')   !!}
-                    {!!Form::select('marca',array('Debe Seleccionar una Marca',$marca),0,['class'=>'form-control'])!!}
-
-                </div>
-                <div class="col-md-6">
-                    {!! Form::label('modelos','Modelo:')   !!}
-                    <select class="form-control" id="modelo" name="modelos">
-                        <option>Debe Seleccionar un Modelo</option>
-                    </select>
-                </div>--}}
 
                 <div class="col-md-6">
                     {!!Form::label('detalle','Detalles del Pedido:')!!}

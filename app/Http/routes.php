@@ -12,13 +12,12 @@
 */
 
 Route::get('/', 'HomeController@index');
-Route::get('home', 'HomeController@index');
+/*Route::get('home', 'HomeController@index');*/
 
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
 ]);
-
 
 Route::get('menu',function()
 {
@@ -83,6 +82,7 @@ Route::get('solicitudes','SolicitudesController@index');
 Route::get('crear_solicitudes','SolicitudesController@create');
 Route::post('solicitudes','SolicitudesController@store');
 Route::get('solicitudes/editar/{id}','SolicitudesController@edit');
+Route::post('solicitudes/{id}','SolicitudesController@update');
 Route::delete('solicitudes/eliminar/{id}','SolicitudesController@destroy');
 Route::get('solicitudes/transferir/{id}','SolicitudesController@transferir');
 Route::get('solicitudes_procesadas','SolicitudesController@procesadas');
@@ -113,9 +113,13 @@ Route::get('renglones', ['uses' => 'RenglonController@index', 'middleware' => ['
 Route::get('crear_renglones', ['uses' => 'RenglonController@create', 'middleware' => ['operador']]);
 Route::post('renglones', ['uses' => 'RenglonController@store', 'middleware' => ['operador']]);
 Route::delete('renglones/eliminar/{id}', ['uses' => 'RenglonController@destroy', 'middleware' => ['operador']]);
-/*Route::delete('seriales/eliminar/{id}', ['uses' => 'RenglonController@borrar', 'middleware' => ['operador']]);*/
 Route::get('renglones/editar/{id}', ['uses' => 'RenglonController@edit', 'middleware' => ['operador']]);
 Route::post('renglones/{id}', ['uses' => 'RenglonController@update', 'middleware' => ['operador']]);
+
+Route::get('seriales/{id}', ['uses' => 'SerialesController@index', 'middleware' => ['operador']]);
+Route::get('seriales/editar/{id}', ['uses' => 'SerialesController@edit', 'middleware' => ['operador']]);
+Route::post('seriales/{id}', ['uses' => 'SerialesController@update', 'middleware' => ['operador']]);
+Route::delete('seriales/eliminar/{id}', ['uses' => 'RenglonController@eliminarserial', 'middleware' => ['operador']]);
 
 Route::get('reportes',function()
 {
@@ -204,10 +208,10 @@ Route::get('articulo',function() {
 Route::get('modal/{id}',function($id)
 {
 
-    $seriales=\Illuminate\Support\Facades\DB::table('seriales')
-        ->join('renglones','seriales.id_renglon','=','renglones.id_renglon')
-        ->select('seriales.seriales','renglones.descrip_renglon')
-        ->where('seriales.id_renglon','=',$id)
+    $seriales=\Illuminate\Support\Facades\DB::table('inventario_seriales')
+        ->join('renglones','inventario_seriales.id_renglon','=','renglones.id_renglon')
+        ->select('inventario_seriales.serial','renglones.descrip_renglon')
+        ->where('inventario_seriales.id_renglon','=',$id)
         ->get();
     /*$seriales=\App\Seriales::where('id_renglon','=',$id)->get();*/
 
@@ -218,13 +222,16 @@ Route::get('modal/{id}',function($id)
       echo "<tr>";
          echo "<td style='text-align:center;'>".'<b>Articulo</b>'."</td>";
          echo "<td style='text-align:center;'>".'<b>Seriales</b>'."</td>";
+         /*echo "<td style='text-align:center;'>".'<b>Seriales</b>'."</td>";*/
       echo "</tr>";
 
     foreach($seriales as $serial) {
         echo "<tr>";
             echo "<td style='text-align:center;'>".$serial->descrip_renglon."</td>";
-            echo "<td style='text-align:center;'>".$serial->seriales."</td>";
+            echo "<td style='text-align:center;'>".$serial->serial."</td>";
+            /*echo "<td><a href='modal' class='btn btn-danger'></a></td>";*/
         echo "</tr>";
+
     }
       echo "</table>";
 });

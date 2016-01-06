@@ -49,9 +49,7 @@ class SolicitudesController extends Controller {
 	{
         $oficina=\App\Oficinas::all()->lists('descrip_oficina','id_oficina');
         $tarticulo=\App\TipoRenglon::all()->lists('descrip_tipo_renglon','id_tipo_renglon');
-
         $marca=\App\Marca::all()->lists('descrip_marca','id_marca');
-       /* dd($oficina);*/
         array_unshift($tarticulo,'Por Favor Seleccione un Tipo de Artículo');
         array_unshift($oficina,'Por Favor Seleccione una Oficina');
         return view('solicitudes.crear')->with(['oficina'=>$oficina,'t_articulo'=>$tarticulo,'marca'=>$marca]);
@@ -75,10 +73,6 @@ class SolicitudesController extends Controller {
         $solicitud->tipo_solicitud=\Request::Input('tipo_solicitud');
         $solicitud->id_renglon=\Request::Input('articulos');
         $solicitud->id_tipo_renglon=\Request::Input('t_articulos');
-       /* $solicitud->categoria=\Request::Input('categoria');
-        $solicitud->subcategoria=\Request::Input('subcategorias');
-        $solicitud->marca=\Request::Input('marca');
-        $solicitud->modelo=\Request::Input('modelos');*/
         $solicitud->pedido=\Request::Input('detalle');
         $solicitud->observaciones=\Request::Input('observaciones');
         $solicitud->estatus='RECIBIDO';
@@ -97,32 +91,6 @@ class SolicitudesController extends Controller {
 	 * @return Response
 	 */
 
-
-    /*public function transferencia(SolicitudForm $solicitudForm)
-    {
-        $solicitud=new  Solicitudes_Almacen();
-        $solicitud->id_solicitud=\Request::Input('solicitud');
-        $solicitud->id_oficina=\Request::Input('oficina');
-        $solicitud->id_departamento=\Request::Input('departamento');
-        $solicitud->desde=\Request::Input('desde');
-        $solicitud->hasta=\Request::Input('hasta');
-        $solicitud->beneficiario=\Request::Input('nombre_beneficiario');
-        $solicitud->telef_beneficiario=\Request::Input('telef_beneficiario');
-        $solicitud->email_beneficiario=\Request::Input('email_beneficiario');
-        $solicitud->tipo_solicitud=\Request::Input('tipo_solicitud');
-        $solicitud->id_renglon=\Request::Input('articulos');
-        $solicitud->id_tipo_renglon=\Request::Input('t_articulos');
-        $solicitud->pedido=\Request::Input('detalle');
-        $solicitud->observaciones=\Request::Input('observaciones');
-        $solicitud->estatus='asignado';
-        if (Auth::User())
-        {
-            $solicitud->cod_usua=Auth::User()->cod_usua;
-        }
-        $solicitud->save();
-        return redirect('solicitudes')->with('message','Se ha transferido su solicitud exitosamente');
-    }*/
-
     public function show($id)
 	{
 		//
@@ -137,7 +105,11 @@ class SolicitudesController extends Controller {
 	public function edit($id)
 	{
 		$solicitudes=\App\Solicitudes::find($id);
-        return view('solicitudes.editar')->with('solicitud',$solicitudes);
+        $oficina=\App\Oficinas::all()->lists('descrip_oficina','id_oficina');
+        $tarticulo=\App\TipoRenglon::all()->lists('descrip_tipo_renglon','id_tipo_renglon');
+        $marca=\App\Marca::all()->lists('descrip_marca','id_marca');
+        return view('solicitudes.editar')->with(['solicitud'=>$solicitudes,'oficina'=>$oficina,'t_articulo'=>$tarticulo
+                                                ,'marca'=>$marca]);
 	}
 
 	/**
@@ -146,9 +118,29 @@ class SolicitudesController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, SolicitudForm $solicitudForm)
 	{
-		//
+        $solicitud=\App\Solicitudes::find($id);
+        /*$solicitud->id_solicitud=\Request::Input('solicitud');*/
+        $solicitud->id_oficina=\Request::Input('oficina');
+        $solicitud->id_departamento=\Request::Input('departamento');
+        $solicitud->desde=\Request::Input('desde');
+        $solicitud->hasta=\Request::Input('hasta');
+        $solicitud->beneficiario=\Request::Input('nombre_beneficiario');
+        $solicitud->telef_beneficiario=\Request::Input('telef_beneficiario');
+        $solicitud->email_beneficiario=\Request::Input('email_beneficiario');
+        $solicitud->tipo_solicitud=\Request::Input('tipo_solicitud');
+        $solicitud->id_renglon=\Request::Input('articulos');
+        $solicitud->id_tipo_renglon=\Request::Input('t_articulos');
+        $solicitud->pedido=\Request::Input('detalle');
+        $solicitud->observaciones=\Request::Input('observaciones');
+        /*$solicitud->estatus='';*/
+        if (Auth::User())
+        {
+            $solicitud->cod_usua=Auth::User()->cod_usua;
+        }
+        $solicitud->save();
+        return redirect('solicitudes')->with('message','Se ha transferido su solicitud exitosamente');
 	}
 
 	/**

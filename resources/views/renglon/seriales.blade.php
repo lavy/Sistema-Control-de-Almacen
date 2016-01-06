@@ -36,7 +36,7 @@
 
                             {{--<td width="40" align="center">--}}
 
-                            {{--</td>--}}
+                                {{--</td>--}}
 
                             <td width="60" align="center">
                                 {!! Html::link('seriales/editar/'.$seriales->id_serial, '', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}

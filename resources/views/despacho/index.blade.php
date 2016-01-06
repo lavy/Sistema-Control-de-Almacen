@@ -51,7 +51,7 @@
                         @endif
 
                         @if($ord->cantidad !=NULL)
-                            <td>{!!link_to('reversar/'.$ord->id_transaccion,'Reversar',['class'=>'btn btn-info btn-md'])!!}</td>
+                            <td>{!!link_to('despacho/editar/'.$ord->id_transaccion,'Reversar',['class'=>'btn btn-info btn-md'])!!}</td>
                         @else
                             <td>{!!link_to('#','Reversar',['class'=>'btn btn-info btn-md','disabled'=>'true'])!!}</td>
                         @endif

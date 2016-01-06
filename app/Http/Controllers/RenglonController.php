@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RenglonesForm;
+use App\Inventario_Seriales;
 use App\Renglon;
 use App\Seriales;
 use Illuminate\Http\Request;
@@ -89,12 +90,34 @@ class RenglonController extends Controller {
         }
         $renglon->save();
 
-        $serial=$renglon->serial=\Request::Input('serial');
-        foreach($serial as $seriales)
+
+        $max=DB::select('SELECT MAX(id_renglon) AS id FROM renglones');
+        /*dd($max[0]->id);*/
+        $detalle=DB::select('SELECT id_detalle FROM inventario WHERE inventario.id_renglon='.$max[0]->id);
+
+        /*dd($detalle);*/
+        /*dd($detalle[0]->id_detalle);*/
+
+        $serial=Input::get('serial');
+        /*dd($serial);*/
+        foreach($serial as $serials)
+        {
+            DB::table('inventario_seriales')->insert(
+                ['id_renglon' => $max[0]->id, 'serial' => $serials, 'id_detalle' => $detalle[0]->id_detalle]
+            );
+            /*$seriales=new Inventario_Seriales();
+            $seriales->id_renglon=$detalle;
+            $seriales->serial=$serials;
+            $seriales->id_detalle=$detalle;
+            $seriales->save();*/
+        }
+
+
+        /*foreach($serial as $seriales)
         {
             $renglon=\App\Renglon::find($renglon->id_renglon);
             $renglon->Serial()->attach($seriales);
-        }
+        }*/
 
         /*$serials=new \App\Seriales();
         $serias=$serials->serial=\Request::Input('serial');
@@ -202,12 +225,4 @@ class RenglonController extends Controller {
         $renglon->delete();
         return redirect('renglones')->with('message','Borrado');
 	}
-
-    /*public function borrar($id)
-    {
-        $seriales=Seriales::find($id);
-        $seriales->delete();
-        return redirect('')
-    }*/
-
 }

@@ -32,90 +32,90 @@
             <area shape="rect" coords="802,49,828,75" href="http://instagram.com/prensacapital" title="Instagram"/>
         </map>
 
-        @if (Auth::check())
-            <nav class="navbar navbar-default">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <span class="navbar-brand" href="#">{{Auth::user()->nombre.'   '.Auth::user()->apellido}}</span>
-                    </div>
-                    <div>
-
-                        <?php App\Menu::menu_complete(Auth::user()->cod_usua)  ?>
-
-
-
-
-{{--<nav class="navbar navbar-default">
+@if(Auth::check() && Auth::user()->UserLevel !=1)
+<nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">{{Auth::user()->nombre.'   '.Auth::user()->apellido}}</a>
         </div>
         <div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Inicio</a></li>
+                <li><a href="{{URL::to('menu')}}">Inicio</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Institución
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Jefes</a></li>
-                        <li><a href="#">Tecnicos</a></li>
-                        <li><a href="#">Oficinas</a></li>
-                        <li><a href="#">Departamentos</a></li>
+                        <li><a href="{{URL::to('jefes')}}">Jefes</a></li>
+                        <li><a href="{{URL::to('tecnico')}}">Tecnicos</a></li>
+                        <li><a href="{{URL::to('oficina')}}">Oficinas</a></li>
+                        <li><a href="{{URL::to('departamento')}}">Departamentos</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tablas Básicas
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Almacenes</a></li>
-                        <li><a href="#">Marcas</a></li>
-                        <li><a href="#">Modelos</a></li>
-                        <li><a href="#">Proveedores</a></li>
+                        <li><a href="{{URL::to('almacen')}}">Almacenes</a></li>
+                        <li><a href="{{URL::to('marca')}}">Marcas</a></li>
+                        <li><a href="{{URL::to('modelos')}}">Modelos</a></li>
+                        <li><a href="{{URL::to('proveedor')}}">Proveedores</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Insumos
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Articulos</a></li>
-                        <li><a href="#">Tipo de Articulos</a></li>
+                        <li><a href="{{URL::to('renglones')}}">Articulos</a></li>
+                        <li><a href="{{URL::to('tiporenglon')}}">Tipo de Articulos</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Solicitudes</a></li>
-                <li><a href="#">Despachos</a></li>
-                <li><a href="#">Inventario</a></li>
+                <li><a href="{{URL::to('solicitudes')}}">Solicitudes</a></li>
+                <li><a href="{{URL::to('despacho')}}">Despachos</a></li>
+                <li><a href="{{URL::to('inventario')}}">Inventario</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Estadísticas
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Reportes</a></li>
-                        <li><a href="#">Gráficos</a></li>
+                        <li><a href="{{URL::to('reportes')}}">Reportes</a></li>
+                        <li><a href="{{URL::to('estadisticas')}}">Gráficos</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Seguridad
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Reportes</a></li>
-                        <li><a href="#">Gráficos</a></li>
+                        <li><a href="{{URL::to('usuarios')}}">Usuarios</a></li>
+                        <li><a href="{{URL::to('niveles')}}">Niveles</a></li>
+                        <li><a href="{{URL::to('permisos')}}">Permisos</a></li>
                     </ul>
                 </li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>Salir</a></li>
+                <li><a href="{{URL::to('auth/logout')}}"><span class="glyphicon glyphicon-log-out"></span>Salir</a></li>
 
             </ul>
         </div>
     </div>
-</nav>--}}
+</nav>
 
-            </div>
-        </div>
-    </nav>
-        @endif
+@elseif(Auth::check() && Auth::user()->UserLevel ==1)
+            <nav class="navbar navbar-default">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">{{Auth::user()->nombre.'   '.Auth::user()->apellido}}</a>
+                    </div>
+                    <div>
+                        <ul class="nav navbar-nav">
+                            <li ><a href="{{URL::to('menu')}}">Inicio</a></li>
+
+                            <li><a href="{{URL::to('solicitudes')}}">Solicitudes</a></li>
+                            <li><a href="{{URL::to('despacho')}}">Despachos</a></li>
+
+                            <li><a href="{{URL::to('auth/logout')}}"><span class="glyphicon glyphicon-log-out"></span>Salir</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+@endif
         {{--@if(Auth::user()->UserLevel===0)
 
         @endif--}}

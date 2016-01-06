@@ -58,6 +58,7 @@
                             {{--</td>
                             <td width="40" align="center">--}}
                                 {{--<a href='modal/'.$renglon->id_renglon id='$renglon->id_renglon' data-toggle='modal'   class='modalLoad btn btn-primary btn-xs' data-target='#myModal'>Detalles</a>;--}}
+                                {!! Html::link('solicitudes/editar/'.$solicitud->id_solicitud, 'Editar', array('class' => 'btn btn-primary btn-xs')) !!}
                                 {!! Html::link('solicitudes/mostrar/'.$solicitud->id_solicitud, 'Ver Solicitud', array('class'=>'modalLoad btn btn-info btn-xs','data-toggle'=>'modal','data-target'=>'#myModal','id'=>'$solicitud->id_solicitud')) !!}
 
                                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

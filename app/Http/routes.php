@@ -21,7 +21,13 @@ Route::controllers([
 
 Route::get('menu',function()
 {
-   return view('menu');
+  if(Auth::check() != FALSE)
+  {
+      return view('menu');
+  }elseif(Auth::check() != TRUE)
+  {
+      return redirect('auth/logout');
+  }
 });
 
 Route::get('oficina',['uses' => 'OficinasController@index', 'middleware' => ['operador']]);
@@ -44,11 +50,11 @@ Route::post('jefes',['uses'=>'JefesController@store','middleware'=>['operador']]
 Route::get('jefes/editar/{id}',['uses'=>'JefesController@edit','middleware'=>['operador']]);
 Route::post('jefes/{id}',['uses'=>'JefesController@update','middleware'=>['operador']]);
 
-Route::get('tecnico','TecnicosController@index');
-Route::get('crear_tecnico','TecnicosController@create');
-Route::post('tecnicoss','TecnicosController@store');
-Route::get('tecnicos/editar/{id}','TecnicosController@edit');
-Route::post('tecnicos/{id}','TecnicosController@update');
+Route::get('tecnico',['uses'=>'TecnicosController@index','middleware'=>['operador']]);
+Route::get('crear_tecnico',['uses'=>'TecnicosController@create','middleware'=>['operador']]);
+Route::post('tecnicoss',['uses'=>'TecnicosController@store','middleware'=>['operador']]);
+Route::get('tecnicos/editar/{id}',['uses'=>'TecnicosController@edit','middleware'=>['operador']]);
+Route::post('tecnicos/{id}',['uses'=>'TecnicosController@update','middleware'=>['operador']]);
 
 Route::get('marca',['uses' => 'MarcasController@index', 'middleware' => ['operador']]);
 Route::get('crear_marcas',['uses' => 'MarcasController@create', 'middleware' => ['operador']]);
@@ -64,12 +70,12 @@ Route::get('modelos/editar/{id}',['uses'=>'ModelosController@edit','middleware'=
 Route::post('modelos/{id}',['uses'=>'ModelosController@update','middleware'=> ['operador']]);
 Route::delete('modelos/{id}',['uses' => 'ModelosController@destroy', 'middleware' => ['operador']]);
 
-Route::get('proveedor','ProveedorController@index');
-Route::get('crear_proveedor','ProveedorController@create');
-Route::post('proveedor','ProveedorController@store');
-Route::get('proveedor/editar/{id}','ProveedorController@edit');
-Route::post('proveedor/{id}','ProveedorController@update');
-Route::delete('proveedor/eliminar/{id}','ProveedorController@destroy');
+Route::get('proveedor',['uses'=>'ProveedorController@index','middleware'=>['operador']]);
+Route::get('crear_proveedor',['uses'=>'ProveedorController@create','middleware'=>['operador']]);
+Route::post('proveedor',['uses'=>'ProveedorController@store','middleware'=>['operador']]);
+Route::get('proveedor/editar/{id}',['uses'=>'ProveedorController@edit','middleware'=>['operador']]);
+Route::post('proveedor/{id}',['uses'=>'ProveedorController@update','middleware'=>['operador']]);
+Route::delete('proveedor/eliminar/{id}',['uses'=>'ProveedorController@destroy','middleware'=>['operador']]);
 
 Route::get('tiporenglon',['uses' => 'TiporenglonController@index', 'middleware' => ['operador']]);
 Route::get('crear_tiporenglon',['uses' => 'TiporenglonController@create', 'middleware' => ['operador']]);
@@ -84,14 +90,14 @@ Route::post('solicitudes','SolicitudesController@store');
 Route::get('solicitudes/editar/{id}','SolicitudesController@edit');
 Route::post('solicitudes/{id}','SolicitudesController@update');
 Route::delete('solicitudes/eliminar/{id}','SolicitudesController@destroy');
-Route::get('solicitudes/transferir/{id}','SolicitudesController@transferir');
+Route::get('solicitudes/transferir/{id}',['uses'=>'SolicitudesController@transferir','middleware'=>['operador']]);
 Route::get('solicitudes_procesadas','SolicitudesController@procesadas');
 
 Route::get('despacho','DespachosController@index');
 Route::get('despacho/detalle/{id}','DespachosController@edit');
 Route::get('despacho/pdf/{id}','DespachosController@planilla');
 Route::post('despacho/{id}','DespachosController@update');
-Route::get('devolucion/{id}','DespachosController@devolucion');
+Route::get('devolucion/{id}',['uses'=>'DespachosController@devolucion','middleware'=>['operador']]);
 Route::get('reversar/{id}','DespachosController@reversar');
 
 Route::get('articulos','ArticulosController@index');
@@ -143,13 +149,13 @@ Route::get('permisos/editar/{id}','PermisosController@edit');
 Route::post('permisos/{id}','PermisosController@update');
 Route::delete('permisos/eliminar/{id}','PermisosController@destroy');
 
-Route::get('estadisticas','EstadisticasController@index');
+Route::get('estadisticas',['uses'=>'EstadisticasController@index','middleware'=>['operador']]);
 
-Route::get('niveles','NivelesController@index');
-Route::get('crear_nivel','NivelesController@create');
-Route::post('niveles','NivelesController@store');
-Route::get('niveles/editar/{id}','NivelesController@edit');
-Route::post('niveles/{id}','NivelesController@update');
+Route::get('niveles',['uses'=>'NivelesController@index','middleware'=>['operador']]);
+Route::get('crear_nivel',['uses'=>'NivelesController@create','middleware'=>['operador']]);
+Route::post('niveles',['uses'=>'NivelesController@store','middleware'=>['operador']]);
+Route::get('niveles/editar/{id}',['uses'=>'NivelesController@edit','middleware'=>['operador']]);
+Route::post('niveles/{id}',['uses'=>'NivelesController@update','middleware'=>['operador']]);
 
 Route::get('almacen',['uses' => 'AlmacenController@index', 'middleware' => ['operador']]);
 Route::get('crear_almacen',['uses' => 'AlmacenController@create', 'middleware' => ['operador']]);

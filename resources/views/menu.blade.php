@@ -1,6 +1,18 @@
 @extends('app')
 @section('content')
 
+    @if($errors->has())
+        <div class='alert alert-danger'>
+            @foreach ($errors->all('<p>:message</p>') as $message)
+                {!! $message !!}
+            @endforeach
+        </div>
+    @endif
+
+    @if (Session::has('message'))
+        <div class="alert alert-danger">{{ Session::get('message') }}</div>
+    @endif
+
     <script>
          function carga(){
              $('#myModal').modal('show') // evento que lanza la ventana

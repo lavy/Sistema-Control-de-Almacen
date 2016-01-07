@@ -178,9 +178,11 @@ class DespachosController extends Controller {
             ->where('id_transaccion', $id)
             ->update(['estatus' => 'Stock','id_transaccion'=>0]);
 
-       /* DB::table('solicitudes_almacen')
-            ->where('id_transaccion', $id)
-            ->update(['estatus' => 'Cerrado']);*/
+        $solicitud=DB::select('SELECT id_solicitud FROM detalle_planilla_orden WHERE detalle_planilla_orden.id_transaccion='.$id);
+
+        DB::table('solicitudes_almacen')
+            ->where('id_solicitud', $solicitud[0]->id_solicitud)
+            ->update(['estatus' => 'Cerrado']);
 
         return redirect('despacho')->with('message','Se han incorporado nuevamente los articulos al Stock');
     }

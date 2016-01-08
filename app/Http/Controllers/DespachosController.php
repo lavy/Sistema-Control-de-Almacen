@@ -32,8 +32,10 @@ class DespachosController extends Controller {
         $orden = DB::table('detalle_planilla_orden')
             ->join('almacen', 'detalle_planilla_orden.id_almacen', '=', 'almacen.id_almacen')
             ->join('renglones', 'detalle_planilla_orden.id_renglon', '=', 'renglones.id_renglon')
-            ->select('detalle_planilla_orden.*', 'almacen.descrip_almacen', 'renglones.descrip_renglon')
-            ->where('id_orden','LIKE','%'.$buscar.'%')->where('detalle_planilla_orden.cod_usua','=',Auth::User()->cod_usua)->paginate(5);
+            ->join('planilla_orden','detalle_planilla_orden.id_orden','=','planilla_orden.id_orden')
+            ->select('detalle_planilla_orden.*', 'almacen.descrip_almacen', 'renglones.descrip_renglon',
+                    'planilla_orden.estatus_orden')
+            ->where('planilla_orden.id_orden','LIKE','%'.$buscar.'%')->where('detalle_planilla_orden.cod_usua','=',Auth::User()->cod_usua)->paginate(5);
         $orden->setPath('despacho');
 		return view('despacho.index')->with(['orden'=>$orden]);
 	}
@@ -118,6 +120,7 @@ class DespachosController extends Controller {
         /*$transaccion=DB::select('SELECT id_transaccion FROM detalle_planilla_orden WHERE id_transaccion='.$id);
             dd($transaccion);*/
         $seriales = Inventario_Seriales::join('detalle_planilla_orden','inventario_seriales.id_renglon','=','detalle_planilla_orden.id_renglon')
+                    ->where('inventario_seriales.estatus','=','Stock')
                     ->lists('inventario_seriales.serial', 'inventario_seriales.id_serial');
         $tecnicos = Tecnico::where('estatus','=','Activo')->lists('nombres_apellidos', 'id_tecnico');
         $tecnico=array_unshift($tecnicos,'Seleccione...');
@@ -139,14 +142,6 @@ class DespachosController extends Controller {
                     JOIN detalle_planilla_orden d
                     ON s.id_solicitud=d.id_solicitud
                     AND d.id_transaccion=".$id);
-
-        /*dd($tipo_solicitud[0]->tipo_solicitud);*/
-
-       /* for($i=1;$i<=count($serial);$i++) {
-            DB::table('inventario_seriales')
-            ->where('id_serial', $serial)
-            ->update(['estatus' => $tipo_solicitud[0]->tipo_solicitud]);
-        }*/
 
         foreach($serial as $seriales){
             DB::table('inventario_seriales')
@@ -174,6 +169,23 @@ class DespachosController extends Controller {
 
     public function devolucion($id)
     {
+     /*   SET @transaccion=new.id_transaccion;
+SET @orden=(SELECT id_orden FROM detalle_planilla_orden WHERE detalle_planilla_orden.id_transaccion=@transaccion);
+SET @renglon=(SELECT id_renglon FROM detalle_planilla_orden WHERE detalle_planilla_orden.id_transaccion=@transaccion);
+SET @existencia=(SELECT cantidad_existencia FROM inventario WHERE inventario.id_renglon=@renglon);
+SET @cantidad=(SELECT cantidad FROM detalle_planilla_orden WHERE detalle_planilla_orden.id_transaccion=@transaccion);
+SET @solicitud=(SELECT id_solicitud FROM detalle_planilla_orden WHERE detalle_planilla_orden.id_transaccion=@transaccion);*/
+
+        $renglon=DB::select('SELECT id_renglon FROM detalle_planilla_orden WHERE detalle_planilla_orden.id_transaccion='.$id);
+        $existencia=DB::select('SELECT cantidad_existencia FROM inventario WHERE inventario.id_renglon='.$renglon[0]->id_renglon);
+        $cantidad=DB::select('SELECT cantidad FROM detalle_planilla_orden WHERE detalle_planilla_orden.id_transaccion='.$id);
+
+        $total=$existencia[0]->cantidad_existencia+$cantidad[0]->cantidad;
+        /*dd($total);*/
+        DB::table('inventario')
+            ->where('id_renglon',$renglon[0]->id_renglon)
+            ->update(['cantidad_existencia'=>$total]);
+
         DB::table('inventario_seriales')
             ->where('id_transaccion', $id)
             ->update(['estatus' => 'Stock','id_transaccion'=>0]);

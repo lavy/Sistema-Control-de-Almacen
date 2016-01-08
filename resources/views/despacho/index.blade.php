@@ -44,7 +44,7 @@
                 </tr>
                 @foreach($orden as $ord )
                     <tr>
-                        @if($ord->cantidad !=NULL)
+                        @if($ord->cantidad !=NULL && $ord->estatus_orden !='Cerrada')
                             <td>{!!link_to('despacho/pdf/'.$ord->id_orden,'Planilla',['class'=>'btn btn-primary btn-md'])!!}</td>
                         @else
                             <td>{!!link_to('#','Planilla',['class'=>'btn btn-primary btn-md','disabled'=>'true'])!!}</td>

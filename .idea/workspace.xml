@@ -25,20 +25,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DespachosController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DespachosController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DespachosController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.666667" vertical-offset="2556" max-vertical-offset="4590">
-              <caret line="176" column="36" selection-start-line="176" selection-start-column="36" selection-end-line="176" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.4" vertical-offset="2790" max-vertical-offset="4806">
+              <caret line="182" column="51" selection-start-line="182" selection-start-column="51" selection-end-line="182" selection-end-column="51" />
               <folding>
-                <marker date="1452176460016" expanded="true" signature="1911:2170" placeholder="SELECT i.can..detalle_planilla_orden..." />
-                <marker date="1452176460016" expanded="true" signature="4780:4995" placeholder="SELECT s.tip..solicitudes_almacen..." />
-                <marker date="1452176460016" expanded="true" signature="6380:6472" placeholder="SELECT id_so..detalle_planilla_orden..." />
-                <marker date="1452176460016" expanded="true" signature="6380:6477" placeholder="SELECT id_so..detalle_planilla_orden..." />
-                <marker date="1452176460016" expanded="true" signature="6380:6478" placeholder="SELECT id_so..detalle_planilla_orden..." />
-                <marker date="1452176460016" expanded="true" signature="6380:6499" placeholder="SELECT id_so..detalle_planilla_orden..." />
-                <marker date="1452176460016" expanded="true" signature="7755:7963" placeholder="SELECT MAX(j..jefes..." />
-                <marker date="1452176460016" expanded="true" signature="7998:8230" placeholder="SELECT u.ci_..users..." />
+                <marker date="1452269645491" expanded="true" signature="2079:2338" placeholder="SELECT i.can..detalle_planilla_orden..." />
+                <marker date="1452269645491" expanded="true" signature="5019:5234" placeholder="SELECT s.tip..solicitudes_almacen..." />
+                <marker date="1452269645491" expanded="true" signature="6818:6908" placeholder="SELECT id_re..detalle_planilla_orden..." />
+                <marker date="1452269645491" expanded="true" signature="6948:7019" placeholder="SELECT canti..inventario..." />
+                <marker date="1452269645491" expanded="true" signature="7077:7165" placeholder="SELECT canti..detalle_planilla_orden..." />
+                <marker date="1452269645491" expanded="true" signature="7601:7693" placeholder="SELECT id_so..detalle_planilla_orden..." />
+                <marker date="1452269645491" expanded="true" signature="7601:7698" placeholder="SELECT id_so..detalle_planilla_orden..." />
+                <marker date="1452269645491" expanded="true" signature="7601:7699" placeholder="SELECT id_so..detalle_planilla_orden..." />
+                <marker date="1452269645491" expanded="true" signature="7601:7720" placeholder="SELECT id_so..detalle_planilla_orden..." />
+                <marker date="1452269645491" expanded="true" signature="8976:9184" placeholder="SELECT MAX(j..jefes..." />
+                <marker date="1452269645491" expanded="true" signature="9219:9451" placeholder="SELECT u.ci_..users..." />
               </folding>
             </state>
           </provider>
@@ -60,7 +63,7 @@
       <file leaf-file-name="EmailController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/EmailController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1926">
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1926">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -80,18 +83,18 @@
       <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/despacho/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.0" vertical-offset="891" max-vertical-offset="1746">
-              <caret line="72" column="29" selection-start-line="72" selection-start-column="29" selection-end-line="72" selection-end-column="29" />
+            <state vertical-scroll-proportion="-3.0" vertical-offset="747" max-vertical-offset="1746">
+              <caret line="46" column="83" selection-start-line="46" selection-start-column="83" selection-end-line="46" selection-end-column="83" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routes.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.653333" vertical-offset="5697" max-vertical-offset="6912">
-              <caret line="151" column="90" selection-start-line="151" selection-start-column="90" selection-end-line="151" selection-end-column="90" />
+            <state vertical-scroll-proportion="-30.333334" vertical-offset="5373" max-vertical-offset="6912">
+              <caret line="353" column="21" selection-start-line="353" selection-start-column="21" selection-end-line="353" selection-end-column="21" />
               <folding>
                 <marker date="1452180956300" expanded="true" signature="12860:12888" placeholder="..." />
                 <marker date="1452180956300" expanded="true" signature="12890:12908" placeholder="..." />
@@ -136,7 +139,7 @@
       <file leaf-file-name="OperadorMiddleware.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Middleware/OperadorMiddleware.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.333333" vertical-offset="0" max-vertical-offset="594">
+            <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="594">
               <caret line="21" column="42" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
               <folding />
             </state>
@@ -146,7 +149,7 @@
       <file leaf-file-name="menu.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/menu.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.666667" vertical-offset="0" max-vertical-offset="1872">
+            <state vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="1872">
               <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
               <folding />
             </state>
@@ -156,7 +159,7 @@
       <file leaf-file-name="crear.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/usuarios/crear.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.666667" vertical-offset="0" max-vertical-offset="1494">
+            <state vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="1494">
               <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
               <folding />
             </state>
@@ -226,11 +229,11 @@
         <option value="$PROJECT_DIR$/resources/views/renglon/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/SerialesController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/SolicitudesController.php" />
-        <option value="$PROJECT_DIR$/resources/views/despacho/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Middleware/OperadorMiddleware.php" />
         <option value="$PROJECT_DIR$/resources/views/menu.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/DespachosController.php" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/resources/views/despacho/index.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/DespachosController.php" />
       </list>
     </option>
   </component>
@@ -267,6 +270,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -921,7 +925,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -960,9 +963,6 @@
       <BehatRunner />
       <method />
     </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
-      <method />
-    </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-options />
       <gulpfile />
@@ -970,6 +970,9 @@
       <arguments />
       <pass-parent-envs>true</pass-parent-envs>
       <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method />
     </configuration>
     <list size="0" />
@@ -1023,14 +1026,14 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871974" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1341,7 +1344,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="1188">
           <caret line="32" column="80" selection-start-line="32" selection-start-column="80" selection-end-line="32" selection-end-column="80" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1349,7 +1351,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1242" max-vertical-offset="2034">
           <caret line="79" column="58" selection-start-line="79" selection-start-column="58" selection-end-line="79" selection-end-column="58" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1357,9 +1358,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="1908">
           <caret line="22" column="61" selection-start-line="22" selection-start-column="61" selection-end-line="22" selection-end-column="61" />
-          <folding>
-            <element signature="e#39#61#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1373,14 +1371,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/EmailController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1926">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="558">
@@ -1391,7 +1381,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/menu.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.666667" vertical-offset="0" max-vertical-offset="1872">
+        <state vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="1872">
           <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
           <folding />
         </state>
@@ -1399,60 +1389,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/usuarios/crear.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.666667" vertical-offset="0" max-vertical-offset="1494">
+        <state vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="1494">
           <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/despacho/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.0" vertical-offset="891" max-vertical-offset="1746">
-          <caret line="72" column="29" selection-start-line="72" selection-start-column="29" selection-end-line="72" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Middleware/OperadorMiddleware.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.333333" vertical-offset="0" max-vertical-offset="594">
+        <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="594">
           <caret line="21" column="42" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/RenglonController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.333333" vertical-offset="1188" max-vertical-offset="4050">
-          <caret line="98" column="40" selection-start-line="98" selection-start-column="40" selection-end-line="98" selection-end-column="40" />
-          <folding>
-            <marker date="1451921555128" expanded="true" signature="3558:3601" placeholder="SELECT MAX(i..renglones..." />
-            <marker date="1451921555128" expanded="true" signature="3663:3725" placeholder="SELECT id_de..inventario..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DespachosController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.666667" vertical-offset="2556" max-vertical-offset="4590">
-          <caret line="176" column="36" selection-start-line="176" selection-start-column="36" selection-end-line="176" selection-end-column="36" />
-          <folding>
-            <marker date="1452176460016" expanded="true" signature="1911:2170" placeholder="SELECT i.can..detalle_planilla_orden..." />
-            <marker date="1452176460016" expanded="true" signature="4780:4995" placeholder="SELECT s.tip..solicitudes_almacen..." />
-            <marker date="1452176460016" expanded="true" signature="6380:6472" placeholder="SELECT id_so..detalle_planilla_orden..." />
-            <marker date="1452176460016" expanded="true" signature="6380:6477" placeholder="SELECT id_so..detalle_planilla_orden..." />
-            <marker date="1452176460016" expanded="true" signature="6380:6478" placeholder="SELECT id_so..detalle_planilla_orden..." />
-            <marker date="1452176460016" expanded="true" signature="6380:6499" placeholder="SELECT id_so..detalle_planilla_orden..." />
-            <marker date="1452176460016" expanded="true" signature="7755:7963" placeholder="SELECT MAX(j..jefes..." />
-            <marker date="1452176460016" expanded="true" signature="7998:8230" placeholder="SELECT u.ci_..users..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.653333" vertical-offset="5697" max-vertical-offset="6912">
-          <caret line="151" column="90" selection-start-line="151" selection-start-column="90" selection-end-line="151" selection-end-column="90" />
+        <state vertical-scroll-proportion="-30.333334" vertical-offset="5373" max-vertical-offset="6912">
+          <caret line="353" column="21" selection-start-line="353" selection-start-column="21" selection-end-line="353" selection-end-column="21" />
           <folding>
             <marker date="1452180956300" expanded="true" signature="12860:12888" placeholder="..." />
             <marker date="1452180956300" expanded="true" signature="12890:12908" placeholder="..." />
@@ -1489,6 +1443,53 @@
             <marker date="1452180956300" expanded="true" signature="18648:18675" placeholder="..." />
             <marker date="1452180956300" expanded="true" signature="18677:18695" placeholder="..." />
             <marker date="1452180956300" expanded="true" signature="18758:18776" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/EmailController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1926">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/RenglonController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.333333" vertical-offset="1188" max-vertical-offset="4050">
+          <caret line="98" column="40" selection-start-line="98" selection-start-column="40" selection-end-line="98" selection-end-column="40" />
+          <folding>
+            <marker date="1451921555128" expanded="true" signature="3558:3601" placeholder="SELECT MAX(i..renglones..." />
+            <marker date="1451921555128" expanded="true" signature="3663:3725" placeholder="SELECT id_de..inventario..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/despacho/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.0" vertical-offset="747" max-vertical-offset="1746">
+          <caret line="46" column="83" selection-start-line="46" selection-start-column="83" selection-end-line="46" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DespachosController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4" vertical-offset="2790" max-vertical-offset="4806">
+          <caret line="182" column="51" selection-start-line="182" selection-start-column="51" selection-end-line="182" selection-end-column="51" />
+          <folding>
+            <marker date="1452269645491" expanded="true" signature="2079:2338" placeholder="SELECT i.can..detalle_planilla_orden..." />
+            <marker date="1452269645491" expanded="true" signature="5019:5234" placeholder="SELECT s.tip..solicitudes_almacen..." />
+            <marker date="1452269645491" expanded="true" signature="6818:6908" placeholder="SELECT id_re..detalle_planilla_orden..." />
+            <marker date="1452269645491" expanded="true" signature="6948:7019" placeholder="SELECT canti..inventario..." />
+            <marker date="1452269645491" expanded="true" signature="7077:7165" placeholder="SELECT canti..detalle_planilla_orden..." />
+            <marker date="1452269645491" expanded="true" signature="7601:7693" placeholder="SELECT id_so..detalle_planilla_orden..." />
+            <marker date="1452269645491" expanded="true" signature="7601:7698" placeholder="SELECT id_so..detalle_planilla_orden..." />
+            <marker date="1452269645491" expanded="true" signature="7601:7699" placeholder="SELECT id_so..detalle_planilla_orden..." />
+            <marker date="1452269645491" expanded="true" signature="7601:7720" placeholder="SELECT id_so..detalle_planilla_orden..." />
+            <marker date="1452269645491" expanded="true" signature="8976:9184" placeholder="SELECT MAX(j..jefes..." />
+            <marker date="1452269645491" expanded="true" signature="9219:9451" placeholder="SELECT u.ci_..users..." />
           </folding>
         </state>
       </provider>

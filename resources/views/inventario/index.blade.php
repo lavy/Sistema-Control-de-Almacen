@@ -12,6 +12,8 @@
                 {!!Form::submit('BUSCAR',['class'=>'btn bnt-default'])!!}
                 {!!Form::close()!!}
 
+                <a href="{{URL::to('excel_inventario')}}"><i class="fa fa-file-excel-o fa-2x" style="margin-left: 20px; "></i></a>
+
 
                 <table class="table table-bordered">
                     <tr>

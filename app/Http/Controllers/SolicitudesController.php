@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 class SolicitudesController extends Controller {
 
     public function __construct()
@@ -65,8 +66,8 @@ class SolicitudesController extends Controller {
 		$solicitud= new\App\Solicitudes();
         $solicitud->id_oficina=\Request::Input('oficina');
         $solicitud->id_departamento=\Request::Input('departamento');
-        $solicitud->desde=\Request::Input('desde');
-        $solicitud->hasta=\Request::Input('hasta');
+        $solicitud->desde=date("Y-m-d", strtotime(\Request::Input('desde')));
+        $solicitud->hasta=date("Y-m-d",strtotime(\Request::Input('hasta')));
         $solicitud->beneficiario=\Request::Input('nombre_beneficiario');
         $solicitud->telef_beneficiario=\Request::Input('telef_beneficiario');
         $solicitud->email_beneficiario=\Request::Input('email_beneficiario');
@@ -121,11 +122,10 @@ class SolicitudesController extends Controller {
 	public function update($id, SolicitudForm $solicitudForm)
 	{
         $solicitud=\App\Solicitudes::find($id);
-        /*$solicitud->id_solicitud=\Request::Input('solicitud');*/
         $solicitud->id_oficina=\Request::Input('oficina');
         $solicitud->id_departamento=\Request::Input('departamento');
-        $solicitud->desde=\Request::Input('desde');
-        $solicitud->hasta=\Request::Input('hasta');
+        $solicitud->desde=date("Y-m-d", strtotime(\Request::Input('desde')));
+        $solicitud->hasta=date("Y-m-d",strtotime(\Request::Input('hasta')));
         $solicitud->beneficiario=\Request::Input('nombre_beneficiario');
         $solicitud->telef_beneficiario=\Request::Input('telef_beneficiario');
         $solicitud->email_beneficiario=\Request::Input('email_beneficiario');

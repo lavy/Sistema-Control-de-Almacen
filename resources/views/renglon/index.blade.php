@@ -25,6 +25,9 @@
 
                 {!!link_to('crear_renglones','Crear Nuevo Artículo',['class'=>'btn btn-primary'])!!}
 
+                <a href="{{URL::to('excel_renglon')}}"><i class="fa fa-file-excel-o fa-2x" style="margin-left: 20px; "></i></a>
+
+
                 <table class="table table-bordered">
                     <tr>
                         <th width="20px" style="text-align:center;font:bold 14px 'cursive';">#ARTICULO</th>

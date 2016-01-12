@@ -30,10 +30,11 @@
                     </tr>
                     @foreach($prestados as $pres )
                         <tr>
+
                             <td style="text-align:center;">{{$pres->id_transaccion}}</td>
                             <td style="text-align:center;">{{$pres->id_solicitud}}</td>
-                            <td style="text-align:center;">{{$pres->desde}}</td>
-                            <td style="text-align:center;">{{$pres->hasta}}</td>
+                            <td style="text-align:center;">{{date("d-m-Y",strtotime($pres->desde))}}</td>
+                            <td style="text-align:center;">{{date("d-m-Y",strtotime($pres->hasta))}}</td>
                             <td style="text-align:center;">{{$pres->beneficiario}}</td>
                             <td style="text-align:center;">{{$pres->telef_beneficiario}}</td>
                             <td style="text-align:center;">{{$pres->email}}</td>

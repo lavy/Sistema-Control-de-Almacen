@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <title>Sistema de Control Almacén</title>
 	<meta charset="utf-8">
@@ -15,14 +15,13 @@
     <link rel="shortcut icon" href="{{asset('images/estrella-trans.ico')}}">
     <script src="{{asset('highcharts/highcharts.js')}}"></script>
     <script src="{{asset('highcharts/exporting.js')}}"></script>
-
-    {{--<script src="{{asset('datepicker/js/bootstrap-datepicker.js')}}"></script>
-    <link href="{{ asset('datepicker/css/datepicker.css')}}" rel="stylesheet" media="screen">--}}
+    <link rel="stylesheet" href="{{asset('font-awesome/css/font-awesome.min.css')}}">
 
 
+</head>
 <body>
 
-    <div class="container">
+<div class="container">
         <img src="{{asset('images/banner.png')}}" width="1150px" height="200px" class="img-responsive" usemap="#map">
 
         <map name="map">
@@ -116,9 +115,6 @@
                 </div>
             </nav>
 @endif
-        {{--@if(Auth::user()->UserLevel===0)
-
-        @endif--}}
 
 @yield('content')
     </div>

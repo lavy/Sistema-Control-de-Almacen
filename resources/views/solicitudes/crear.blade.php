@@ -64,8 +64,6 @@
                 {{--</div>--}}
 
 
-
-
                 <div class='col-sm-6' style="margin-top: 25px">
                     <div class="form-group">
                         <div class='input-group date' id='datetimepicker5'>
@@ -77,7 +75,6 @@
                         </div>
                     </div>
                 </div>
-
 
 
                 <div class='col-sm-6' style="margin-top: 25px">
@@ -93,7 +90,6 @@
                 </div>
 
 
-
                 <div class="col-md-6">
                     {!!Form::label('t_articulos','Tipo de Artículos:')!!}
                     {!!Form::select('t_articulos',$t_articulo,'',['class'=>'form-control','id'=>'t_articulos'])!!}
@@ -105,17 +101,6 @@
                         <option>Debe Seleccionar un Articulo</option>
                     </select>
                 </div>
-
-               {{-- <div class="col-md-6">
-                    {!!Form::label('categoria','Categoria:')!!}
-                    {!!Form::select('categoria',array('Debe Seleccionar una Categoria',$categoria),0,['class'=>'form-control','id'=>'categoria'])!!}
-                </div>
-                <div class="col-md-6">
-                    {!! Form::label('subcategorias','Subcategoria:')   !!}
-                    <select class="form-control" id="subcategoria" name="subcategorias">
-                        <option>Debe Seleccionar una Subcategoria</option>
-                    </select>
-                </div>--}}
 
                 <div class="col-md-6">
                     {!!Form::label('detalle','Detalles del Pedido:')!!}
@@ -156,7 +141,7 @@
                 $('#datetimepicker5').datetimepicker({
                     minDate: 0,
                     useCurrent:true,
-                    format:'DD-MM-YYYY',
+                    format:'DD-MM-YYYY'
 
                 });
                 $('#datetimepicker6').datetimepicker({

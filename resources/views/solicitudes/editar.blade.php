@@ -33,6 +33,7 @@
                 </div>--}}
                 <div class="col-md-6">
                     {!! Form::label('departamento','Departamento:')   !!}
+                    {{--{!!Form::select('departamento',$solicitud->id_departamento,['class'=>'form-control','id'=>'departamento'])!!}--}}
                     <select class="form-control" id="departamento" name="departamento">
                         <option>Debe Seleccionar un Departamento</option>
                     </select>

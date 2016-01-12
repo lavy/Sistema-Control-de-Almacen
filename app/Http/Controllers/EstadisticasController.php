@@ -18,39 +18,17 @@ class EstadisticasController extends Controller {
 	 */
 	public function index()
     {
-      /*  $report=[];*/
-        $esta =" SELECT ofic.descrip_oficina as oficina,
-                COALESCE ((SELECT count(id_oficina)
-                     from solicitudes_almacen
-                       Where id_oficina = ofic.id_oficina
-                       GROUP BY ofic.descrip_oficina),
-                       0) as cantidad
-                FROM oficinas ofic
-                ORDER BY oficina ASC";
-        $consulta=DB::select($esta);
 
+        $oficina=DB::select("SELECT ofic.descrip_oficina AS oficina,
+                            COALESCE ((SELECT COUNT(id_oficina)
+                                 FROM solicitudes_almacen
+                                   WHERE id_oficina = ofic.id_oficina
+                                   GROUP BY ofic.descrip_oficina),
+                                   0) AS cantidad
+                            FROM oficinas ofic
+                            ORDER BY oficina ASC");
 
-         /*   foreach($consulta as $report)
-            {
-                $report =  [$report->oficina . $report->cantidad];
-            }*/
-
-
-        return view('estadisticas.pie')->with('oficina',$consulta);
-
-        /*$datos=array();
-        $datos_leyenda =array();
-        $datos_suma =array();*/
-
- /*       foreach ($esta as $fila)
-        {
-            array_push($datos_leyenda, $fila['oficina']);
-            array_push($datos, array($fila['oficina'], (int) $fila['cantidad']));
-            array_push($datos_suma, (int) $fila['cantidad']);
-        }*/
-        /*$total=array_sum($datos_suma);*/
-
-        /*return view('estadisticas.pie')->with('consulta',$esta);*/
+        return view('estadisticas.pie')->with('oficina',$oficina);
     }
 
 

@@ -12,7 +12,7 @@
 */
 
 Route::get('/', 'HomeController@index');
-/*Route::get('home', 'HomeController@index');*/
+Route::get('home', 'HomeController@index');
 
 Route::controllers([
     'auth' => 'Auth\AuthController',
@@ -121,6 +121,14 @@ Route::post('renglones', ['uses' => 'RenglonController@store', 'middleware' => [
 Route::delete('renglones/eliminar/{id}', ['uses' => 'RenglonController@destroy', 'middleware' => ['operador']]);
 Route::get('renglones/editar/{id}', ['uses' => 'RenglonController@edit', 'middleware' => ['operador']]);
 Route::post('renglones/{id}', ['uses' => 'RenglonController@update', 'middleware' => ['operador']]);
+
+Route::get('excel_renglon','ExcelController@renglon');
+Route::get('excel_inventario','ExcelController@inventario');
+
+Route::get('obtener_excel','ExcelController@obtener');
+/*Route::get('e_renglon','ExcelController@index');*/
+
+Route::get('import','ExcelController@import');
 
 Route::get('seriales/{id}', ['uses' => 'SerialesController@index', 'middleware' => ['operador']]);
 Route::get('seriales/editar/{id}', ['uses' => 'SerialesController@edit', 'middleware' => ['operador']]);
@@ -245,54 +253,72 @@ Route::get('modal/{id}',function($id)
 
 Route::get('solicitudes/mostrar/{id}',function($id){
 
-    $solicitudes=\App\Solicitudes::find($id);
+    $solicitudes=\Illuminate\Support\Facades\DB::table('solicitudes')
+        ->join('oficinas','solicitudes.id_oficina','=','oficinas.id_oficina')
+        ->join('departamentos','solicitudes.id_departamento','=','departamentos.id_departamento')
+        ->join('renglones','solicitudes.id_renglon','=','renglones.id_renglon')
+        ->join('tipo_renglones','solicitudes.id_tipo_renglon','=','tipo_renglones.id_tipo_renglon')
+        ->select('tipo_renglones.descrip_tipo_renglon','renglones.descrip_renglon',
+            'oficinas.descrip_oficina','departamentos.descrip_departamento','solicitudes.*')
+        ->where('solicitudes.id_solicitud','=',$id)
+        ->get();
+    /*dd($solicitudes);*/
+    /*$solicitudes=\App\Solicitudes::find($id);*/
 
     echo"<table class='table table-striped table-condensed'>";
         echo "<tr>";
             echo"<td>".'<b>Solicitud</b>'."</td>";
-            echo"<td>".$solicitudes->id_solicitud."</td>";
+            echo"<td>".$solicitudes[0]->id_solicitud."</td>";
         echo "</tr>";
         echo "<tr>";
             echo"<td>".'<b>Oficina</b>'."</td>";
-            echo"<td>".$solicitudes->id_oficina."</td>";
+            echo"<td>".$solicitudes[0]->descrip_oficina."</td>";
         echo "</tr>";
         echo "<tr>";
             echo"<td>".'<b>Departamento</b>'."</td>";
-            echo"<td>".$solicitudes->id_departamento."</td>";
+            echo"<td>".$solicitudes[0]->descrip_departamento."</td>";
         echo "</tr>";
         echo "<tr>";
             echo"<td>".'<b>Fecha Solicitud</b>'."</td>";
-            echo"<td>".$solicitudes->fecha_solicitud."</td>";
+            echo"<td>".$solicitudes[0]->fecha_solicitud."</td>";
         echo "</tr>";
         echo "<tr>";
             echo"<td>".'<b>Tipo Solicitud</b>'."</td>";
-            echo"<td>".$solicitudes->tipo_solicitud."</td>";
+            echo"<td>".$solicitudes[0]->tipo_solicitud."</td>";
         echo "</tr>";
-    if($solicitudes->desde && $solicitudes->hasta !=NULL ) {
+    if($solicitudes[0]->desde && $solicitudes[0]->hasta !=NULL ) {
         echo "<tr>";
             echo "<td>" . '<b>Desde</b>' . "</td>";
-            echo "<td>" . $solicitudes->desde . "</td>";
+            echo "<td>" . date("d-m-Y",strtotime($solicitudes[0]->desde)) . "</td>";
         echo "</tr>";
         echo "<tr>";
             echo "<td>" . '<b>Hasta</b>' . "</td>";
-            echo "<td>" . $solicitudes->hasta . "</td>";
+            echo "<td>" . date("d-m-Y",strtotime($solicitudes[0]->hasta)) . "</td>";
         echo "</tr>";
     }
         echo "<tr>";
             echo"<td>".'<b>Beneficiario</b>'."</td>";
-            echo"<td>".$solicitudes->beneficiario."</td>";
+            echo"<td>".$solicitudes[0]->beneficiario."</td>";
         echo "</tr>";
         echo "<tr>";
             echo"<td>".'<b>Telefono Beneficiario</b>'."</td>";
-            echo"<td>".$solicitudes->telef_beneficiario."</td>";
+            echo"<td>".$solicitudes[0]->telef_beneficiario."</td>";
         echo "</tr>";
         echo "<tr>";
             echo"<td>".'<b>Email Beneficiario</b>'."</td>";
-            echo"<td>".$solicitudes->email_beneficiario."</td>";
+            echo"<td>".$solicitudes[0]->email_beneficiario."</td>";
+        echo "</tr>";
+        echo "<tr>";
+            echo"<td>".'<b>Tipo de Articulo</b>'."</td>";
+            echo"<td>".$solicitudes[0]->descrip_tipo_renglon."</td>";
+        echo "</tr>";
+        echo "<tr>";
+            echo"<td>".'<b>Articulo</b>'."</td>";
+            echo"<td>".$solicitudes[0]->descrip_renglon."</td>";
         echo "</tr>";
         echo "<tr>";
             echo"<td>".'<b>Estatus</b>'."</td>";
-            echo"<td>".$solicitudes->estatus."</td>";
+            echo"<td>".$solicitudes[0]->estatus."</td>";
         echo "</tr>";
 });
 

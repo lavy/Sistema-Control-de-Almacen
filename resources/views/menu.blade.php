@@ -13,14 +13,14 @@
         <div class="alert alert-danger">{{ Session::get('message') }}</div>
     @endif
 
-    <script>
+   {{-- <script>
          function carga(){
              $('#myModal').modal('show') // evento que lanza la ventana
              $('#modalContent').val('');
              $('#bodys').load($(this).attr('href'));
          return false;
          }
-    </script>
+    </script>--}}
 
     <style>
         .carousel-inner > .item > img,
@@ -31,11 +31,11 @@
     </style>
 
 
-    <div class="container" onload="carga()">
-        <br>
+    <div class="container" style="margin-top: 30px;" onload="carga()">
+     {{--   <br>
 
-        <td width="40" align="center">
-            {{--<a href='modal/'.$renglon->id_renglon id='$renglon->id_renglon' data-toggle='modal'   class='modalLoad btn btn-primary btn-xs' data-target='#myModal'>Detalles</a>;--}}
+
+            --}}{{--<a href='modal/'.$renglon->id_renglon id='$renglon->id_renglon' data-toggle='modal'   class='modalLoad btn btn-primary btn-xs' data-target='#myModal'>Detalles</a>;--}}{{--
             {!! Html::link('proxima_entrega/', '', array('class'=>'modalLoad glyphicon glyphicon-eye-open btn btn-primary btn-xs','data-toggle'=>'modal','data-target'=>'#myModal','id'=>'')) !!}
 
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -56,7 +56,7 @@
                     </div>
                 </div>
             </div>
-        </td>
+--}}
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">

@@ -15,7 +15,7 @@ class EmailController extends Controller {
 	 */
 	public function index()
 	{
-		return view('contacto');
+		return view('emails.contacto');
 	}
 
 	/**
@@ -88,7 +88,7 @@ class EmailController extends Controller {
     $data = $request->all();
 
     //se envia el array y la vista lo recibe en llaves individuales {{ $email }} , {{ $subject }}...
-        \Mail::send('success', $data, function($message) use ($request)
+        \Mail::send('emails.success', $data, function($message) use ($request)
     {
         //remitente
         $message->from(env('MAIL_USERNAME'));

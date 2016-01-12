@@ -23,7 +23,6 @@
             {!!Form::submit('BUSCAR',['class'=>'btn bnt-default'])!!}
             {!!Form::close()!!}
 
-
             <p>POR FAVOR PULSE EL BOTON <b>DETALLES</b> PARA COMPLEMENTAR LA ORDEN DE SUMINISTROS</p>
             <table class="table table-bordered">
                 <tr>

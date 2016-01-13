@@ -33,8 +33,9 @@ class DespachosController extends Controller {
             ->join('almacen', 'detalle_planilla_orden.id_almacen', '=', 'almacen.id_almacen')
             ->join('renglones', 'detalle_planilla_orden.id_renglon', '=', 'renglones.id_renglon')
             ->join('planilla_orden','detalle_planilla_orden.id_orden','=','planilla_orden.id_orden')
+            ->join('solicitudes_almacen','detalle_planilla_orden.id_solicitud','=','solicitudes_almacen.id_solicitud')
             ->select('detalle_planilla_orden.*', 'almacen.descrip_almacen', 'renglones.descrip_renglon',
-                    'planilla_orden.estatus_orden')
+                    'planilla_orden.estatus_orden','solicitudes_almacen.tipo_solicitud')
             ->where('planilla_orden.id_orden','LIKE','%'.$buscar.'%')->where('detalle_planilla_orden.cod_usua','=',Auth::User()->cod_usua)->paginate(5);
         $orden->setPath('despacho');
 		return view('despacho.index')->with(['orden'=>$orden]);
@@ -86,39 +87,6 @@ class DespachosController extends Controller {
                             ON i.id_renglon=d.id_renglon
                             AND d.id_transaccion=".$id);
 
-
-        /*$det=DB::table('detalle_planilla_orden')
-                ->join('inventario','detalle_planilla_orden.id_renglon','=','inventario.id_renglon')
-                ->select('inventario.cantidad_existencia','inventario.existencia_minima')
-                ->where('detalle_planilla_orden.id_transaccion','=',$id)->get();
-        */
-        /*$solic= DB::table('solicitudes_almacen')
-            ->join('detalle_planilla_orden','solicitudes_almacen.id_solicitud','=','detalle_planilla_orden.id_solicitud')
-            ->join('oficinas','solicitudes_almacen.id_oficina','=','oficinas.id_oficina')
-            ->join('departamentos','solicitudes_almacen.id_departamento','=','departamentos.id_departamento')
-            ->select('oficinas.descrip_oficina','departamentos.descrip_departamento','solicitudes_almacen.pedido')
-            ->where('detalle_planilla_orden.id_transaccion','=',$id)
-            ->get();*/
-       /* dd($det);*/
-        /*$tecnico=Tecnico::only('estatus');*/
-        /*$seriales= DB::table('inventario_seriales')
-            ->join('detalle_planilla_orden','inventario_seriales.id_renglon','=','detalle_planilla_orden.id_renglon')
-            ->select('serial','id_serial')
-            ->where('inventario_seriales.estatus','=','Stock')
-            ->where('detalle_planilla_orden.id_transaccion','=',$id)
-            ->get();*/
-        /*dd($seriales);*/
-
-        /*$seriales=DB::select('SELECT i.serial,i.id_serial
-                    FROM inventario_seriales i
-                    JOIN detalle_planilla_orden d
-                    ON d.id_renglon=i.id_renglon
-                    WHERE d.id_orden='.$id);*/
-
-        /*dd($seriales);*/
-
-        /*$transaccion=DB::select('SELECT id_transaccion FROM detalle_planilla_orden WHERE id_transaccion='.$id);
-            dd($transaccion);*/
         $seriales = Inventario_Seriales::join('detalle_planilla_orden','inventario_seriales.id_renglon','=','detalle_planilla_orden.id_renglon')
                     ->where('inventario_seriales.estatus','=','Stock')
                     ->lists('inventario_seriales.serial', 'inventario_seriales.id_serial');
@@ -169,19 +137,12 @@ class DespachosController extends Controller {
 
     public function devolucion($id)
     {
-     /*   SET @transaccion=new.id_transaccion;
-SET @orden=(SELECT id_orden FROM detalle_planilla_orden WHERE detalle_planilla_orden.id_transaccion=@transaccion);
-SET @renglon=(SELECT id_renglon FROM detalle_planilla_orden WHERE detalle_planilla_orden.id_transaccion=@transaccion);
-SET @existencia=(SELECT cantidad_existencia FROM inventario WHERE inventario.id_renglon=@renglon);
-SET @cantidad=(SELECT cantidad FROM detalle_planilla_orden WHERE detalle_planilla_orden.id_transaccion=@transaccion);
-SET @solicitud=(SELECT id_solicitud FROM detalle_planilla_orden WHERE detalle_planilla_orden.id_transaccion=@transaccion);*/
-
         $renglon=DB::select('SELECT id_renglon FROM detalle_planilla_orden WHERE detalle_planilla_orden.id_transaccion='.$id);
         $existencia=DB::select('SELECT cantidad_existencia FROM inventario WHERE inventario.id_renglon='.$renglon[0]->id_renglon);
         $cantidad=DB::select('SELECT cantidad FROM detalle_planilla_orden WHERE detalle_planilla_orden.id_transaccion='.$id);
 
         $total=$existencia[0]->cantidad_existencia+$cantidad[0]->cantidad;
-        /*dd($total);*/
+
         DB::table('inventario')
             ->where('id_renglon',$renglon[0]->id_renglon)
             ->update(['cantidad_existencia'=>$total]);
@@ -231,6 +192,12 @@ SET @solicitud=(SELECT id_solicitud FROM detalle_planilla_orden WHERE detalle_pl
                     'renglones.unidad_medida', 'renglones.descrip_renglon')
             ->where('detalle_planilla_orden.id_orden','=',$id)->get();
 
+        $tipo_solicitud=DB::table('planilla_orden')
+            ->join('solicitudes_almacen','planilla_orden.id_solicitud','=','solicitudes_almacen.id_solicitud')
+            ->select('solicitudes_almacen.tipo_solicitud','solicitudes_almacen.desde','solicitudes_almacen.hasta')
+            ->where('planilla_orden.id_orden','=',$id)
+            ->get();
+
         $jefe=DB::select("SELECT MAX(j.fecha_ingreso) AS fecha,j.nombre,j.cedula,o.descrip_oficina
                           FROM jefes j
                           JOIN oficinas o
@@ -260,11 +227,9 @@ SET @solicitud=(SELECT id_solicitud FROM detalle_planilla_orden WHERE detalle_pl
                 ->select('tecnicos.nombres_apellidos','tecnicos.cedula')
                 ->where('planilla_orden.id_orden','=',$id)->get();
 
-        /*$tecnicos = \App\Tecnico::with('planilla_orden')->where('id_orden','=',$id)->where('tecnicos.id_tecnico','=','planilla_orden.id_tecnico')->get();*/
-
-
         $view =  \View::make('despacho.acta_entrega')->with(['despacho'=>$despacho,'jefe'=>$jefe,'usuario'=>$usuario,
-            'beneficiario'=>$beneficiarios,'tabla'=>$tabla,'tecnicos'=>$tecnicos,'oficinas'=>$oficinas])->render();
+            'beneficiario'=>$beneficiarios,'tabla'=>$tabla,'tecnicos'=>$tecnicos,'oficinas'=>$oficinas,
+            'tipo'=>$tipo_solicitud])->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
         return $pdf->stream('planilla');

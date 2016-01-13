@@ -17,7 +17,6 @@
     <script src="{{asset('highcharts/exporting.js')}}"></script>
     <link rel="stylesheet" href="{{asset('font-awesome/css/font-awesome.min.css')}}">
 
-
 </head>
 <body>
 

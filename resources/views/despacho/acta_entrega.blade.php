@@ -31,7 +31,6 @@
             margin-bottom: 0px;
         }
     </style>
-
 </head>
 <body>
 <div id="table1" style="position:absolute; overflow:hidden; left:25px; top:150px; width:700px; height:52px; z-index:0">
@@ -159,7 +158,6 @@
 </div>
 
 <?php setlocale(LC_ALL,"es_ES");?>
-{{--echo strftime("%A %d de %B del %Y");--}}
 
 <div id="text4" style="position:absolute; overflow:hidden; left:0px; top:81px; width:177px; height:20px; z-index:4">
     <div class="wpmd">
@@ -268,6 +266,19 @@ foreach($tecnicos as $tec)
 <?php
 }
 ?>
+
+<?php
+foreach($tipo as $t)
+{
+?>
+    <div id="text10" style="position:absolute; overflow:hidden; left:325px; top:80px; width:126px; height:58px; z-index:11" >
+        <?php echo $t->tipo_solicitud?>
+    </div>
+<?php
+}
+?>
+
+
 
 <div id="text11" style="position:absolute; overflow:hidden; left:0px; top:950px; width:441px; height:56px; z-index:12">
     <div class="wpmd">

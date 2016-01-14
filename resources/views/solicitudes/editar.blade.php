@@ -33,23 +33,23 @@
                 </div>--}}
                 <div class="col-md-6">
                     {!! Form::label('departamento','Departamento:')   !!}
-                    {{--{!!Form::select('departamento',$solicitud->id_departamento,['class'=>'form-control','id'=>'departamento'])!!}--}}
-                    <select class="form-control" id="departamento" name="departamento">
+                    {!!Form::select('departamento',$departamento,$solicitud->id_departamento,['class'=>'form-control','id'=>'departamento'])!!}
+                    {{--<select class="form-control" id="departamento" name="departamento">
                         <option>Debe Seleccionar un Departamento</option>
-                    </select>
+                    </select>--}}
                 </div>
                 {{--<div class="col-md-6">
                     {!!Form::label('fecha_solicitud','Fecha Solicitud:')!!}
                     {!!Form::text('fecha_solicitud',$solicitud->fecha_solicitud,array('class'=>'form-control','type'=>'text'))!!}
                 </div>--}}
-                <div class="col-md-6" id="desde">
+               {{-- <div class="col-md-6" id="desde">
                     {!!Form::label('desde','Desde:')!!}
                     {!!Form::text('desde',$solicitud->desde,array('class'=>'form-control','type'=>'text','id'=>'desdes'))!!}
                 </div>
                 <div class="col-md-6" id="hasta">
                     {!!Form::label('hasta','Hasta:')!!}
                     {!!Form::text('hasta',$solicitud->hasta,array('class'=>'form-control','type'=>'text','id'=>'hastas'))!!}
-                </div>
+                </div>--}}
                 <div class="col-md-6">
                     {!!Form::label('nombre_beneficiario','Beneficiario:')!!}
                     {!!Form::text('nombre_beneficiario',$solicitud->beneficiario,array('class'=>'form-control','type'=>'text'))!!}
@@ -78,7 +78,7 @@
                     <div class="form-group">
                         <div class='input-group date' id='datetimepicker5'>
                             {{--{!!Form::label('desde','Fecha De Inicio:')!!}--}}
-                            <input type='text' name="desde" class="form-control"  placeholder="Desde" disabled id="datetimepicker54"/>
+                            <input type='text'  value="{{$solicitud->desde}}" name="desde" class="form-control"  placeholder="Desde" disabled id="datetimepicker54"/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -92,7 +92,7 @@
                     <div class="form-group">
                         <div class='input-group date' id='datetimepicker6'>
                             {{--{!!Form::label('hasta','Fecha De Culminación:')!!}--}}
-                            <input type='text' name="hasta" class="form-control" placeholder="Hasta" disabled id="datetimepicker64"/>
+                            <input type='text' name="hasta" value="{{$solicitud->hasta}}" class="form-control" placeholder="Hasta" disabled id="datetimepicker64"/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -102,14 +102,15 @@
 
                 <div class="col-md-6">
                     {!!Form::label('t_articulos','Tipo de Artículos:')!!}
-                    {!!Form::select('t_articulos',$t_articulo,'',['class'=>'form-control','id'=>'t_articulos'])!!}
+                    {!!Form::select('t_articulos',$t_articulo,$solicitud->id_tipo_renglon,['class'=>'form-control','id'=>'t_articulos'])!!}
                 </div>
 
                 <div class="col-md-6">
                     {!! Form::label('articulos','Artículo:')   !!}
-                    <select class="form-control" id="articulos" name="articulos">
+                    {!!Form::select('articulos',$articulo,$solicitud->id_renglon,['class'=>'form-control','id'=>'articulos'])!!}
+                    {{--<select class="form-control" id="articulos" name="articulos">
                         <option>Debe Seleccionar un Articulo</option>
-                    </select>
+                    </select>--}}
                 </div>
                 {{--<div class="col-md-6">
                     {!!Form::label('estatus','Estatus:')!!}
@@ -124,8 +125,6 @@
                     {!!Form::label('observaciones','Observaciones:')!!}
                     {!!Form::text('observaciones',$solicitud->observaciones,['class'=>'form-control','type'=>'text'])!!}
                 </div>
-
-
             </div>
             <div class="col-md-offset-5">
                 {!!Form::submit('Editar',array('class'=>'btn btn-primary btn-md'))!!}
@@ -155,14 +154,18 @@
 
             $(function () {
                 $('#datetimepicker5').datetimepicker({
-                    minDate: 0,
+                    minDate: new Date(),
+                    daysOfWeekDisabled: [0, 6],
                     useCurrent:true,
                     format:'DD-MM-YYYY',
+                    locale:'es'
 
                 });
                 $('#datetimepicker6').datetimepicker({
                     useCurrent: false, //Important! See issue #1075
-                    format:'DD-MM-YYYY'
+                    daysOfWeekDisabled: [0, 6],
+                    format:'DD-MM-YYYY',
+                    locale:'es'
                 });
 
                 $("#datetimepicker5").on("dp.change", function (e) {
@@ -173,18 +176,6 @@
                     $('#datetimepicker5').data("DateTimePicker").maxDate(e.date);
                 });
             });
-
-            /*   $(function () {
-             $('#datetimepicker5').datetimepicker({
-             format:'DD-MM-YYYY'
-             });
-             });
-
-             $(function () {
-             $('#datetimepicker6').datetimepicker({
-             format:'DD-MM-YYYY'
-             });
-             });*/
 
             $('#t_articulos').change(function () {
                 $.get("{{ url('t_articulos')}}",

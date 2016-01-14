@@ -9,6 +9,7 @@
     <script src="{{asset ('jquery/jquery.js')}}"></script>
     <script src="{{asset('bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <script src="{{asset ('moments/moment.js')}}"></script>
+    <script src="{{asset ('moments/locale/es.js')}}"></script>
     <script src="{{asset('bootstrap/js/transition.js')}}"></script>
     <script src="{{asset ('bootstrap/js/collapse.js')}}"></script>
     <script src="{{asset ('datepicker/js/bootstrap-datetimepicker.min.js')}}"></script>

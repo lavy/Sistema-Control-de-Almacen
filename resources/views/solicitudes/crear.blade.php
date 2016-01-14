@@ -56,13 +56,10 @@
             <div class="panel-heading" style="text-align:center">DATOS SOLICITUD</div>
             <div class="panel-body">
 
-                {{--<div class="row row-centered">--}}
                 <div class="col-md-6 col-md-offset-3 col-center-block">
                     {!!Form::label('tipo_solicitud','Tipo de Solicitud:')!!}
                     {!!Form::select('tipo_solicitud',array('Por Favor Seleccione','Asignación','Prestamo'),0,['class'=>'form-control','id'=>'tipo_solicitud'])!!}
                 </div>
-                {{--</div>--}}
-
 
                 <div class='col-sm-6' style="margin-top: 25px">
                     <div class="form-group">
@@ -139,14 +136,18 @@
 
             $(function () {
                 $('#datetimepicker5').datetimepicker({
-                    minDate: 0,
+                    minDate: new Date(),
+                    daysOfWeekDisabled: [0, 6],
                     useCurrent:true,
-                    format:'DD-MM-YYYY'
+                    format:'DD-MM-YYYY',
+                    locale:'es'
 
                 });
                 $('#datetimepicker6').datetimepicker({
+                    daysOfWeekDisabled: [0, 6],
                     useCurrent: false, //Important! See issue #1075
-                    format:'DD-MM-YYYY'
+                    format:'DD-MM-YYYY',
+                    locale:'es'
                 });
 
                 $("#datetimepicker5").on("dp.change", function (e) {
@@ -157,18 +158,6 @@
                     $('#datetimepicker5').data("DateTimePicker").maxDate(e.date);
                 });
             });
-
-         /*   $(function () {
-                $('#datetimepicker5').datetimepicker({
-                    format:'DD-MM-YYYY'
-                });
-            });
-
-            $(function () {
-                $('#datetimepicker6').datetimepicker({
-                    format:'DD-MM-YYYY'
-                });
-            });*/
 
                 $('#t_articulos').change(function () {
                     $.get("{{ url('t_articulos')}}",

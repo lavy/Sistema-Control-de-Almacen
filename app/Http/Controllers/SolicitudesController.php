@@ -107,10 +107,12 @@ class SolicitudesController extends Controller {
 	{
 		$solicitudes=\App\Solicitudes::find($id);
         $oficina=\App\Oficinas::all()->lists('descrip_oficina','id_oficina');
+        $departamento=\App\Departamentos::all()->lists('descrip_departamento','id_departamento');
         $tarticulo=\App\TipoRenglon::all()->lists('descrip_tipo_renglon','id_tipo_renglon');
         $marca=\App\Marca::all()->lists('descrip_marca','id_marca');
+        $articulo=\App\Renglon::all()->lists('descrip_renglon','id_renglon');
         return view('solicitudes.editar')->with(['solicitud'=>$solicitudes,'oficina'=>$oficina,'t_articulo'=>$tarticulo
-                                                ,'marca'=>$marca]);
+                                                ,'marca'=>$marca,'articulo'=>$articulo,'departamento'=>$departamento]);
 	}
 
 	/**
@@ -166,7 +168,12 @@ class SolicitudesController extends Controller {
     public function procesadas(Request $request)
     {
         $buscar=$request->input('buscar');
-        $solicitudes=\App\Solicitudes_Almacen::where('beneficiario','LIKE','%'.$buscar.'%')->paginate(5);
+        if(Auth::User()->UserLevel !=0) {
+            $solicitudes=\App\Solicitudes_Almacen::where('beneficiario', 'LIKE', '%' . $buscar . '%')
+                ->where('solicitudes_almacen.cod_usua', '=', Auth::User()->cod_usua)->paginate(5);
+        }else{
+            $solicitudes = \App\Solicitudes_Almacen::where('beneficiario', 'LIKE', '%' . $buscar . '%')->paginate(5);
+        }
         $solicitudes->setPath('solicitudes_procesadas');
         return view('solicitudes.procesadas')->with('solicitudes',$solicitudes);
     }

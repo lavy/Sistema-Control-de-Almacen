@@ -29,6 +29,7 @@
             <area shape="rect" coords="745,50,770,74" href="http://www.facebook.com/gobiernodel.distritocapital" title="Facebook" />
             <area shape="rect" coords="775,49,798,75" href="http://www.youtube.com/channel/UCkSbdOePnjXDHbWJt0rA_mw" title="Youtube"/>
             <area shape="rect" coords="802,49,828,75" href="http://instagram.com/prensacapital" title="Instagram"/>
+            <area shape="rect" coords="980,30,945,85" href="http://gdc.gob.ve" title="GDC WEB"/>
         </map>
 
 @if(Auth::check() && Auth::user()->UserLevel !=1)
@@ -44,28 +45,28 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Institución
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{URL::to('jefes')}}">Jefes</a></li>
-                        <li><a href="{{URL::to('tecnico')}}">Tecnicos</a></li>
-                        <li><a href="{{URL::to('oficina')}}">Oficinas</a></li>
-                        <li><a href="{{URL::to('departamento')}}">Departamentos</a></li>
+                        <li><a href="{{URL::to('jefes')}}"><i class="fa fa-gavel"></i>Jefes</a></li>
+                        <li><a href="{{URL::to('tecnico')}}"><i class="fa fa-life-ring"></i>Tecnicos</a></li>
+                        <li><a href="{{URL::to('oficina')}}"><i class="fa fa-building"></i>Oficinas</a></li>
+                        <li><a href="{{URL::to('departamento')}}"><i class="fa fa-university"></i>Departamentos</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tablas Básicas
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{URL::to('almacen')}}">Almacenes</a></li>
-                        <li><a href="{{URL::to('marca')}}">Marcas</a></li>
-                        <li><a href="{{URL::to('modelos')}}">Modelos</a></li>
-                        <li><a href="{{URL::to('proveedor')}}">Proveedores</a></li>
+                        <li><a href="{{URL::to('almacen')}}"><i class="fa fa-industry"></i>Almacenes</a></li>
+                        <li><a href="{{URL::to('marca')}}"><i class="fa fa-registered"></i>Marcas</a></li>
+                        <li><a href="{{URL::to('modelos')}}"><i class="fa fa-registered"></i>Modelos</a></li>
+                        <li><a href="{{URL::to('proveedor')}}"><i class="fa fa-bus"></i>Proveedores</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Insumos
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{URL::to('renglones')}}">Articulos</a></li>
-                        <li><a href="{{URL::to('tiporenglon')}}">Tipo de Articulos</a></li>
+                        <li><a href="{{URL::to('renglones')}}"><i class="fa fa-cubes"></i>Articulos</a></li>
+                        <li><a href="{{URL::to('tiporenglon')}}"><i class="fa fa-cube"></i>Tipo de Articulos</a></li>
                     </ul>
                 </li>
                 <li><a href="{{URL::to('solicitudes')}}">Solicitudes</a></li>
@@ -75,17 +76,17 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Estadísticas
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{URL::to('reportes')}}">Reportes</a></li>
-                        <li><a href="{{URL::to('estadisticas')}}">Gráficos</a></li>
+                        <li><a href="{{URL::to('reportes')}}"><i class="fa fa-fax"></i>Reportes</a></li>
+                        <li><a href="{{URL::to('estadisticas')}}"><i class="fa fa-pie-chart"></i>Gráficos</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Seguridad
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{URL::to('usuarios')}}">Usuarios</a></li>
-                        <li><a href="{{URL::to('niveles')}}">Niveles</a></li>
-                        <li><a href="{{URL::to('permisos')}}">Permisos</a></li>
+                        <li><a href="{{URL::to('usuarios')}}"><i class="fa fa-users"></i>Usuarios</a></li>
+                        <li><a href="{{URL::to('niveles')}}"><i class="fa fa-align-center"></i>Niveles</a></li>
+                        {{--<li><a href="{{URL::to('permisos')}}">Permisos</a></li>--}}
                     </ul>
                 </li>
                 <li><a href="{{URL::to('auth/logout')}}"><span class="glyphicon glyphicon-log-out"></span>Salir</a></li>

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        {!!Form::open(['action'=>'UsuariosController@store'])!!}
+        {!!Form::open(['action'=>'UsuariosController@store','id'=>'form'])!!}
 
         @if($errors->has())
             <div class='alert alert-danger'>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('email','Correo Institucional:')!!}
-                    {!!Form::text('email',null,array('class'=>'form-control','type'=>'text'))!!}
+                    {!!Form::text('email',null,array('class'=>'form-control','type'=>'text','id'=>'correo'))!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('password','Password:')!!}
@@ -75,4 +75,44 @@
 
     {!!Form::close()!!}
     </div>
+    <script>
+       /* $.ajax({
+            url: ("correo"),
+            data=correo,
+            context: document.body
+        }).done(function() {
+            $( this ).addClass( "done" );
+        });*/
+
+
+        $("#form").submit(function(){
+            var correo=$('#correo').val();
+            if(correo != "") {
+                $.ajax({
+                    method: "GET",
+                    url: "correo",
+                    data: 'correo='+correo,
+                    async:false,
+                    success: function (data) {
+                        /*$('#info').html(data);*/
+                        /*if(data != 0) {*/
+                            alert(data);
+                        /*}*/
+                    }
+
+                });
+            }
+        });
+
+        /*$("form").submit(function(){
+        $.ajax({
+            url: 'correo',
+            type: 'GET',
+            data:correo,
+            success: function(data){
+                return data;
+            }
+        })
+        });*/
+    </script>
 @endsection

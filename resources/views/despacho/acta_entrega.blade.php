@@ -274,13 +274,14 @@ foreach($tipo as $t)
     <div id="text10" style="position:absolute; overflow:hidden; left:325px; top:90px; width:126px; height:58px; z-index:11" >
         <?php echo $t->tipo_solicitud?>
     </div>
+@if($t->desde !=NULL && $t->hasta !=NULL)
     <div id="text10" style="position:absolute; overflow:hidden; left:275px; top:110px; width:126px; height:58px; z-index:11">
         <?php echo date('d-m-Y',strtotime($t->desde)); ?>
     </div>
     <div id="text10" style="position:absolute; overflow:hidden; left:375px; top:110px; width:126px; height:58px; z-index:11">
         <?php echo date('d-m-Y',strtotime($t->hasta)); ?>
     </div>
-
+@endif
 <?php
 }
 ?>

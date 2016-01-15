@@ -32,6 +32,7 @@
                     <li role="presentation"><a href="{{URL::to('reportes/productos')}}">Demanda por consumo de productos</a></li>
                     <li role="presentation"><a href="{{URL::to('reportes/asignados')}}">Articulos Asignados</a></li>
                     <li role="presentation"><a href="{{URL::to('reportes/prestados')}}">Articulos Prestados</a></li>
+                    <li role="presentation"><a href="{{URL::to('menu')}}">Salir</a></li>
                 </ul>
             </li>
         </ul>

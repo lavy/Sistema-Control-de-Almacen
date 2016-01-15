@@ -66,8 +66,11 @@ class SolicitudesController extends Controller {
 		$solicitud= new\App\Solicitudes();
         $solicitud->id_oficina=\Request::Input('oficina');
         $solicitud->id_departamento=\Request::Input('departamento');
-        $solicitud->desde=date("Y-m-d", strtotime(\Request::Input('desde')));
-        $solicitud->hasta=date("Y-m-d",strtotime(\Request::Input('hasta')));
+        if(\Request::Input('desde') != NULL && \Request::Input('hasta'))
+        {
+            $solicitud->desde = date("Y-m-d", strtotime(\Request::Input('desde')));
+            $solicitud->hasta = date("Y-m-d", strtotime(\Request::Input('hasta')));
+        }
         $solicitud->beneficiario=\Request::Input('nombre_beneficiario');
         $solicitud->telef_beneficiario=\Request::Input('telef_beneficiario');
         $solicitud->email_beneficiario=\Request::Input('email_beneficiario');
@@ -126,8 +129,11 @@ class SolicitudesController extends Controller {
         $solicitud=\App\Solicitudes::find($id);
         $solicitud->id_oficina=\Request::Input('oficina');
         $solicitud->id_departamento=\Request::Input('departamento');
+        if(\Request::Input('desde') != NULL && \Request::Input('hasta') !=NULL)
+        {
         $solicitud->desde=date("Y-m-d", strtotime(\Request::Input('desde')));
         $solicitud->hasta=date("Y-m-d",strtotime(\Request::Input('hasta')));
+        }
         $solicitud->beneficiario=\Request::Input('nombre_beneficiario');
         $solicitud->telef_beneficiario=\Request::Input('telef_beneficiario');
         $solicitud->email_beneficiario=\Request::Input('email_beneficiario');

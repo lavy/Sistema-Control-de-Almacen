@@ -122,13 +122,13 @@ Route::delete('renglones/eliminar/{id}', ['uses' => 'RenglonController@destroy',
 Route::get('renglones/editar/{id}', ['uses' => 'RenglonController@edit', 'middleware' => ['operador']]);
 Route::post('renglones/{id}', ['uses' => 'RenglonController@update', 'middleware' => ['operador']]);
 
-Route::get('excel_renglon','ExcelController@renglon');
-Route::get('excel_inventario','ExcelController@inventario');
+Route::get('excel_renglon',['uses'=>'ExcelController@renglon','middleware'=>['operador']]);
+Route::get('excel_inventario',['uses'=>'ExcelController@inventario','middleware'=>['operador']]);
 
-Route::get('obtener_excel','ExcelController@obtener');
+Route::get('obtener_excel',['uses'=>'ExcelController@obtener','middleware'=>['operador']]);
 /*Route::get('e_renglon','ExcelController@index');*/
 
-Route::get('import','ExcelController@import');
+Route::get('import',['uses'=>'ExcelController@import','middleware'=>['operador']]);
 
 Route::get('seriales/{id}', ['uses' => 'SerialesController@index', 'middleware' => ['operador']]);
 Route::get('seriales/editar/{id}', ['uses' => 'SerialesController@edit', 'middleware' => ['operador']]);
@@ -320,6 +320,17 @@ Route::get('solicitudes/mostrar/{id}',function($id){
             echo"<td>".'<b>Estatus</b>'."</td>";
             echo"<td>".$solicitudes[0]->estatus."</td>";
         echo "</tr>";
+});
+
+Route::get('correo',function(){
+   $correo=Input::get('email');
+   $verificar=DB::select('SELECT * FROM users where email='.$correo);
+
+    if($verificar != NULL || $verificar != '')
+    {
+        echo "Ya ha sido creado un usuario con este mismo correo";
+    }
+
 });
 
 

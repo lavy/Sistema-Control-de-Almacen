@@ -1,9 +1,8 @@
 @extends('app')
 @section('content')
-{{--
-    {!!Form::open(['url'=>'almacen','method'=>'GET','class'=>'navbar-form navbar-left pull-right','role'=>'search'])!!}
+{{--    {!!Form::open(['url'=>'almacen','method'=>'GET','class'=>'navbar-form navbar-left pull-right','role'=>'search'])!!}
     <div class="form-group">
-    <div class='col-sm-6' style="margin-top: 25px">
+    <div class='col-sm-6' style="margin-top: 25px" >
         <div class="form-group">
             <div class='input-group date' id='datetimepicker5'>
                 --}}{{--{!!Form::label('desde','Fecha De Inicio:')!!}--}}{{--
@@ -30,7 +29,7 @@
     </div>
     </div>
     {!!Form::close()!!}--}}
-    <div id="container" style="min-width: 800px; height: 600px; max-width: 1200px; margin: 0 auto"></div>
+    <div id="container" style="min-width: 800px; height: 600px; max-width: 1200px; margin-top:20px"></div>
 
 <script>
     $(function () {
@@ -76,5 +75,25 @@
             }]
         });
     });
+
+    /*$(function () {
+        $('#datetimepicker5').datetimepicker({
+            format:'DD-MM-YYYY',
+            locale:'es'
+
+        });
+        $('#datetimepicker6').datetimepicker({
+            format:'DD-MM-YYYY',
+            locale:'es'
+        });
+
+        $("#datetimepicker5").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").minDate(e.date);
+        });
+
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker5').data("DateTimePicker").maxDate(e.date);
+        });
+    });*/
 </script>
 @endsection

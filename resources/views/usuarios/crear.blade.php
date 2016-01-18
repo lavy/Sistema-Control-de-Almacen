@@ -15,6 +15,9 @@
         @if (Session::has('message'))
             <div class="alert alert-success">{{ Session::get('message') }}</div>
         @endif
+
+        <div  id="info"></div>
+
         <div class="panel panel-primary">
             <div class="panel-heading" style="text-align:center;">CREAR USUARIOS</div>
             <div class="panel-body">
@@ -45,6 +48,7 @@
                     {!!Form::label('email','Correo Institucional:')!!}
                     {!!Form::text('email',null,array('class'=>'form-control','type'=>'text','id'=>'correo'))!!}
                 </div>
+
                 <div class="col-md-6">
                     {!!Form::label('password','Password:')!!}
                     {!!Form::password('password',['class'=>'form-control'])!!}
@@ -67,7 +71,7 @@
                 </div>
             </div>
             <div class="col-md-offset-5">
-                {!!Form::submit('Aceptar',['class'=>'btn btn-primary','name'=>'Aceptar'])!!}
+                {!!Form::submit('Aceptar',['class'=>'btn btn-primary','name'=>'Aceptar','id'=>'enviar'])!!}
                 {!!link_to('menu','Salir',['class'=>'btn btn-primary'])!!}
             </div>
         </div>
@@ -76,34 +80,36 @@
     {!!Form::close()!!}
     </div>
     <script>
-       /* $.ajax({
-            url: ("correo"),
-            data=correo,
-            context: document.body
-        }).done(function() {
-            $( this ).addClass( "done" );
-        });*/
+     $(document).ready(function(){
+        /*$('#info').hide();*/
 
-
-        $("#form").submit(function(){
+        $("#correo").blur(function(){
             var correo=$('#correo').val();
             if(correo != "") {
                 $.ajax({
                     method: "GET",
                     url: "correo",
-                    data: 'correo='+correo,
+                    data: "correo="+correo,
                     async:false,
                     success: function (data) {
-                        /*$('#info').html(data);*/
-                        /*if(data != 0) {*/
-                            alert(data);
+                       /* if(data != "")
+                        {*/
+                            /*$('#info').show();*/
+                            $('#info').html(data);
                         /*}*/
+
+                        /*alert(data);*/
+                        /*if(data != 0) {
+                            alert(data);
+                        }*/
+
                     }
+
 
                 });
             }
         });
-
+     });
         /*$("form").submit(function(){
         $.ajax({
             url: 'correo',

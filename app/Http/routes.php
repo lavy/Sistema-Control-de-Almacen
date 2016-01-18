@@ -322,14 +322,31 @@ Route::get('solicitudes/mostrar/{id}',function($id){
         echo "</tr>";
 });
 
-Route::get('correo',function(){
-   $correo=Input::get('email');
-   $verificar=DB::select('SELECT * FROM users where email='.$correo);
+Route::get('correo',function(\Illuminate\Http\Request $request){
+    /*$correo='martin.suarez@gdc.gob.ve';*/
+    $correo=Input::get('email');
+    $verificar=\App\User::where('email','=',$correo);
+    dd($verificar);
+    /*$verificar=DB::select("SELECT email FROM users WHERE email=".$correo);*/
 
-    if($verificar != NULL || $verificar != '')
+    /*dd($verificar);*/
+    /*$verificar=DB::select('SELECT email FROM users WHERE email='."'".$correo."'");*/
+    /*dd($verificar);*/
+    if($verificar != NULL && $verificar != "")
     {
-        echo "Ya ha sido creado un usuario con este mismo correo";
+        $x = "Ya ha sido creado un usuario con este mismo correo";
+        return $x;
     }
+   /*$correo=Input::get('email');*/
+   /*$verificar=DB::select('SELECT email FROM users WHERE email='.$correo);*/
+   /*$verificar=DB::select("SELECT email FROM users WHERE email LIKE'.$correo.'");*/
+   /*$cuenta=count($verificar);*/
+
+  /*  if($verificar != FALSE)
+    {
+       $x="Ya ha sido creado un usuario con este mismo correo";
+       return $x;
+    }*/
 
 });
 

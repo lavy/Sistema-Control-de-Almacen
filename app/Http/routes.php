@@ -324,19 +324,41 @@ Route::get('solicitudes/mostrar/{id}',function($id){
 
 Route::get('correo',function(\Illuminate\Http\Request $request){
     /*$correo='martin.suarez@gdc.gob.ve';*/
-    $correo=Input::get('email');
-    $verificar=\App\User::where('email','=',$correo);
-    dd($verificar);
+    sleep(1);
+    $correo='martisn.suarez@gdc.gob.ve';
+    /*$correo=Input::get('email');*/
+    $verificar=\App\User::where('email','=',$correo)->lists('email');
+    /*dd($verificar);*/
     /*$verificar=DB::select("SELECT email FROM users WHERE email=".$correo);*/
+    /*$verificar=DB::select('SELECT COUNT(email) FROM users WHERE email='."'".$correo."'");*/
+    /*$cantidad=count($verificar);*/
+    /*dd($verificar[0]->email);*/
+    /*$cantidad=count($verificar);*/
+    /*dd(is_array($verificar[0]));*/
+
+    if(is_array($verificar)){
+
+            if($verificar != "")
+            {
+                echo "Ya ha sido creado un usuario con este mismo correo";
+            }
+            else
+            {
+                echo "Disponible";
+            }
+    }
+
+
 
     /*dd($verificar);*/
-    /*$verificar=DB::select('SELECT email FROM users WHERE email='."'".$correo."'");*/
-    /*dd($verificar);*/
-    if($verificar != NULL && $verificar != "")
+    /*if($verificar != "")
     {
-        $x = "Ya ha sido creado un usuario con este mismo correo";
-        return $x;
+        echo "Ya ha sido creado un usuario con este mismo correo";
     }
+     elseif($verificar == "" || $verificar == NULL)
+    {
+        echo "Correo Disponible";
+    }*/
    /*$correo=Input::get('email');*/
    /*$verificar=DB::select('SELECT email FROM users WHERE email='.$correo);*/
    /*$verificar=DB::select("SELECT email FROM users WHERE email LIKE'.$correo.'");*/

@@ -87,10 +87,9 @@
             var correo=$('#correo').val();
             if(correo != "") {
                 $.ajax({
-                    method: "GET",
+                    method: "POST",
                     url: "correo",
                     data: "correo="+correo,
-                    async:false,
                     success: function (data) {
                        /* if(data != "")
                         {*/

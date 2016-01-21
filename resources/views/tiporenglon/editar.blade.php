@@ -11,7 +11,7 @@
         @endif
         {!!Form::open(['url'=>'tiporenglon/'.$trenglon->id_tipo_renglon])!!}
         <div class="panel panel-primary">
-            <div class="panel-heading" style="text-align:center;">EDITAR TIPO DE RENGLON</div>
+            <div class="panel-heading" style="text-align:center;">EDITAR TIPO DE ARTICULO</div>
             <div class="panel-body">
                 <div class="col-md-6">
                     {!!Form::label('descripcion','Nueva Descripción:')!!}

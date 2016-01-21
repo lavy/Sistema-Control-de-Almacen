@@ -25,66 +25,112 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="acta_entrega.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/despacho/acta_entrega.blade.php">
+      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4660" max-vertical-offset="5490">
-              <caret line="283" column="6" selection-start-line="283" selection-start-column="6" selection-end-line="283" selection-end-column="6" />
+            <state vertical-scroll-proportion="-6.3333335" vertical-offset="5589" max-vertical-offset="8280">
+              <caret line="329" column="66" selection-start-line="329" selection-start-column="66" selection-end-line="329" selection-end-column="66" />
+              <folding>
+                <marker date="1453331651500" expanded="true" signature="13308:13326" placeholder="..." />
+                <marker date="1453331651500" expanded="true" signature="13383:13401" placeholder="..." />
+                <marker date="1453331651500" expanded="true" signature="13618:13636" placeholder="..." />
+                <marker date="1453331651500" expanded="true" signature="13703:13721" placeholder="..." />
+                <marker date="1453331651500" expanded="true" signature="19198:19216" placeholder="..." />
+                <marker date="1453331651500" expanded="true" signature="19268:19286" placeholder="..." />
+                <marker date="1453331651500" expanded="true" signature="19421:19439" placeholder="..." />
+                <marker date="1453331651500" expanded="true" signature="19504:19522" placeholder="..." />
+                <marker date="1453331651500" expanded="true" signature="20380:20398" placeholder="..." />
+                <marker date="1453331651500" expanded="true" signature="20450:20468" placeholder="..." />
+                <marker date="1453331651500" expanded="true" signature="20603:20621" placeholder="..." />
+                <marker date="1453331651500" expanded="true" signature="20686:20704" placeholder="..." />
+                <marker date="1453331651500" expanded="true" signature="21469:21487" placeholder="..." />
+                <marker date="1453331651500" expanded="true" signature="21539:21557" placeholder="..." />
+                <marker date="1453331651500" expanded="true" signature="21691:21709" placeholder="..." />
+                <marker date="1453331651500" expanded="true" signature="21772:21790" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RenglonController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/RenglonController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="8.0" vertical-offset="684" max-vertical-offset="4050">
+              <caret line="35" column="41" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
+              <folding>
+                <marker date="1453331651500" expanded="true" signature="3558:3601" placeholder="SELECT MAX(i..renglones..." />
+                <marker date="1453331651500" expanded="true" signature="3663:3725" placeholder="SELECT id_de..inventario..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TiporenglonController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TiporenglonController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-20.0" vertical-offset="270" max-vertical-offset="1890">
+              <caret line="49" column="95" selection-start-line="49" selection-start-column="95" selection-end-line="49" selection-end-column="95" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routes.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <file leaf-file-name="ProveedorController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ProveedorController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.25333333" vertical-offset="5589" max-vertical-offset="8280">
-              <caret line="329" column="66" selection-start-line="329" selection-start-column="66" selection-end-line="329" selection-end-column="66" />
-              <folding>
-                <marker date="1453211862645" expanded="true" signature="13278:13306" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="13308:13326" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="13383:13401" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="13585:13616" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="13618:13636" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="13703:13721" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="14768:14794" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="14924:14950" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="15081:15107" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="15248:15274" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="15413:15439" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="15643:15672" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="15823:15852" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="16009:16035" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="16168:16194" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="16342:16368" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="16513:16539" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="16684:16710" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="16842:16868" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="17303:17338" placeholder="SELECT email..users..." />
-                <marker date="1453211862645" expanded="true" signature="17303:17338" placeholder="SELECT email..users..." />
-                <marker date="1453211862645" expanded="true" signature="17303:17338" placeholder="SELECT email..users..." />
-                <marker date="1453211862645" expanded="true" signature="17303:17339" placeholder="SELECT email..users..." />
-                <marker date="1453211862645" expanded="true" signature="17303:17349" placeholder="SELECT email..users..." />
-                <marker date="1453211862645" expanded="true" signature="17382:17441" placeholder="SELECT email..users..." />
-                <marker date="1453211862645" expanded="true" signature="19173:19196" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="19198:19216" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="19268:19286" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="19392:19419" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="19421:19439" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="19504:19522" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="20355:20378" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="20380:20398" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="20450:20468" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="20574:20601" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="20603:20621" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="20686:20704" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="21444:21467" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="21469:21487" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="21539:21557" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="21662:21689" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="21691:21709" placeholder="..." />
-                <marker date="1453211862645" expanded="true" signature="21772:21790" placeholder="..." />
-              </folding>
+            <state vertical-scroll-proportion="-20.666666" vertical-offset="1026" max-vertical-offset="1998">
+              <caret line="91" column="80" selection-start-line="91" selection-start-column="80" selection-end-line="91" selection-end-column="80" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MarcasController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/MarcasController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-25.333334" vertical-offset="810" max-vertical-offset="1908">
+              <caret line="86" column="63" selection-start-line="86" selection-start-column="63" selection-end-line="86" selection-end-column="63" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="editar.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/tecnicos/editar.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="900">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="crear.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/tiporenglon/crear.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-12.666667" vertical-offset="0" max-vertical-offset="720">
+              <caret line="19" column="88" selection-start-line="19" selection-start-column="88" selection-end-line="19" selection-end-column="88" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="editar.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/tiporenglon/editar.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.666667" vertical-offset="0" max-vertical-offset="612">
+              <caret line="13" column="89" selection-start-line="13" selection-start-column="89" selection-end-line="13" selection-end-column="89" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/tiporenglon/index.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1080">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -92,87 +138,8 @@
       <file leaf-file-name="crear.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/usuarios/crear.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.333333" vertical-offset="1368" max-vertical-offset="2304">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1368" max-vertical-offset="2304">
               <caret line="96" column="50" selection-start-line="96" selection-start-column="50" selection-end-line="96" selection-end-column="50" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/User.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="684">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DespachosController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DespachosController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3420" max-vertical-offset="4176">
-              <caret line="202" column="41" selection-start-line="202" selection-start-column="41" selection-end-line="202" selection-end-column="41" />
-              <folding>
-                <marker date="1452701914083" expanded="true" signature="2235:2494" placeholder="SELECT i.can..detalle_planilla_orden..." />
-                <marker date="1452701914083" expanded="true" signature="3365:3580" placeholder="SELECT s.tip..solicitudes_almacen..." />
-                <marker date="1452701914083" expanded="true" signature="4540:4630" placeholder="SELECT id_re..detalle_planilla_orden..." />
-                <marker date="1452701914083" expanded="true" signature="4670:4741" placeholder="SELECT canti..inventario..." />
-                <marker date="1452701914083" expanded="true" signature="4799:4887" placeholder="SELECT canti..detalle_planilla_orden..." />
-                <marker date="1452701914083" expanded="true" signature="5300:5392" placeholder="SELECT id_so..detalle_planilla_orden..." />
-                <marker date="1452701914083" expanded="true" signature="7030:7238" placeholder="SELECT MAX(j..jefes..." />
-                <marker date="1452701914083" expanded="true" signature="7273:7505" placeholder="SELECT u.ci_..users..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/app.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="4716">
-              <caret line="88" column="28" selection-start-line="88" selection-start-column="24" selection-end-line="88" selection-end-column="87" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pie.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/estadisticas/pie.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="558" max-vertical-offset="1872">
-              <caret line="31" column="95" selection-start-line="31" selection-start-column="95" selection-end-line="31" selection-end-column="95" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SolicitudesController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SolicitudesController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1773" max-vertical-offset="3330">
-              <caret line="131" column="78" selection-start-line="131" selection-start-column="78" selection-end-line="131" selection-end-column="78" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmailController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/EmailController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1211" max-vertical-offset="1926">
-              <caret line="90" column="28" selection-start-line="90" selection-start-column="28" selection-end-line="90" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/reportes/index.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="297" max-vertical-offset="1008">
-              <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -183,11 +150,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/views/proveedores/editar.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/oficinas/editar.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/marcas/editar.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/jefes/editar.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/despacho/detalle.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/departamentos/editar.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/almacenes/editar.blade.php" />
         <option value="$PROJECT_DIR$/app/Modelo.php" />
@@ -234,6 +196,11 @@
         <option value="$PROJECT_DIR$/resources/views/app.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/usuarios/crear.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/TiporenglonController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ProveedorController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/MarcasController.php" />
+        <option value="$PROJECT_DIR$/resources/views/tiporenglon/crear.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/tiporenglon/editar.blade.php" />
       </list>
     </option>
   </component>
@@ -242,10 +209,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1" />
+    <option name="x" value="-4" />
     <option name="y" value="26" />
-    <option name="width" value="1442" />
-    <option name="height" value="849" />
+    <option name="width" value="1288" />
+    <option name="height" value="978" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -894,7 +861,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../1_10" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FullScreen" value="false" />
     <property name="options.lastSelected" value="configurable.group.appearance" />
@@ -915,6 +882,12 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
     <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner />
       <method />
@@ -922,14 +895,8 @@
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
       <method />
     </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
-      <method />
-    </configuration>
     <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
       <BehatRunner />
-      <method />
-    </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
@@ -977,29 +944,29 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="26" width="1442" height="849" extended-state="6" />
+    <frame x="-4" y="26" width="1288" height="978" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29921874" sideWeight="0.49932706" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32974428" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29930556" sideWeight="0.49932706" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2375" sideWeight="0.50067294" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32974428" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2375" sideWeight="0.50067294" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871974" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871974" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1036,63 +1003,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/seriales/editar.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="684">
-          <caret line="21" column="58" selection-start-line="21" selection-start-column="58" selection-end-line="21" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/tiporenglon/editar.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.6666665" vertical-offset="0" max-vertical-offset="612">
-          <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/renglon/crear.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.6666667" vertical-offset="1278" max-vertical-offset="2754">
-          <caret line="72" column="15" selection-start-line="72" selection-start-column="15" selection-end-line="75" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/phpstorm.jar!/resources/html5-schema/html5/block.rnc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33286715" vertical-offset="3812" max-vertical-offset="4554">
-          <caret line="225" column="16" selection-start-line="225" selection-start-column="16" selection-end-line="225" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Requests/SolicitudForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.333333" vertical-offset="54" max-vertical-offset="1260">
-          <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/seriales/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="1188">
-          <caret line="32" column="80" selection-start-line="32" selection-start-column="80" selection-end-line="32" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SerialesController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="1908">
-          <caret line="22" column="61" selection-start-line="22" selection-start-column="61" selection-end-line="22" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/OperadorMiddleware.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="594">
-          <caret line="21" column="42" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/.htaccess">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="378">
@@ -1254,13 +1164,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/RenglonController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="468" max-vertical-offset="4050">
-          <caret line="35" column="41" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/renglon/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="2088">
@@ -1384,22 +1287,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3420" max-vertical-offset="4176">
           <caret line="202" column="41" selection-start-line="202" selection-start-column="41" selection-end-line="202" selection-end-column="41" />
-          <folding>
-            <marker date="1452701914083" expanded="true" signature="2235:2494" placeholder="SELECT i.can..detalle_planilla_orden..." />
-            <marker date="1452701914083" expanded="true" signature="3365:3580" placeholder="SELECT s.tip..solicitudes_almacen..." />
-            <marker date="1452701914083" expanded="true" signature="4540:4630" placeholder="SELECT id_re..detalle_planilla_orden..." />
-            <marker date="1452701914083" expanded="true" signature="4670:4741" placeholder="SELECT canti..inventario..." />
-            <marker date="1452701914083" expanded="true" signature="4799:4887" placeholder="SELECT canti..detalle_planilla_orden..." />
-            <marker date="1452701914083" expanded="true" signature="5300:5392" placeholder="SELECT id_so..detalle_planilla_orden..." />
-            <marker date="1452701914083" expanded="true" signature="7030:7238" placeholder="SELECT MAX(j..jefes..." />
-            <marker date="1452701914083" expanded="true" signature="7273:7505" placeholder="SELECT u.ci_..users..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/usuarios/crear.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.333333" vertical-offset="1368" max-vertical-offset="2304">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1368" max-vertical-offset="2304">
           <caret line="96" column="50" selection-start-line="96" selection-start-column="50" selection-end-line="96" selection-end-column="50" />
           <folding />
         </state>
@@ -1407,53 +1301,101 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25333333" vertical-offset="5589" max-vertical-offset="8280">
+        <state vertical-scroll-proportion="-6.3333335" vertical-offset="5589" max-vertical-offset="8280">
           <caret line="329" column="66" selection-start-line="329" selection-start-column="66" selection-end-line="329" selection-end-column="66" />
           <folding>
-            <marker date="1453211862645" expanded="true" signature="13278:13306" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="13308:13326" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="13383:13401" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="13585:13616" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="13618:13636" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="13703:13721" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="14768:14794" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="14924:14950" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="15081:15107" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="15248:15274" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="15413:15439" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="15643:15672" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="15823:15852" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="16009:16035" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="16168:16194" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="16342:16368" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="16513:16539" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="16684:16710" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="16842:16868" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="17303:17338" placeholder="SELECT email..users..." />
-            <marker date="1453211862645" expanded="true" signature="17303:17338" placeholder="SELECT email..users..." />
-            <marker date="1453211862645" expanded="true" signature="17303:17338" placeholder="SELECT email..users..." />
-            <marker date="1453211862645" expanded="true" signature="17303:17339" placeholder="SELECT email..users..." />
-            <marker date="1453211862645" expanded="true" signature="17303:17349" placeholder="SELECT email..users..." />
-            <marker date="1453211862645" expanded="true" signature="17382:17441" placeholder="SELECT email..users..." />
-            <marker date="1453211862645" expanded="true" signature="19173:19196" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="19198:19216" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="19268:19286" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="19392:19419" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="19421:19439" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="19504:19522" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="20355:20378" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="20380:20398" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="20450:20468" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="20574:20601" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="20603:20621" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="20686:20704" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="21444:21467" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="21469:21487" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="21539:21557" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="21662:21689" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="21691:21709" placeholder="..." />
-            <marker date="1453211862645" expanded="true" signature="21772:21790" placeholder="..." />
+            <marker date="1453331651500" expanded="true" signature="13308:13326" placeholder="..." />
+            <marker date="1453331651500" expanded="true" signature="13383:13401" placeholder="..." />
+            <marker date="1453331651500" expanded="true" signature="13618:13636" placeholder="..." />
+            <marker date="1453331651500" expanded="true" signature="13703:13721" placeholder="..." />
+            <marker date="1453331651500" expanded="true" signature="19198:19216" placeholder="..." />
+            <marker date="1453331651500" expanded="true" signature="19268:19286" placeholder="..." />
+            <marker date="1453331651500" expanded="true" signature="19421:19439" placeholder="..." />
+            <marker date="1453331651500" expanded="true" signature="19504:19522" placeholder="..." />
+            <marker date="1453331651500" expanded="true" signature="20380:20398" placeholder="..." />
+            <marker date="1453331651500" expanded="true" signature="20450:20468" placeholder="..." />
+            <marker date="1453331651500" expanded="true" signature="20603:20621" placeholder="..." />
+            <marker date="1453331651500" expanded="true" signature="20686:20704" placeholder="..." />
+            <marker date="1453331651500" expanded="true" signature="21469:21487" placeholder="..." />
+            <marker date="1453331651500" expanded="true" signature="21539:21557" placeholder="..." />
+            <marker date="1453331651500" expanded="true" signature="21691:21709" placeholder="..." />
+            <marker date="1453331651500" expanded="true" signature="21772:21790" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/RenglonController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="8.0" vertical-offset="684" max-vertical-offset="4050">
+          <caret line="35" column="41" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
+          <folding>
+            <marker date="1453331651500" expanded="true" signature="3558:3601" placeholder="SELECT MAX(i..renglones..." />
+            <marker date="1453331651500" expanded="true" signature="3663:3725" placeholder="SELECT id_de..inventario..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TiporenglonController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.0" vertical-offset="270" max-vertical-offset="1890">
+          <caret line="49" column="95" selection-start-line="49" selection-start-column="95" selection-end-line="49" selection-end-column="95" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ProveedorController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.666666" vertical-offset="1026" max-vertical-offset="1998">
+          <caret line="91" column="80" selection-start-line="91" selection-start-column="80" selection-end-line="91" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/moments/.jshintrc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="849">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/MarcasController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-25.333334" vertical-offset="810" max-vertical-offset="1908">
+          <caret line="86" column="63" selection-start-line="86" selection-start-column="63" selection-end-line="86" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/tecnicos/editar.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="900">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/tiporenglon/crear.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.666667" vertical-offset="0" max-vertical-offset="720">
+          <caret line="19" column="88" selection-start-line="19" selection-start-column="88" selection-end-line="19" selection-end-column="88" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/tiporenglon/editar.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.666667" vertical-offset="0" max-vertical-offset="612">
+          <caret line="13" column="89" selection-start-line="13" selection-start-column="89" selection-end-line="13" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/tiporenglon/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1080">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -17,7 +17,7 @@
         @endif
 
         <div class="panel panel-primary">
-            <div class="panel-heading" style="text-align:center;">CREAR TIPO RENGLON</div>
+            <div class="panel-heading" style="text-align:center;">CREAR TIPO DE ARTICULO</div>
             <div class="panel-body">
                 <div class="col-md-6">
                     {!!Form::label('descripcion','Descripción:')!!}

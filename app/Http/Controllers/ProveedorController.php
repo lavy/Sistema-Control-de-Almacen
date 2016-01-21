@@ -48,7 +48,7 @@ class ProveedorController extends Controller {
         $proveedor->telef_contacto=\Request::Input('telefono_contacto');
         $proveedor->email=\Request::Input('email');
         $proveedor->save();
-        return redirect('proveedor')->with('message','post saved');
+        return redirect('proveedor')->with('message','Se ha Creado un Nuevo Proveedor');
 	}
 
 	/**
@@ -89,7 +89,7 @@ class ProveedorController extends Controller {
         $proveedor->telef_contacto=\Request::Input('telefono_contacto');
         $proveedor->email=\Request::Input('email');
         $proveedor->save();
-        return redirect('proveedor')->with('message','post saved');
+        return redirect('proveedor')->with('message','Se ha editado un Proveedor');
 	}
 
 	/**

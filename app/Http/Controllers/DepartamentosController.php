@@ -20,7 +20,7 @@ class DepartamentosController extends Controller {
 	{
         $buscar=$request->input('buscar');
         $departamentos=\App\Departamentos::where('descrip_departamento','LIKE','%'.$buscar.'%')->paginate(10);
-        $departamentos->setPath('departamentos');
+        $departamentos->setPath('departamento');
         return view('departamentos.index')->with('departamentos',$departamentos);
 	}
 

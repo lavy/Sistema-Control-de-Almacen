@@ -18,9 +18,9 @@ class OperadorMiddleware {
 
         if(Auth::User()->UserLevel != 0 && Auth::User()->UserLevel != 2 ) {
             return redirect('menu')->with('message','Usted no esta Autorizado a ingresar en esta ruta');
-        } elseif(Auth::check() != TRUE) {
+        }/* elseif(Auth::check() != TRUE) {
             return redirect('auth/logout');
-        }
+        }*/
         return $next($request);
 
 	}

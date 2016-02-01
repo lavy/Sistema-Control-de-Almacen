@@ -16,12 +16,13 @@
             <div class="alert alert-success">{{ Session::get('message') }}</div>
         @endif
 
+        <div id="info"></div>
         <div class="panel panel-primary">
-            <div class="panel-heading" style="text-align:center;">CREAR TIPO RENGLON</div>
+            <div class="panel-heading" style="text-align:center;">CREAR TIPO ARTICULO</div>
             <div class="panel-body">
                 <div class="col-md-6">
                     {!!Form::label('descripcion','Descripción:')!!}
-                    {!!Form::text('descripcion',null,array('class'=>'form-control','type'=>'text'))!!}
+                    {!!Form::text('descripcion',null,array('class'=>'form-control','type'=>'text','id'=>'tipo_articulo'))!!}
                 </div>
             </div>
             <div class="col-md-offset-5">
@@ -32,4 +33,26 @@
     </div>
     {!!Form::close()!!}
     </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#tipo_articulo").keyup(function () {
+                var tipo_articulo = $('#tipo_articulo').val();
+                if (tipo_articulo != "") {
+                    $.ajax({
+                        method: "GET",
+                        url: "t_articulo",
+                        data: "t_articulo="+tipo_articulo,
+                        success: function (data) {
+                            if(data == 'Disponible'){
+                                $('#info').html("<div class='alert alert-success'><b>Disponible</b></div>");
+                            }else{
+                                $('#info').html("<div class='alert alert-danger'><b>No Disponible</b></div>");
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 @endsection

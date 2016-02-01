@@ -14,9 +14,10 @@
     <script src="{{asset ('bootstrap/js/collapse.js')}}"></script>
     <script src="{{asset ('datepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
     <link rel="shortcut icon" href="{{asset('images/estrella-trans.ico')}}">
+    <link rel="stylesheet" href="{{asset('font-awesome/css/font-awesome.min.css')}}">
     <script src="{{asset('highcharts/highcharts.js')}}"></script>
     <script src="{{asset('highcharts/exporting.js')}}"></script>
-    <link rel="stylesheet" href="{{asset('font-awesome/css/font-awesome.min.css')}}">
+
 
 </head>
 <body>

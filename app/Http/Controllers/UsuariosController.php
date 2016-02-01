@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UsuariosForm;
+use App\UserLevel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
@@ -93,7 +94,8 @@ class UsuariosController extends Controller {
 	public function edit($id)
 	{
 		$usuario=\App\User::find($id);
-        return view('usuarios.editar')->with('usuarios',$usuario);
+        $nivel_usuario=UserLevel::all()->lists('UserLevelName','UserLevelID');
+        return view('usuarios.editar')->with(['usuarios'=>$usuario,'nivel'=>$nivel_usuario]);
 	}
 
 	/**

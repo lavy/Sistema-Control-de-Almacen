@@ -10,19 +10,19 @@
         @endif
         {!!Form::open(['url'=>'usuarios/'.$usuarios->cod_usua])!!}
         <div class="panel panel-primary">
-            <div class="panel-heading" style="text-align:center;">EDITAR SUBCATEGORIA</div>
+            <div class="panel-heading" style="text-align:center;">EDITAR USUARIO</div>
             <div class="panel-body">
                <div class="col-md-6">
                     {!!Form::label('nombre','Nombre:')!!}
-                    {!!Form::text('nombre',$usuarios->nombre,['class'=>'form-control','type'=>'text'])!!}
+                    {!!Form::text('nombre',$usuarios->nombre,['class'=>'form-control','type'=>'text','readonly'])!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('apellido','Apellido:')!!}
-                    {!!Form::text('apellido',$usuarios->apellido,array('class'=>'form-control','type'=>'text'))!!}
+                    {!!Form::text('apellido',$usuarios->apellido,['class'=>'form-control','type'=>'text','readonly'])!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('email','Correo Institucional:')!!}
-                    {!!Form::text('email',$usuarios->email,['class'=>'form-control','type'=>'text'])!!}
+                    {!!Form::text('email',$usuarios->email,['class'=>'form-control','type'=>'text','readonly'])!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('password','Nueva contraseña:')!!}
@@ -30,11 +30,11 @@
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('cedula','Cedula:')!!}
-                    {!!Form::text('cedula',$usuarios->ci_usua,array('class'=>'form-control','type'=>'text'))!!}
+                    {!!Form::text('cedula',$usuarios->ci_usua,['class'=>'form-control','type'=>'text','readonly'])!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('cargo','Cargo:')!!}
-                    {!!Form::text('cargo',$usuarios->cargo,array('class'=>'form-control','type'=>'text'))!!}
+                    {!!Form::text('cargo',$usuarios->cargo,['class'=>'form-control','type'=>'text','readonly'])!!}
                 </div>
                 {{--<div class="col-md-6">
                     {!!Form::label('codigo','Codigo:')!!}
@@ -44,9 +44,13 @@
                     {!!Form::label('nivel_usuario','Nivel de Usuario:')!!}
                     {!!Form::select('nivel_usuario',$usuarios->Userevel,'',['class'=>'form-control'])!!}
                 </div>--}}
+                {{--<div class="col-md-6">
+                    {!!Form::label('nivel_usuario','Nivel de Usuario:')!!}
+                    {!!Form::text('nivel_usuario',$usuarios->UserLevel,['class'=>'form-control','type'=>'text'])!!}
+                </div>--}}
                 <div class="col-md-6">
                     {!!Form::label('nivel_usuario','Nivel de Usuario:')!!}
-                    {!!Form::text('nivel_usuario',$usuarios->UserLevel,array('class'=>'form-control','type'=>'text'))!!}
+                    {!!Form::select('nivel_usuario',$nivel,$usuarios->UserLevel,['class'=>'form-control','readonly'])!!}
                 </div>
             </div>
             <div class="col-md-offset-5">

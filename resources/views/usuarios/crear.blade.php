@@ -16,7 +16,7 @@
             <div class="alert alert-success">{{ Session::get('message') }}</div>
         @endif
 
-        <div  id="info"></div>
+        <div id="info"></div>
 
         <div class="panel panel-primary">
             <div class="panel-heading" style="text-align:center;">CREAR USUARIOS</div>
@@ -79,45 +79,25 @@
 
     {!!Form::close()!!}
     </div>
-    <script>
-     $(document).ready(function(){
-        /*$('#info').hide();*/
-
-        $("#correo").blur(function(){
-            var correo=$('#correo').val();
-            if(correo != "") {
-                $.ajax({
-                    method: "POST",
-                    url: "correo",
-                    data: "correo="+correo,
-                    success: function (data) {
-                       /* if(data != "")
-                        {*/
-                            /*$('#info').show();*/
-                            $('#info').html(data);
-                        /*}*/
-
-                        /*alert(data);*/
-                        /*if(data != 0) {
-                            alert(data);
-                        }*/
-
-                    }
-
-
-                });
-            }
-        });
+    <script type="text/javascript">
+     $(document).ready(function() {
+         $("#correo").focusout(function () {
+             var correo = $('#correo').val();
+             if (correo != "") {
+                 $.ajax({
+                     method: "GET",
+                     url: "correo_usuario",
+                     data: "correo="+correo,
+                     success: function (data) {
+                         if(data == 'Disponible'){
+                             $('#info').html("<div class='alert alert-success'><b>Disponible</b></div>");
+                         }else{
+                             $('#info').html("<div class='alert alert-danger'><b>No Disponible</b></div>");
+                         }
+                     }
+                 });
+             }
+         });
      });
-        /*$("form").submit(function(){
-        $.ajax({
-            url: 'correo',
-            type: 'GET',
-            data:correo,
-            success: function(data){
-                return data;
-            }
-        })
-        });*/
     </script>
 @endsection

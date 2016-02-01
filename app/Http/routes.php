@@ -322,56 +322,119 @@ Route::get('solicitudes/mostrar/{id}',function($id){
         echo "</tr>";
 });
 
-Route::get('correo',function(\Illuminate\Http\Request $request){
-    /*$correo='martin.suarez@gdc.gob.ve';*/
-    sleep(1);
-    $correo='martisn.suarez@gdc.gob.ve';
-    /*$correo=Input::get('email');*/
-    $verificar=\App\User::where('email','=',$correo)->lists('email');
-    /*dd($verificar);*/
-    /*$verificar=DB::select("SELECT email FROM users WHERE email=".$correo);*/
-    /*$verificar=DB::select('SELECT COUNT(email) FROM users WHERE email='."'".$correo."'");*/
-    /*$cantidad=count($verificar);*/
-    /*dd($verificar[0]->email);*/
-    /*$cantidad=count($verificar);*/
-    /*dd(is_array($verificar[0]));*/
+Route::get('correo_usuario',function() {
 
-    if(is_array($verificar)){
+    if(Request::ajax()){
 
-            if($verificar != "")
-            {
-                echo "Ya ha sido creado un usuario con este mismo correo";
-            }
-            else
-            {
-                echo "Disponible";
-            }
+    $correo = Input::get('correo');
+    $verificar = \App\User::where('email', '=', $correo)->count();
+
+        if ($verificar == 0) {
+           echo "Disponible";
+        } else {
+           echo "No Disponible";
+        }
     }
-
-
-
-    /*dd($verificar);*/
-    /*if($verificar != "")
-    {
-        echo "Ya ha sido creado un usuario con este mismo correo";
-    }
-     elseif($verificar == "" || $verificar == NULL)
-    {
-        echo "Correo Disponible";
-    }*/
-   /*$correo=Input::get('email');*/
-   /*$verificar=DB::select('SELECT email FROM users WHERE email='.$correo);*/
-   /*$verificar=DB::select("SELECT email FROM users WHERE email LIKE'.$correo.'");*/
-   /*$cuenta=count($verificar);*/
-
-  /*  if($verificar != FALSE)
-    {
-       $x="Ya ha sido creado un usuario con este mismo correo";
-       return $x;
-    }*/
 
 });
 
+Route::get('t_articulo',function() {
+
+    if(Request::ajax()){
+
+        $tipo_articulo = Input::get('t_articulo');
+        $verificar=\App\TipoRenglon::where('descrip_tipo_renglon','=', $tipo_articulo)->count();
+
+        if ($verificar == 0) {
+            echo "Disponible";
+        } else {
+            echo "No Disponible";
+        }
+    }
+
+});
+
+
+Route::get('deptos',function() {
+
+    if(Request::ajax()){
+
+        $departamento = Input::get('depto');
+        $verificar=\App\Departamentos::where('descrip_departamento','=', $departamento)->count();
+
+        if ($verificar == 0) {
+            echo "Disponible";
+        } else {
+            echo "No Disponible";
+        }
+    }
+
+});
+
+
+Route::get('ofic',function() {
+
+    if(Request::ajax()){
+
+        $oficina = Input::get('ofic');
+        $verificar=\App\Oficinas::where('descrip_oficina','=', $oficina)->count();
+
+        if ($verificar == 0) {
+            echo "Disponible";
+        } else {
+            echo "No Disponible";
+        }
+    }
+});
+
+Route::get('jefs',function() {
+
+    if(Request::ajax()){
+
+        $cedula = Input::get('cedula');
+        $verificar=\App\Jefes::where('cedula','=', $cedula)->count();
+
+        if ($verificar == 0) {
+            echo "Disponible";
+        } else {
+            echo "No Disponible";
+        }
+    }
+
+});
+
+
+Route::get('tecs',function() {
+
+    if(Request::ajax()){
+
+        $cedula = Input::get('cedula');
+        $verificar=\App\Tecnico::where('cedula','=', $cedula)->count();
+
+        if ($verificar == 0) {
+            echo "Disponible";
+        } else {
+            echo "No Disponible";
+        }
+    }
+
+});
+
+Route::get('marcs',function() {
+
+    if(Request::ajax()){
+
+        $marca = Input::get('marca');
+        $verificar=\App\Marca::where('descrip_marca','=', $marca)->count();
+
+        if ($verificar == 0) {
+            echo "Disponible";
+        } else {
+            echo "No Disponible";
+        }
+    }
+
+});
 
 Route::get('asignados/{id}',function($id){
 

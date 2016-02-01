@@ -14,6 +14,9 @@
         @if (Session::has('message'))
             <div class="alert alert-success">{{ Session::get('message') }}</div>
         @endif
+
+        <div id="info"></div>
+
         <div class="panel panel-primary">
             <div class="panel-heading" style="text-align:center;">CREAR JEFE</div>
             <div class="panel-body">
@@ -27,7 +30,7 @@
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('cedula','Cedula:')!!}
-                    {!!Form::text('cedula',null,array('class'=>'form-control','type'=>'text'))!!}
+                    {!!Form::text('cedula',null,array('class'=>'form-control','type'=>'text','id'=>'cedula'))!!}
                 </div>
                 <div class="row">
                     <div class='col-md-6'>
@@ -51,11 +54,32 @@
     </div>
 
     <script type="text/javascript">
-        $(function () {
-            $('#datetimepicker5').datetimepicker({
-                format:'DD-MM-YYYY'
+        $(document).ready(function() {
+            $("#cedula").keyup(function () {
+                var cedula = $('#cedula').val();
+                if (cedula != "") {
+                    $.ajax({
+                        method: "GET",
+                        url: "jefs",
+                        data: "cedula="+cedula,
+                        success: function (data) {
+                            if(data == 'Disponible'){
+                                $('#info').html("<div class='alert alert-success'><b>Disponible</b></div>");
+                            }else{
+                                $('#info').html("<div class='alert alert-danger'><b>No Disponible</b></div>");
+                            }
+                        }
+                    });
+                }
+            });
 
+            $(function () {
+                $('#datetimepicker5').datetimepicker({
+                    format:'DD-MM-YYYY'
+
+                });
             });
         });
+
     </script>
 @endsection

@@ -17,7 +17,7 @@
         <div class="panel panel-primary">
             <div class="panel-heading" style="text-align:center;">MARCAS</div>
             <div class="panel-body">
-                {!!Form::open(['url'=>'marcas','method'=>'GET','class'=>'navbar-form navbar-left pull-right','role'=>'search'])!!}
+                {!!Form::open(['url'=>'marca','method'=>'GET','class'=>'navbar-form navbar-left pull-right','role'=>'search'])!!}
                 <div class="form-group">
                     {!!Form::text('buscar',null,['class'=>'form-control','placeholder'=>'Busqueda por Marcas'])!!}
                 </div>

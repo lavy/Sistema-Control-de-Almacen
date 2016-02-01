@@ -14,6 +14,9 @@
         @if (Session::has('message'))
             <div class="alert alert-success">{{ Session::get('message') }}</div>
         @endif
+
+        <div id="info"></div>
+
         <div class="panel panel-primary">
             <div class="panel-heading" style="text-align:center;">CARGAR PERSONAL DE SOPORTE</div>
             <div class="panel-body">
@@ -23,7 +26,7 @@
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('cedula','Cedula Identidad:')!!}
-                    {!!Form::text('cedula',null,array('class'=>'form-control','type'=>'text'))!!}
+                    {!!Form::text('cedula',null,array('class'=>'form-control','type'=>'text','id'=>'cedula'))!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('foto_t','Foto Tecnico:')!!}
@@ -53,11 +56,32 @@
 
     {!!Form::close()!!}
     </div>
-    <script>
-        $(function () {
-            $('#datetimepicker5').datetimepicker({
-                format:'YYYY-MM-DD'
+    <script type="text/javascript">
+       $(document).ready(function() {
+            $("#cedula").keyup(function () {
+                var cedula = $('#cedula').val();
+                if (cedula != "") {
+                    $.ajax({
+                        method: "GET",
+                        url: "tecs",
+                        data: "cedula=" + cedula,
+                        success: function (data) {
+                            if (data == 'Disponible') {
+                                $('#info').html("<div class='alert alert-success'><b>Disponible</b></div>");
+                            } else {
+                                $('#info').html("<div class='alert alert-danger'><b>No Disponible</b></div>");
+                            }
+                        }
+                    });
+                }
             });
+
+           $(function () {
+               $('#datetimepicker5').datetimepicker({
+                   format:'YYYY-MM-DD'
+               });
+           });
+
         });
     </script>
 @endsection

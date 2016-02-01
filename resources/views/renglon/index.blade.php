@@ -40,7 +40,6 @@
                         <th width="10px" style="text-align:center;font:bold 14px 'cursive';">CANTIDAD</th>
                         <th width="10px"style="text-align:center;font:bold 14px 'cursive';">EXISTENCIA MINIMA</th>
                         <th width="10px" style="text-align:center;font:bold 14px 'cursive';">FOTO PRODUCTO</th>
-
                     </tr>
                     @foreach($renglones as $renglon )
                         <tr>

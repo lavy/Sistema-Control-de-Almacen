@@ -47,7 +47,7 @@ class MarcasController extends Controller {
         $marcas->descrip_marca=\Request::Input('descripcion');
         $marcas->id_proveedor=\Request::Input('proveedor');
         $marcas->save();
-        return redirect('marca')->with('message','Post Saved');
+        return redirect('marca')->with('message','Se ha Registrado una nueva Marca');
 	}
 
 	/**
@@ -84,7 +84,7 @@ class MarcasController extends Controller {
 		$marca=\App\Marca::find($id);
         $marca->descrip_marca=\Request::Input('descripcion');
         $marca->save();
-        return redirect('marca');
+        return redirect('marca')->with('Se ha editado una marca');
 	}
 
 	/**

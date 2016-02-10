@@ -9,4 +9,6 @@ class Proveedor extends Model {
     protected $primaryKey='id_proveedor';
     /*protected $fillable=[''];
     protected $guarded='id_proveedor';*/
+
+
 }

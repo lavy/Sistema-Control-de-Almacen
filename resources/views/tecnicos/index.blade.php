@@ -19,11 +19,21 @@
                 <div class="form-group">
                     {!!Form::text('buscar',null,['class'=>'form-control','placeholder'=>'Busqueda por Técnicos'])!!}
                 </div>
-                {!!Form::submit('BUSCAR',['class'=>'btn bnt-default'])!!}
+                {!!Form::submit('BUSCAR',['class'=>'btn btn-default'])!!}
                 {!!Form::close()!!}
 
+                <p>
                 {!!link_to('crear_tecnico','Crear Nuevo Técnico',['class'=>'btn btn-primary'])!!}
+                </p>
 
+                <p>
+                    Hay {{$tecnicos->total()}}
+                    @if($tecnicos->total() >1)
+                        Tecnicos
+                    @else
+                        Técnico
+                    @endif
+                </p>
                 <table class="table table-bordered">
                     <tr>
                         <th width="20px" style="text-align:center;font:bold 14px 'cursive';">#</th>

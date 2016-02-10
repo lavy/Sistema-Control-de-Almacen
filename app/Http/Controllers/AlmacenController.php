@@ -6,6 +6,11 @@ use App\Http\Requests\AlmacenForm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class AlmacenController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
 class AlmacenController extends Controller {
 
 	/**
@@ -15,7 +20,7 @@ class AlmacenController extends Controller {
 	 */
 	public function index(Request $request)
 	{
-		$buscar=$request->input('buscar');
+		$buscar=trim($request->input('buscar'));
 
         $almacen=\App\Almacen::where('descrip_almacen','LIKE','%'.$buscar.'%')
                             ->where('id_almacen','=',Auth::User()->id_almacen)

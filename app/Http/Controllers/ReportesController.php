@@ -5,6 +5,11 @@ use App\Http\Controllers\Controller;
 use DB;
 use Illuminate\Http\Request;
 
+/**
+ * Class ReportesController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
 class ReportesController extends Controller {
 
     public function __construct()
@@ -19,7 +24,7 @@ class ReportesController extends Controller {
 	 */
 	public function oficinas(Request $request)
 	{
-        $buscar=$request->input('buscar');
+        $buscar=trim($request->input('buscar'));
 
         $oficina =DB::select(" SELECT ofic.descrip_oficina as oficina,
                 COALESCE ((SELECT count(id_oficina)
@@ -40,7 +45,7 @@ class ReportesController extends Controller {
 	 */
 	public function departamentos(Request $request)
 	{
-        $buscar=$request->input('buscar');
+        $buscar=trim($request->input('buscar'));
         $departamento =DB::select(" SELECT dept.descrip_departamento as departamento,
                 COALESCE ((SELECT COUNT(id_departamento)
                      FROM solicitudes_almacen
@@ -107,7 +112,7 @@ class ReportesController extends Controller {
 	 */
 	public function inventario(Request $request)
 	{
-        $buscar=$request->input('buscar');
+        $buscar=trim($request->input('buscar'));
 		$inventario=\App\HistoricoInventario::where('fecha_movimiento','LIKE','%'.$buscar.'%')->paginate(5);
         $inventario->setPath('reportes/inventario');
         return view('reportes.inventario')->with('inventario',$inventario);
@@ -121,7 +126,7 @@ class ReportesController extends Controller {
 	 */
 	public function salidas(Request $request)
 	{
-		$buscar=$request->input('buscar');
+		$buscar=trim($request->input('buscar'));
         $salidas=\App\Despachos::where('id_renglon','LIKE','%'.$buscar.'%')->paginate(5);
         $salidas->setPath('reportes/salidas');
         return view('reportes.salidas')->with('salidas',$salidas);
@@ -135,7 +140,7 @@ class ReportesController extends Controller {
 	 */
 	public function asignados(Request $request)
 	{
-		$buscar=$request->input('buscar');
+		$buscar=trim($request->input('buscar'));
         $asignados=DB::table('detalle_planilla_orden')
             ->join('solicitudes_almacen','detalle_planilla_orden.id_solicitud','=','solicitudes_almacen.id_solicitud')
             ->select('solicitudes_almacen.*','detalle_planilla_orden.*')
@@ -147,7 +152,7 @@ class ReportesController extends Controller {
 
     public function prestados(Request $request)
     {
-        $buscar=$request->input('buscar');
+        $buscar=($request->input('buscar'));
         $prestados=DB::table('detalle_planilla_orden')
             ->join('solicitudes_almacen','detalle_planilla_orden.id_solicitud','=','solicitudes_almacen.id_solicitud')
             ->select('solicitudes_almacen.*','detalle_planilla_orden.*')

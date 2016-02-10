@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
+/**
+ * Class RenglonController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
 class RenglonController extends Controller {
 
     public function __construct()
@@ -24,7 +29,7 @@ class RenglonController extends Controller {
 	 */
 	public function index(Request $request)
 	{
-        $buscar=$request->Input('buscar');
+        $buscar=trim($request->Input('buscar'));
         $renglon = DB::table('renglones')
             ->join('tipo_renglones', 'renglones.id_tipo_renglon', '=', 'tipo_renglones.id_tipo_renglon')
             ->join('marca', 'renglones.id_marca', '=', 'marca.id_marca')

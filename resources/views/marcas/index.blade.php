@@ -21,11 +21,21 @@
                 <div class="form-group">
                     {!!Form::text('buscar',null,['class'=>'form-control','placeholder'=>'Busqueda por Marcas'])!!}
                 </div>
-                {!!Form::submit('BUSCAR',['class'=>'btn bnt-default'])!!}
+                {!!Form::submit('BUSCAR',['class'=>'btn btn-default'])!!}
                 {!!Form::close()!!}
 
+                <p>
                 {!!link_to('crear_marcas','Crear Nueva Marca',['class'=>'btn btn-primary'])!!}
+                </p>
 
+                <p>
+                    Hay {{$marcas->total()}}
+                    @if($marcas->total() >1)
+                        Marcas
+                    @else
+                        Marca
+                    @endif
+                </p>
                 <table class="table table-bordered">
                     <tr>
                         <th width="20px" style="text-align:center;">#</th>

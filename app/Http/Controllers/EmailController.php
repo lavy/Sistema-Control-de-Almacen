@@ -6,6 +6,11 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
+/**
+ * Class EmailController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
 class EmailController extends Controller {
 
 	/**

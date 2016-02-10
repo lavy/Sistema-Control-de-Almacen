@@ -1,7 +1,6 @@
 @extends('app')
 
 @section('content')
-    <div class="container">
 
         @if($errors->has())
             <div class='alert alert-danger'>
@@ -22,11 +21,20 @@
                 <div class="form-group">
                     {!!Form::text('buscar',null,['class'=>'form-control','placeholder'=>'Busqueda por Almacén'])!!}
                 </div>
-                {!!Form::submit('BUSCAR',['class'=>'btn bnt-default'])!!}
+                {!!Form::submit('BUSCAR',['class'=>'btn btn-default'])!!}
                 {!!Form::close()!!}
 
+                <p>
                 {!!link_to('crear_almacen','Crear Nuevo Almacén',['class'=>'btn btn-primary'])!!}
+                </p>
 
+                <p>Hay {{$almacenes->total()}}
+                    @if($almacenes->total() > 1)
+                        Almacenes
+                    @else
+                        Almacen
+                    @endif
+                </p>
                 <table class="table table-bordered">
                     <tr>
                         <th width="100px" style="text-align:center;">#</th>
@@ -56,5 +64,5 @@
             </div>
         </div>
     </div>
-    </div>
+
 @endsection

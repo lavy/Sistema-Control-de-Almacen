@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        {!!Form::open(['action'=>'TiporenglonController@store'])!!}
+        {!!Form::open(['action'=>'TiporenglonController@store','id'=>'form'])!!}
 
         @if($errors->has())
             <div class='alert alert-danger'>
@@ -51,6 +51,17 @@
                             }
                         }
                     });
+                }
+            });
+
+
+
+            $('#form').submit(function() {
+                var tipo_articulo = $('#tipo_articulo').val();
+
+                if (tipo_articulo.length > 150 || tipo_articulo == "") {
+                    $('#info').html("<div class='alert alert-danger'><b>El Campo Descripcion debe ser menor a 150 Caracteres</b></div>");
+                    return false;
                 }
             });
         });

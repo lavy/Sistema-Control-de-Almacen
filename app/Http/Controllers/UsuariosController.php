@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
+/**
+ * Class UsuariosController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
 class UsuariosController extends Controller {
 
 
@@ -23,7 +29,7 @@ class UsuariosController extends Controller {
 	 */
 	public function index(Request $request)
 	{
-        $buscar=$request->input('buscar');
+        $buscar=trim($request->input('buscar'));
         /*$usuarios=\App\User::where('nombre','LIKE','%'.$buscar.'%')
                             ->where('UserLevel','<>',Auth::user()->UserLevel)
                             ->paginate(5);*/
@@ -70,8 +76,6 @@ class UsuariosController extends Controller {
         Session::flash('mensaje','Se Ha Registrado Un Usuario con exito');
         return redirect('usuarios');
 
-
-
 	}
 
 	/**
@@ -113,7 +117,6 @@ class UsuariosController extends Controller {
         $usuario->cargo=\Request::Input('cargo');
         $usuario->password=\Hash::make(\Request::Input('password'));
         $usuario->ci_usua=\Request::Input('cedula');
-       /* $usuario->cod_usua=\Request::Input('codigo');*/
         $usuario->UserLevel=\Request::Input('nivel_usuario');
         $usuario->save();
         return redirect('usuarios')->with('message','Ha sido Actualizado Exitosamente');

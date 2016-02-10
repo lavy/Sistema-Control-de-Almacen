@@ -9,11 +9,20 @@
                 <div class="form-group">
                     {!!Form::text('buscar',null,['class'=>'form-control','placeholder'=>'Busqueda por Articulo'])!!}
                 </div>
-                {!!Form::submit('BUSCAR',['class'=>'btn bnt-default'])!!}
+                {!!Form::submit('BUSCAR',['class'=>'btn btn-default'])!!}
                 {!!Form::close()!!}
 
+                <p>
                 <a href="{{URL::to('excel_inventario')}}"><i class="fa fa-file-excel-o fa-2x" style="margin-left: 20px; "></i></a>
-
+                </p>
+                <p>
+                    Hay {{$inventario->total()}}
+                    @if($inventario->total() >1)
+                        Articulos
+                    @else
+                        Articulo
+                    @endif
+                </p>
 
                 <table class="table table-bordered">
                     <tr>
@@ -66,7 +75,7 @@
         </div>
     </div>
     </div>
-    <script>
+    <script type="text/javascript">
         $('.modalLoad').click(function() {
             $('#myModal').modal('show') // evento que lanza la ventana
             $('#modalContent').val('');

@@ -16,15 +16,10 @@ class Oficinas extends Model {
         return $this->hasMany('App\Departamentos','id_oficina','id_oficina');
     }
 
- /*    static function oficina()
-     {
-         $oficina = \DB::select('select * from oficinas');
-         return ($oficina);
-     }*/
 
-    /*public function scopeOficina($query,$buscar)
+    /*public function scopeOficina($query,$tipo,$buscar)
     {
-       $query->where('descrip_oficina',$buscar);
+       return $query->where($tipo,$buscar);
     }*/
 
 }

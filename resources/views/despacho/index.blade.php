@@ -20,7 +20,7 @@
             <div class="form-group">
                 {!!Form::text('buscar',null,['class'=>'form-control text-uppercase','placeholder'=>'Busqueda por #Orden'])!!}
             </div>
-            {!!Form::submit('BUSCAR',['class'=>'btn bnt-default'])!!}
+            {!!Form::submit('BUSCAR',['class'=>'btn btn-default'])!!}
             {!!Form::close()!!}
 
             <p>POR FAVOR PULSE EL BOTON <b>DETALLES</b> PARA COMPLEMENTAR LA ORDEN DE SUMINISTROS</p>

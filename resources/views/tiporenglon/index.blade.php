@@ -20,10 +20,21 @@
                 <div class="form-group">
                     {!!Form::text('buscar',null,['class'=>'form-control','placeholder'=>'Busqueda por Tipo Artículo'])!!}
                 </div>
-                {!!Form::submit('BUSCAR',['class'=>'btn bnt-default'])!!}
+                {!!Form::submit('BUSCAR',['class'=>'btn btn-default'])!!}
                 {!!Form::close()!!}
 
+                <p>
                 {!!link_to('crear_tiporenglon','Crear Nuevo Tipo de Artículo',['class'=>'btn btn-primary'])!!}
+                </p>
+
+                <p>
+                    Hay {{$trenglon->total()}}
+                    @if($trenglon->total() >1)
+                        Tipo de Articulos
+                    @else
+                        Tipo de Articulo
+                    @endif
+                </p>
 
                 <table class="table table-bordered">
                     <tr>

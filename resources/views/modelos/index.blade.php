@@ -20,11 +20,21 @@
                 <div class="form-group">
                     {!!Form::text('buscar',null,['class'=>'form-control','placeholder'=>'Busqueda por Modelo'])!!}
                 </div>
-                {!!Form::submit('BUSCAR',['class'=>'btn bnt-default'])!!}
+                {!!Form::submit('BUSCAR',['class'=>'btn btn-default'])!!}
                 {!!Form::close()!!}
 
+                <p>
                 {!!link_to('crear_modelos','Crear Nuevo Modelo',['class'=>'btn btn-primary'])!!}
+                </p>
 
+                <p>
+                    Hay {{$modelos->total()}}
+                    @if($modelos->total() >1)
+                        Modelos
+                    @else
+                        Modelo
+                    @endif
+                </p>
                 <table class="table table-bordered">
                     <tr>
                         <th width="20px" style="text-align:center;">#MODELO</th>

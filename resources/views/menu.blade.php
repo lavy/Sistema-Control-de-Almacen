@@ -13,14 +13,16 @@
         <div class="alert alert-danger">{{ Session::get('message') }}</div>
     @endif
 
-   {{-- <script>
-         function carga(){
-             $('#myModal').modal('show') // evento que lanza la ventana
-             $('#modalContent').val('');
-             $('#bodys').load($(this).attr('href'));
-         return false;
-         }
-    </script>--}}
+    <script type="text/javascript">
+        $('.modalLoad').click(function() {
+            $.get("prueba",function(data) {
+                $('#myModal').modal('show') // evento que lanza la ventana
+                $('#modalContent').val('');
+                $('#bodys').html(data);
+                return false;
+            })
+        });
+    </script>
 
     <style>
         .carousel-inner > .item > img,
@@ -32,11 +34,11 @@
 
 
     <div class="container" style="margin-top: 30px;" onload="carga()">
-     {{--   <br>
+        <br>
 
 
-            --}}{{--<a href='modal/'.$renglon->id_renglon id='$renglon->id_renglon' data-toggle='modal'   class='modalLoad btn btn-primary btn-xs' data-target='#myModal'>Detalles</a>;--}}{{--
-            {!! Html::link('proxima_entrega/', '', array('class'=>'modalLoad glyphicon glyphicon-eye-open btn btn-primary btn-xs','data-toggle'=>'modal','data-target'=>'#myModal','id'=>'')) !!}
+            {{--<a href='modal/'.$renglon->id_renglon id='$renglon->id_renglon' data-toggle='modal'   class='modalLoad btn btn-primary btn-xs' data-target='#myModal'>Detalles</a>;--}}
+            {!! Html::link('prueba', '', array('class'=>'modalLoad glyphicon glyphicon-eye-open btn btn-primary btn-xs','data-toggle'=>'modal','data-target'=>'#myModal','id'=>'')) !!}
 
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
@@ -56,7 +58,6 @@
                     </div>
                 </div>
             </div>
---}}
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
@@ -77,7 +78,7 @@
                 </div>
 
                 <div class="item">
-                    <img src="images/almacen.jpeg" alt="Chania" width="460" height="345">
+                    <img src="images/almacen.jpeg" alt="Almacen del Gobierno del Distrito Capital" width="460" height="345">
                     <div class="carousel-caption">
                         <h3>Almacen</h3>
                         <p>Mediante la Tecnología se Hace el Control del Inventario del Almacen.</p>

@@ -18,14 +18,25 @@
         <div class="panel panel-primary">
             <div class="panel-heading" style="text-align:center;">DEPARTAMENTOS</div>
             <div class="panel-body">
-                {!!Form::open(['url'=>'departamentos','method'=>'GET','class'=>'navbar-form navbar-left pull-right','role'=>'search'])!!}
+                {!!Form::open(['url'=>'departamento','method'=>'GET','class'=>'navbar-form navbar-left pull-right','role'=>'search'])!!}
                 <div class="form-group">
                     {!!Form::text('buscar',null,['class'=>'form-control','placeholder'=>'Busqueda por Departamento','id'=>'buscar'])!!}
                 </div>
                 {!!Form::submit('BUSCAR',['class'=>'btn btn-default'])!!}
                 {!!Form::close()!!}
 
+                <p>
                 {!!link_to('crear_departamentos','Crear Nuevo Departamento',['class'=>'btn btn-primary'])!!}
+                </p>
+
+                <p>
+                    Hay {{$departamentos->total()}}
+                    @if($departamentos->total() >1)
+                        Departamentos
+                    @else
+                        Departamento
+                    @endif
+                </p>
 
                 <table class="table table-bordered">
                     <tr>

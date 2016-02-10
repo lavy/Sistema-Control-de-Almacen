@@ -1,8 +1,7 @@
 @extends('app')
 
 @section('content')
-    <div class="container">
-        {!!Form::open(['action'=>'DepartamentosController@store'])!!}
+        {!!Form::open(['action'=>'DepartamentosController@store','id'=>'form'])!!}
 
         @if($errors->has())
             <div class='alert alert-danger'>
@@ -23,7 +22,7 @@
             <div class="panel-body">
                 <div class="col-md-6">
                     {!!Form::label('oficina','Oficina:')!!}
-                    {!!Form::select('oficina',$oficina,['Por Favor Seleccione'],['class'=>'form-control'])!!}
+                    {!!Form::select('oficina',$oficina,['Por Favor Seleccione'],['class'=>'form-control','id'=>'oficina'])!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('descripción','Descripción:')!!}
@@ -35,9 +34,8 @@
                 {!!link_to('menu','Salir',['class'=>'btn btn-primary'])!!}
             </div>
         </div>
-    </div>
     {!!Form::close()!!}
-    </div>
+
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -57,6 +55,21 @@
                         }
                     });
                 }
+            });
+
+            $('#form').submit(function(){
+                var Oficina=$('#oficina').val();
+                var Departamento=$('#departamento').val();
+
+                if(Oficina == 0){
+                    $('#info').html("<div class='alert alert-danger'><b>Debe Seleccionar una Oficina</b></div>");
+                    return false;
+                }
+                else if(Departamento.length > 250 || Departamento == ""){
+                    $('#info').html("<div class='alert alert-danger'><b>El Campo Descripción debe ser menor a 250 Caracteres</b></div>");
+                    return false;
+                }
+
             });
         });
     </script>

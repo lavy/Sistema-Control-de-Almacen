@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        {!!Form::open(['action'=>'SolicitudesController@store'])!!}
+        {!!Form::open(['action'=>'SolicitudesController@store','id'=>'form'])!!}
 
         @if($errors->has())
             <div class='alert alert-danger'>
@@ -16,15 +16,12 @@
             <div class="alert alert-success">{{ Session::get('message') }}</div>
         @endif
 
-        <center><h1>Registro de Solicitudes</h1></center>
+        <div id="info"></div>
+        <center><h1>Registro de la Solicitud</h1></center>
         <div class="panel panel-primary">
             <div class="panel-heading" style="text-align:center">DATOS SOLICITANTE</div>
             <div class="panel-body">
 
-                {{--  <div class="col-md-6">
-                      {!!Form::label('almacen','Almacen:')!!}
-                      {!!Form::select('almacen',array('Por Favor Seleccione'),0,array('class'=>'form-control'))!!}
-                  </div>--}}
                 <div class="col-md-6">
                     {!!Form::label('oficina','Oficina:')!!}
                     {!!Form::select('oficina',$oficina,'',['class'=>'form-control','id'=>'oficina'])!!}
@@ -32,20 +29,20 @@
                 <div class="col-md-6">
                     {!! Form::label('departamento','Departamento:')   !!}
                     <select class="form-control" id="departamento" name="departamento">
-                        <option>Debe Seleccionar un Departamento</option>
+                        <option value="0">Debe Seleccionar un Departamento</option>
                     </select>
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('nombre_beneficiario','Nombre Beneficiario:')!!}
-                    {!!Form::text('nombre_beneficiario',null,['class'=>'form-control','type'=>'text'])!!}
+                    {!!Form::text('nombre_beneficiario',null,['class'=>'form-control','type'=>'text','id'=>'nombre'])!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('telef_beneficiario','Telefono Beneficiario:')!!}
-                    {!!Form::text('telef_beneficiario',null,['class'=>'form-control','type'=>'text','placeholder'=>'0426-256-6545','pattern'=>'\d{4}[\-]\d{3}[\-]\d{4}'])!!}
+                    {!!Form::text('telef_beneficiario',null,['class'=>'form-control','type'=>'text','placeholder'=>'04262566545','id'=>'telefono'])!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('email_beneficiario','Email Beneficiario:')!!}
-                    {!!Form::email('email_beneficiario',null,['class'=>'form-control','type'=>'text'])!!}
+                    {!!Form::email('email_beneficiario',null,['class'=>'form-control','type'=>'text','id'=>'correo'])!!}
                 </div>
 
             </div>
@@ -101,15 +98,15 @@
 
                 <div class="col-md-6">
                     {!!Form::label('detalle','Detalles del Pedido:')!!}
-                    {!!Form::text('detalle',null,['class'=>'form-control','type'=>'text'])!!}
+                    {!!Form::text('detalle',null,['class'=>'form-control','type'=>'text','id'=>'detalle'])!!}
                 </div>
 
                 <div class="col-md-6">
                     {!!Form::label('observaciones','Observaciones:')!!}
-                    {!!Form::text('observaciones',null,['class'=>'form-control','type'=>'text'])!!}
+                    {!!Form::text('observaciones',null,['class'=>'form-control','type'=>'text','id'=>'observacion'])!!}
                 </div>
 
-                <div class="col-md-6 col-md-offset-5 col-center-block">
+                <div class="col-md-6 col-md-offset-5 col-center-block" style="margin-top: 20px">
                     {!!Form::submit('Aceptar',['class'=>'btn btn-primary','name'=>'Aceptar'])!!}
                     {!!link_to('menu','Salir',['class'=>'btn btn-primary'])!!}
                 </div>
@@ -218,5 +215,65 @@
             });
         });
 
+
+
+        $('#form').submit(function() {
+            var Oficina=$('#oficina').val();
+            var Departamento=$('#Departamento').val();
+            var Nombre = $('#nombre').val();
+            var Telefono = $('#telefono').val();
+            var Correo = $('#correo').val();
+            var Tipo_Solicitud=$('#tipo_solicitud').val();
+            var Detalle = $('#detalle').val();
+            var Observacion = $('#observacion').val();
+
+
+            if(Oficina == 0){
+                $('#info').html("<div class='alert alert-danger'><b>Debe Seleccionar una Oficina</b></div>");
+                return false;
+            }
+            else if(Departamento == 0){
+                $('#info').html("<div class='alert alert-danger'><b>Debe Seleccionar un Departamento</b></div>");
+                return false;
+            }
+            else if (Nombre.length > 50 || Nombre == "") {
+                $('#info').html("<div class='alert alert-danger'><b>El Campo Nombre Beneficiario debe ser menor a 50 Caracteres</b></div>");
+                return false;
+            }
+            else if (Telefono.length > 11 || Telefono == "" || isNaN(Telefono)) {
+                $('#info').html("<div class='alert alert-danger'><b>El Campo Telefono Beneficiario debe ser menor a 11 Caracteres, no debe estar vacio y debe ser numerico</b></div>");
+                return false;
+            }
+            else if (Correo.length > 60 || Correo == "") {
+                $('#info').html("<div class='alert alert-danger'><b>El Campo Correo Beneficiario debe ser menor a 60 Caracteres</b></div>");
+                return false;
+            }
+            else if(Tipo_Solicitud == 0){
+                $('#info').html("<div class='alert alert-danger'><b>Debe Seleccionar Un tipo de Solicitud</b></div>");
+                return false;
+            }
+            else if (Detalle.length > 250 || Detalle == "") {
+                $('#info').html("<div class='alert alert-danger'><b>El Campo Detalle Pedido Contacto debe ser menor a 250 Caracteres</b></div>");
+                return false;
+            }
+            else if (Observacion.length > 250 || Observacion == "") {
+                $('#info').html("<div class='alert alert-danger'><b>El Campo Observacion debe ser menor a 250 Caracteres</b></div>");
+                return false;
+            }
+
+
+           /* var desde=$('#datetimepicker54').val();
+            var hasta=$('#datetimepicker64').val();
+            var seleccionado=$('#tipo_solicitud option:selected').html();
+            if (seleccionado === 'Prestamo'){
+                if(desde.length == ""){
+                    $('#info').html("<div class='alert alert-danger'><b>El Campo desde es requerido</b></div>");
+                    return false;
+                }
+                else if(hasta.length == "")
+                    $('#info').html("<div class='alert alert-danger'><b>El Campo hasta es requerido</b></div>");
+                    return false;
+            }*/
+        });
     </script>
 @endsection

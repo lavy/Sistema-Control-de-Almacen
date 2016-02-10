@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
-    <div class="container">
-        {!!Form::open(['action'=>'TecnicosController@store','files'=>'true'])!!}
+
+        {!!Form::open(['action'=>'TecnicosController@store','files'=>'true','id'=>'form'])!!}
 
         @if($errors->has())
             <div class='alert alert-danger'>
@@ -22,7 +22,7 @@
             <div class="panel-body">
                 <div class="col-md-6">
                     {!!Form::label('nombre_tecnico','Nombre de Tecnico:')!!}
-                    {!!Form::text('nombre_tecnico',null,array('class'=>'form-control','type'=>'text'))!!}
+                    {!!Form::text('nombre_tecnico',null,array('class'=>'form-control','type'=>'text','id'=>'nombre'))!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('cedula','Cedula Identidad:')!!}
@@ -38,7 +38,7 @@
                         <div class="form-group">
                             <label for="fecha_nacimiento">Fecha Nacimiento</label>
                             <div class='input-group date' id='datetimepicker5'>
-                                <input type='text' class="form-control" name="fecha_nacimiento"/>
+                                <input type='text' class="form-control" name="fecha_nacimiento" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -55,7 +55,7 @@
     </div>
 
     {!!Form::close()!!}
-    </div>
+
     <script type="text/javascript">
        $(document).ready(function() {
             $("#cedula").keyup(function () {
@@ -78,10 +78,27 @@
 
            $(function () {
                $('#datetimepicker5').datetimepicker({
-                   format:'YYYY-MM-DD'
+                   format:'DD-MM-YYYY'
                });
            });
 
+               $('#form').submit(function(){
+                   var Nombre=$('#nombre').val();
+                   var Cedula=$('#cedula').val();
+
+
+                   if(Nombre.length > 60 || Nombre == ""){
+                       $('#info').html("<div class='alert alert-danger'><b>El Campo Nombre debe ser menor a 60 Caracteres</b></div>");
+                       return false;
+                   }
+
+
+                   else if(Cedula.length > 11 || Cedula == ""){
+                       $('#info').html("<div class='alert alert-danger'><b>El Campo Cedula debe ser menor a 11 Caracteres</b></div>")
+                       return false;
+                   }
+
+               });
         });
     </script>
 @endsection

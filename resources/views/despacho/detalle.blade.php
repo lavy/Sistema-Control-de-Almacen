@@ -9,78 +9,51 @@
                 @endforeach
             </div>
         @endif
-        {!!Form::open(['url'=>'despacho/'.$detalles->id_transaccion,'onsubmit'=>'return validacion()','class'=>'form-horizontal'])!!}
+        {!!Form::open(['url'=>'despacho/'.$detalles->id_transaccion,'onsubmit'=>'return validacion()','class'=>'form-horizontal','id'=>'form'])!!}
+
+        <div id="info"></div>
 
         <div class="panel panel-primary">
             <div class="panel-heading" style="text-align:center;">DETALLES DE LA ORDEN</div>
             <div class="panel-body">
-                <div class="col-md-offset-5">
-                    <button class="add_field_button btn btn-info ">+</button>
-                </div>
-                <div class="form-group">
-                    {!!Form::label('nro_solicitud','NRO DE SOLICITUD:',['class'=>'control-label col-xs-4'])!!}
-                    <div class="col-md-6">
-                        {!!Form::text('nro_solicitud',$detalles->id_solicitud,array('class'=>'form-control','readonly'))!!}
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    {!!Form::label('nro_orden','NRO DE ORDEN:',['class'=>'control-label col-xs-4'])!!}
-                    <div class="col-md-6">
-                        {!!Form::text('nro_orden',$detalles->id_orden,array('class'=>'form-control','readonly'))!!}
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    {!!Form::label('nro_almacen','ALMACÉN:',['class'=>'control-label col-xs-4'])!!}
-                    <div class="col-md-6">
-                        {!!Form::text('nro_almacen',$detalles->id_almacen,array('class'=>'form-control','readonly'))!!}
-                    </div>
-                </div>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Nro de Solicitud</th>
+                        <th>Nro de Orden</th>
+                        <th>Solicitud</th>
+                        <th>Articulo</th>
+                    </tr>
+                    <tr>
+                        <td>{{$detalles->id_solicitud}}</td>
+                        <td>{{$detalles->id_orden}}</td>
+                     @foreach($almacen as $almac)
+                        <td>{{$almac->descrip_almacen}}</td>
+                        <td>{{$almac->descrip_renglon}}</td>
+                     @endforeach
+                    </tr>
+                </table>
 
-                <div class="form-group">
-                    {!!Form::label('articulo','ARTICULO:',['class'=>'control-label col-xs-4'])!!}
-                    <div class="col-md-6">
-                        {!!Form::text('articulo',$detalles->id_renglon,array('class'=>'form-control','readonly'=>'true'))!!}
-                    </div>
+                <div class="col-md-6">
+                    {!!Form::label('tecnico','TÉCNICO:')!!}
+                    {!!Form::select('tecnico',$tecnicos,'',['class'=>'form-control','id'=>'tecnico'])!!}
                 </div>
 
-                <div class="form-group">
-                    {!!Form::label('tecnico','TÉCNICO:',['class'=>'control-label col-xs-4'])!!}
-                    <div class="col-md-6">
-                        {!!Form::select('tecnico',$tecnicos,'',['class'=>'form-control','id'=>'tecnico'])!!}
-                    </div>
+                <div class="col-md-6">
+                      <label for="serial[]">SERIAL</label>
+                      {!!Form::select('serial[]',$seriales,'',['class'=>'form-control selectpicker','id'=>'seriales','multiple','data-live-search'=>'true'])!!}
                 </div>
 
-
-                <div class="input_fields_wraps">
-                    <div class="form-group">
-                        <label for="serial[]" class="control-label col-xs-4">SERIAL</label>
-                        <div class="col-md-6">
-                            {!!Form::select('serial[]',$seriales,'',['class'=>'form-control','id'=>'seriales'])!!}
-                        </div>
-                    </div>
-                </div>
-
-
-                <div  id="hijos">
-
-
-                </div>
-
-                <div class="form-group">
-                    {!!Form::label('cantidad','CANTIDAD:',['class'=>'control-label col-xs-4'])!!}
-                    <div class="col-md-6">
-                        {!!Form::text('cantidad',1,array('class'=>'form-control','id'=>'cantidad_pedir','readonly'=>'true'))!!}
-                    </div>
+                <div class="col-md-6">
+                    {!!Form::label('cantidad','CANTIDAD:')!!}
+                    {!!Form::text('cantidad',0,array('class'=>'form-control','id'=>'cantidad_pedir','readonly'=>'true'))!!}
                 </div>
 
                 @foreach($deta as $det)
-                    <div class="form-group">
-                        {!!Form::label('existencia_a','EXISTENCIA ACTUAL:',['class'=>'control-label col-xs-4'])!!}
-                        <div class="col-md-6">
-                            {!!Form::text('existencia_a',$det->cantidad_existencia,array('class'=>'form-control','readonly','id'=>'existencia_actual'))!!}
-                        </div>
+                    <div class="col-md-6">
+                        {!!Form::label('existencia_a','EXISTENCIA:')!!}
+                        {!!Form::text('existencia_a',$det->cantidad_existencia,array('class'=>'form-control','readonly','id'=>'existencia_actual'))!!}
                     </div>
                     {!!Form::text('existencia_minima',$det->existencia_minima,array('id'=>'existencia_minima'))!!}
                 @endforeach
@@ -93,38 +66,36 @@
 
     <script type="text/javascript">
         $('#existencia_minima').hide();
-        function validacion(){
+        $(document).ready(function(){
+            $('#form').submit(function(){
+            var cantidad=$('#cantidad_pedir').val();
+            var existencia=$('#existencia_actual').val();
+            var existencia_m=$('#existencia_minima').val();
+            var total=cantidad-existencia;
+                if(isNaN(cantidad)){
+                    $('#info').html("<div class='alert alert-danger'><b>La cantidad debe ser númerica</b></div>")
+                    return false;
+                }
+            /*
             var cantidad = document.getElementById('cantidad_pedir').value;
             var existencia = document.getElementById('existencia_actual').value;
             var existencia_m = document.getElementById('existencia_minima').value;
-            var total=cantidad-existencia;
+            var total=cantidad-existencia;*/
            /* if (cantidad > existencia) {
-                alert('LA CANTIDAD DEBE SER MENOR A LA EXISTENCIA');
+                $('#info').html("<div class='alert alert-danger'><b>La Cantidad a Solicitar debe ser Menor a la Existencia</b></div>")
+                *//*alert('LA CANTIDAD DEBE SER MENOR A LA EXISTENCIA');*//*
                 return false;
             }*/
+            });
 
-        }
-       $("#seriales").change(function() {
-           $("#seriales option:selected").each(function () {
-               $(this).hide();
-           })
-       });
 
-        /*   var max_fields      = 10; //maximum input boxes allowed
-         var wrapper         = $(".input_fields_wrap"); //Fields wrapper
-         var add_button      = $(".add_field_button"); //Add button ID
-         var x = 0; //initlal text box count
-         $(add_button).click(function(e){ //on add input button click
-         e.preventDefault();
-         *//*if(x < max_fields){ //max input box allowed*//*
-         x++; //text box increment
-         *//*$(wrapper).append('<div class="col-md-6"><label for="serial[]">Serial '+x+'</label><td><select name="serial['+x+']" class="form-control"><option></option></select></td><span class="input-group-btn"><a href="#" class="remove_field btn btn-danger">Remover</a></span></div></div>'); //add input box*//*
-         $(wrapper).clone().appendTo('.serials'); //add input box
-         *//*}*//*
-         });
-         $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-         e.preventDefault(); $(this).parent('div').remove(); x--;
-         })*/
+
+            $('.selectpicker').selectpicker({
+                style: 'btn-default',
+                size: 10
+            });
+
+
         var existencia=$('#existencia_actual').val();
         var max_fields      = existencia; //maximum input boxes allowed
         var wrapper         = $(".input_fields_wraps"); //Fields wrapper
@@ -142,10 +113,21 @@
             e.preventDefault(); $(this).parent('tr').remove(); x--;
         })
 
-        $('.add_field_button').on('click', function () {
-            var sum=$('#cantidad_pedir').val();
-            sum++;
-            $('#cantidad_pedir').val(sum);
+        /*var selecciones=$('.selectpicker');*/
+        $('.selectpicker').change(function () {
+            /*var valor = $(this).val();*/
+            if('li.selected == elected'){
+                var sum=$('#cantidad_pedir').val();
+                sum++;
+                $('#cantidad_pedir').val(sum);
+            }else
+            {
+            var rest=$('#cantidad_pedir').val();
+            rest--;
+            $('#cantidad_pedir').val(rest);
+            }
+        });
+
         });
     </script>
 @endsection

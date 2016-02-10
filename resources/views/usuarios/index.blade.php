@@ -20,16 +20,25 @@
             <div class="form-group">
                 {!!Form::text('buscar',null,['class'=>'form-control','placeholder'=>'Busqueda por usuario','id'=>'buscar'])!!}
             </div>
-            {!!Form::submit('BUSCAR',['class'=>'btn bnt-default'])!!}
+            {!!Form::submit('BUSCAR',['class'=>'btn btn-default'])!!}
             {!!Form::close()!!}
 
+            <p>
             {!!link_to('crear_usuarios','Crear Nuevo Usuario',['class'=>'btn btn-primary'])!!}
+            </p>
 
+            <p>
+                Hay {{$usuarios->total()}}
+                @if($usuarios->total() >1)
+                    Usuarios
+                @else
+                    Usuario
+                @endif
+            </p>
             <table class="table table-bordered">
                 <tr>
                     <th style="text-align:center;">NOMBRE</th>
                     <th style="text-align:center;">EMAIL</th>
-                    {{--<th style="text-align:center;">PASSWORD</th>--}}
                     <th style="text-align:center;">CEDULA</th>
                     <th style="text-align:center;">CODIGO</th>
                     <th style="text-align:center;">NIVEL USUARIO</th>

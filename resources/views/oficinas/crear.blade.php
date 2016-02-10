@@ -1,8 +1,8 @@
 @extends('app')
 
 @section('content')
-    <div class="container">
-        {!!Form::open(['action'=>'OficinasController@store'])!!}
+
+        {!!Form::open(['action'=>'OficinasController@store','id'=>'form'])!!}
 
         @if($errors->has())
             <div class='alert alert-danger'>
@@ -30,9 +30,9 @@
                 {!!link_to('menu','Salir',['class'=>'btn btn-primary'])!!}
             </div>
         </div>
-    </div>
+
     {!!Form::close()!!}
-    </div>
+
     <script type="text/javascript">
         $(document).ready(function() {
             $("#oficina").keyup(function () {
@@ -51,6 +51,16 @@
                         }
                     });
                 }
+            });
+
+            $('#form').submit(function(){
+                var Oficina=$('#oficina').val();
+
+                if(Oficina.length > 250 || Oficina == ""){
+                    $('#info').html("<div class='alert alert-danger'><b>El Campo Descripción debe ser menor a 250 Caracteres</b></div>");
+                    return false;
+                }
+
             });
         });
     </script>

@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\DB;
 use App\Inventario_Seriales;
 use Illuminate\Http\Request;
 
+/**
+ * Class SerialesController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
 class SerialesController extends Controller {
 
 	/**
@@ -15,7 +20,7 @@ class SerialesController extends Controller {
 	 */
 	public function index($id, Request $request)
 	{
-        $buscar=$request->input('buscar');
+        $buscar=trim($request->input('buscar'));
         $seriales= DB::table('inventario_seriales')
             ->join('renglones', 'inventario_seriales.id_renglon', '=', 'renglones.id_renglon')
             ->select('inventario_seriales.*')

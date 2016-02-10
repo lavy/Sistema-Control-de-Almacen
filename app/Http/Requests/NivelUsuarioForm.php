@@ -22,7 +22,7 @@ class NivelUsuarioForm extends Request {
 	public function rules()
 	{
 		return [
-			'nivel_usuario'=>'required|numeric',
+			/*'nivel_usuario'=>'required|numeric',*/
             'nombre_nivel'=>'required',
 		];
 	}
@@ -30,8 +30,8 @@ class NivelUsuarioForm extends Request {
     public function message()
     {
         return[
-            'nivel_usuario.required'=>'Es necesario especificar el nivel de usuario',
-            'nivel_usuario.numeric'=>'Es necesario que sea numerico',
+           /* 'nivel_usuario.required'=>'Es necesario especificar el nivel de usuario',
+            'nivel_usuario.numeric'=>'Es necesario que sea numerico',*/
             'nombre_nivel.required'=>'Es necesario especificar el nombre del nivel de usuario'
         ];
     }

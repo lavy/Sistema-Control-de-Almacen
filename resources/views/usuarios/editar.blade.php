@@ -36,18 +36,6 @@
                     {!!Form::label('cargo','Cargo:')!!}
                     {!!Form::text('cargo',$usuarios->cargo,['class'=>'form-control','type'=>'text','readonly'])!!}
                 </div>
-                {{--<div class="col-md-6">
-                    {!!Form::label('codigo','Codigo:')!!}
-                    {!!Form::text('codigo',null,array('class'=>'form-control','type'=>'text'))!!}
-                </div>--}}
-                {{--<div class="col-md-6">
-                    {!!Form::label('nivel_usuario','Nivel de Usuario:')!!}
-                    {!!Form::select('nivel_usuario',$usuarios->Userevel,'',['class'=>'form-control'])!!}
-                </div>--}}
-                {{--<div class="col-md-6">
-                    {!!Form::label('nivel_usuario','Nivel de Usuario:')!!}
-                    {!!Form::text('nivel_usuario',$usuarios->UserLevel,['class'=>'form-control','type'=>'text'])!!}
-                </div>--}}
                 <div class="col-md-6">
                     {!!Form::label('nivel_usuario','Nivel de Usuario:')!!}
                     {!!Form::select('nivel_usuario',$nivel,$usuarios->UserLevel,['class'=>'form-control','readonly'])!!}

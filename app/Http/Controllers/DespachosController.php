@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\DetallesForm;
 use Illuminate\Support\Facades\Input;
 
+/**
+ * Class DespachosController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
 class DespachosController extends Controller {
 
     public function __construct()
@@ -27,7 +32,7 @@ class DespachosController extends Controller {
 	 */
 	public function index(Request $request)
 	{
-        $buscar=$request->input('buscar');
+        $buscar=trim($request->input('buscar'));
 
         $orden = DB::table('detalle_planilla_orden')
             ->join('almacen', 'detalle_planilla_orden.id_almacen', '=', 'almacen.id_almacen')
@@ -90,10 +95,25 @@ class DespachosController extends Controller {
         $seriales = Inventario_Seriales::join('detalle_planilla_orden','inventario_seriales.id_renglon','=','detalle_planilla_orden.id_renglon')
                     ->where('inventario_seriales.estatus','=','Stock')
                     ->lists('inventario_seriales.serial', 'inventario_seriales.id_serial');
+
+        $almacen=DB::table('detalle_planilla_orden')
+            ->join('almacen','detalle_planilla_orden.id_almacen','=','almacen.id_almacen')
+            ->join('renglones','detalle_planilla_orden.id_renglon','=','renglones.id_renglon')
+            ->select('almacen.descrip_almacen','renglones.descrip_renglon')
+            ->where('detalle_planilla_orden.id_transaccion','=',$id)
+            ->get();
+
+        $solicitud=DB::table('detalle_planilla_orden')
+            ->join('almacen','detalle_planilla_orden.id_almacen','=','almacen.id_almacen')
+            ->select('almacen.descrip_almacen')
+            ->get();
+
+
+
         $tecnicos = Tecnico::where('estatus','=','Activo')->lists('nombres_apellidos', 'id_tecnico');
         $tecnico=array_unshift($tecnicos,'Seleccione...');
 
-        return view('despacho.detalle')->with(['detalles'=>$detalle,'deta'=>$det,'tecnicos'=>$tecnicos,'seriales'=>$seriales]);
+        return view('despacho.detalle')->with(['detalles'=>$detalle,'deta'=>$det,'tecnicos'=>$tecnicos,'seriales'=>$seriales,'almacen'=>$almacen]);
 	}
 
 	/**
@@ -118,10 +138,10 @@ class DespachosController extends Controller {
         }
 
         $despacho=\App\DetalleOrden::find($id);
-        $despacho->id_solicitud=\Request::Input('nro_solicitud');
+        /*$despacho->id_solicitud=\Request::Input('nro_solicitud');
         $despacho->id_orden=\Request::Input('nro_orden');
         $despacho->id_almacen=\Request::Input('nro_almacen');
-        $despacho->id_renglon=\Request::Input('articulo');
+        $despacho->id_renglon=\Request::Input('articulo');*/
         $despacho->id_tecnico=\Request::Input('tecnico');
         $despacho->cantidad=\Request::Input('cantidad');
 

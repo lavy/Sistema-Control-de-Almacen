@@ -5,6 +5,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\NivelUsuarioForm;
 
+/**
+ * Class NivelesController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
 class NivelesController extends Controller {
 
     public function __construct()
@@ -42,10 +47,9 @@ class NivelesController extends Controller {
 	public function store(NivelUsuarioForm $nivelUsuarioForm)
 	{
         $nivel = new \App\UserLevel();
-        $nivel->UserLevelID = \Request::Input('nivel_usuario');
         $nivel->UserLevelName = \Request::Input('nombre_nivel');
         $nivel->save();
-        return redirect('niveles');
+        return redirect('niveles')->with('message','Se ha agregado un Nuevo Nivel');
 	}
 
 	/**
@@ -80,10 +84,9 @@ class NivelesController extends Controller {
 	public function update($id)
 	{
 		$nivel=\App\UserLevel::find($id);
-        $nivel->UserLevelID=\Request::input('nivel_usuario');
         $nivel->UserLevelName=\Request::input('nombre_nivel');
         $nivel->save();
-        return redirect('niveles')->with('message','Se ha actualizado el registro');
+        return redirect('niveles')->with('message','Se ha actualizado el Nivel');
 	}
 
 	/**

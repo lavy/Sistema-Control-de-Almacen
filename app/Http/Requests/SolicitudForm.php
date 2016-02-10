@@ -33,9 +33,6 @@ class SolicitudForm extends Request {
             'articulos'=>'required|not_in:0',
             'detalle'=>'required',
             'observaciones'=>'required'
-
-
-
 		];
 	}
     public function messages()

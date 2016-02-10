@@ -5,6 +5,11 @@ use App\Http\Controllers\Controller;
 use DB;
 use Illuminate\Http\Request;
 
+/**
+ * Class EstadisticasController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
 class EstadisticasController extends Controller {
 
     public function __construct()

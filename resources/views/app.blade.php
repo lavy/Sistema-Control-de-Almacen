@@ -15,10 +15,9 @@
     <script src="{{asset ('datepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
     <link rel="shortcut icon" href="{{asset('images/estrella-trans.ico')}}">
     <link rel="stylesheet" href="{{asset('font-awesome/css/font-awesome.min.css')}}">
-    <script src="{{asset('highcharts/highcharts.js')}}"></script>
-    <script src="{{asset('highcharts/exporting.js')}}"></script>
-
-
+    <link rel="stylesheet" href="{{asset('bootstrap-select/dist/css/bootstrap-select.min.css')}}">
+    <script src="{{asset('bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
+    <script src="{{asset('bootstrap-select/dist/js/i18n/defaults-es_CL.min.js')}}"></script>
 </head>
 <body>
 
@@ -129,129 +128,8 @@
             </div>
             </div>
     </footer>
+
+@stack('scripts')
 </body>
 </html>
 
-
-
-{{--
-	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
-
-	<!-- Fonts -->
-	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-</head>
-<body>
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle Navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Laravel</a>
-			</div>
-
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/') }}">Home</a></li>
-				</ul>
-
-				<ul class="nav navbar-nav navbar-right">
-					@if (Auth::guest())
-						<li><a href="{{ url('/auth/login') }}">Login</a></li>
-						<li><a href="{{ url('/auth/register') }}">Register</a></li>
-					@else
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="{{ url('/auth/logout') }}">Logout</a></li>
-							</ul>
-						</li>
-					@endif
-				</ul>
-			</div>
-		</div>
-	</nav>
-
-	@yield('content')
-
-	<!-- Scripts -->
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
-</body>
-</html>
---}}
-
-{{--
-
-
-<nav class="navbar navbar-default">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">WebSiteName</a>
-        </div>
-        <div>
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Inicio</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Institución
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Jefes</a></li>
-                        <li><a href="#">Tecnicos</a></li>
-                        <li><a href="#">Oficinas</a></li>
-                        <li><a href="#">Departamentos</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tablas Básicas
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Almacenes</a></li>
-                        <li><a href="#">Marcas</a></li>
-                        <li><a href="#">Modelos</a></li>
-                        <li><a href="#">Proveedores</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Insumos
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Articulos</a></li>
-                        <li><a href="#">Tipo de Articulos</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Solicitudes</a></li>
-                <li><a href="#">Despachos</a></li>
-                <li><a href="#">Inventario</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Estadísticas
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Reportes</a></li>
-                        <li><a href="#">Gráficos</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Seguridad
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Reportes</a></li>
-                        <li><a href="#">Gráficos</a></li>
-                    </ul>
-                </li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>Salir</a></li>
-
-            </ul>
-        </div>
-    </div>
-</nav>--}}

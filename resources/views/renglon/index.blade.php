@@ -20,13 +20,23 @@
                 <div class="form-group">
                     {!!Form::text('buscar',null,['class'=>'form-control','placeholder'=>'Busqueda por Artículo'])!!}
                 </div>
-                {!!Form::submit('BUSCAR',['class'=>'btn bnt-default'])!!}
+                {!!Form::submit('BUSCAR',['class'=>'btn btn-default'])!!}
                 {!!Form::close()!!}
 
+                <p>
                 {!!link_to('crear_renglones','Crear Nuevo Artículo',['class'=>'btn btn-primary'])!!}
 
                 <a href="{{URL::to('excel_renglon')}}"><i class="fa fa-file-excel-o fa-2x" style="margin-left: 20px; "></i></a>
+                </p>
 
+                <p>
+                    Hay {{$renglones->total()}}
+                    @if($renglones->total() >1)
+                        Articulos
+                    @else
+                        Articulo
+                    @endif
+                </p>
 
                 <table class="table table-bordered">
                     <tr>

@@ -8,6 +8,11 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
+/**
+ * Class ExcelController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
 class ExcelController extends Controller {
 
 	/**

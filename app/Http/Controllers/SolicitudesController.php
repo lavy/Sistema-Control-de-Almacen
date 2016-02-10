@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+
+/**
+ * Class SolicitudesController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
 class SolicitudesController extends Controller {
 
     public function __construct()
@@ -23,7 +29,7 @@ class SolicitudesController extends Controller {
 	 */
 	public function index(Request $request)
 	{
-        $buscar=$request->input('buscar');
+        $buscar=trim($request->input('buscar'));
         if(Auth::User()->UserLevel !=0) {
             $solicitudes = DB::table('solicitudes')
                 ->join('oficinas', 'solicitudes.id_oficina', '=', 'oficinas.id_oficina')

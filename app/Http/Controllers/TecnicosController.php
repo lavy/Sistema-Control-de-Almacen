@@ -6,6 +6,11 @@ use App\Http\Requests\TecnicosForm;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 
+/**
+ * Class TecnicosController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
 class TecnicosController extends Controller {
 
 
@@ -20,7 +25,7 @@ class TecnicosController extends Controller {
 	 */
 	public function index(Request $request)
 	{
-        $buscar=$request->input('buscar');
+        $buscar=trim($request->input('buscar'));
         $tecnicos=\App\Tecnico::where('nombres_apellidos','LIKE','%'.$buscar.'%')->paginate(5);
         $tecnicos->setPath('tecnico');
 		return view('tecnicos.index')->with('tecnicos',$tecnicos);
@@ -51,7 +56,7 @@ class TecnicosController extends Controller {
         $tecnicos=new \App\Tecnico();
         $tecnicos->nombres_apellidos=\Request::input('nombre_tecnico');
         $tecnicos->cedula=\Request::input('cedula');
-        $tecnicos->fecha_nacimiento=\Request::input('fecha_nacimiento');
+        $tecnicos->fecha_nacimiento=date("Y-m-d",strtotime(\Request::input('fecha_nacimiento')));
         $tecnicos->foto_tecnico=$url_foto;
         $tecnicos->save();
         return redirect('tecnico')->with('message','Se ha registrado un tecnico exitosamente');
@@ -93,12 +98,6 @@ class TecnicosController extends Controller {
         $ruta=public_path().'/tecnicos/';
         $url_foto=$foto_tecnico->getClientOriginalName();
         $subir=$foto_tecnico->move($ruta,$foto_tecnico->getClientOriginalName());
-
-       /* $imagen = Input::file('image');
-        $nombre  =$imagen->getClientOriginalName();
-        $ruta = public_path('tecnicos/' . $nombre);
-        \Image::make($imagen->getRealPath())->resize(50, 50)->save($ruta);*/
-
 
         $tecnicos=\App\Tecnico::find($id);
         $tecnicos->nombres_apellidos=\Request::input('nombre_tecnico');

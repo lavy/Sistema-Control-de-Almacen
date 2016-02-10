@@ -6,6 +6,12 @@ use App\Http\Requests\ModelosForm;
 use App\Modelo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
+/**
+ * Class ModelosController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
 class ModelosController extends Controller {
 
     public function __construct()
@@ -19,11 +25,11 @@ class ModelosController extends Controller {
 	 */
 	public function index(Request $request)
 	{
-        $buscar=$request->input('buscar');
+        $buscar=trim($request->input('buscar'));
 		$modelos=DB::table('modelo')
                     ->join('marca','marca.id_marca','=','modelo.id_marca')
                     ->select('modelo.*','marca.descrip_marca')
-                    ->where('descrip_modelo','LIKE','%'.$buscar.'%')->paginate(5);
+                    ->where('descrip_modelo','LIKE','%'.$buscar.'%')->orderBy('id_modelo','asc')->paginate(5);
         $modelos->setPath('modelos');
         return view('modelos.index')->with('modelos',$modelos);
 	}

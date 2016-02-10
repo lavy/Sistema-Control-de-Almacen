@@ -22,10 +22,10 @@ class DetallesForm extends Request {
 	public function rules()
 	{
 		return [
-            'nro_solicitud'=>'required',
+            /*'nro_solicitud'=>'required',
             'nro_orden'=>'required',
             'nro_almacen'=>'required',
-            'articulo'=>'required',
+            'articulo'=>'required',*/
             'tecnico'=>'required|not_in:0',
             /*'serial'=>'required|not_in:0',*/
             'cantidad'=>'required',
@@ -36,10 +36,10 @@ class DetallesForm extends Request {
     public function message()
     {
         return[
-            'nro_solicitud.required'=>'El nro de la solicitud es requerido',
+            /*'nro_solicitud.required'=>'El nro de la solicitud es requerido',
             'nro_orden.required'=>'El nro de la orden es requerido',
             'nro_almacen.required'=>'El nro del almacen es requerido',
-            'articulo.required'=>'El articulo es requerido',
+            'articulo.required'=>'El articulo es requerido',*/
             'tecnico.required'=>'El tecnico es requerido',
             'tecnico.not_in:0'=>'El tecnico es requerido',
             'serial.not_in:0'=>'El serial es requerido',

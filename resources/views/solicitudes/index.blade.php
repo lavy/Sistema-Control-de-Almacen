@@ -1,6 +1,6 @@
 @extends('app')
 @section('content')
-    <div class="container">
+
         @if($errors->has())
             <div class='alert alert-danger'>
                 @foreach ($errors->all('<p>:message</p>') as $message)
@@ -19,13 +19,19 @@
                 <div class="form-group">
                     {!!Form::text('buscar',null,['class'=>'form-control','placeholder'=>'Busqueda por Beneficiario'])!!}
                 </div>
-                {!!Form::submit('BUSCAR',['class'=>'btn bnt-default'])!!}
+                {!!Form::submit('BUSCAR',['class'=>'btn btn-default'])!!}
                 {!!Form::close()!!}
-
-                {!!link_to('crear_solicitudes','Crear Nueva Solicitud',['class'=>'btn btn-primary'])!!}
-
-                {!!link_to('solicitudes_procesadas','Solicitudes Procesadas',['class'=>'btn btn-success'])!!}
-
+                <p>
+                    {!!link_to('crear_solicitudes','Crear Nueva Solicitud',['class'=>'btn btn-primary'])!!}
+                    {!!link_to('solicitudes_procesadas','Solicitudes Procesadas',['class'=>'btn btn-success'])!!}
+                </p>
+                <p>Hay {{$solicitudes->total()}}
+                    @if($solicitudes->total() >1)
+                        Solicitudes
+                    @else
+                        Solicitud
+                    @endif
+                </p>
                 <table class="table table-bordered">
                     <tr>
                         {{--<th width="20px" style="text-align:center;font:bold 14px 'cursive';"># SOLICITUD</th>--}}
@@ -86,7 +92,6 @@
                 {!! $solicitudes->render() !!}
             </div>
         </div>
-    </div>
     </div>
 
     <script type="text/javascript">

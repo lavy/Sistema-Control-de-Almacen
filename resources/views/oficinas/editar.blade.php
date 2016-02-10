@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-    <div class="container">
+
         @if($errors->has())
             <div class='alert alert-danger'>
                 @foreach ($errors->all('<p>:message</p>') as $message)
@@ -9,13 +9,16 @@
                 @endforeach
             </div>
         @endif
-        {!!Form::open(['url'=>'oficinas/'.$oficina->id_oficina])!!}
+        {!!Form::open(['url'=>'oficinas/'.$oficina->id_oficina,'id'=>'form'])!!}
+
+        <div id="info"></div>
+
         <div class="panel panel-primary">
             <div class="panel-heading" style="text-align:center;">EDITAR OFICINA</div>
             <div class="panel-body">
                 <div class="col-md-6">
                     {!!Form::label('descripcion','Nueva Descripción:')!!}
-                    {!!Form::text('descripcion',$oficina->descrip_oficina,array('class'=>'form-control'))!!}
+                    {!!Form::text('descripcion',$oficina->descrip_oficina,['class'=>'form-control','id'=>'oficina'])!!}
                 </div>
             </div>
             <div class="col-md-offset-5">
@@ -23,7 +26,22 @@
                 {!!link_to('menu','Salir',['class'=>'btn btn-primary'])!!}
             </div>
         </div>
-    </div>
+
     {!!Form::close()!!}
-    </div>
+
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+        $('#form').submit(function(){
+            var Oficina=$('#oficina').val();
+
+
+
+            if(Oficina.length > 150 || Oficina == ""){
+                $('#info').html("<div class='alert alert-danger'><b>El Campo Descripción debe ser menor a 150 Caracteres</b></div>");
+                return false;
+            }
+            });
+        });
+    </script>
 @endsection

@@ -175,8 +175,14 @@ Route::delete('almacen/eliminar/{id}',['uses' => 'AlmacenController@destroy', 'm
 Route::post('enviar', ['as' => 'enviar', 'uses' => 'EmailController@send'] );
 Route::get('contacto', ['as' => 'contacto', 'uses' => 'EmailController@index'] );
 
-Route::get('pruebasss',function(){
+/*Route::get('pruebasss',function(){
     dd(\App\Modelo::all()->lists('descrip_modelo','id_modelo'));
+});*/
+
+Route::get('prueba',function(){
+
+    echo "<td>".'hola'."</td>";
+    echo "<td>"."dkjashdjaslkjdjlkas"."</td>";
 });
 /*Route::get('send',function() {
     $data = [
@@ -336,6 +342,20 @@ Route::get('correo_usuario',function() {
         }
     }
 
+});
+
+Route::get('nivels',function(){
+    if(Request::ajax()){
+
+        $nivel=Input::get('nivel');
+        $verificar=\App\UserLevel::where('UserLevelName','=',$nivel)->count();
+
+        if ($verificar == 0) {
+            echo "Disponible";
+        } else {
+            echo "No Disponible";
+        }
+    }
 });
 
 Route::get('t_articulo',function() {

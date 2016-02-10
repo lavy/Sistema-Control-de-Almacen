@@ -1,8 +1,8 @@
 @extends('app')
 
 @section('content')
-    <div class="container">
-        {!!Form::open(['action'=>'AlmacenController@store','id'=>'example1'])!!}
+
+        {!!Form::open(['action'=>'AlmacenController@store','id'=>'form'])!!}
 
         @if($errors->has())
             <div class='alert alert-danger'>
@@ -60,14 +60,13 @@
                 {!!link_to('menu','Salir',['class'=>'btn btn-primary'])!!}
             </div>
         </div>
-    </div>
     {!!Form::close()!!}
-    </div>
+
 
     <script type="text/javascript">
         $(document).ready(function(){
-            $('#example1').guardian();
-           /*$('form').submit(function(){
+
+           $('#form').submit(function(){
               var Almacen=$('#descripcion').val();
               var Direccion=$('#direccion').val();
               var Telefono=$('#telefono').val();
@@ -76,50 +75,38 @@
               var Celular_C=$('#celular_c').val();
               var correo=$('#correo').val();
 
-               if(Almacen.length > 150 && Almacen != ""){
+               if(Almacen.length > 150 || Almacen == ""){
                    $('#info').html("<div class='alert alert-danger'><b>El Campo Descripción debe ser menor a 150 Caracteres</b></div>");
                    return false;
-               }else{
-                   return true;
                }
 
 
-               if(Direccion.length > 250 && Direccion != ""){
+               else if(Direccion.length > 250 || Direccion == ""){
                    $('#info').html("<div class='alert alert-danger'><b>El Campo Direccion debe ser menor a 250 Caracteres</b></div>")
                    return false;
-               }else{
-                   return true;
                }
 
 
-               if(Telefono.length > 50 && Telefono != ""){
+               else if(Telefono.length > 50 || Telefono == ""){
                    $('#info').html("<div class='alert alert-danger'><b>El Campo Telefono debe ser menor a 50 Caracteres</b></div>")
                    return false;
-               }else{
-                   return true;
                }
 
-               if(Persona.length > 50 && Persona != ""){
+               else if(Persona.length > 50 || Persona == ""){
                    $('#info').html("<div class='alert alert-danger'><b>El Campo Persona Contacto debe ser menor a 50 Caracteres</b></div>")
                    return false;
-               }else{
-                   return true;
                }
 
-               if(Telefono_C.length > 50 && Telefono_C != ""){
+               else if(Telefono_C.length > 50 || Telefono_C == ""){
                    $('#info').html("<div class='alert alert-danger'><b>El Campo Telefono Contacto debe ser menor a 50 Caracteres</b></div>")
                    return false;
-               }else{
-                   return true;
                }
 
-               if(Celular_C.length > 50 && Celular_C != ""){
+               else if(Celular_C.length > 50 || Celular_C == ""){
                    $('#info').html("<div class='alert alert-danger'><b>El Campo Celular Contacto debe ser menor a 50 Caracteres</b></div>")
                    return false;
-               }else{
-                   return true;
                }
-           });*/
+           });
         });
 
 

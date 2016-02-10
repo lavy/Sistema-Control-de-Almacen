@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        {!!Form::open(['action'=>'MarcasController@store'])!!}
+        {!!Form::open(['action'=>'MarcasController@store','id'=>'form'])!!}
 
         @if($errors->has())
             <div class='alert alert-danger'>
@@ -23,7 +23,7 @@
             <div class="panel-body">
                 <div class="col-md-6">
                     {!!Form::label('proveedor','Proveedor:')!!}
-                    {!!Form::select('proveedor',$proveedor,'',['class'=>'form-control'])!!}
+                    {!!Form::select('proveedor',$proveedor,'',['class'=>'form-control','id'=>'proveedor'])!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('descripcion','Descripción:')!!}
@@ -58,6 +58,21 @@
                     });
                 }
             });
+
+            $('#form').submit(function(){
+                var Proveedor=$('#proveedor').val();
+                var Marca=$('#marca').val();
+
+                if(Proveedor == 0){
+                    $('#info').html("<div class='alert alert-danger'><b>Debe Seleccionar un Proveedor</b></div>")
+                    return false;
+                }
+                else if(Marca.length > 250 || Marca.length == ""){
+                    $('#info').html("<div class='alert alert-danger'><b>El Campo Descripción debe ser menor a 250 caracteres</b></div>")
+                    return false;
+                }
+
+            })
         });
     </script>
 

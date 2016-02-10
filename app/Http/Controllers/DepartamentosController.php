@@ -5,6 +5,11 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
+/**
+ * Class DepartamentosController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
 class DepartamentosController extends Controller {
 
     public function __construct()
@@ -18,7 +23,7 @@ class DepartamentosController extends Controller {
 	 */
 	public function index(Request $request)
 	{
-        $buscar=$request->input('buscar');
+        $buscar=trim($request->input('buscar'));
         $departamentos=\App\Departamentos::where('descrip_departamento','LIKE','%'.$buscar.'%')->paginate(10);
         $departamentos->setPath('departamento');
         return view('departamentos.index')->with('departamentos',$departamentos);
@@ -69,7 +74,8 @@ class DepartamentosController extends Controller {
 	public function edit($id)
 	{
 		$departamento=\App\Departamentos::find($id);
-        return view('departamentos.editar')->with('departamento',$departamento);
+        $oficina=\App\Oficinas::all()->lists('descrip_oficina','id_oficina');
+        return view('departamentos.editar')->with(['departamento'=>$departamento,'oficina'=>$oficina]);
 	}
 
 	/**
@@ -81,6 +87,7 @@ class DepartamentosController extends Controller {
 	public function update($id)
 	{
 		$departamento=\App\Departamentos::find($id);
+        $departamento->id_oficina=\Request::Input('oficina');
         $departamento->descrip_departamento=\Request::Input('descripcion');
         $departamento->save();
         return redirect('departamento')->with('message','El registro fue editado Exitosamente');
@@ -96,7 +103,7 @@ class DepartamentosController extends Controller {
 	{
 		$departamento=\App\Departamentos::find($id);
         $departamento->delete();
-        return redirect('departamentos')->with('message','Borrado');
+        return redirect('departamentos')->with('message','El Departamento se ha Borrado');
 	}
 
 }

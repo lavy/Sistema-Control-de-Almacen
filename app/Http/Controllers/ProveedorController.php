@@ -5,6 +5,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProveedorForm;
 use Illuminate\Http\Request;
 
+/**
+ * Class ProveedorController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
 class ProveedorController extends Controller {
 
     public function __construct()
@@ -18,7 +23,7 @@ class ProveedorController extends Controller {
 	 */
 	public function index(Request $request)
 	{
-        $buscar=$request->input('buscar');
+        $buscar=trim($request->input('buscar'));
 		$proveedor=\App\Proveedor::where('nombre_proveedor','LIKE','%'.$buscar.'%')->paginate(5);
         $proveedor->setPath('proveedor');
         return view('proveedores.index')->with('proveedor',$proveedor);

@@ -1,6 +1,6 @@
 @extends('app')
 @section('content')
-    <div class="container">
+
         @if($errors->has())
             <div class='alert alert-danger'>
                 @foreach ($errors->all('<p>:message</p>') as $message)
@@ -19,10 +19,22 @@
                 <div class="form-group">
                     {!!Form::text('buscar',null,['class'=>'form-control','placeholder'=>'Busqueda por Jefes'])!!}
                 </div>
-                {!!Form::submit('BUSCAR',['class'=>'btn bnt-default'])!!}
+                {!!Form::submit('BUSCAR',['class'=>'btn btn-default'])!!}
                 {!!Form::close()!!}
 
+                <p>
                 {!!link_to('crear_jefes','Crear Nuevo Jefe',['class'=>'btn btn-primary'])!!}
+                </p>
+
+                <p>
+                    Hay {{$jefes->total()}}
+                    @if($jefes->total() >1)
+                        Jefes
+                    @else
+                        Jefe
+                    @endif
+                </p>
+
 
                 <table class="table table-bordered">
                     <tr>
@@ -38,7 +50,7 @@
                             <td style="text-align:center;">{{$jefe->descrip_oficina}}</td>
                             <td style="text-align:center;">{{$jefe->nombre}}</td>
                             <td style="text-align:center;">{{$jefe->cedula}}</td>
-                            <td style="text-align:center;">{{$jefe->fecha_ingreso}}</td>
+                            <td style="text-align:center;">{{date("d-m-Y",strtotime(($jefe->fecha_ingreso)))}}</td>
                             <td width="60" align="center">
                                 {!! Html::link('jefes/editar/'.$jefe->id_jefe, 'Editar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}
                             </td>
@@ -48,6 +60,5 @@
                 {!!$jefes->render()!!}
             </div>
         </div>
-    </div>
     </div>
 @endsection

@@ -5,6 +5,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TipoRenglonesForm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
+/**
+ * Class TiporenglonController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
 class TiporenglonController extends Controller {
 
     public function __construct()
@@ -18,7 +24,7 @@ class TiporenglonController extends Controller {
 	 */
 	public function index(Request $request )
 	{
-        $buscar=$request->Input('buscar');
+        $buscar=trim($request->Input('buscar'));
         $trenglon=\App\TipoRenglon::where('descrip_tipo_renglon','LIKE','%'.$buscar.'%')
                                     ->where('id_almacen','=',Auth::User()->id_almacen)
                                     ->paginate(5);

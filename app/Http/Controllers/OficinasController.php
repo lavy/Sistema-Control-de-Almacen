@@ -6,6 +6,11 @@ use App\Http\Requests\OficinasForm;
 
 use Illuminate\Http\Request;
 
+/**
+ * Class OficinasController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
 class OficinasController extends Controller {
 
     public function __construct()
@@ -20,9 +25,8 @@ class OficinasController extends Controller {
 	public function index(Request $request)
 	{
 
-        $buscar=$request->input('buscar');
-        $oficinas = \App\Oficinas::where('descrip_oficina', 'LIKE', '%' . $buscar . '%')->paginate(10);
-        /*dd($oficinas);*/
+        $buscar=trim($request->input('buscar'));
+        $oficinas = \App\Oficinas::where('descrip_oficina','LIKE', '%' .$buscar . '%')->paginate(10);
         $oficinas->setPath('oficina');
         return view('oficinas.index')->with('oficinas', $oficinas);
 

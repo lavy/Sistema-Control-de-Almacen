@@ -5,7 +5,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
-
+/**
+ * Class PermisosController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
 class PermisosController extends Controller {
 
 	/**
@@ -15,7 +19,7 @@ class PermisosController extends Controller {
 	 */
 	public function index(Request $request)
 	{
-        $buscar=$request->input('buscar');
+        $buscar=trim($request->input('buscar'));
         $menu = DB::table('opciones_perfiles')
             ->join('menu', 'opciones_perfiles.id_opcion', '=', 'menu.id')
             ->join('userlevels', 'opciones_perfiles.UserLevelID', '=', 'userlevels.UserLevelID')

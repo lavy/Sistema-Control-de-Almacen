@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
     <div class="container">
-        {!!Form::open(['action'=>'JefesController@store'])!!}
+        {!!Form::open(['action'=>'JefesController@store','id'=>'form'])!!}
 
         @if($errors->has())
             <div class='alert alert-danger'>
@@ -22,11 +22,11 @@
             <div class="panel-body">
                 <div class="col-md-6">
                     {!!Form::label('oficina','Oficina:')!!}
-                    {!!Form::select('oficina',$oficinas,'',['class'=>'form-control'])!!}
+                    {!!Form::select('oficina',$oficinas,'',['class'=>'form-control','id'=>'oficina'])!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('nombre','Nombre:')!!}
-                    {!!Form::text('nombre',null,array('class'=>'form-control','type'=>'text'))!!}
+                    {!!Form::text('nombre',null,array('class'=>'form-control','type'=>'text','id'=>'nombre'))!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('cedula','Cedula:')!!}
@@ -79,6 +79,28 @@
 
                 });
             });
+
+            $('#form').submit(function(){
+                var Oficina=$('#oficina').val();
+                var Nombre=$('#nombre').val();
+                var Cedula=$('#cedula').val();
+                /*var ()
+                var rxDatePattern = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/;
+                var dtArray = currVal.match(rxDatePattern);*/
+
+                if(Oficina == 0){
+                    $('#info').html("<div class='alert alert-danger'><b>Debe Seleccionar una Oficina</b></div>")
+                    return false;
+                }
+                else if(Nombre.length > 100 || Nombre.length == ""){
+                    $('#info').html("<div class='alert alert-danger'><b>El Campo Nombre debe ser menor a 100 caracteres</b></div>")
+                    return false;
+                }
+                else if(Cedula.length > 11 || Cedula.length == ""){
+                    $('#info').html("<div class='alert alert-danger'><b>El Campo Cedula debe ser menor a 11 caracteres</b></div>")
+                    return false;
+                }
+            })
         });
 
     </script>

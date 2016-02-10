@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\JefesForm;
 
+/**
+ * Class JefesController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
 class JefesController extends Controller {
 
 	/**
@@ -16,7 +21,7 @@ class JefesController extends Controller {
 	 */
 	public function index(Request $request)
 	{
-        $buscar=$request->input('buscar');
+        $buscar=trim($request->input('buscar'));
         $jefes=DB::table('jefes')
                 ->join('oficinas','jefes.id_oficina','=','oficinas.id_oficina')
                 ->select('jefes.*','oficinas.descrip_oficina')
@@ -50,7 +55,7 @@ class JefesController extends Controller {
         $jefes->id_oficina=\Request::input('oficina');
         $jefes->nombre=\Request::input('nombre');
         $jefes->cedula=\Request::input('cedula');
-        $jefes->fecha_ingreso=\Request::input('fecha_ingreso');
+        $jefes->fecha_ingreso=date("Y-m-d",strtotime(\Request::input('fecha_ingreso')));
         $jefes->save();
         return redirect('jefes');
 	}
@@ -92,7 +97,7 @@ class JefesController extends Controller {
         $jefes->id_oficina = \Request::input('oficina');
         $jefes->nombre = \Request::input('nombre');
         $jefes->cedula = \Request::input('cedula');
-        $jefes->fecha_ingreso = \Request::input('fecha_ingreso');
+        $jefes->fecha_ingreso =date("Y-m-d",strtotime(\Request::input('fecha_ingreso')));
         $jefes->save();
         return redirect('jefes')->with('message');
 

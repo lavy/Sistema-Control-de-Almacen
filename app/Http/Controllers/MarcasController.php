@@ -5,6 +5,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MarcasForm;
 use Illuminate\Http\Request;
 
+/**
+ * Class MarcasController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
 class MarcasController extends Controller {
 
     public function __construct()
@@ -18,7 +23,7 @@ class MarcasController extends Controller {
 	 */
 	public function index(Request $request)
 	{
-        $buscar=$request->input('buscar');
+        $buscar=trim($request->input('buscar'));
 		$marcas=\App\Marca::where('descrip_marca','LIKE','%'.$buscar.'%')->paginate(5);
         $marcas->setPath('marca');
         return view('marcas.index')->with('marcas',$marcas);
@@ -70,7 +75,9 @@ class MarcasController extends Controller {
 	public function edit($id)
 	{
 		$marca=\App\Marca::find($id);
-        return view('marcas.editar')->with('marca',$marca);
+        $proveedor=\App\Proveedor::all()->lists('nombre_proveedor','id_proveedor');
+        array_unshift($proveedor,'Seleccione un proveedor');
+        return view('marcas.editar')->with(['marca'=>$marca,'proveedor'=>$proveedor]);
 	}
 
 	/**
@@ -82,6 +89,7 @@ class MarcasController extends Controller {
 	public function update($id)
 	{
 		$marca=\App\Marca::find($id);
+        $marca->id_proveedor=\Request::Input('proveedor');
         $marca->descrip_marca=\Request::Input('descripcion');
         $marca->save();
         return redirect('marca')->with('Se ha editado una marca');

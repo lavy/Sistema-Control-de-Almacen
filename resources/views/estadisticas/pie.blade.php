@@ -1,37 +1,9 @@
 @extends('app')
 @section('content')
-{{--    {!!Form::open(['url'=>'almacen','method'=>'GET','class'=>'navbar-form navbar-left pull-right','role'=>'search'])!!}
-    <div class="form-group">
-    <div class='col-sm-6' style="margin-top: 25px" >
-        <div class="form-group">
-            <div class='input-group date' id='datetimepicker5'>
-                --}}{{--{!!Form::label('desde','Fecha De Inicio:')!!}--}}{{--
-                <input type='text' name="desde" class="form-control"  placeholder="Desde" id="datetimepicker54"/>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-            </div>
-        </div>
-    </div>
 
+<div id="container" style="min-width: 800px; height: 600px; max-width: 1200px; margin-top:20px"></div>
 
-
-    <div class='col-sm-6' style="margin-top: 25px">
-        <div class="form-group">
-            <div class='input-group date' id='datetimepicker6'>
-                --}}{{--{!!Form::label('hasta','Fecha De Culminación:')!!}--}}{{--
-                <input type='text' name="hasta" class="form-control" placeholder="Hasta"  id="datetimepicker64"/>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-            </div>
-        </div>
-    </div>
-    </div>
-    {!!Form::close()!!}--}}
-    <div id="container" style="min-width: 800px; height: 600px; max-width: 1200px; margin-top:20px"></div>
-
-<script>
+<script type="text/javascript">
     $(function () {
         $('#container').highcharts({
             chart: {
@@ -41,7 +13,7 @@
                 type: 'pie'
             },
             title: {
-                text: 'Solicitudes al Almacen por Oficinas de Nivel Superior'
+                text: 'Solicitudes al Almacen por Oficinas de Nivel Superior Al <?php echo date('d-m-Y'); ?>'
             },
             tooltip: {
                 pointFormat: '<b>{series.name}:</b>{point.percentage:.1f}%<br><b>Cantidad:</b>{point.y}'
@@ -75,25 +47,9 @@
             }]
         });
     });
-
-    /*$(function () {
-        $('#datetimepicker5').datetimepicker({
-            format:'DD-MM-YYYY',
-            locale:'es'
-
-        });
-        $('#datetimepicker6').datetimepicker({
-            format:'DD-MM-YYYY',
-            locale:'es'
-        });
-
-        $("#datetimepicker5").on("dp.change", function (e) {
-            $('#datetimepicker6').data("DateTimePicker").minDate(e.date);
-        });
-
-        $("#datetimepicker6").on("dp.change", function (e) {
-            $('#datetimepicker5').data("DateTimePicker").maxDate(e.date);
-        });
-    });*/
 </script>
+@push('scripts')
+<script src="{{asset('highcharts/highcharts.js')}}"></script>
+<script src="{{asset('highcharts/exporting.js')}}"></script>
+@endpush
 @endsection

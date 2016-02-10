@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class InventarioController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
 class InventarioController extends Controller {
 
     public function __construct()
@@ -20,7 +25,7 @@ class InventarioController extends Controller {
 	 */
 	public function index(Request $request)
 	{
-        $buscar=$request->input('buscar');
+        $buscar=trim($request->input('buscar'));
         $inventario= DB::table('inventario')
             ->join('almacen', 'inventario.id_almacen', '=', 'almacen.id_almacen')
             ->join('renglones', 'inventario.id_renglon', '=', 'renglones.id_renglon')

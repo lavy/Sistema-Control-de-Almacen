@@ -23,7 +23,18 @@
                 {!!Form::submit('BUSCAR',['class'=>'btn btn-default'])!!}
                 {!!Form::close()!!}
 
+                <p>
                 {!!link_to('crear_proveedor','Crear Nuevo Proveedor',['class'=>'btn btn-primary'])!!}
+                </p>
+
+                <p>
+                    Hay {{$proveedor->total()}}
+                    @if($proveedor->total() >1)
+                        Proveedores
+                    @else
+                        Proveedor
+                    @endif
+                </p>
 
                 <table class="table table-bordered">
                     <tr>

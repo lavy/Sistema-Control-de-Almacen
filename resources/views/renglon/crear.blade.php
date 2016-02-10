@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
     <div class="container">
-        {!!Form::open(['action'=>'RenglonController@store','files'=>'true'])!!}
+        {!!Form::open(['action'=>'RenglonController@store','files'=>'true','id'=>'form'])!!}
 
         @if($errors->has())
             <div class='alert alert-danger'>
@@ -15,22 +15,19 @@
             <div class="alert alert-success">{{ Session::get('message') }}</div>
         @endif
 
+        <div id="info"></div>
+
         <div class="panel panel-primary">
             <div class="panel-heading" style="text-align:center;">CREAR ARTÍCULO </div>
             <div class="panel-body">
 
-                {{--<div class="col-md-6">
-                    {!!Form::label('almacen','Almacen:')!!}
-                    {!!Form::select('almacen',$almacen,'',['class'=>'form-control','id'=>'tipo_renglon'])!!}
-                </div>
---}}
                 <div class="col-md-6">
                     {!!Form::label('tipo_renglon','Tipo de Artículo:')!!}
-                    {!!Form::select('tipo_renglon',$trenglon,'',['class'=>'form-control','id'=>'tipo_renglon'])!!}
+                    {!!Form::select('tipo_renglon',$trenglon,'',['class'=>'form-control','id'=>'tipo_articulo'])!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('descripcion','Descripción del Artículo:')!!}
-                    {!!Form::text('descripcion',null,['class'=>'form-control','type'=>'text'])!!}
+                    {!!Form::text('descripcion',null,['class'=>'form-control','type'=>'text','id'=>'articulo'])!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('marca','Marca:')!!}
@@ -40,14 +37,7 @@
                     {!!Form::label('modelo','Modelo:')!!}
                     {!!Form::select('modelo',$modelo,'',['class'=>'form-control','id'=>'modelo'])!!}
                 </div>
-               {{-- <div class="col-md-6">
-                    {!!Form::label('codigo_fabricante','Codigo Fabricante:')!!}
-                    {!!Form::text('codigo_fabricante',null,['class'=>'form-control','type'=>'text'])!!}
-                </div>--}}
-           {{--     <div class="col-md-6" id="imei">
-                    {!!Form::label('imei','IMEI:')!!}
-                    {!!Form::text('imei',null,['class'=>'form-control','type'=>'text'])!!}
-                </div>--}}
+
 
                     <div class="input_fields_wrap">
                         <div class="col-md-6">
@@ -68,7 +58,7 @@
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('existencia_minima','Existencia Minima:')!!}
-                    {!!Form::text('existencia_minima',null,['class'=>'form-control','type'=>'text'])!!}
+                    {!!Form::text('existencia_minima',null,['class'=>'form-control','type'=>'text','id'=>'existencia_minima'])!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('foto_articulo','Foto Articulo:')!!}
@@ -140,6 +130,37 @@
                 $(function () {
                     $('[data-toggle="tooltip"]').tooltip()
                 })
+
+
+            $('#form').submit(function(){
+               var Tipo_Articulo=$('#tipo_articulo').val();
+               var Articulo=$('#articulo').val();
+               var Marca=$('#marca').val();
+               var Modelo= $('#modelo').val();
+               var Existencia_Minima=$('#existencia_minima').val();
+
+                if(Tipo_Articulo == 0){
+                    $('#info').html("<div class='alert alert-danger'><b>Debe Seleccionar un Tipo de Articulo</b></div>")
+                    return false;
+                }
+                else if(Articulo.length > 250 || Articulo == ""){
+                    $('#info').html("<div class='alert alert-danger'><b>El campo Articulo debe ser menor a 250 caracteres</b></div>")
+                    return false;
+                }
+                else if(Marca == 0){
+                    $('#info').html("<div class='alert alert-danger'><b>Debe Seleccionar una Marca</b></div>")
+                    return false;
+                }
+                else if(Modelo == 0){
+                    $('#info').html("<div class='alert alert-danger'><b>Debe Seleccionar una Modelo</b></div>")
+                    return false;
+                }
+                else if(Existencia_Minima.length > 11 && isNaN(Existencia_Minima)){
+                    $('#info').html("<div class='alert alert-danger'><b>El campo Existencia Minima debe ser Numerico y menor a 11 caracteres </b></div>")
+                    return false;
+                }
+
+            });
 
         });
     </script>

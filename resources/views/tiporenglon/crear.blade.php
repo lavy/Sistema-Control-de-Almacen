@@ -18,7 +18,11 @@
 
         <div id="info"></div>
         <div class="panel panel-primary">
+<<<<<<< HEAD
             <div class="panel-heading" style="text-align:center;">CREAR TIPO ARTICULO</div>
+=======
+            <div class="panel-heading" style="text-align:center;">CREAR TIPO DE ARTICULO</div>
+>>>>>>> b0fe6e0504d5b4d819ba44bbfb1136f8172f5620
             <div class="panel-body">
                 <div class="col-md-6">
                     {!!Form::label('descripcion','Descripción:')!!}

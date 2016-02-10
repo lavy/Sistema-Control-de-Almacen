@@ -94,7 +94,11 @@ class ProveedorController extends Controller {
         $proveedor->telef_contacto=\Request::Input('telefono_contacto');
         $proveedor->email=\Request::Input('email');
         $proveedor->save();
+<<<<<<< HEAD
         return redirect('proveedor')->with('message','Se ha Editado un Proveedor');
+=======
+        return redirect('proveedor')->with('message','Se ha editado un Proveedor');
+>>>>>>> b0fe6e0504d5b4d819ba44bbfb1136f8172f5620
 	}
 
 	/**

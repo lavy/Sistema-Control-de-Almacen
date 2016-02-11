@@ -1,0 +1,114 @@
+<?php namespace App\Http\Controllers;
+
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\TecnicosForm;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
+
+/**
+ * Class TecnicosController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
+class TecnicosController extends Controller {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    /**
+	 * Muestra una lista de todos los registros.
+	 *
+	 * @return Response
+	 */
+	public function index(Request $request)
+	{
+        $buscar=trim($request->input('buscar'));
+        $tecnicos=\App\Tecnico::where('nombres_apellidos','LIKE','%'.$buscar.'%')->paginate(5);
+        $tecnicos->setPath('tecnico');
+		return view('tecnicos.index')->with('tecnicos',$tecnicos);
+	}
+
+	/**
+	 * Muestra el Formulario para crear un nuevo registro.
+	 *
+	 * @return Response
+	 */
+	public function create()
+	{
+        return view('tecnicos.crear');
+	}
+
+	/**
+	 * Instancia el modelo y crea un nuevo registro.
+	 *
+	 * @return Response
+	 */
+	public function store(TecnicosForm $tecnicosForm)
+	{
+        $foto_tecnico=Input::file('foto_t');
+        $ruta=public_path().'/tecnicos/';
+        $url_foto=$foto_tecnico->getClientOriginalName();
+        $subir=$foto_tecnico->move($ruta,$foto_tecnico->getClientOriginalName());
+
+        $tecnicos=new \App\Tecnico();
+        $tecnicos->nombres_apellidos=\Request::input('nombre_tecnico');
+        $tecnicos->cedula=\Request::input('cedula');
+        $tecnicos->fecha_nacimiento=date("Y-m-d",strtotime(\Request::input('fecha_nacimiento')));
+        $tecnicos->foto_tecnico=$url_foto;
+        $tecnicos->save();
+        return redirect('tecnico')->with('message','Se ha registrado un tecnico exitosamente');
+	}
+
+	/**
+	 * Muestra el Formulario para la edición del registro correspondiente.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+		$tecnicos=\App\Tecnico::find($id);
+        /*$estatus=\App\Estatus::all()->lists('descrip_estatus','id_estatus');*/
+        return view('tecnicos.editar')->with(['tecnicos'=>$tecnicos]);
+	}
+
+	/**
+	 * Actualiza el registro especificado en la base de datos.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function update($id)
+	{
+        $foto_tecnico=Input::file('foto_t');
+        $ruta=public_path().'/tecnicos/';
+        $url_foto=$foto_tecnico->getClientOriginalName();
+        $subir=$foto_tecnico->move($ruta,$foto_tecnico->getClientOriginalName());
+
+        $tecnicos=\App\Tecnico::find($id);
+        $tecnicos->nombres_apellidos=\Request::input('nombre_tecnico');
+        $tecnicos->cedula=\Request::input('cedula');
+        $tecnicos->estatus=\Request::input('estatus');
+        $tecnicos->foto_tecnico=$url_foto;
+        $tecnicos->save();
+        return redirect('tecnico')->with('message','Se ha Actualizado el registro satisfactoriamente');
+	}
+
+	/**
+	 * Remueve o elimina el registro especificado de la base de datos.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
+		$tecnicos=\App\Tecnico::find($id);
+        $tecnicos->delete();
+        return redirect('tecnicos')->with('message','Se ha Borrado Satisfactoriamente');
+	}
+
+}
+

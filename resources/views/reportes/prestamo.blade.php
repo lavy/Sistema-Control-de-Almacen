@@ -7,7 +7,7 @@
             <div class="panel-heading" style="text-align:center;">SOLICITUDES DE PRESTAMOS</div>
             <div class="panel-body">
 
-                {!!Form::open(['url'=>'oficinas','method'=>'GET','class'=>'navbar-form navbar-left pull-right','role'=>'search'])!!}
+                {!!Form::open(['url'=>'reportes/prestamos','method'=>'GET','class'=>'navbar-form navbar-left pull-right','role'=>'search'])!!}
                 <div class="form-group">
                     {!!Form::text('buscar',null,['class'=>'form-control','placeholder'=>'Busqueda por Oficina','id'=>'buscar'])!!}
                 </div>

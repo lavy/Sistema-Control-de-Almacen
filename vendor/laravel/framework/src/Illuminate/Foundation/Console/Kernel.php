@@ -4,7 +4,6 @@ use Exception;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Console\Application as Artisan;
-use Symfony\Component\Console\Input\ArgvInput;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Console\Kernel as KernelContract;
 
@@ -58,7 +57,11 @@ class Kernel implements KernelContract {
 	{
 		$this->app = $app;
 		$this->events = $events;
-		$this->defineConsoleSchedule();
+
+		$this->app->booted(function()
+		{
+			$this->defineConsoleSchedule();
+		});
 	}
 
 	/**
@@ -204,7 +207,7 @@ class Kernel implements KernelContract {
 	{
 		if (is_null($this->artisan))
 		{
-			return $this->artisan = (new Artisan($this->app, $this->events))
+			return $this->artisan = (new Artisan($this->app, $this->events, $this->app->version()))
 								->resolveCommands($this->commands);
 		}
 

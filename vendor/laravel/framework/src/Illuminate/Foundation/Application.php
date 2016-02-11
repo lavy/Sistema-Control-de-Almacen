@@ -20,7 +20,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 	 *
 	 * @var string
 	 */
-	const VERSION = '5.0';
+	const VERSION = '5.0.35';
 
 	/**
 	 * The base path for the Laravel installation.
@@ -86,11 +86,25 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 	protected $deferredServices = array();
 
 	/**
+	 * The custom database path defined by the developer.
+	 *
+	 * @var string
+	 */
+	protected $databasePath;
+
+	/**
 	 * The custom storage path defined by the developer.
 	 *
 	 * @var string
 	 */
 	protected $storagePath;
+
+	/**
+	 * Indicates if the storage directory should be used for optimizations.
+	 *
+	 * @var bool
+	 */
+	protected $useStoragePathForOptimizations = false;
 
 	/**
 	 * The environment file to load during bootstrapping.
@@ -160,12 +174,53 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 	 */
 	public function bootstrapWith(array $bootstrappers)
 	{
+		$this->hasBeenBootstrapped = true;
+
 		foreach ($bootstrappers as $bootstrapper)
 		{
-			$this->make($bootstrapper)->bootstrap($this);
-		}
+			$this['events']->fire('bootstrapping: '.$bootstrapper, [$this]);
 
-		$this->hasBeenBootstrapped = true;
+			$this->make($bootstrapper)->bootstrap($this);
+
+			$this['events']->fire('bootstrapped: '.$bootstrapper, [$this]);
+		}
+	}
+
+	/**
+	 * Register a callback to run after loading the environment.
+	 *
+	 * @param  \Closure  $callback
+	 * @return void
+	 */
+	public function afterLoadingEnvironment(Closure $callback)
+	{
+		return $this->afterBootstrapping(
+			'Illuminate\Foundation\Bootstrap\DetectEnvironment', $callback
+		);
+	}
+
+	/**
+	 * Register a callback to run before a bootstrapper.
+	 *
+	 * @param  string  $bootstrapper
+	 * @param  Closure  $callback
+	 * @return void
+	 */
+	public function beforeBootstrapping($bootstrapper, Closure $callback)
+	{
+		$this['events']->listen('bootstrapping: '.$bootstrapper, $callback);
+	}
+
+	/**
+	 * Register a callback to run after a bootstrapper.
+	 *
+	 * @param  string  $bootstrapper
+	 * @param  Closure  $callback
+	 * @return void
+	 */
+	public function afterBootstrapping($bootstrapper, Closure $callback)
+	{
+		$this['events']->listen('bootstrapped: '.$bootstrapper, $callback);
 	}
 
 	/**
@@ -215,7 +270,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 	 */
 	public function path()
 	{
-		return $this->basePath.'/app';
+		return $this->basePath.DIRECTORY_SEPARATOR.'app';
 	}
 
 	/**
@@ -235,7 +290,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 	 */
 	public function configPath()
 	{
-		return $this->basePath.'/config';
+		return $this->basePath.DIRECTORY_SEPARATOR.'config';
 	}
 
 	/**
@@ -245,7 +300,22 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 	 */
 	public function databasePath()
 	{
-		return $this->basePath.'/database';
+		return $this->databasePath ?: $this->basePath.DIRECTORY_SEPARATOR.'database';
+	}
+
+	/**
+	 * Set the database directory.
+	 *
+	 * @param  string  $path
+	 * @return $this
+	 */
+	public function useDatabasePath($path)
+	{
+		$this->databasePath = $path;
+
+		$this->instance('path.database', $path);
+
+		return $this;
 	}
 
 	/**
@@ -255,7 +325,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 	 */
 	public function langPath()
 	{
-		return $this->basePath.'/resources/lang';
+		return $this->basePath.DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.'lang';
 	}
 
 	/**
@@ -265,7 +335,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 	 */
 	public function publicPath()
 	{
-		return $this->basePath.'/public';
+		return $this->basePath.DIRECTORY_SEPARATOR.'public';
 	}
 
 	/**
@@ -275,7 +345,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 	 */
 	public function storagePath()
 	{
-		return $this->storagePath ?: $this->basePath.'/storage';
+		return $this->storagePath ?: $this->basePath.DIRECTORY_SEPARATOR.'storage';
 	}
 
 	/**
@@ -392,10 +462,10 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 	 */
 	public function registerConfiguredProviders()
 	{
-		$manifestPath = $this->storagePath().'/framework/services.json';
+		$manifestPath = $this->getCachedServicesPath();
 
 		(new ProviderRepository($this, new Filesystem, $manifestPath))
-		            ->load($this->config['app.providers']);
+					->load($this->config['app.providers']);
 	}
 
 	/**
@@ -409,7 +479,9 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 	public function register($provider, $options = array(), $force = false)
 	{
 		if ($registered = $this->getProvider($provider) && ! $force)
-                                     return $registered;
+		{
+			return $registered;
+		}
 
 		// If the given "provider" is a string, we will resolve it, passing in the
 		// application instance automatically for the developer. This is simply
@@ -681,7 +753,14 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 	 */
 	public function getCachedConfigPath()
 	{
-		return $this['path.storage'].'/framework/config.php';
+		if ($this->vendorIsWritableForOptimizations())
+		{
+			return $this->basePath().'/vendor/config.php';
+		}
+		else
+		{
+			return $this['path.storage'].'/framework/config.php';
+		}
 	}
 
 	/**
@@ -701,7 +780,73 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 	 */
 	public function getCachedRoutesPath()
 	{
-		return $this['path.storage'].'/framework/routes.php';
+		if ($this->vendorIsWritableForOptimizations())
+		{
+			return $this->basePath().'/vendor/routes.php';
+		}
+		else
+		{
+			return $this['path.storage'].'/framework/routes.php';
+		}
+	}
+
+	/**
+	 * Get the path to the cached "compiled.php" file.
+	 *
+	 * @return string
+	 */
+	public function getCachedCompilePath()
+	{
+		if ($this->vendorIsWritableForOptimizations())
+		{
+			return $this->basePath().'/vendor/compiled.php';
+		}
+		else
+		{
+			return $this->storagePath().'/framework/compiled.php';
+		}
+	}
+
+	/**
+	 * Get the path to the cached services.json file.
+	 *
+	 * @return string
+	 */
+	public function getCachedServicesPath()
+	{
+		if ($this->vendorIsWritableForOptimizations())
+		{
+			return $this->basePath().'/vendor/services.json';
+		}
+		else
+		{
+			return $this->storagePath().'/framework/services.json';
+		}
+	}
+
+	/**
+	 * Determine if vendor path is writable.
+	 *
+	 * @return bool
+	 */
+	public function vendorIsWritableForOptimizations()
+	{
+		if ($this->useStoragePathForOptimizations) return false;
+
+		return is_writable($this->basePath().'/vendor');
+	}
+
+	/**
+	 * Determines if storage directory should be used for optimizations.
+	 *
+	 * @param  bool  $value
+	 * @return $this
+	 */
+	public function useStoragePathForOptimizations($value = true)
+	{
+		$this->useStoragePathForOptimizations = $value;
+
+		return $this;
 	}
 
 	/**
@@ -725,7 +870,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 	 */
 	public function isDownForMaintenance()
 	{
-		return file_exists($this->storagePath().'/framework/down');
+		return file_exists($this->storagePath().DIRECTORY_SEPARATOR.'framework'.DIRECTORY_SEPARATOR.'down');
 	}
 
 	/**
@@ -796,6 +941,16 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 	}
 
 	/**
+	 * Get the application's deferred services.
+	 *
+	 * @return array
+	 */
+	public function getDeferredServices()
+	{
+		return $this->deferredServices;
+	}
+
+	/**
 	 * Set the application's deferred services.
 	 *
 	 * @param  array  $services
@@ -804,6 +959,17 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 	public function setDeferredServices(array $services)
 	{
 		$this->deferredServices = $services;
+	}
+
+	/**
+	 * Add an array of services to the application's deferred services.
+	 *
+	 * @param  array  $services
+	 * @return void
+	 */
+	public function addDeferredServices(array $services)
+	{
+		$this->deferredServices = array_merge($this->deferredServices, $services);
 	}
 
 	/**
@@ -850,40 +1016,40 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 	public function registerCoreContainerAliases()
 	{
 		$aliases = array(
-			'app'            => ['Illuminate\Foundation\Application', 'Illuminate\Contracts\Container\Container', 'Illuminate\Contracts\Foundation\Application'],
-			'artisan'        => ['Illuminate\Console\Application', 'Illuminate\Contracts\Console\Application'],
-			'auth'           => 'Illuminate\Auth\AuthManager',
-			'auth.driver'    => ['Illuminate\Auth\Guard', 'Illuminate\Contracts\Auth\Guard'],
+			'app'                  => ['Illuminate\Foundation\Application', 'Illuminate\Contracts\Container\Container', 'Illuminate\Contracts\Foundation\Application'],
+			'artisan'              => ['Illuminate\Console\Application', 'Illuminate\Contracts\Console\Application'],
+			'auth'                 => 'Illuminate\Auth\AuthManager',
+			'auth.driver'          => ['Illuminate\Auth\Guard', 'Illuminate\Contracts\Auth\Guard'],
 			'auth.password.tokens' => 'Illuminate\Auth\Passwords\TokenRepositoryInterface',
-			'blade.compiler' => 'Illuminate\View\Compilers\BladeCompiler',
-			'cache'          => ['Illuminate\Cache\CacheManager', 'Illuminate\Contracts\Cache\Factory'],
-			'cache.store'    => ['Illuminate\Cache\Repository', 'Illuminate\Contracts\Cache\Repository'],
-			'config'         => ['Illuminate\Config\Repository', 'Illuminate\Contracts\Config\Repository'],
-			'cookie'         => ['Illuminate\Cookie\CookieJar', 'Illuminate\Contracts\Cookie\Factory', 'Illuminate\Contracts\Cookie\QueueingFactory'],
-			'encrypter'      => ['Illuminate\Encryption\Encrypter', 'Illuminate\Contracts\Encryption\Encrypter'],
-			'db'             => 'Illuminate\Database\DatabaseManager',
-			'events'         => ['Illuminate\Events\Dispatcher', 'Illuminate\Contracts\Events\Dispatcher'],
-			'files'          => 'Illuminate\Filesystem\Filesystem',
-			'filesystem'     => 'Illuminate\Contracts\Filesystem\Factory',
-			'filesystem.disk' => 'Illuminate\Contracts\Filesystem\Filesystem',
-			'filesystem.cloud' => 'Illuminate\Contracts\Filesystem\Cloud',
-			'hash'           => 'Illuminate\Contracts\Hashing\Hasher',
-			'translator'     => ['Illuminate\Translation\Translator', 'Symfony\Component\Translation\TranslatorInterface'],
-			'log'            => ['Illuminate\Log\Writer', 'Illuminate\Contracts\Logging\Log', 'Psr\Log\LoggerInterface'],
-			'mailer'         => ['Illuminate\Mail\Mailer', 'Illuminate\Contracts\Mail\Mailer', 'Illuminate\Contracts\Mail\MailQueue'],
-			'paginator'      => 'Illuminate\Pagination\Factory',
-			'auth.password'  => ['Illuminate\Auth\Passwords\PasswordBroker', 'Illuminate\Contracts\Auth\PasswordBroker'],
-			'queue'          => ['Illuminate\Queue\QueueManager', 'Illuminate\Contracts\Queue\Factory', 'Illuminate\Contracts\Queue\Monitor'],
-			'queue.connection' => 'Illuminate\Contracts\Queue\Queue',
-			'redirect'       => 'Illuminate\Routing\Redirector',
-			'redis'          => ['Illuminate\Redis\Database', 'Illuminate\Contracts\Redis\Database'],
-			'request'        => 'Illuminate\Http\Request',
-			'router'         => ['Illuminate\Routing\Router', 'Illuminate\Contracts\Routing\Registrar'],
-			'session'        => 'Illuminate\Session\SessionManager',
-			'session.store'  => ['Illuminate\Session\Store', 'Symfony\Component\HttpFoundation\Session\SessionInterface'],
-			'url'            => ['Illuminate\Routing\UrlGenerator', 'Illuminate\Contracts\Routing\UrlGenerator'],
-			'validator'      => ['Illuminate\Validation\Factory', 'Illuminate\Contracts\Validation\Factory'],
-			'view'           => ['Illuminate\View\Factory', 'Illuminate\Contracts\View\Factory'],
+			'blade.compiler'       => 'Illuminate\View\Compilers\BladeCompiler',
+			'cache'                => ['Illuminate\Cache\CacheManager', 'Illuminate\Contracts\Cache\Factory'],
+			'cache.store'          => ['Illuminate\Cache\Repository', 'Illuminate\Contracts\Cache\Repository'],
+			'config'               => ['Illuminate\Config\Repository', 'Illuminate\Contracts\Config\Repository'],
+			'cookie'               => ['Illuminate\Cookie\CookieJar', 'Illuminate\Contracts\Cookie\Factory', 'Illuminate\Contracts\Cookie\QueueingFactory'],
+			'encrypter'            => ['Illuminate\Encryption\Encrypter', 'Illuminate\Contracts\Encryption\Encrypter'],
+			'db'                   => 'Illuminate\Database\DatabaseManager',
+			'events'               => ['Illuminate\Events\Dispatcher', 'Illuminate\Contracts\Events\Dispatcher'],
+			'files'                => 'Illuminate\Filesystem\Filesystem',
+			'filesystem'           => ['Illuminate\Filesystem\FilesystemManager', 'Illuminate\Contracts\Filesystem\Factory'],
+			'filesystem.disk'      => 'Illuminate\Contracts\Filesystem\Filesystem',
+			'filesystem.cloud'     => 'Illuminate\Contracts\Filesystem\Cloud',
+			'hash'                 => 'Illuminate\Contracts\Hashing\Hasher',
+			'translator'           => ['Illuminate\Translation\Translator', 'Symfony\Component\Translation\TranslatorInterface'],
+			'log'                  => ['Illuminate\Log\Writer', 'Illuminate\Contracts\Logging\Log', 'Psr\Log\LoggerInterface'],
+			'mailer'               => ['Illuminate\Mail\Mailer', 'Illuminate\Contracts\Mail\Mailer', 'Illuminate\Contracts\Mail\MailQueue'],
+			'paginator'            => 'Illuminate\Pagination\Factory',
+			'auth.password'        => ['Illuminate\Auth\Passwords\PasswordBroker', 'Illuminate\Contracts\Auth\PasswordBroker'],
+			'queue'                => ['Illuminate\Queue\QueueManager', 'Illuminate\Contracts\Queue\Factory', 'Illuminate\Contracts\Queue\Monitor'],
+			'queue.connection'     => 'Illuminate\Contracts\Queue\Queue',
+			'redirect'             => 'Illuminate\Routing\Redirector',
+			'redis'                => ['Illuminate\Redis\Database', 'Illuminate\Contracts\Redis\Database'],
+			'request'              => 'Illuminate\Http\Request',
+			'router'               => ['Illuminate\Routing\Router', 'Illuminate\Contracts\Routing\Registrar'],
+			'session'              => 'Illuminate\Session\SessionManager',
+			'session.store'        => ['Illuminate\Session\Store', 'Symfony\Component\HttpFoundation\Session\SessionInterface'],
+			'url'                  => ['Illuminate\Routing\UrlGenerator', 'Illuminate\Contracts\Routing\UrlGenerator'],
+			'validator'            => ['Illuminate\Validation\Factory', 'Illuminate\Contracts\Validation\Factory'],
+			'view'                 => ['Illuminate\View\Factory', 'Illuminate\Contracts\View\Factory'],
 		);
 
 		foreach ($aliases as $key => $aliases)

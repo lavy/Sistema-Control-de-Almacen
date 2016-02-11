@@ -7,7 +7,7 @@
             <div class="panel-heading" style="text-align:center;">ARTICULOS PRESTADOS</div>
             <div class="panel-body">
 
-                {!!Form::open(['url'=>'oficinas','method'=>'GET','class'=>'navbar-form navbar-left pull-right','role'=>'search'])!!}
+                {!!Form::open(['url'=>'reportes/prestados','method'=>'GET','class'=>'navbar-form navbar-left pull-right','role'=>'search'])!!}
                 <div class="form-group">
                     {!!Form::text('buscar',null,['class'=>'form-control','placeholder'=>'Busqueda por Beneficiario','id'=>'buscar'])!!}
                 </div>

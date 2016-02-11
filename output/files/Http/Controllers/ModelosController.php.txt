@@ -1,0 +1,105 @@
+<?php namespace App\Http\Controllers;
+
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ModelosForm;
+use App\Modelo;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+/**
+ * Class ModelosController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
+class ModelosController extends Controller {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    /**
+	 * Muestra una lista de todos los registros.
+	 *
+	 * @return Response
+	 */
+	public function index(Request $request)
+	{
+        $buscar=trim($request->input('buscar'));
+		$modelos=DB::table('modelo')
+                    ->join('marca','marca.id_marca','=','modelo.id_marca')
+                    ->select('modelo.*','marca.descrip_marca')
+                    ->where('descrip_modelo','LIKE','%'.$buscar.'%')->orderBy('id_modelo','asc')->paginate(5);
+        $modelos->setPath('modelos');
+        return view('modelos.index')->with('modelos',$modelos);
+	}
+
+	/**
+	 * Muestra el Formulario para crear un nuevo registro.
+	 *
+	 * @return Response
+	 */
+	public function create()
+	{
+        $marca=\App\Marca::all()->lists('descrip_marca','id_marca');
+        array_unshift($marca,'Por Favor Seleccione una marca');
+        return view('modelos.crear')->with('marca',$marca);
+	}
+
+	/**
+	 * Instancia el modelo y crea un nuevo registro.
+	 *
+	 * @return Response
+	 */
+	public function store(ModelosForm $modelosForm)
+    {
+        $modelos = new \App\Modelo();
+        $modelos->id_marca=\Request::Input('marca');
+        $modelos->descrip_modelo=\Request::Input('descripcion');
+        $modelos->save();
+        return redirect('modelos')->with('message','Se ha registrado un nuevo modelo');
+    }
+
+	/**
+	 * Muestra el Formulario para la edición del registro correspondiente.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+        $modelos=Modelo::find($id);
+        $marca=\App\Marca::all()->lists('descrip_marca','id_marca');
+        return view('modelos.editar')->with(['marca'=>$marca,'modelo'=>$modelos]);
+	}
+
+	/**
+	 * Actualiza el registro especificado en la base de datos.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function update($id)
+	{
+        $modelos = Modelo::find($id);
+        $modelos->id_marca=\Request::Input('marca');
+        $modelos->descrip_modelo=\Request::Input('descripcion');
+        $modelos->save();
+        return redirect('modelos')->with('message','Se ha editado un modelo');
+	}
+
+	/**
+	 * Remueve o elimina el registro especificado de la base de datos.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
+        $modelos=\App\Modelo::find($id);
+        $modelos->delete();
+        return redirect('modelos')->with('message','Se ha eliminado un modelo');
+	}
+
+}
+

@@ -1,0 +1,115 @@
+<?php namespace App\Http\Controllers;
+
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ProveedorForm;
+use Illuminate\Http\Request;
+
+/**
+ * Class ProveedorController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
+class ProveedorController extends Controller {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    /**
+	 * Muestra una lista de todos los registros.
+	 *
+	 * @return Response
+	 */
+	public function index(Request $request)
+	{
+        $buscar=trim($request->input('buscar'));
+		$proveedor=\App\Proveedor::where('nombre_proveedor','LIKE','%'.$buscar.'%')->paginate(5);
+        $proveedor->setPath('proveedor');
+        return view('proveedores.index')->with('proveedor',$proveedor);
+	}
+
+	/**
+	 * Muestra el Formulario para crear un nuevo registro.
+	 *
+	 * @return Response
+	 */
+	public function create()
+	{
+		return view('proveedores.crear');
+	}
+
+	/**
+	 * Instancia el modelo y crea un nuevo registro.
+	 *
+	 * @return Response
+	 */
+	public function store(ProveedorForm $proveedorForm)
+	{
+        $proveedor=new \App\Proveedor;
+        $proveedor->nombre_proveedor=\Request::Input('nombre_proveedor');
+        $proveedor->contacto=\Request::Input('contacto');
+        $proveedor->telef_proveedor=\Request::Input('telefono_proveedor');
+        $proveedor->telef_contacto=\Request::Input('telefono_contacto');
+        $proveedor->email=\Request::Input('email');
+        $proveedor->save();
+        return redirect('proveedor')->with('message','Se ha Creado un Nuevo Proveedor');
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		//
+	}
+
+	/**
+	 * Muestra el Formulario para la edición del registro correspondiente.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+		$proveedor=\App\Proveedor::find($id);
+        return view('proveedores.editar')->with('proveedor',$proveedor);
+	}
+
+	/**
+	 * Actualiza el registro especificado en la base de datos.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function update($id)
+	{
+        $proveedor=\App\Proveedor::find($id);
+        $proveedor->nombre_proveedor=\Request::Input('nombre_proveedor');
+        $proveedor->contacto=\Request::Input('contacto');
+        $proveedor->telef_proveedor=\Request::Input('telefono_proveedor');
+        $proveedor->telef_contacto=\Request::Input('telefono_contacto');
+        $proveedor->email=\Request::Input('email');
+        $proveedor->save();
+
+        return redirect('proveedor')->with('message','Se ha Editado un Proveedor');
+	}
+
+	/**
+	 * Remueve o elimina el registro especificado de la base de datos.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
+		$proveedor=\App\Proveedor::find($id);
+        $proveedor->delete();
+        return redirect('proveedor')->with('message');
+	}
+
+}
+

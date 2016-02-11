@@ -66,6 +66,7 @@ class CallQueuedHandler {
 	/**
 	 * Call the failed method on the job instance.
 	 *
+	 * @param  array  $data
 	 * @return void
 	 */
 	public function failed(array $data)
@@ -74,7 +75,7 @@ class CallQueuedHandler {
 
 		if (method_exists($handler, 'failed'))
 		{
-			call_user_func_array([$handler, 'failed'], unserialize($data));
+			call_user_func_array([$handler, 'failed'], unserialize($data['data']));
 		}
 	}
 

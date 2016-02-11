@@ -1,0 +1,173 @@
+<?php namespace App\Http\Controllers;
+
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use DB;
+use Illuminate\Http\Request;
+
+/**
+ * Class ReportesController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
+class ReportesController extends Controller {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+	 * Este Metodo Consulta y devuelve datos a la vista para la construccion del reporte de solicitudes por oficinas
+	 *
+	 * @param Request $request
+     * @return $this
+	 */
+	public function oficinas(Request $request)
+	{
+        $buscar=trim($request->input('buscar'));
+
+        $oficina =DB::select(" SELECT ofic.descrip_oficina as oficina,
+                COALESCE ((SELECT count(id_oficina)
+                     FROM solicitudes_almacen
+                       WHERE id_oficina = ofic.id_oficina
+                       GROUP BY ofic.descrip_oficina),
+                       0) AS cantidad
+                FROM oficinas ofic
+                ORDER BY cantidad ASC");
+        $oficina->setPath('oficinas');
+
+        return view('reportes.oficina')->with('oficinas',$oficina);
+	}
+
+	/**
+	 * Este Metodo Consulta y devuelve datos a la vista para la construccion del reporte de solicitudes por departamentos
+	 *
+	 * @param Request $request
+     * @return $this
+	 */
+	public function departamentos(Request $request)
+	{
+        $buscar=trim($request->input('buscar'));
+        $departamento =DB::select(" SELECT dept.descrip_departamento as departamento,
+                COALESCE ((SELECT COUNT(id_departamento)
+                     FROM solicitudes_almacen
+                       WHERE id_departamento = dept.id_departamento
+                       GROUP BY dept.descrip_departamento),
+                       0) as cantidad
+                FROM departamentos dept
+                WHERE dept.descrip_departamento='%'.$buscar.'%'
+                ORDER BY departamento ASC");
+
+        return view('reportes.departamento')->with('departamento',$departamento);
+	}
+
+	/**
+	 * Este Metodo Consulta y devuelve datos a la vista para la construccion del reporte de solicitudes del tipo prestamo
+	 *
+	 * @return $this
+	 */
+	public function prestamos()
+	{
+        $prestamos= DB::select("SELECT ofic.descrip_oficina as oficina,
+                COALESCE ((SELECT count(tipo_solicitud)
+                     from solicitudes_almacen
+                       WHERE tipo_solicitud='Prestamo'
+                       AND id_oficina = ofic.id_oficina
+                       GROUP BY ofic.descrip_oficina),
+                       0) as cantidad_prestamos
+                FROM oficinas ofic
+                ORDER BY oficina DESC");
+        return view('reportes.prestamo')->with('prestamos',$prestamos);
+	}
+
+	/**
+	 * Este Metodo Consulta y devuelve datos a la vista para la construccion del reporte de demanda de articulos
+	 *
+	 * @return $this
+	 */
+	public function demanda()
+	{
+        $demanda=DB::select(" SELECT ren.descrip_renglon as articulo,
+                COALESCE ((SELECT count(id_renglon)
+                     from solicitudes_almacen
+                       Where id_renglon = ren.id_renglon
+                       GROUP BY ren.id_renglon),
+                       0) as cantidad
+                FROM renglones ren
+                ORDER BY cantidad ASC");
+
+
+
+		return view('reportes.productos')->with('demandas',$demanda);
+	}
+
+	/**
+	 * Este Metodo Consulta y devuelve datos a la vista para la construccion del reporte de salidas almacen
+	 *
+     * @param Request $request
+     * @return $this
+	 */
+	public function inventario(Request $request)
+	{
+        $buscar=trim($request->input('buscar'));
+		$inventario=\App\HistoricoInventario::where('fecha_movimiento','LIKE','%'.$buscar.'%')->paginate(5);
+        $inventario->setPath('inventario');
+        return view('reportes.inventario')->with('inventario',$inventario);
+	}
+
+	/**
+	 * Este Metodo Consulta y devuelve datos a la vista para la construccion del reporte de salidas almacen
+	 *
+	 * @param Request $request
+     * @return $this
+	 */
+	public function salidas(Request $request)
+	{
+		$buscar=trim($request->input('buscar'));
+        $salidas=\App\Despachos::where('id_renglon','LIKE','%'.$buscar.'%')->paginate(5);
+        $salidas->setPath('reportes/salidas');
+        return view('reportes.salidas')->with('salidas',$salidas);
+	}
+
+	/**
+	 * Este Metodo Consulta y devuelve datos a la vista para la construccion del reporte de articulos asignados
+	 *
+	 * @param Request $request
+     * @return $this
+	 */
+	public function asignados(Request $request)
+	{
+		$buscar=trim($request->input('buscar'));
+        $asignados=DB::table('detalle_planilla_orden')
+            ->join('solicitudes_almacen','detalle_planilla_orden.id_solicitud','=','solicitudes_almacen.id_solicitud')
+            ->select('solicitudes_almacen.*','detalle_planilla_orden.*')
+            ->where('solicitudes_almacen.tipo_solicitud','=','Asignacion')
+            ->where('solicitudes_almacen.beneficiario','LIKE','%'.$buscar.'%')
+            ->paginate(5);
+        /*dd($asignados);*/
+        $asignados->setPath('asignados');
+        return view('reportes.asignados')->with('asignados',$asignados);
+	}
+
+    /**
+     * Este Metodo Consulta y devuelve datos a la vista para la construccion del reporte de articulos prestados
+     *
+     * @param Request $request
+     * @return $this
+     */
+    public function prestados(Request $request)
+    {
+        $buscar=($request->input('buscar'));
+        $prestados=DB::table('detalle_planilla_orden')
+            ->join('solicitudes_almacen','detalle_planilla_orden.id_solicitud','=','solicitudes_almacen.id_solicitud')
+            ->select('solicitudes_almacen.*','detalle_planilla_orden.*')
+            ->where('solicitudes_almacen.tipo_solicitud','=','Prestamo')
+            ->where('solicitudes_almacen.beneficiario','LIKE','%'.$buscar.'%')
+            ->paginate(5);
+        $prestados->setPath('prestados');
+        return view('reportes.prestados')->with('prestados',$prestados);
+    }
+
+}
+

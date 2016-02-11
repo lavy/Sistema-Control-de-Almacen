@@ -44,7 +44,27 @@ class EstadisticasController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		$oficinas=DB::select("SELECT ofic.descrip_oficina AS oficina,
+                            COALESCE ((SELECT COUNT(id_oficina)
+                                 FROM solicitudes_almacen
+                                   WHERE id_oficina = ofic.id_oficina
+                                   GROUP BY ofic.descrip_oficina),
+                                   0) AS cantidad
+                            FROM oficinas ofic
+                            ORDER BY oficina ASC");
+
+        $departamento =DB::select(" SELECT dept.descrip_departamento AS departamento,o.descrip_oficina AS oficina,
+                COALESCE ((SELECT COUNT(id_departamento)
+                     FROM solicitudes_almacen
+                       WHERE id_departamento = dept.id_departamento
+                       GROUP BY dept.descrip_departamento),
+                       0) AS cantidad
+                FROM departamentos dept
+                JOIN oficinas o
+                ON dept.id_oficina=o.id_oficina
+                ORDER BY departamento ASC");
+
+        return view('estadisticas.columns')->with(['oficina'=>$oficinas,'departamentos'=>$departamento]);
 	}
 
 	/**

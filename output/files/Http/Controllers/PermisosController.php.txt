@@ -1,0 +1,113 @@
+<?php namespace App\Http\Controllers;
+
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+
+/**
+ * Class PermisosController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
+class PermisosController extends Controller {
+
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function index(Request $request)
+	{
+        $buscar=trim($request->input('buscar'));
+        $menu = DB::table('opciones_perfiles')
+            ->join('menu', 'opciones_perfiles.id_opcion', '=', 'menu.id')
+            ->join('userlevels', 'opciones_perfiles.UserLevelID', '=', 'userlevels.UserLevelID')
+            ->select('opciones_perfiles.UserLevelID', 'menu.nombre', 'opciones_perfiles.id_opcion','userlevels.UserLevelName')
+            ->where('menu.nombre','LIKE','%'.$buscar.'%')->paginate(10);
+
+        $menu->setPath('permisos');
+        return view('permisos.index')->with('menus',$menu);
+	}
+
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function create()
+	{
+        $permisos=\App\Menu::all()->lists('nombre','id');
+        $nivel_usuario=\App\UserLevel::all()->lists('UserLevelName','UserLevelID');
+        /*array_unshift($nivel_usuario,'Seleccione un nivel de usuario');*/
+        array_unshift($permisos,'Seleccione una opcion del menu');
+		return view('permisos.crear')->with(['permisos'=>$permisos,'userlevel'=>$nivel_usuario]);
+	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @return Response
+	 */
+	public function store()
+	{
+		$permisos=new \App\Permisos();
+        $permisos->id_opcion=\Request::input('opcion');
+        $permisos->UserLevelID=\Request::input('nivel_usuario');
+        $permisos->save();
+        return redirect('permisos');
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		//
+	}
+
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+		$permisos=\App\Permisos::find($id);
+        return view('permisos.editar')->with('permisos',$permisos);
+	}
+
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function update($id)
+	{
+		$permisos=\App\Permisos::find($id);
+        $permisos->id_opcion=\Request::input('opcion');
+        $permisos->UserLevelID=\Request::input('nivel_usuario');
+        $permisos->save();
+        return redirect('permisos');
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
+		$permisos=\App\Permisos::find($id);
+        $permisos->delete();
+        return redirect('permisos');
+	}
+
+}
+

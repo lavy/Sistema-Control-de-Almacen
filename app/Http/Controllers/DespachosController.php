@@ -47,26 +47,6 @@ class DespachosController extends Controller {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-        //
-	}
-
-	/**
 	 * Display the specified resource.
 	 *
 	 * @param  int  $id
@@ -122,7 +102,7 @@ class DespachosController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id, DetallesForm $detallesForm,Request $request)
+	public function update($id,Request $request)
     {
         $serial = Input::get('serial');
         $tipo_solicitud = DB::select("SELECT s.tipo_solicitud
@@ -150,6 +130,8 @@ class DespachosController extends Controller {
             $despacho->cod_usua=Auth::User()->cod_usua;
         }
         $despacho->save();
+
+        /*dd($despacho);*/
 
         return redirect('despacho')->with('message','Se ha Generado la Planilla de su Orden');
 	}

@@ -172,10 +172,11 @@ class Builder {
 	 */
 	protected $operators = array(
 		'=', '<', '>', '<=', '>=', '<>', '!=',
-		'like', 'not like', 'between', 'ilike',
+		'like', 'like binary', 'not like', 'between', 'ilike',
 		'&', '|', '^', '<<', '>>',
 		'rlike', 'regexp', 'not regexp',
-		'~', '~*', '!~', '!~*',
+		'~', '~*', '!~', '!~*', 'similar to',
+                'not similar to',
 	);
 
 	/**
@@ -420,7 +421,7 @@ class Builder {
 	/**
 	 * Add a basic where clause to the query.
 	 *
-	 * @param  string  $column
+	 * @param  string|array|\Closure  $column
 	 * @param  string  $operator
 	 * @param  mixed   $value
 	 * @param  string  $boolean
@@ -453,7 +454,7 @@ class Builder {
 		}
 		elseif ($this->invalidOperatorAndValue($operator, $value))
 		{
-			throw new InvalidArgumentException("Value must be provided.");
+			throw new InvalidArgumentException("Illegal operator and value combination.");
 		}
 
 		// If the columns is actually a Closure instance, we will assume the developer
@@ -527,7 +528,7 @@ class Builder {
 	{
 		$isOperator = in_array($operator, $this->operators);
 
-		return ($isOperator && $operator != '=' && is_null($value));
+		return $isOperator && $operator != '=' && is_null($value);
 	}
 
 	/**
@@ -1058,7 +1059,10 @@ class Builder {
 
 		$this->havings[] = compact('type', 'column', 'operator', 'value', 'boolean');
 
-		$this->addBinding($value, 'having');
+		if ( ! $value instanceof Expression)
+		{
+			$this->addBinding($value, 'having');
+		}
 
 		return $this;
 	}
@@ -1370,12 +1374,7 @@ class Builder {
 	 */
 	protected function runSelect()
 	{
-		if ($this->useWritePdo)
-		{
-			return $this->connection->select($this->toSql(), $this->getBindings(), false);
-		}
-
-		return $this->connection->select($this->toSql(), $this->getBindings());
+		return $this->connection->select($this->toSql(), $this->getBindings(), ! $this->useWritePdo);
 	}
 
 	/**
@@ -1389,12 +1388,12 @@ class Builder {
 	{
 		$page = Paginator::resolveCurrentPage();
 
-		$total = $this->getCountForPagination();
+		$total = $this->getCountForPagination($columns);
 
 		$results = $this->forPage($page, $perPage)->get($columns);
 
 		return new LengthAwarePaginator($results, $total, $perPage, $page, [
-			'path' => Paginator::resolveCurrentPath()
+			'path' => Paginator::resolveCurrentPath(),
 		]);
 	}
 
@@ -1413,25 +1412,32 @@ class Builder {
 
 		$this->skip(($page - 1) * $perPage)->take($perPage + 1);
 
-		return new Paginator($this->get($columns), $page, $perPage, [
-			'path' => Paginator::resolveCurrentPath()
+		return new Paginator($this->get($columns), $perPage, $page, [
+			'path' => Paginator::resolveCurrentPath(),
 		]);
 	}
 
 	/**
 	 * Get the count of the total records for the paginator.
 	 *
+	 * @param  array  $columns
 	 * @return int
 	 */
-	public function getCountForPagination()
+	public function getCountForPagination($columns = ['*'])
 	{
 		$this->backupFieldsForCount();
 
-		$total = $this->count();
+		$this->aggregate = ['function' => 'count', 'columns' => $columns];
+
+		$results = $this->get();
+
+		$this->aggregate = null;
 
 		$this->restoreFieldsForCount();
 
-		return $total;
+		if (isset($this->groups)) return count($results);
+
+		return isset($results[0]) ? (int) array_change_key_case((array) $results[0])['aggregate'] : 0;
 	}
 
 	/**
@@ -1441,7 +1447,7 @@ class Builder {
 	 */
 	protected function backupFieldsForCount()
 	{
-		foreach (['orders', 'limit', 'offset'] as $field)
+		foreach (['orders', 'limit', 'offset', 'columns'] as $field)
 		{
 			$this->backups[$field] = $this->{$field};
 
@@ -1456,7 +1462,7 @@ class Builder {
 	 */
 	protected function restoreFieldsForCount()
 	{
-		foreach (['orders', 'limit', 'offset'] as $field)
+		foreach (['orders', 'limit', 'offset', 'columns'] as $field)
 		{
 			$this->{$field} = $this->backups[$field];
 		}
@@ -1579,7 +1585,7 @@ class Builder {
 	 * Retrieve the minimum value of a given column.
 	 *
 	 * @param  string  $column
-	 * @return mixed
+	 * @return float|int
 	 */
 	public function min($column)
 	{
@@ -1590,7 +1596,7 @@ class Builder {
 	 * Retrieve the maximum value of a given column.
 	 *
 	 * @param  string  $column
-	 * @return mixed
+	 * @return float|int
 	 */
 	public function max($column)
 	{
@@ -1601,7 +1607,7 @@ class Builder {
 	 * Retrieve the sum of the values of a given column.
 	 *
 	 * @param  string  $column
-	 * @return mixed
+	 * @return float|int
 	 */
 	public function sum($column)
 	{
@@ -1614,7 +1620,7 @@ class Builder {
 	 * Retrieve the average of the values of a given column.
 	 *
 	 * @param  string  $column
-	 * @return mixed
+	 * @return float|int
 	 */
 	public function avg($column)
 	{
@@ -1626,7 +1632,7 @@ class Builder {
 	 *
 	 * @param  string  $function
 	 * @param  array   $columns
-	 * @return mixed
+	 * @return float|int
 	 */
 	public function aggregate($function, $columns = array('*'))
 	{
@@ -1659,6 +1665,8 @@ class Builder {
 	 */
 	public function insert(array $values)
 	{
+		if (empty($values)) return true;
+
 		// Since every insert gets treated like a batch insert, we will make sure the
 		// bindings are structured in a way that is convenient for building these
 		// inserts statements by verifying the elements are actually an array.

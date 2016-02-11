@@ -18,9 +18,10 @@ class ReportesController extends Controller {
     }
 
     /**
-	 * Display a listing of the resource.
+	 * Este Metodo Consulta y devuelve datos a la vista para la construccion del reporte de solicitudes por oficinas
 	 *
-	 * @return Response
+	 * @param Request $request
+     * @return $this
 	 */
 	public function oficinas(Request $request)
 	{
@@ -28,45 +29,42 @@ class ReportesController extends Controller {
 
         $oficina =DB::select(" SELECT ofic.descrip_oficina as oficina,
                 COALESCE ((SELECT count(id_oficina)
-                     from solicitudes_almacen
-                       Where id_oficina = ofic.id_oficina
+                     FROM solicitudes_almacen
+                       WHERE id_oficina = ofic.id_oficina
                        GROUP BY ofic.descrip_oficina),
-                       0) as cantidad
+                       0) AS cantidad
                 FROM oficinas ofic
                 ORDER BY cantidad ASC");
+        $oficina->setPath('oficinas');
 
         return view('reportes.oficina')->with('oficinas',$oficina);
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Este Metodo Consulta y devuelve datos a la vista para la construccion del reporte de solicitudes por departamentos
 	 *
-	 * @return Response
+	 * @param Request $request
+     * @return $this
 	 */
 	public function departamentos(Request $request)
 	{
         $buscar=trim($request->input('buscar'));
-        $departamento =DB::select(" SELECT dept.descrip_departamento as departamento,
+        $departamento =DB::select(" SELECT dept.descrip_departamento AS departamento,
                 COALESCE ((SELECT COUNT(id_departamento)
                      FROM solicitudes_almacen
                        WHERE id_departamento = dept.id_departamento
                        GROUP BY dept.descrip_departamento),
-                       0) as cantidad
+                       0) AS cantidad
                 FROM departamentos dept
-                WHERE dept.descrip_departamento='%'.$buscar.'%'
                 ORDER BY departamento ASC");
 
-        /*$departamento= DB::select("SELECT s.id_departamento,d.descrip_departamento, COUNT(s.id_departamento) as departamento
-          FROM solicitudes s
-          JOIN departamentos d
-          on d.id_departamento=s.id_departamento");*/
         return view('reportes.departamento')->with('departamento',$departamento);
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Este Metodo Consulta y devuelve datos a la vista para la construccion del reporte de solicitudes del tipo prestamo
 	 *
-	 * @return Response
+	 * @return $this
 	 */
 	public function prestamos()
 	{
@@ -83,21 +81,28 @@ class ReportesController extends Controller {
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Este Metodo Consulta y devuelve datos a la vista para la construccion del reporte de demanda de articulos
 	 *
-	 * @param  int  $id
-	 * @return Response
+	 * @return $this
 	 */
 	public function demanda()
 	{
-        $demanda=DB::select(" SELECT ren.descrip_renglon as articulo,
-                COALESCE ((SELECT count(id_renglon)
-                     from solicitudes_almacen
-                       Where id_renglon = ren.id_renglon
+        $demanda=DB::select(" SELECT ren.descrip_renglon AS articulo,
+                COALESCE ((SELECT COUNT(id_renglon)
+                     FROM solicitudes_almacen
+                       WHERE id_renglon = ren.id_renglon
                        GROUP BY ren.id_renglon),
-                       0) as cantidad
+                       0) AS cantidad
                 FROM renglones ren
                 ORDER BY cantidad ASC");
+
+        /*$demanda=DB::table('renglones')
+            ->join('solicitudes_almacen','renglones.id_renglon','=','solicitudes_almacen.id_renglon')
+            ->select(DB::raw('count(solicitudes_almacen.id_renglon) as cantidad,count(renglones.id_renglon) as articulo'))
+            ->orderBy('cantidad','asc')
+            ->get();*/
+        /*$demanda->setPath('productos');*/
+
 
 
 
@@ -105,38 +110,38 @@ class ReportesController extends Controller {
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
+	 * Este Metodo Consulta y devuelve datos a la vista para la construccion del reporte de salidas almacen
 	 *
-	 * @param  int  $id
-	 * @return Response
+     * @param Request $request
+     * @return $this
 	 */
 	public function inventario(Request $request)
 	{
         $buscar=trim($request->input('buscar'));
 		$inventario=\App\HistoricoInventario::where('fecha_movimiento','LIKE','%'.$buscar.'%')->paginate(5);
-        $inventario->setPath('reportes/inventario');
+        $inventario->setPath('inventario');
         return view('reportes.inventario')->with('inventario',$inventario);
 	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Este Metodo Consulta y devuelve datos a la vista para la construccion del reporte de salidas almacen
 	 *
-	 * @param  int  $id
-	 * @return Response
+	 * @param Request $request
+     * @return $this
 	 */
 	public function salidas(Request $request)
 	{
 		$buscar=trim($request->input('buscar'));
         $salidas=\App\Despachos::where('id_renglon','LIKE','%'.$buscar.'%')->paginate(5);
-        $salidas->setPath('reportes/salidas');
+        $salidas->setPath('salidas');
         return view('reportes.salidas')->with('salidas',$salidas);
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Este Metodo Consulta y devuelve datos a la vista para la construccion del reporte de articulos asignados
 	 *
-	 * @param  int  $id
-	 * @return Response
+	 * @param Request $request
+     * @return $this
 	 */
 	public function asignados(Request $request)
 	{
@@ -145,11 +150,19 @@ class ReportesController extends Controller {
             ->join('solicitudes_almacen','detalle_planilla_orden.id_solicitud','=','solicitudes_almacen.id_solicitud')
             ->select('solicitudes_almacen.*','detalle_planilla_orden.*')
             ->where('solicitudes_almacen.tipo_solicitud','=','Asignacion')
-            /*->where('solicitudes_almacen.beneficiario','LIKE','%'.$buscar.'%')*/
-            ->get();
+            ->where('solicitudes_almacen.beneficiario','LIKE','%'.$buscar.'%')
+            ->paginate(5);
+        /*dd($asignados);*/
+        $asignados->setPath('asignados');
         return view('reportes.asignados')->with('asignados',$asignados);
 	}
 
+    /**
+     * Este Metodo Consulta y devuelve datos a la vista para la construccion del reporte de articulos prestados
+     *
+     * @param Request $request
+     * @return $this
+     */
     public function prestados(Request $request)
     {
         $buscar=($request->input('buscar'));
@@ -157,8 +170,9 @@ class ReportesController extends Controller {
             ->join('solicitudes_almacen','detalle_planilla_orden.id_solicitud','=','solicitudes_almacen.id_solicitud')
             ->select('solicitudes_almacen.*','detalle_planilla_orden.*')
             ->where('solicitudes_almacen.tipo_solicitud','=','Prestamo')
-            /*->where('solicitudes_almacen.beneficiario','LIKE','%'.$buscar.'%')*/
-            ->get();
+            ->where('solicitudes_almacen.beneficiario','LIKE','%'.$buscar.'%')
+            ->paginate(5);
+        $prestados->setPath('prestados');
         return view('reportes.prestados')->with('prestados',$prestados);
     }
 

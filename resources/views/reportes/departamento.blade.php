@@ -7,7 +7,7 @@
             <div class="panel-heading" style="text-align:center;">SOLICITUDES POR DEPARTAMENTOS</div>
             <div class="panel-body">
 
-                {!!Form::open(['url'=>'oficinas','method'=>'GET','class'=>'navbar-form navbar-left pull-right','role'=>'search'])!!}
+                {!!Form::open(['url'=>'reportes/departamentos','method'=>'GET','class'=>'navbar-form navbar-left pull-right','role'=>'search'])!!}
                 <div class="form-group">
                     {!!Form::text('buscar',null,['class'=>'form-control','placeholder'=>'Busqueda por Oficina','id'=>'buscar'])!!}
                 </div>

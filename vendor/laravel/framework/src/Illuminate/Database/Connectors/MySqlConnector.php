@@ -21,7 +21,7 @@ class MySqlConnector extends Connector implements ConnectorInterface {
 
 		if (isset($config['unix_socket']))
 		{
-			$connection->exec("use {$config['database']};");
+			$connection->exec("use `{$config['database']}`;");
 		}
 
 		$collation = $config['collation'];
@@ -36,6 +36,16 @@ class MySqlConnector extends Connector implements ConnectorInterface {
 
 		$connection->prepare($names)->execute();
 
+		// Next, we will check to see if a timezone has been specified in this config
+		// and if it has we will issue a statement to modify the timezone with the
+		// database. Setting this DB timezone is an optional configuration item.
+		if (isset($config['timezone']))
+		{
+			$connection->prepare(
+				'set time_zone="'.$config['timezone'].'"'
+			)->execute();
+		}
+
 		// If the "strict" option has been configured for the connection we'll enable
 		// strict mode on all of these tables. This enforces some extra rules when
 		// using the MySQL database system and is a quicker way to enforce them.
@@ -43,13 +53,18 @@ class MySqlConnector extends Connector implements ConnectorInterface {
 		{
 			$connection->prepare("set session sql_mode='STRICT_ALL_TABLES'")->execute();
 		}
+		else
+		{
+			$connection->prepare("set session sql_mode=''")->execute();
+		}
 
 		return $connection;
 	}
 
 	/**
-	 * Create a DSN string from a configuration. Chooses socket or host/port based on
-	 * the 'unix_socket' config value
+	 * Create a DSN string from a configuration.
+	 *
+	 * Chooses socket or host/port based on the 'unix_socket' config value.
 	 *
 	 * @param  array   $config
 	 * @return string

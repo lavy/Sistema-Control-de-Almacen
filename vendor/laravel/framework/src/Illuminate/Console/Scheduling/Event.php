@@ -4,6 +4,7 @@ use Closure;
 use Carbon\Carbon;
 use LogicException;
 use Cron\CronExpression;
+use GuzzleHttp\Client as HttpClient;
 use Illuminate\Contracts\Mail\Mailer;
 use Symfony\Component\Process\Process;
 use Illuminate\Contracts\Container\Container;
@@ -16,42 +17,49 @@ class Event {
 	 *
 	 * @var string
 	 */
-	protected $command;
+	public $command;
 
 	/**
 	 * The cron expression representing the event's frequency.
 	 *
 	 * @var string
 	 */
-	protected $expression = '* * * * * *';
+	public $expression = '* * * * * *';
 
 	/**
 	 * The timezone the date should be evaluated on.
 	 *
 	 * @var \DateTimeZone|string
 	 */
-	protected $timezone;
+	public $timezone;
 
 	/**
 	 * The user the command should run as.
 	 *
 	 * @var string
 	 */
-	protected $user;
+	public $user;
 
 	/**
 	 * The list of environments the command should run under.
 	 *
 	 * @var array
 	 */
-	protected $environments = [];
+	public $environments = [];
 
 	/**
 	 * Indicates if the command should run in maintenance mode.
 	 *
 	 * @var bool
 	 */
-	protected $evenInMaintenanceMode = false;
+	public $evenInMaintenanceMode = false;
+
+	/**
+	 * Indicates if the command should not overlap itself.
+	 *
+	 * @var bool
+	 */
+	public $withoutOverlapping = false;
 
 	/**
 	 * The filter callback.
@@ -72,28 +80,21 @@ class Event {
 	 *
 	 * @var string
 	 */
-	protected $output = '/dev/null';
+	public $output = '/dev/null';
 
 	/**
-	 * The e-mail addresses the command output should be sent to.
+	 * The array of callbacks to be run after the event is finished.
 	 *
 	 * @var array
 	 */
-	protected $emailAddresses = [];
-
-	/**
-	 * The callback to be run after the event is finished.
-	 *
-	 * @var \Closure
-	 */
-	protected $afterCallback;
+	protected $afterCallbacks = [];
 
 	/**
 	 * The human readable description of the event.
 	 *
 	 * @var string
 	 */
-	protected $description;
+	public $description;
 
 	/**
 	 * Create a new event instance.
@@ -114,7 +115,7 @@ class Event {
 	 */
 	public function run(Container $container)
 	{
-		if ($this->afterCallback || ! empty($this->emailAddresses))
+		if (count($this->afterCallbacks) > 0)
 		{
 			$this->runCommandInForeground($container);
 		}
@@ -148,49 +149,21 @@ class Event {
 			trim($this->buildCommand(), '& '), base_path(), null, null, null
 		))->run();
 
-		if ($this->afterCallback)
-		{
-			$container->call($this->afterCallback);
-		}
-
-		if ($this->emailAddresses && $container->bound('Illuminate\Contracts\Mail\Mailer'))
-		{
-			$this->emailOutput($container->make('Illuminate\Contracts\Mail\Mailer'));
-		}
+		$this->callAfterCallbacks($container);
 	}
 
 	/**
-	 * E-mail the output of the event to the recipients.
+	 * Call all of the "after" callbacks for the event.
 	 *
-	 * @param  \Illuminate\Contracts\Mail\Mailer  $mailer
+	 * @param  \Illuminate\Contracts\Container\Container  $container
 	 * @return void
 	 */
-	protected function emailOutput(Mailer $mailer)
+	protected function callAfterCallbacks(Container $container)
 	{
-		$mailer->raw(file_get_contents($this->output), function($m)
+		foreach ($this->afterCallbacks as $callback)
 		{
-			$m->subject($this->getEmailSubject());
-
-			foreach ($this->emailAddresses as $address)
-			{
-				$m->to($address);
-			}
-		});
-	}
-
-	/**
-	 * Get the e-mail subject line for output results.
-	 *
-	 * @return string
-	 */
-	protected function getEmailSubject()
-	{
-		if ($this->description)
-		{
-			return 'Scheduled Job Output ('.$this->description.')';
+			$container->call($callback);
 		}
-
-		return 'Scheduled Job Output';
 	}
 
 	/**
@@ -200,9 +173,27 @@ class Event {
 	 */
 	public function buildCommand()
 	{
-		$command = $this->command.' > '.$this->output.' 2>&1 &';
+		if ($this->withoutOverlapping)
+		{
+			$command = '(touch '.$this->mutexPath().'; '.$this->command.'; rm '.$this->mutexPath().') > '.$this->output.' 2>&1 &';
+		}
+		else
+		{
+			$command = $this->command.' > '.$this->output.' 2>&1 &';
+		}
+
 
 		return $this->user ? 'sudo -u '.$this->user.' '.$command : $command;
+	}
+
+	/**
+	 * Get the mutex path for the scheduled command.
+	 *
+	 * @return string
+	 */
+	protected function mutexPath()
+	{
+		return storage_path().'/framework/schedule-'.md5($this->expression.$this->command);
 	}
 
 	/**
@@ -213,7 +204,7 @@ class Event {
 	 */
 	public function isDue(Application $app)
 	{
-		if ($app->isDownForMaintenance() && ! $this->runsInMaintenanceMode())
+		if ( ! $this->runsInMaintenanceMode() && $app->isDownForMaintenance())
 		{
 			return false;
 		}
@@ -237,7 +228,7 @@ class Event {
 			$date->setTimezone($this->timezone);
 		}
 
-		return CronExpression::factory($this->expression)->isDue($date);
+		return CronExpression::factory($this->expression)->isDue($date->toDateTimeString());
 	}
 
 	/**
@@ -298,9 +289,7 @@ class Event {
 	 */
 	public function hourly()
 	{
-		$this->expression = '0 * * * * *';
-
-		return $this;
+		return $this->cron('0 * * * * *');
 	}
 
 	/**
@@ -310,9 +299,7 @@ class Event {
 	 */
 	public function daily()
 	{
-		$this->expression = '0 0 * * * *';
-
-		return $this;
+		return $this->cron('0 0 * * * *');
 	}
 
 	/**
@@ -347,9 +334,7 @@ class Event {
 	 */
 	public function twiceDaily()
 	{
-		$this->expression = '0 1,13 * * * *';
-
-		return $this;
+		return $this->cron('0 1,13 * * * *');
 	}
 
 	/**
@@ -439,9 +424,7 @@ class Event {
 	 */
 	public function weekly()
 	{
-		$this->expression = '0 0 * * 0 *';
-
-		return $this;
+		return $this->cron('0 0 * * 0 *');
 	}
 
 	/**
@@ -465,9 +448,7 @@ class Event {
 	 */
 	public function monthly()
 	{
-		$this->expression = '0 0 1 * * *';
-
-		return $this;
+		return $this->cron('0 0 1 * * *');
 	}
 
 	/**
@@ -477,9 +458,7 @@ class Event {
 	 */
 	public function yearly()
 	{
-		$this->expression = '0 0 1 1 * *';
-
-		return $this;
+		return $this->cron('0 0 1 1 * *');
 	}
 
 	/**
@@ -489,9 +468,7 @@ class Event {
 	 */
 	public function everyFiveMinutes()
 	{
-		$this->expression = '*/5 * * * * *';
-
-		return $this;
+		return $this->cron('*/5 * * * * *');
 	}
 
 	/**
@@ -501,9 +478,7 @@ class Event {
 	 */
 	public function everyTenMinutes()
 	{
-		$this->expression = '*/10 * * * * *';
-
-		return $this;
+		return $this->cron('*/10 * * * * *');
 	}
 
 	/**
@@ -513,9 +488,7 @@ class Event {
 	 */
 	public function everyThirtyMinutes()
 	{
-		$this->expression = '0,30 * * * * *';
-
-		return $this;
+		return $this->cron('0,30 * * * * *');
 	}
 
 	/**
@@ -526,9 +499,9 @@ class Event {
 	 */
 	public function days($days)
 	{
-		$this->spliceIntoPosition(5, implode(',', is_array($days) ? $days : func_get_args()));
+		$days = is_array($days) ? $days : func_get_args();
 
-		return $this;
+		return $this->spliceIntoPosition(5, implode(',', $days));
 	}
 
 	/**
@@ -580,6 +553,21 @@ class Event {
 		$this->evenInMaintenanceMode = true;
 
 		return $this;
+	}
+
+	/**
+	 * Do not allow the event to overlap each other.
+	 *
+	 * @return $this
+	 */
+	public function withoutOverlapping()
+	{
+		$this->withoutOverlapping = true;
+
+		return $this->skip(function()
+		{
+			return file_exists($this->mutexPath());
+		});
 	}
 
 	/**
@@ -636,9 +624,58 @@ class Event {
 			throw new LogicException("Must direct output to a file in order to e-mail results.");
 		}
 
-		$this->emailAddresses = is_array($addresses) ? $addresses : func_get_args();
+		$addresses = is_array($addresses) ? $addresses : func_get_args();
 
-		return $this;
+		return $this->then(function(Mailer $mailer) use ($addresses)
+		{
+			$this->emailOutput($mailer, $addresses);
+		});
+	}
+
+	/**
+	 * E-mail the output of the event to the recipients.
+	 *
+	 * @param  \Illuminate\Contracts\Mail\Mailer  $mailer
+	 * @param  array  $addresses
+	 * @return void
+	 */
+	protected function emailOutput(Mailer $mailer, $addresses)
+	{
+		$mailer->raw(file_get_contents($this->output), function($m) use ($addresses)
+		{
+			$m->subject($this->getEmailSubject());
+
+			foreach ($addresses as $address)
+			{
+				$m->to($address);
+			}
+		});
+	}
+
+	/**
+	 * Get the e-mail subject line for output results.
+	 *
+	 * @return string
+	 */
+	protected function getEmailSubject()
+	{
+		if ($this->description)
+		{
+			return 'Scheduled Job Output ('.$this->description.')';
+		}
+
+		return 'Scheduled Job Output';
+	}
+
+	/**
+	 * Register a callback to ping a given URL after the job runs.
+	 *
+	 * @param  string  $url
+	 * @return $this
+	 */
+	public function thenPing($url)
+	{
+		return $this->then(function() use ($url) { (new HttpClient)->get($url); });
 	}
 
 	/**
@@ -649,9 +686,20 @@ class Event {
 	 */
 	public function then(Closure $callback)
 	{
-		$this->afterCallback = $callback;
+		$this->afterCallbacks[] = $callback;
 
 		return $this;
+	}
+
+	/**
+	 * Set the human-friendly description of the event.
+	 *
+	 * @param  string  $description
+	 * @return $this
+	 */
+	public function name($description)
+	{
+		return $this->description($description);
 	}
 
 	/**
@@ -680,9 +728,7 @@ class Event {
 
 		$segments[$position - 1] = $value;
 
-		$this->expression = implode(' ', $segments);
-
-		return $this;
+		return $this->cron(implode(' ', $segments));
 	}
 
 	/**

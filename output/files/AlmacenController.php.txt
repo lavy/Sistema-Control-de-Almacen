@@ -1,0 +1,112 @@
+<?php namespace App\Http\Controllers;
+
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\AlmacenForm;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+/**
+ * Class AlmacenController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
+class AlmacenController extends Controller {
+
+	/**
+	 * Muestra una lista de todos los registros.
+	 *
+	 * @return Response
+	 */
+	public function index(Request $request)
+	{
+		$buscar=trim($request->input('buscar'));
+
+        $almacen=\App\Almacen::where('descrip_almacen','LIKE','%'.$buscar.'%')
+                            ->where('id_almacen','=',Auth::User()->id_almacen)
+                            ->paginate(5);
+        $almacen->setPath('almacen');
+        return view('almacenes.index')->with('almacenes',$almacen);
+	}
+
+	/**
+	 * Muestra el Formulario para crear un nuevo registro.
+	 *
+	 * @return Response
+	 */
+	public function create()
+	{
+		return view('almacenes.crear');
+	}
+
+	/**
+	 * Instancia el modelo y crea un nuevo registro.
+	 *
+	 * @return Response
+	 */
+	public function store(AlmacenForm $almacenForm)
+	{
+		$almacen= new \App\Almacen();
+        $almacen->descrip_almacen=\Request::input('descripcion');
+        $almacen->direccion=\Request::input('direccion');
+        $almacen->telefono=\Request::input('telefono');
+        $almacen->persona_contacto_almacen=\Request::input('persona_contacto');
+        $almacen->telef_contacto_almacen=\Request::input('telef_contacto');
+        $almacen->celular_contacto_almacen=\Request::input('celular_contacto');
+        $almacen->email_contacto_almacen=\Request::input('correo_contacto');
+        if(Auth::User())
+        {
+            $almacen->cod_usua=Auth::User()->cod_usua;
+        }
+        $almacen->save();
+
+        return redirect('almacen')->with('message');
+	}
+
+	/**
+	 * Muestra el Formulario para la edición del registro correspondiente.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+        $almacen= \App\Almacen::find($id);
+        return view('almacenes.editar')->with('almacen',$almacen);
+	}
+
+	/**
+	 * Actualiza el registro especificado en la base de datos.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function update($id)
+	{
+		$almacen=\App\Almacen::find($id);
+        $almacen->descrip_almacen=\Request::input('descripcion');
+        $almacen->direccion=\Request::input('direccion');
+        $almacen->telefono=\Request::input('telefono');
+        $almacen->persona_contacto_almacen=\Request::input('persona_contacto');
+        $almacen->telef_contacto_almacen=\Request::input('telef_contacto');
+        $almacen->celular_contacto_almacen=\Request::input('celular_contacto');
+        $almacen->email_contacto_almacen=\Request::input('correo_contacto');
+        $almacen->save();
+        return redirect('almacen')->with('message');
+	}
+
+	/**
+	 * Remueve o elimina el registro especificado de la base de datos.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
+		$almacen=\App\Almacen::find($id);
+        $almacen->delete();
+        return redirect('almacen')->with('message','borrado');
+	}
+
+}
+

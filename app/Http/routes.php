@@ -158,6 +158,7 @@ Route::post('permisos/{id}','PermisosController@update');
 Route::delete('permisos/eliminar/{id}','PermisosController@destroy');
 
 Route::get('estadisticas',['uses'=>'EstadisticasController@index','middleware'=>['operador']]);
+Route::get('estadisticas/X',['uses'=>'EstadisticasController@create','middleware'=>['operador']]);
 
 Route::get('niveles',['uses'=>'NivelesController@index','middleware'=>['operador']]);
 Route::get('crear_nivel',['uses'=>'NivelesController@create','middleware'=>['operador']]);

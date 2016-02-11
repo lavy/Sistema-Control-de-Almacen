@@ -1,0 +1,241 @@
+<?php namespace App\Http\Controllers;
+
+use App\DetalleOrden;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use App\Inventario_Seriales;
+use App\RenglonesSeriales;
+use App\Tecnico;
+use Illuminate\Http\Request;
+use Barryvdh\DomPDF\PDF;
+use Illuminate\Support\Facades\DB;
+use Symfony\Component\Security\Core\User\User;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\DetallesForm;
+use Illuminate\Support\Facades\Input;
+
+/**
+ * Class DespachosController
+ * @package App\Http\Controllers
+ * @author Martin Gomes martingomes36@gmail.com
+ */
+class DespachosController extends Controller {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    /**
+	 * Muestra una lista de todos los registros.
+	 *
+	 * @return Response
+	 */
+	public function index(Request $request)
+	{
+        $buscar=trim($request->input('buscar'));
+
+        $orden = DB::table('detalle_planilla_orden')
+            ->join('almacen', 'detalle_planilla_orden.id_almacen', '=', 'almacen.id_almacen')
+            ->join('renglones', 'detalle_planilla_orden.id_renglon', '=', 'renglones.id_renglon')
+            ->join('planilla_orden','detalle_planilla_orden.id_orden','=','planilla_orden.id_orden')
+            ->join('solicitudes_almacen','detalle_planilla_orden.id_solicitud','=','solicitudes_almacen.id_solicitud')
+            ->select('detalle_planilla_orden.*', 'almacen.descrip_almacen', 'renglones.descrip_renglon',
+                    'planilla_orden.estatus_orden','solicitudes_almacen.tipo_solicitud')
+            ->where('planilla_orden.id_orden','LIKE','%'.$buscar.'%')->where('detalle_planilla_orden.cod_usua','=',Auth::User()->cod_usua)->paginate(5);
+        $orden->setPath('despacho');
+		return view('despacho.index')->with(['orden'=>$orden]);
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		//
+	}
+
+	/**
+	 * Muestra el Formulario para la edición del registro correspondiente.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+        $detalle=\App\DetalleOrden::find($id);
+        $det=DB::select("SELECT i.cantidad_existencia,i.existencia_minima
+                            FROM detalle_planilla_orden d
+                            JOIN inventario i
+                            ON i.id_renglon=d.id_renglon
+                            AND d.id_transaccion=".$id);
+
+        $seriales = Inventario_Seriales::join('detalle_planilla_orden','inventario_seriales.id_renglon','=','detalle_planilla_orden.id_renglon')
+                    ->where('inventario_seriales.estatus','=','Stock')
+                    ->lists('inventario_seriales.serial', 'inventario_seriales.id_serial');
+
+        $almacen=DB::table('detalle_planilla_orden')
+            ->join('almacen','detalle_planilla_orden.id_almacen','=','almacen.id_almacen')
+            ->join('renglones','detalle_planilla_orden.id_renglon','=','renglones.id_renglon')
+            ->select('almacen.descrip_almacen','renglones.descrip_renglon')
+            ->where('detalle_planilla_orden.id_transaccion','=',$id)
+            ->get();
+
+        $solicitud=DB::table('detalle_planilla_orden')
+            ->join('almacen','detalle_planilla_orden.id_almacen','=','almacen.id_almacen')
+            ->select('almacen.descrip_almacen')
+            ->get();
+
+
+
+        $tecnicos = Tecnico::where('estatus','=','Activo')->lists('nombres_apellidos', 'id_tecnico');
+        $tecnico=array_unshift($tecnicos,'Seleccione...');
+
+        return view('despacho.detalle')->with(['detalles'=>$detalle,'deta'=>$det,'tecnicos'=>$tecnicos,'seriales'=>$seriales,'almacen'=>$almacen]);
+	}
+
+	/**
+	 * Actualiza el registro especificado en la base de datos..
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function update($id,Request $request)
+    {
+        $serial = Input::get('serial');
+        $tipo_solicitud = DB::select("SELECT s.tipo_solicitud
+                    FROM solicitudes_almacen s
+                    JOIN detalle_planilla_orden d
+                    ON s.id_solicitud=d.id_solicitud
+                    AND d.id_transaccion=".$id);
+
+        foreach($serial as $seriales){
+            DB::table('inventario_seriales')
+                ->where('id_serial', $seriales)
+                ->update(['estatus' => $tipo_solicitud[0]->tipo_solicitud,'id_transaccion'=>$id]);
+        }
+
+        $despacho=\App\DetalleOrden::find($id);
+        /*$despacho->id_solicitud=\Request::Input('nro_solicitud');
+        $despacho->id_orden=\Request::Input('nro_orden');
+        $despacho->id_almacen=\Request::Input('nro_almacen');
+        $despacho->id_renglon=\Request::Input('articulo');*/
+        $despacho->id_tecnico=\Request::Input('tecnico');
+        $despacho->cantidad=\Request::Input('cantidad');
+
+        if(Auth::User())
+        {
+            $despacho->cod_usua=Auth::User()->cod_usua;
+        }
+        $despacho->save();
+
+        /*dd($despacho);*/
+
+        return redirect('despacho')->with('message','Se ha Generado la Planilla de su Orden');
+	}
+
+
+    public function devolucion($id)
+    {
+        $renglon=DB::select('SELECT id_renglon FROM detalle_planilla_orden WHERE detalle_planilla_orden.id_transaccion='.$id);
+        $existencia=DB::select('SELECT cantidad_existencia FROM inventario WHERE inventario.id_renglon='.$renglon[0]->id_renglon);
+        $cantidad=DB::select('SELECT cantidad FROM detalle_planilla_orden WHERE detalle_planilla_orden.id_transaccion='.$id);
+
+        $total=$existencia[0]->cantidad_existencia+$cantidad[0]->cantidad;
+
+        DB::table('inventario')
+            ->where('id_renglon',$renglon[0]->id_renglon)
+            ->update(['cantidad_existencia'=>$total]);
+
+        DB::table('inventario_seriales')
+            ->where('id_transaccion', $id)
+            ->update(['estatus' => 'Stock','id_transaccion'=>0]);
+
+        $solicitud=DB::select('SELECT id_solicitud FROM detalle_planilla_orden WHERE detalle_planilla_orden.id_transaccion='.$id);
+
+        DB::table('solicitudes_almacen')
+            ->where('id_solicitud', $solicitud[0]->id_solicitud)
+            ->update(['estatus' => 'Cerrado']);
+
+        return redirect('despacho')->with('message','Se han incorporado nuevamente los articulos al Stock');
+    }
+
+    /*public function reversar($id)
+    {
+        DB::table('detalle_planilla_orden')
+            ->where('id_transaccion', $id)
+            ->update(['cantidad' => 'NULL']);
+
+        return redirect('despacho')->with('message','Se han reversado la transacción, si desea hacerla nuevamente, Pulse
+         el Boton Detalles');
+    }*/
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
+		//
+	}
+
+
+    public function planilla($id)
+    {
+        $despacho=\App\Orden::find($id);
+
+        $tabla = DB::table('detalle_planilla_orden')
+            ->join('renglones', 'detalle_planilla_orden.id_renglon', '=', 'renglones.id_renglon')
+            ->select('detalle_planilla_orden.*', 'renglones.descrip_renglon', 'detalle_planilla_orden.cantidad',
+                    'renglones.unidad_medida', 'renglones.descrip_renglon')
+            ->where('detalle_planilla_orden.id_orden','=',$id)->get();
+
+        $tipo_solicitud=DB::table('planilla_orden')
+            ->join('solicitudes_almacen','planilla_orden.id_solicitud','=','solicitudes_almacen.id_solicitud')
+            ->select('solicitudes_almacen.tipo_solicitud','solicitudes_almacen.desde','solicitudes_almacen.hasta')
+            ->where('planilla_orden.id_orden','=',$id)
+            ->get();
+
+        $jefe=DB::select("SELECT MAX(j.fecha_ingreso) AS fecha,j.nombre,j.cedula,o.descrip_oficina
+                          FROM jefes j
+                          JOIN oficinas o
+                          ON j.id_oficina=o.id_oficina;");
+
+        $usuario=DB::select("SELECT u.ci_usua,u.nombre,u.apellido,u.cargo
+                            FROM users u
+                            JOIN planilla_orden p
+                            ON p.cod_usua=u.cod_usua
+                            AND p.id_orden=".$id);
+
+        $oficinas=DB::table('planilla_orden')
+            ->join('almacen','planilla_orden.id_almacen','=','almacen.id_almacen')
+            ->join('oficinas','planilla_orden.id_oficina','=','oficinas.id_oficina')
+            ->join('departamentos','planilla_orden.id_departamento','=','departamentos.id_departamento')
+            ->select('almacen.descrip_almacen','oficinas.descrip_oficina','departamentos.descrip_departamento')
+            ->where('planilla_orden.id_orden','=',$id)->get();
+
+        $beneficiarios = DB::table('planilla_orden')
+            ->join('solicitudes_almacen', 'planilla_orden.id_solicitud', '=', 'solicitudes_almacen.id_solicitud')
+            ->select('solicitudes_almacen.beneficiario', 'solicitudes_almacen.telef_beneficiario',
+                'solicitudes_almacen.email')
+            ->where('planilla_orden.id_orden','=',$id)->get();
+
+        $tecnicos=DB::table('planilla_orden')
+                ->join('tecnicos','planilla_orden.id_tecnico','=','tecnicos.id_tecnico')
+                ->select('tecnicos.nombres_apellidos','tecnicos.cedula')
+                ->where('planilla_orden.id_orden','=',$id)->get();
+
+        $view =  \View::make('despacho.acta_entrega')->with(['despacho'=>$despacho,'jefe'=>$jefe,'usuario'=>$usuario,
+            'beneficiario'=>$beneficiarios,'tabla'=>$tabla,'tecnicos'=>$tecnicos,'oficinas'=>$oficinas,
+            'tipo'=>$tipo_solicitud])->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        return $pdf->stream('planilla');
+
+    }
+}
+

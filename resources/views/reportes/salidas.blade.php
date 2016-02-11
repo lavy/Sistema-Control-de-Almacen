@@ -4,7 +4,7 @@
 
     <div class="container">
         <div class="panel panel-primary">
-            <div class="panel-heading" style="text-align:center;">HISTORICO INVENTARIOS</div>
+            <div class="panel-heading" style="text-align:center;">SALIDAS ALMACEN</div>
             <div class="panel-body">
 
                 {!!Form::open(['url'=>'reportes/salidas','method'=>'GET','class'=>'navbar-form navbar-left pull-right','role'=>'search'])!!}

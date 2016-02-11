@@ -2,6 +2,10 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Unidades
+ * @package App
+ */
 class Unidades extends Model {
 
 	protected $table='unidades_medidas';

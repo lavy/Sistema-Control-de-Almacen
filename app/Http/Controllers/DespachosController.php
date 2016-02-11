@@ -26,7 +26,7 @@ class DespachosController extends Controller {
         $this->middleware('auth');
     }
     /**
-	 * Display a listing of the resource.
+	 * Muestra una lista de todos los registros.
 	 *
 	 * @return Response
 	 */
@@ -78,7 +78,7 @@ class DespachosController extends Controller {
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
+	 * Muestra el Formulario para la edición del registro correspondiente.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -117,7 +117,7 @@ class DespachosController extends Controller {
 	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Actualiza el registro especificado en la base de datos..
 	 *
 	 * @param  int  $id
 	 * @return Response

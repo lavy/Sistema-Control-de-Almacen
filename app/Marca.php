@@ -2,6 +2,10 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Marca
+ * @package App
+ */
 class Marca extends Model {
 
     public $timestamps=false;

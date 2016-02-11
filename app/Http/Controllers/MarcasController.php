@@ -17,7 +17,7 @@ class MarcasController extends Controller {
         $this->middleware('auth');
     }
     /**
-	 * Display a listing of the resource.
+	 * Muestra una lista de todos los registros.
 	 *
 	 * @return Response
 	 */
@@ -30,7 +30,7 @@ class MarcasController extends Controller {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Muestra el Formulario para crear un nuevo registro.
 	 *
 	 * @return Response
 	 */
@@ -42,7 +42,7 @@ class MarcasController extends Controller {
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Instancia el modelo y crea un nuevo registro.
 	 *
 	 * @return Response
 	 */
@@ -52,26 +52,12 @@ class MarcasController extends Controller {
         $marcas->descrip_marca=\Request::Input('descripcion');
         $marcas->id_proveedor=\Request::Input('proveedor');
         $marcas->save();
-<<<<<<< HEAD
+
         return redirect('marca')->with('message','Se ha Registrado una nueva Marca');
-=======
-        return redirect('marca')->with('message','Se ha Creado una Nueva Marca');
->>>>>>> b0fe6e0504d5b4d819ba44bbfb1136f8172f5620
 	}
 
 	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
+	 * Muestra el Formulario para la edición del registro correspondiente.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -85,7 +71,7 @@ class MarcasController extends Controller {
 	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Actualiza el registro especificado en la base de datos.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -100,7 +86,7 @@ class MarcasController extends Controller {
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Remueve o elimina el registro especificado de la base de datos.
 	 *
 	 * @param  int  $id
 	 * @return Response

@@ -2,6 +2,10 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class UserLevel
+ * @package App
+ */
 class UserLevel extends Model {
 
 	public $timestamps=false;

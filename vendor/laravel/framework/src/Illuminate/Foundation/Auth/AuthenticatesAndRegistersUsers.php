@@ -84,7 +84,7 @@ trait AuthenticatesAndRegistersUsers {
 		return redirect('/auth/login')
 					->withInput($request->only('email'))
 					->withErrors([
-						'email' => 'Los datos para su verificación no son correctos.',
+						'email' => 'These credentials do not match our records.',
 					]);
 	}
 

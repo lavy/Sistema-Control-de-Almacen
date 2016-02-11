@@ -2,6 +2,10 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Inventario_Seriales
+ * @package App
+ */
 class Inventario_Seriales extends Model {
 
     public $timestamps=false;

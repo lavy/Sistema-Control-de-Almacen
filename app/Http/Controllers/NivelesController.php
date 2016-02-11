@@ -17,7 +17,7 @@ class NivelesController extends Controller {
         $this->middleware('auth');
     }
     /**
-	 * Display a listing of the resource.
+	 * Muestra una lista de todos los registros.
 	 *
 	 * @return Response
 	 */
@@ -30,7 +30,7 @@ class NivelesController extends Controller {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Muestra el Formulario para crear un nuevo registro.
 	 *
 	 * @return Response
 	 */
@@ -40,7 +40,7 @@ class NivelesController extends Controller {
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Instancia el modelo y crea un nuevo registro.
 	 *
 	 * @return Response
 	 */
@@ -52,19 +52,8 @@ class NivelesController extends Controller {
         return redirect('niveles')->with('message','Se ha agregado un Nuevo Nivel');
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-    {
-        //
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
+	 /**
+	 * Muestra el Formulario para la edición del registro correspondiente.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -76,7 +65,7 @@ class NivelesController extends Controller {
 	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Actualiza el registro especificado en la base de datos.
 	 *
 	 * @param  int  $id
 	 * @return Response

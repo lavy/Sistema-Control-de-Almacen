@@ -19,7 +19,7 @@ class InventarioController extends Controller {
         $this->middleware('auth');
     }
     /**
-	 * Display a listing of the resource.
+	 * Muestra una lista de todos los registros.
 	 *
 	 * @return Response
 	 */
@@ -33,20 +33,11 @@ class InventarioController extends Controller {
             ->where('renglones.descrip_renglon','LIKE','%'.$buscar.'%')
             ->where('inventario.id_almacen','=',Auth::User()->id_almacen)
             ->paginate(5);
-   /*     $inventario=\App\Inventario::where('id_detalle','LIKE','%'.$buscar.'%')->paginate(5);*/
         $inventario->setPath('inventario');
         return view('inventario.index')->with('inventario',$inventario);
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
+
 
 	/**
 	 * Store a newly created resource in storage.
@@ -68,48 +59,5 @@ class InventarioController extends Controller {
         Return redirect('inventario')->with('message');
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
 
 }

@@ -2,6 +2,10 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class TipoRenglon
+ * @package App
+ */
 class TipoRenglon extends Model {
 
 	public $timestamps=false;

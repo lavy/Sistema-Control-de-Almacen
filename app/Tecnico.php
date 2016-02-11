@@ -2,6 +2,10 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Tecnico
+ * @package App
+ */
 class Tecnico extends Model {
 
 	public $timestamps=false;

@@ -86,7 +86,7 @@
                    return false;
                }
 
-               else if(Telefono.length > 50 || Telefono.length == "" || isNaN(Telefono)){
+               else if(Telefono.length != 11 || Telefono.length == "" || isNaN(Telefono)){
                    $('#info').html("<div class='alert alert-danger'><b>El Campo Telefono debe ser menor a 11 Caracteres, no debe estar vacio y debe ser numerico</b></div>")
                    return false;
                }
@@ -96,12 +96,12 @@
                    return false;
                }
 
-               else if(Telefono_C.length > 11 || Telefono_C.length == "" || isNaN(Telefono_C)){
+               else if(Telefono_C.length != 11 || Telefono_C.length == "" || isNaN(Telefono_C)){
                    $('#info').html("<div class='alert alert-danger'><b>El Campo Telefono Contacto debe ser menor a 11 Caracteres, no debe estar vacio y debe ser numerico</b></div>")
                    return false;
                }
 
-               else if(Celular_C.length > 11 || Celular_C.length == "" || isNaN(Celular_C)){
+               else if(Celular_C.length != 11 || Celular_C.length == "" || isNaN(Celular_C)){
                    $('#info').html("<div class='alert alert-danger'><b>El Campo Celular Contacto debe ser menor a 11 Caracteres, no debe estar vacio y debe ser numerico</b></div>")
                    return false;
                }

@@ -58,23 +58,23 @@
             var Telefono_C = $('#telefono_c').val();
             var Correo = $('#correo').val();
 
-            if (Proveedor.length > 150 || Proveedor == "") {
+            if (Proveedor.length > 150 || Proveedor.length == "") {
                 $('#info').html("<div class='alert alert-danger'><b>El Campo Nombre Proveedor debe ser menor a 150 Caracteres</b></div>");
                 return false;
             }
-            else if (Contacto.length > 40 || Contacto == "") {
+            else if (Contacto.length > 40 || Contacto.length == "") {
                 $('#info').html("<div class='alert alert-danger'><b>El Campo Contacto debe ser menor a 40 Caracteres</b></div>");
                 return false;
             }
-            else if (Telefono_P.length > 40 || Telefono_P == "") {
-                $('#info').html("<div class='alert alert-danger'><b>El Campo Telefono Proveedor debe ser menor a 40 Caracteres</b></div>");
+            else if (Telefono_P.length > 11 || Telefono_P.length == "" || isNaN(Telefono_P)) {
+                $('#info').html("<div class='alert alert-danger'><b>El Campo Telefono Proveedor debe ser menor a 40 Caracteres, no debe estar vacio y debe ser numerico</b></div>");
                 return false;
             }
-            else if (Telefono_C.length > 40 || Telefono_C == "") {
-                $('#info').html("<div class='alert alert-danger'><b>El Campo Telefono Contacto debe ser menor a 40 Caracteres</b></div>");
+            else if (Telefono_C.length > 11 || Telefono_C.length == "" || isNaN(Telefono_C)) {
+                $('#info').html("<div class='alert alert-danger'><b>El Campo Telefono Contacto debe ser menor a 40 Caracteres, no debe estar vacio y debe ser numerico</b></div>");
                 return false;
             }
-            else if (Correo.length > 40 || Correo == "") {
+            else if (Correo.length > 40 || Correo.length == "") {
                 $('#info').html("<div class='alert alert-danger'><b>El Campo Email debe ser menor a 40 Caracteres</b></div>");
                 return false;
             }

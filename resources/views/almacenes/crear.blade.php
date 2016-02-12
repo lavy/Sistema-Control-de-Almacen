@@ -75,34 +75,37 @@
               var Celular_C=$('#celular_c').val();
               var correo=$('#correo').val();
 
-               if(Almacen.length > 150 || Almacen == ""){
+               if(Almacen.length > 150 || Almacen.length == ""){
                    $('#info').html("<div class='alert alert-danger'><b>El Campo Descripción debe ser menor a 150 Caracteres</b></div>");
                    return false;
                }
 
 
-               else if(Direccion.length > 250 || Direccion == ""){
+               else if(Direccion.length > 250 || Direccion.length == ""){
                    $('#info').html("<div class='alert alert-danger'><b>El Campo Direccion debe ser menor a 250 Caracteres</b></div>")
                    return false;
                }
 
-
-               else if(Telefono.length > 50 || Telefono == ""){
-                   $('#info').html("<div class='alert alert-danger'><b>El Campo Telefono debe ser menor a 50 Caracteres</b></div>")
+               else if(Telefono.length > 50 || Telefono.length == "" || isNaN(Telefono)){
+                   $('#info').html("<div class='alert alert-danger'><b>El Campo Telefono debe ser menor a 11 Caracteres, no debe estar vacio y debe ser numerico</b></div>")
                    return false;
                }
 
-               else if(Persona.length > 50 || Persona == ""){
+               else if(Persona.length > 50 || Persona.length == ""){
                    $('#info').html("<div class='alert alert-danger'><b>El Campo Persona Contacto debe ser menor a 50 Caracteres</b></div>")
                    return false;
                }
 
-               else if(Telefono_C.length > 50 || Telefono_C == ""){
-                   $('#info').html("<div class='alert alert-danger'><b>El Campo Telefono Contacto debe ser menor a 50 Caracteres</b></div>")
+               else if(Telefono_C.length > 11 || Telefono_C.length == "" || isNaN(Telefono_C)){
+                   $('#info').html("<div class='alert alert-danger'><b>El Campo Telefono Contacto debe ser menor a 11 Caracteres, no debe estar vacio y debe ser numerico</b></div>")
                    return false;
                }
 
-               else if(Celular_C.length > 50 || Celular_C == ""){
+               else if(Celular_C.length > 11 || Celular_C.length == "" || isNaN(Celular_C)){
+                   $('#info').html("<div class='alert alert-danger'><b>El Campo Celular Contacto debe ser menor a 11 Caracteres, no debe estar vacio y debe ser numerico</b></div>")
+                   return false;
+               }
+               else if(correo.length > 50 || correo.length == ""){
                    $('#info').html("<div class='alert alert-danger'><b>El Campo Celular Contacto debe ser menor a 50 Caracteres</b></div>")
                    return false;
                }

@@ -50,7 +50,7 @@
                         foreach($oficina as $ofic)
                         {
                     ?>
-                    ['<?php echo $ofic->oficina; ?>', <?php echo $ofic->cantidad ?>],
+                    ['<?php echo $ofic->oficina; ?>', <?php echo $ofic->cantidad; ?>,'<?php echo $ofic->oficina; ?>'],
                     <?php
                         }
                     ?>]
@@ -64,7 +64,7 @@
                     name: '<?php echo $dept->oficina; ?>',
                     id: '<?php echo $dept->oficina; ?>',
                     data:
-                            ['<?php echo $dept->departamento; ?>', <?php echo $dept->cantidad ?>],
+                            ['<?php echo $dept->departamento; ?>', <?php echo $dept->cantidad; ?>],
 
                     <?php
                            }

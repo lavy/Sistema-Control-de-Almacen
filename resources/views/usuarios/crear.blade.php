@@ -80,11 +80,9 @@
                      data: "correo="+correo,
                      success: function (data) {
                          if(data == 'Disponible'){
-                             $('#info').html("<div class='alert alert-success'><b>Disponible</b></div>");
-                             return true;
+                             $('#info').html("<input type='hidden' id='disponible' value='true' name='disponible'><div class='alert alert-success'><b>Disponible</b></div>");
                          }else{
-                             $('#info').html("<div class='alert alert-danger'><b>No Disponible</b></div>");
-                             return false;
+                             $('#info').html("<input type='hidden' id='disponible' value='false' name='disponible'><div class='alert alert-danger'><b>El Usuario ya esta registrado</b></div>");
                          }
                      }
                  });
@@ -100,6 +98,7 @@
             var Cedula=$('#cedula').val();
             var Cargo=$('#cargo').val();
             var Nivel_Usuario=$('#nivel_usuario').val();
+            var Disponible=$('#disponible').val();
 
 
              if (Almacen == 0) {
@@ -132,6 +131,10 @@
              }
              else if (Nivel_Usuario == 0) {
                  $('#info').html("<div class='alert alert-danger'><b>Debe Seleccionar un Nivel de Usuario</b></div>");
+                 return false;
+             }
+             else if(Disponible != true  ){
+                 $('#info').html("<div class='alert alert-danger'><b>El Usuario ya esta registrado</b></div>")
                  return false;
              }
          });

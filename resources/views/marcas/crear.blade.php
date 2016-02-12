@@ -50,9 +50,9 @@
                         data: "marca="+marca,
                         success: function (data) {
                             if(data == 'Disponible'){
-                                $('#info').html("<div class='alert alert-success'><b>Disponible</b></div>");
+                                $('#info').html("<input type='hidden' id='disponible' value='true' name='disponible'><div class='alert alert-success'><b>Disponible</b></div>");
                             }else{
-                                $('#info').html("<div class='alert alert-danger'><b>No Disponible</b></div>");
+                                $('#info').html("<input type='hidden' id='disponible' value='false' name='disponible'><div class='alert alert-danger'><b>Ya esta Marca ha sido registrada</b></div>");
                             }
                         }
                     });
@@ -62,6 +62,7 @@
             $('#form').submit(function(){
                 var Proveedor=$('#proveedor').val();
                 var Marca=$('#marca').val();
+                var Disponible=$('#disponible').val();
 
                 if(Proveedor == 0){
                     $('#info').html("<div class='alert alert-danger'><b>Debe Seleccionar un Proveedor</b></div>")
@@ -69,6 +70,10 @@
                 }
                 else if(Marca.length > 250 || Marca.length == ""){
                     $('#info').html("<div class='alert alert-danger'><b>El Campo Descripción debe ser menor a 250 caracteres</b></div>")
+                    return false;
+                }
+                else if(Disponible != true  ){
+                    $('#info').html("<div class='alert alert-danger'><b>La Marca ya se encuentra registrada</b></div>")
                     return false;
                 }
 

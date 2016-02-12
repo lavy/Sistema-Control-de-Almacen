@@ -55,7 +55,7 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#cedula").keyup(function () {
+            $("#cedula").keyup(function (){
                 var cedula = $('#cedula').val();
                 if (cedula != "") {
                     $.ajax({
@@ -64,9 +64,9 @@
                         data: "cedula="+cedula,
                         success: function (data) {
                             if(data == 'Disponible'){
-                                $('#info').html("<div class='alert alert-success'><b>Disponible</b></div>");
+                                $('#info').html("<input type='hidden' id='disponible' value='true' name='disponible'><div class='alert alert-success'><b>Disponible</b></div>");
                             }else{
-                                $('#info').html("<div class='alert alert-danger'><b>No Disponible</b></div>");
+                                $('#info').html("<input type='hidden' id='disponible' value='false' name='disponible'><div class='alert alert-danger'><b>Ya la Cedula Existe</b></div>");
                             }
                         }
                     });
@@ -84,6 +84,8 @@
                 var Oficina=$('#oficina').val();
                 var Nombre=$('#nombre').val();
                 var Cedula=$('#cedula').val();
+                var Disponible=$('#disponible').val();
+
                 /*var ()
                 var rxDatePattern = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/;
                 var dtArray = currVal.match(rxDatePattern);*/
@@ -96,8 +98,12 @@
                     $('#info').html("<div class='alert alert-danger'><b>El Campo Nombre debe ser menor a 100 caracteres</b></div>")
                     return false;
                 }
-                else if(Cedula.length > 11 || Cedula.length == ""){
-                    $('#info').html("<div class='alert alert-danger'><b>El Campo Cedula debe ser menor a 11 caracteres</b></div>")
+                else if(Cedula.length > 11 || Cedula.length == "" || isNaN(Cedula)){
+                    $('#info').html("<div class='alert alert-danger'><b>El Campo Cedula debe ser menor a 11 caracteres y Numerico</b></div>")
+                    return false;
+                }
+                else if(Disponible != true  ){
+                    $('#info').html("<div class='alert alert-danger'><b>La Cedula ya se encuentra registrada</b></div>")
                     return false;
                 }
             })

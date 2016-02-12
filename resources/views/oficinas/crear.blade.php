@@ -44,9 +44,9 @@
                         data: "ofic="+oficina,
                         success: function (data) {
                             if(data == 'Disponible'){
-                                $('#info').html("<div class='alert alert-success'><b>Disponible</b></div>");
+                                $('#info').html("<input type='hidden' id='disponible' value='true' name='disponible'><div class='alert alert-success'><b>Disponible</b></div>");
                             }else{
-                                $('#info').html("<div class='alert alert-danger'><b>No Disponible</b></div>");
+                                $('#info').html("<input type='hidden' id='disponible' value='false' name='disponible'><div class='alert alert-danger'><b>Ya esta Oficina esta registrada</b></div>");
                             }
                         }
                     });
@@ -55,9 +55,14 @@
 
             $('#form').submit(function(){
                 var Oficina=$('#oficina').val();
+                var Disponible=$('#disponible').val();
 
                 if(Oficina.length > 250 || Oficina == ""){
                     $('#info').html("<div class='alert alert-danger'><b>El Campo Descripción debe ser menor a 250 Caracteres</b></div>");
+                    return false;
+                }
+                else if(Disponible != true  ){
+                    $('#info').html("<div class='alert alert-danger'><b>La Oficina ya se encuentra registrada</b></div>")
                     return false;
                 }
 

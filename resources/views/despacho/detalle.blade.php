@@ -72,22 +72,11 @@
             var existencia=$('#existencia_actual').val();
             var existencia_m=$('#existencia_minima').val();
             var total=cantidad-existencia;
-                if(isNaN(cantidad)){
-                    $('#info').html("<div class='alert alert-danger'><b>La cantidad debe ser númerica</b></div>")
+                if(isNaN(cantidad) || cantidad <= 0){
+                    $('#info').html("<div class='alert alert-danger'><b>La cantidad debe ser númerica, mayor que cero</b></div>")
                     return false;
                 }
-            /*
-            var cantidad = document.getElementById('cantidad_pedir').value;
-            var existencia = document.getElementById('existencia_actual').value;
-            var existencia_m = document.getElementById('existencia_minima').value;
-            var total=cantidad-existencia;*/
-           /* if (cantidad > existencia) {
-                $('#info').html("<div class='alert alert-danger'><b>La Cantidad a Solicitar debe ser Menor a la Existencia</b></div>")
-                *//*alert('LA CANTIDAD DEBE SER MENOR A LA EXISTENCIA');*//*
-                return false;
-            }*/
             });
-
 
 
             $('.selectpicker').selectpicker({
@@ -96,7 +85,7 @@
             });
 
 
-        var existencia=$('#existencia_actual').val();
+        /*var existencia=$('#existencia_actual').val();
         var max_fields      = existencia; //maximum input boxes allowed
         var wrapper         = $(".input_fields_wraps"); //Fields wrapper
         var add_button      = $(".add_field_button"); //Add button ID
@@ -106,12 +95,12 @@
             if(x < max_fields){ //max input box allowed
                 x++; //text box increment
                 $(wrapper).clone().appendTo('#hijos')
-                /*$(wrapper).clone().attr('id','acompañante2').appendTo('<div class="col-md-3"><input type="text" class="form-control" name="mytext[]"/><a href="#" class="remove_field btn btn-danger">Remover</a></div>'); //add input box*/
+                *//*$(wrapper).clone().attr('id','acompañante2').appendTo('<div class="col-md-3"><input type="text" class="form-control" name="mytext[]"/><a href="#" class="remove_field btn btn-danger">Remover</a></div>'); //add input box*//*
             }
         });
         $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
             e.preventDefault(); $(this).parent('tr').remove(); x--;
-        })
+        })*/
 
         /*var selecciones=$('.selectpicker');*/
         $('.selectpicker').change(function () {

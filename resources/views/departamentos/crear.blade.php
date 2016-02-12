@@ -48,9 +48,9 @@
                         data: "depto="+departamento,
                         success: function (data) {
                             if(data == 'Disponible'){
-                                $('#info').html("<div class='alert alert-success'><b>Disponible</b></div>");
+                                $('#info').html("<input type='hidden' id='disponible' value='true' name='disponible'><div class='alert alert-success'><b>Disponible</b></div>");
                             }else{
-                                $('#info').html("<div class='alert alert-danger'><b>No Disponible</b></div>");
+                                $('#info').html("<input type='hidden' id='disponible' value='false' name='disponible'><div class='alert alert-danger'><b>Ya el Departamento Existe</b></div>");
                             }
                         }
                     });
@@ -60,6 +60,7 @@
             $('#form').submit(function(){
                 var Oficina=$('#oficina').val();
                 var Departamento=$('#departamento').val();
+                var Disponible=$('#disponible').val();
 
                 if(Oficina == 0){
                     $('#info').html("<div class='alert alert-danger'><b>Debe Seleccionar una Oficina</b></div>");
@@ -67,6 +68,10 @@
                 }
                 else if(Departamento.length > 250 || Departamento == ""){
                     $('#info').html("<div class='alert alert-danger'><b>El Campo Descripción debe ser menor a 250 Caracteres</b></div>");
+                    return false;
+                }
+                else if(Disponible != true  ){
+                    $('#info').html("<div class='alert alert-danger'><b>El Departamento ya se encuentra registrado</b></div>")
                     return false;
                 }
 

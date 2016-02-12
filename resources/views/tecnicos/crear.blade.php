@@ -67,9 +67,9 @@
                         data: "cedula=" + cedula,
                         success: function (data) {
                             if (data == 'Disponible') {
-                                $('#info').html("<div class='alert alert-success'><b>Disponible</b></div>");
+                                $('#info').html("<input type='hidden' id='disponible' value='true' name='disponible'><div class='alert alert-success'><b>Disponible</b></div>");
                             } else {
-                                $('#info').html("<div class='alert alert-danger'><b>No Disponible</b></div>");
+                                $('#info').html("<input type='hidden' id='disponible' value='false' name='disponible'><div class='alert alert-danger'><b>La Cedula ya existe</b></div>");
                             }
                         }
                     });
@@ -85,19 +85,20 @@
                $('#form').submit(function(){
                    var Nombre=$('#nombre').val();
                    var Cedula=$('#cedula').val();
-
+                   var Disponible=$('#disponible').val();
 
                    if(Nombre.length > 60 || Nombre == ""){
                        $('#info').html("<div class='alert alert-danger'><b>El Campo Nombre debe ser menor a 60 Caracteres</b></div>");
                        return false;
                    }
-
-
                    else if(Cedula.length > 11 || Cedula == ""){
                        $('#info').html("<div class='alert alert-danger'><b>El Campo Cedula debe ser menor a 11 Caracteres</b></div>")
                        return false;
                    }
-
+                   else if(Disponible != true  ){
+                       $('#info').html("<div class='alert alert-danger'><b>La Cedula ya se encuentra registrada</b></div>")
+                       return false;
+                   }
                });
         });
     </script>

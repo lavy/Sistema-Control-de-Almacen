@@ -106,15 +106,6 @@
                 });
 
 
-                /*var cantidad=('#cantidad').val();
-                if(cantidad <= 0)
-                {
-                    alert('la cantidad no debe ser 0');
-                    cantidad=1;
-                }*/
-
-
-
                 $('.add_field_button').on('click', function () {
                     var total=$('#cantidad').val()
                         total++;

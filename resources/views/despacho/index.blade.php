@@ -27,7 +27,6 @@
             <table class="table table-bordered">
                 <tr>
                     <th style="text-align:center;">PDF</th>
-                    {{--<th style="text-align:center;">REVERSAR</th>--}}
                     <th style="text-align:center;">DETALLE ORDEN</th>
                     <th style="text-align:center;">DEVOLUCIONES</th>
                     <th style="text-align:center;"># TRANSACCIÓN</th>
@@ -37,10 +36,6 @@
                     <th style="text-align:center;">ARTICULO</th>
                     <th style="text-align:center;">TIPO SOLICITUD</th>
 
-                    {{--<th style="text-align:center;">OFICINA</th>
-                    <th style="text-align:center;">DEPARTAMENTO</th>
-                    <th style="text-align:center;">FECHA ORDEN</th>
-                    <th style="text-align:center;">HORA ORDEN</th>--}}
                 </tr>
                 @foreach($orden as $ord )
                     <tr>
@@ -49,12 +44,6 @@
                         @else
                             <td>{!!link_to('#','Planilla',['class'=>'btn btn-primary btn-md','disabled'=>'true'])!!}</td>
                         @endif
-
-                        {{--@if($ord->cantidad !=NULL)
-                            <td>{!!link_to('despacho/editar/'.$ord->id_transaccion,'Reversar',['class'=>'btn btn-info btn-md'])!!}</td>
-                        @else
-                            <td>{!!link_to('#','Reversar',['class'=>'btn btn-info btn-md','disabled'=>'true'])!!}</td>
-                        @endif--}}
 
                         @if($ord->cantidad ===NULL)
                         <td width="60" align="center">
@@ -82,7 +71,6 @@
                         <td style="text-align:center;">{{$ord->id_solicitud}}</td>
                         <td style="text-align:center;">{{$ord->descrip_renglon}}</td>
                         <td style="text-align:center;">{{$ord->tipo_solicitud}}</td>
-
                     </tr>
                 @endforeach
             </table>

@@ -18,11 +18,7 @@
 
         <div id="info"></div>
         <div class="panel panel-primary">
-<<<<<<< HEAD
             <div class="panel-heading" style="text-align:center;">CREAR TIPO ARTICULO</div>
-=======
-            <div class="panel-heading" style="text-align:center;">CREAR TIPO DE ARTICULO</div>
->>>>>>> b0fe6e0504d5b4d819ba44bbfb1136f8172f5620
             <div class="panel-body">
                 <div class="col-md-6">
                     {!!Form::label('descripcion','Descripción:')!!}
@@ -49,9 +45,9 @@
                         data: "t_articulo="+tipo_articulo,
                         success: function (data) {
                             if(data == 'Disponible'){
-                                $('#info').html("<div class='alert alert-success'><b>Disponible</b></div>");
+                                $('#info').html("<input type='hidden' id='disponible' value='true' name='disponible'><div class='alert alert-success'><b>Disponible</b></div>");
                             }else{
-                                $('#info').html("<div class='alert alert-danger'><b>No Disponible</b></div>");
+                                $('#info').html("<input type='hidden' id='disponible' value='false' name='disponible'><div class='alert alert-danger'><b>El Tipo de Articulo ya existe</b></div>");
                             }
                         }
                     });
@@ -62,9 +58,14 @@
 
             $('#form').submit(function() {
                 var tipo_articulo = $('#tipo_articulo').val();
+                var Disponible=$('#disponible').val();
 
                 if (tipo_articulo.length > 150 || tipo_articulo == "") {
                     $('#info').html("<div class='alert alert-danger'><b>El Campo Descripcion debe ser menor a 150 Caracteres</b></div>");
+                    return false;
+                }
+                else if(Disponible != true  ){
+                    $('#info').html("<div class='alert alert-danger'><b>El Tipo de Articulo ya esta registrado</b></div>")
                     return false;
                 }
             });

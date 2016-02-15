@@ -50,6 +50,24 @@
     {!!Form::close()!!}
     </div>
     <script type="text/javascript">
+     $(document).ready(function(){
+        $("#proveedor").keyup(function () {
+            var proveedor = $('#proveedor').val();
+            if (proveedor != "") {
+                $.ajax({
+                    method: "GET",
+                    url: "provs",
+                    data: "proveedor="+proveedor,
+                    success: function (data) {
+                        if (data == 'Disponible') {
+                            $('#info').html("<input type='hidden' id='disponible' value='true' name='disponible'><div class='alert alert-success'><b>Disponible</b></div>");
+                        } else {
+                            $('#info').html("<input type='hidden' id='disponible' value='false' name='disponible'><div class='alert alert-danger'><b>El Proveedor ya existe</b></div>");
+                        }
+                    }
+                });
+            }
+        });
 
         $('#form').submit(function() {
             var Proveedor = $('#proveedor').val();
@@ -57,6 +75,7 @@
             var Telefono_P = $('#telefono_p').val();
             var Telefono_C = $('#telefono_c').val();
             var Correo = $('#correo').val();
+            var Disponible=$('disponible').val();
 
             if (Proveedor.length > 150 || Proveedor.length == "") {
                 $('#info').html("<div class='alert alert-danger'><b>El Campo Nombre Proveedor debe ser menor a 150 Caracteres</b></div>");
@@ -78,7 +97,12 @@
                 $('#info').html("<div class='alert alert-danger'><b>El Campo Email debe ser menor a 40 Caracteres</b></div>");
                 return false;
             }
+            else if(Disponible != true  ){
+                $('#info').html("<div class='alert alert-danger'><b>El Proveedor ya se encuentra registrado</b></div>")
+                return false;
+            }
 
-        });
+        })
+     });
     </script>
 @endsection

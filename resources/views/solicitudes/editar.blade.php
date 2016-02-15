@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')
     <div class="container">
-        {!!Form::open(['url'=>'solicitudes/'.$solicitud->id_solicitud])!!}
+        {!!Form::open(['url'=>'solicitudes/'.$solicitud->id_solicitud,'id'=>'form'])!!}
         @if($errors->has())
             <div class='alert alert-danger'>
                 @foreach ($errors->all('<p>:message</p>') as $message)
@@ -13,43 +13,21 @@
         @if (Session::has('message'))
             <div class="alert alert-success">{{ Session::get('message') }}</div>
         @endif
+        <div id="info"></div>
         <center><h1>Editar Solicitud</h1></center>
         <div class="panel panel-primary">
             <div class="panel-heading" style="text-align:center;">DATOS SOLICITANTE</div>
             <div class="panel-body">
-                {{--<div class="col-md-6">
-                    {!!Form::label('solicitud','Solicitud:')!!}
-                    {!!Form::text('solicitud',$solicitud->id_solicitud,['class'=>'form-control','type'=>'text'])!!}
-                </div>--}}
+
                 <div class="col-md-6">
                     {!!Form::label('oficina','Oficina:')!!}
                     {!!Form::select('oficina',$oficina,$solicitud->id_oficina,['class'=>'form-control','id'=>'oficina'])!!}
                     {{--{!!Form::text('oficina',$solicitud->id_oficina,array('class'=>'form-control','type'=>'text'))!!}--}}
                 </div>
-                {{--<div class="col-md-6">
-                    {!!Form::label('departamento','Departamento:')!!}
-                    --}}{{--{!!Form::select('departamento',$dep,$renglon->id_tipo_renglon,['class'=>'form-control','id'=>'tipo_renglon'])!!}--}}{{--
-                    {!!Form::text('departamento',$solicitud->id_departamento,array('class'=>'form-control','type'=>'text'))!!}
-                </div>--}}
                 <div class="col-md-6">
                     {!! Form::label('departamento','Departamento:')   !!}
                     {!!Form::select('departamento',$departamento,$solicitud->id_departamento,['class'=>'form-control','id'=>'departamento'])!!}
-                    {{--<select class="form-control" id="departamento" name="departamento">
-                        <option>Debe Seleccionar un Departamento</option>
-                    </select>--}}
                 </div>
-                {{--<div class="col-md-6">
-                    {!!Form::label('fecha_solicitud','Fecha Solicitud:')!!}
-                    {!!Form::text('fecha_solicitud',$solicitud->fecha_solicitud,array('class'=>'form-control','type'=>'text'))!!}
-                </div>--}}
-               {{-- <div class="col-md-6" id="desde">
-                    {!!Form::label('desde','Desde:')!!}
-                    {!!Form::text('desde',$solicitud->desde,array('class'=>'form-control','type'=>'text','id'=>'desdes'))!!}
-                </div>
-                <div class="col-md-6" id="hasta">
-                    {!!Form::label('hasta','Hasta:')!!}
-                    {!!Form::text('hasta',$solicitud->hasta,array('class'=>'form-control','type'=>'text','id'=>'hastas'))!!}
-                </div>--}}
                 <div class="col-md-6">
                     {!!Form::label('nombre_beneficiario','Beneficiario:')!!}
                     {!!Form::text('nombre_beneficiario',$solicitud->beneficiario,array('class'=>'form-control','type'=>'text'))!!}
@@ -108,9 +86,6 @@
                 <div class="col-md-6">
                     {!! Form::label('articulos','Artículo:')   !!}
                     {!!Form::select('articulos',$articulo,$solicitud->id_renglon,['class'=>'form-control','id'=>'articulos'])!!}
-                    {{--<select class="form-control" id="articulos" name="articulos">
-                        <option>Debe Seleccionar un Articulo</option>
-                    </select>--}}
                 </div>
                 {{--<div class="col-md-6">
                     {!!Form::label('estatus','Estatus:')!!}
@@ -247,6 +222,61 @@
         {
             $('#hasta').show();
         }
+
+
+        $('#form').submit(function() {
+            var Oficina=$('#oficina').val();
+            var Departamento=$('#Departamento').val();
+            var Nombre = $('#nombre').val();
+            var Telefono = $('#telefono').val();
+            var Correo = $('#correo').val();
+            var Tipo_Solicitud=$('#tipo_solicitud').val();
+            var Detalle = $('#detalle').val();
+            var Observacion = $('#observacion').val();
+            var desde=$('#datetimepicker54').val();
+            var hasta=$('#datetimepicker64').val();
+            var seleccionado=$('#tipo_solicitud option:selected').html();
+
+
+            if(Oficina == 0){
+                $('#info').html("<div class='alert alert-danger'><b>Debe Seleccionar una Oficina</b></div>");
+                return false;
+            }
+            else if(Departamento == 0){
+                $('#info').html("<div class='alert alert-danger'><b>Debe Seleccionar un Departamento</b></div>");
+                return false;
+            }
+            else if (Nombre.length > 50 || Nombre.length == "") {
+                $('#info').html("<div class='alert alert-danger'><b>El Campo Nombre Beneficiario debe ser menor a 50 Caracteres</b></div>");
+                return false;
+            }
+            else if (Telefono.length > 11 || Telefono.length == "" || isNaN(Telefono)) {
+                $('#info').html("<div class='alert alert-danger'><b>El Campo Telefono Beneficiario debe ser menor a 11 Caracteres, no debe estar vacio y debe ser numerico</b></div>");
+                return false;
+            }
+            else if (Correo.length > 60 || Correo.length == "") {
+                $('#info').html("<div class='alert alert-danger'><b>El Campo Correo Beneficiario debe ser menor a 60 Caracteres</b></div>");
+                return false;
+            }
+            else if(Tipo_Solicitud == 0){
+                $('#info').html("<div class='alert alert-danger'><b>Debe Seleccionar Un tipo de Solicitud</b></div>");
+                return false;
+            }
+            else if (Detalle.length > 250 || Detalle.length == "") {
+                $('#info').html("<div class='alert alert-danger'><b>El Campo Detalle Pedido Contacto debe ser menor a 250 Caracteres</b></div>");
+                return false;
+            }
+            else if (Observacion.length > 250 || Observacion.length == "") {
+                $('#info').html("<div class='alert alert-danger'><b>El Campo Observacion debe ser menor a 250 Caracteres</b></div>");
+                return false;
+            }
+            else if (seleccionado === 'Prestamo'){
+                if(desde.length == "" || hasta.length == ""){
+                    $('#info').html("<div class='alert alert-danger'><b>El Campo desde y hasta no debe estar vacio</b></div>");
+                    return false;
+                }
+            }
+        });
 
     </script>
 

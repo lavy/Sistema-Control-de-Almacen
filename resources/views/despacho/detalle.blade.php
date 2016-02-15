@@ -47,7 +47,7 @@
 
                 <div class="col-md-6">
                     {!!Form::label('cantidad','CANTIDAD:')!!}
-                    {!!Form::text('cantidad',0,array('class'=>'form-control','id'=>'cantidad_pedir','readonly'=>'true'))!!}
+                    {!!Form::text('cantidad',0,array('class'=>'form-control','id'=>'cantidad_pedir'))!!}
                 </div>
 
                 @foreach($deta as $det)
@@ -55,7 +55,10 @@
                         {!!Form::label('existencia_a','EXISTENCIA:')!!}
                         {!!Form::text('existencia_a',$det->cantidad_existencia,array('class'=>'form-control','readonly','id'=>'existencia_actual'))!!}
                     </div>
-                    {!!Form::text('existencia_minima',$det->existencia_minima,array('id'=>'existencia_minima'))!!}
+                    <div class="col-md-6">
+                        {!!Form::label('existencia_minima','EXISTENCIA MINIMA:')!!}
+                        {!!Form::text('existencia_minima',$det->existencia_minima,array('class'=>'form-control','id'=>'existencia_minima','readonly'=>'true'))!!}
+                    </div>
                 @endforeach
 
             </div>
@@ -65,17 +68,26 @@
     </div>
 
     <script type="text/javascript">
-        $('#existencia_minima').hide();
         $(document).ready(function(){
             $('#form').submit(function(){
             var cantidad=$('#cantidad_pedir').val();
             var existencia=$('#existencia_actual').val();
             var existencia_m=$('#existencia_minima').val();
-            var total=cantidad-existencia;
-                if(isNaN(cantidad) || cantidad <= 0){
+            var total=existencia-cantidad;
+
+                if(isNaN(cantidad) || cantidad <= 0 || cantidad.length == ""){
                     $('#info').html("<div class='alert alert-danger'><b>La cantidad debe ser númerica, mayor que cero</b></div>")
                     return false;
                 }
+                else if(cantidad > existencia || cantidad == existencia){
+                    $('#info').html("<div class='alert alert-danger'><b>La cantidad debe ser menor que existencia</b></div>")
+                    return false;
+                }
+                else if(total <= existencia_m ){
+                    $('#info').html("<div class='alert alert-danger'><b>La existencia minima es '+existencia_m+', por favor inserte otra cantidad.</b></div>")
+                    return false;
+                }
+
             });
 
 
@@ -83,34 +95,17 @@
                 style: 'btn-default',
                 size: 10
             });
+        $('.selectpicker').countSelectedText();
 
-
-        /*var existencia=$('#existencia_actual').val();
-        var max_fields      = existencia; //maximum input boxes allowed
-        var wrapper         = $(".input_fields_wraps"); //Fields wrapper
-        var add_button      = $(".add_field_button"); //Add button ID
-        var x = 1; //initial text box count
-        $(add_button).click(function(e){ //on add input button click
-            e.preventDefault();
-            if(x < max_fields){ //max input box allowed
-                x++; //text box increment
-                $(wrapper).clone().appendTo('#hijos')
-                *//*$(wrapper).clone().attr('id','acompañante2').appendTo('<div class="col-md-3"><input type="text" class="form-control" name="mytext[]"/><a href="#" class="remove_field btn btn-danger">Remover</a></div>'); //add input box*//*
-            }
-        });
-        $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-            e.preventDefault(); $(this).parent('tr').remove(); x--;
-        })*/
-
-        /*var selecciones=$('.selectpicker');*/
         $('.selectpicker').change(function () {
             /*var valor = $(this).val();*/
-            if('li.selected == elected'){
+            if($('.selectpicker option:selected')){
                 var sum=$('#cantidad_pedir').val();
                 sum++;
                 $('#cantidad_pedir').val(sum);
             }else
             {
+                $('span').addClass('uncheck');
             var rest=$('#cantidad_pedir').val();
             rest--;
             $('#cantidad_pedir').val(rest);

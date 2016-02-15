@@ -53,7 +53,7 @@
                    $('#info').html("<div class='alert alert-danger'><b>El campo Nombre del Técnico debe ser menor a 60 Caracteres</b></div>");
                    return false;
                }
-               else if(Cedula > 11 || Cedula == ""){
+               else if(Cedula > 8 || Cedula == ""){
                    $('#info').html("<div class='alert alert-danger'><b>El campo Cedula debe ser menor a 11 Caracteres</b></div>");
                    return false;
                }

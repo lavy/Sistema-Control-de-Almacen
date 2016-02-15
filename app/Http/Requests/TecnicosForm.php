@@ -23,6 +23,7 @@ class TecnicosForm extends Request {
 	{
 		return [
             'nombre_tecnico'=>'required|min:2|max:20',
+            'fecha_nacimiento'=>'date'
             /*'foto'=>'required'*/
 		];
 	}
@@ -37,6 +38,7 @@ class TecnicosForm extends Request {
             'cedula.numeric'=>'La cedula debe ser numerica',
             'cedula.min'=>'La cedula debe tener minimo 8 caracteres',
             'cedula.max'=>'La cedula debe tener maximo 10 caracteres',
+            'fecha_nacimiento.date'=>'el campo fecha de nacimiento debe ser de tipo fecha'
           /*  'foto.required'=>'La foto es requerida',
             'foto.image'=>'La foto debe ser una imagen'*/
         ];

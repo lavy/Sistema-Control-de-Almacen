@@ -98,7 +98,7 @@
                     $('#info').html("<div class='alert alert-danger'><b>El Campo Nombre debe ser menor a 100 caracteres</b></div>")
                     return false;
                 }
-                else if(Cedula.length > 11 || Cedula.length == "" || isNaN(Cedula)){
+                else if(Cedula.length > 8 || Cedula.length == "" || isNaN(Cedula)){
                     $('#info').html("<div class='alert alert-danger'><b>El Campo Cedula debe ser menor a 11 caracteres y Numerico</b></div>")
                     return false;
                 }

@@ -361,6 +361,20 @@ Route::get('nivels',function(){
     }
 });
 
+Route::get('provs',function(){
+    if(Request::ajax()){
+
+        $provs=Input::get('proveedor');
+        $verificar=\App\Proveedor::where('nombre_proveedor','=',$provs)->count();
+
+        if ($verificar == 0) {
+            echo "Disponible";
+        } else {
+            echo "No Disponible";
+        }
+    }
+});
+
 Route::get('t_articulo',function() {
 
     if(Request::ajax()){

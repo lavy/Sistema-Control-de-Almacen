@@ -91,7 +91,7 @@
                        $('#info').html("<div class='alert alert-danger'><b>El Campo Nombre debe ser menor a 60 Caracteres</b></div>");
                        return false;
                    }
-                   else if(Cedula.length > 11 || Cedula == ""){
+                   else if(Cedula.length > 8 || Cedula == ""){
                        $('#info').html("<div class='alert alert-danger'><b>El Campo Cedula debe ser menor a 11 Caracteres</b></div>")
                        return false;
                    }

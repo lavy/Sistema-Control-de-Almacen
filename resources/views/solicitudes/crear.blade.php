@@ -141,6 +141,7 @@
 
                 });
                 $('#datetimepicker6').datetimepicker({
+                    minDate: new Date(),
                     daysOfWeekDisabled: [0, 6],
                     useCurrent: false, //Important! See issue #1075
                     format:'DD-MM-YYYY',
@@ -226,6 +227,9 @@
             var Tipo_Solicitud=$('#tipo_solicitud').val();
             var Detalle = $('#detalle').val();
             var Observacion = $('#observacion').val();
+            var desde=$('#datetimepicker54').val();
+            var hasta=$('#datetimepicker64').val();
+            var seleccionado=$('#tipo_solicitud option:selected').html();
 
 
             if(Oficina == 0){
@@ -236,15 +240,15 @@
                 $('#info').html("<div class='alert alert-danger'><b>Debe Seleccionar un Departamento</b></div>");
                 return false;
             }
-            else if (Nombre.length > 50 || Nombre == "") {
+            else if (Nombre.length > 50 || Nombre.length == "") {
                 $('#info').html("<div class='alert alert-danger'><b>El Campo Nombre Beneficiario debe ser menor a 50 Caracteres</b></div>");
                 return false;
             }
-            else if (Telefono.length > 11 || Telefono == "" || isNaN(Telefono)) {
+            else if (Telefono.length > 11 || Telefono.length == "" || isNaN(Telefono)) {
                 $('#info').html("<div class='alert alert-danger'><b>El Campo Telefono Beneficiario debe ser menor a 11 Caracteres, no debe estar vacio y debe ser numerico</b></div>");
                 return false;
             }
-            else if (Correo.length > 60 || Correo == "") {
+            else if (Correo.length > 60 || Correo.length == "") {
                 $('#info').html("<div class='alert alert-danger'><b>El Campo Correo Beneficiario debe ser menor a 60 Caracteres</b></div>");
                 return false;
             }
@@ -252,28 +256,20 @@
                 $('#info').html("<div class='alert alert-danger'><b>Debe Seleccionar Un tipo de Solicitud</b></div>");
                 return false;
             }
-            else if (Detalle.length > 250 || Detalle == "") {
+            else if (Detalle.length > 250 || Detalle.length == "") {
                 $('#info').html("<div class='alert alert-danger'><b>El Campo Detalle Pedido Contacto debe ser menor a 250 Caracteres</b></div>");
                 return false;
             }
-            else if (Observacion.length > 250 || Observacion == "") {
+            else if (Observacion.length > 250 || Observacion.length == "") {
                 $('#info').html("<div class='alert alert-danger'><b>El Campo Observacion debe ser menor a 250 Caracteres</b></div>");
                 return false;
             }
-
-
-           /* var desde=$('#datetimepicker54').val();
-            var hasta=$('#datetimepicker64').val();
-            var seleccionado=$('#tipo_solicitud option:selected').html();
-            if (seleccionado === 'Prestamo'){
-                if(desde.length == ""){
-                    $('#info').html("<div class='alert alert-danger'><b>El Campo desde es requerido</b></div>");
+            else if (seleccionado === 'Prestamo'){
+                if(desde.length == "" || hasta.length == ""){
+                    $('#info').html("<div class='alert alert-danger'><b>El Campo desde y hasta no debe estar vacio</b></div>");
                     return false;
                 }
-                else if(hasta.length == "")
-                    $('#info').html("<div class='alert alert-danger'><b>El Campo hasta es requerido</b></div>");
-                    return false;
-            }*/
+            }
         });
     </script>
 @endsection

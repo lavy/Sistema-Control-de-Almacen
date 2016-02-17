@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Sistema de Control Almacén</title>
+    <title>Sistema Control de Almacen - @yield('title')</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="{{asset('bootstrap-select/dist/css/bootstrap-select.min.css')}}">
     <script src="{{asset('bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
     <script src="{{asset('bootstrap-select/dist/js/i18n/defaults-es_CL.min.js')}}"></script>
+    <link href="{{asset ('select2/dist/css/select2.min.css')}}" rel="stylesheet" />
+    <script src="{{asset('select2/dist/js/select2.min.js')}}"></script>
 </head>
 <body>
 
@@ -36,7 +38,7 @@
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">{{Auth::user()->nombre.'   '.Auth::user()->apellido}}</a>
+            <a class="navbar-brand">{{Auth::user()->nombre.'   '.Auth::user()->apellido}}</a>
         </div>
         <div>
             <ul class="nav navbar-nav">
@@ -45,7 +47,7 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Institución
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{URL::to('jefes')}}"><i class="fa fa-gavel"></i>Jefes</a></li>
+                        <li><a href="{{URL::to('jefes')}}"><i class="fa fa-gavel"></i>Supervisores</a></li>
                         <li><a href="{{URL::to('tecnico')}}"><i class="fa fa-life-ring"></i>Tecnicos</a></li>
                         <li><a href="{{URL::to('oficina')}}"><i class="fa fa-building"></i>Oficinas</a></li>
                         <li><a href="{{URL::to('departamento')}}"><i class="fa fa-university"></i>Departamentos</a></li>

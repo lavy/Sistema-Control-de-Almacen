@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', 'Crear Oficina')
 @section('content')
 
         {!!Form::open(['action'=>'OficinasController@store','id'=>'form'])!!}

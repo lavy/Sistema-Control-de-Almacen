@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', 'Usuarios')
 @section('content')
 
     @if($errors->has())

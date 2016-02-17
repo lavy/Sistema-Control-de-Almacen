@@ -1,4 +1,5 @@
 @extends('app')
+@section('title', 'Jéfes')
 @section('content')
 
         @if($errors->has())
@@ -13,7 +14,7 @@
             <div class="alert alert-success">{{ Session::get('message') }}</div>
         @endif
         <div class="panel panel-primary">
-            <div class="panel-heading" style="text-align:center;">JEFES</div>
+            <div class="panel-heading" style="text-align:center;">SUPERVISORES</div>
             <div class="panel-body">
                 {!!Form::open(['url'=>'jefes','method'=>'GET','class'=>'navbar-form navbar-left pull-right','role'=>'search'])!!}
                 <div class="form-group">
@@ -23,7 +24,7 @@
                 {!!Form::close()!!}
 
                 <p>
-                {!!link_to('crear_jefes','Crear Nuevo Jefe',['class'=>'btn btn-primary'])!!}
+                {!!link_to('crear_jefes','Crear Nuevo Supervisor',['class'=>'btn btn-primary'])!!}
                 </p>
 
                 <p>

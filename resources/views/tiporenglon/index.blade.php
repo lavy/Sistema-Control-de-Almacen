@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', 'Tipos de Articulos')
 @section('content')
     @if($errors->has())
         <div class='alert alert-danger'>

@@ -1,4 +1,5 @@
 @extends('app')
+@section('title', 'Crear Técnico')
 @section('content')
 
         {!!Form::open(['action'=>'TecnicosController@store','files'=>'true','id'=>'form'])!!}

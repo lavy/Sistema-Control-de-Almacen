@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', 'Crear Marca')
 @section('content')
     <div class="container">
         {!!Form::open(['action'=>'MarcasController@store','id'=>'form'])!!}

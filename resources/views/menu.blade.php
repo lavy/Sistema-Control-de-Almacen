@@ -1,4 +1,5 @@
 @extends('app')
+@section('title', 'Menú Principal')
 @section('content')
 
     @if($errors->has())

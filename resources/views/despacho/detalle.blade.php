@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', 'Complementar Detalle')
 @section('content')
     <div class="container">
         @if($errors->has())
@@ -47,7 +47,7 @@
 
                 <div class="col-md-6">
                     {!!Form::label('cantidad','CANTIDAD:')!!}
-                    {!!Form::text('cantidad',0,array('class'=>'form-control','id'=>'cantidad_pedir'))!!}
+                    {!!Form::text('cantidad',0,array('class'=>'form-control','id'=>'cantidad_pedir','readonly'))!!}
                 </div>
 
                 @foreach($deta as $det)
@@ -68,22 +68,22 @@
     </div>
 
     <script type="text/javascript">
-        $(document).ready(function(){
-            $('#form').submit(function(){
-            var cantidad=$('#cantidad_pedir').val();
-            var existencia=$('#existencia_actual').val();
-            var existencia_m=$('#existencia_minima').val();
-            var total=existencia-cantidad;
+        $(document).ready(function() {
+            $('#form').submit(function () {
+                var cantidad = $('#cantidad_pedir').val();
+                var existencia = $('#existencia_actual').val();
+                var existencia_m = $('#existencia_minima').val();
+                var total = existencia - cantidad;
 
-                if(isNaN(cantidad) || cantidad <= 0 || cantidad.length == ""){
+                if (isNaN(cantidad) || cantidad <= 0 || cantidad.length == "") {
                     $('#info').html("<div class='alert alert-danger'><b>La cantidad debe ser númerica, mayor que cero</b></div>")
                     return false;
                 }
-                else if(cantidad > existencia || cantidad == existencia){
+                else if (cantidad > existencia || cantidad == existencia) {
                     $('#info').html("<div class='alert alert-danger'><b>La cantidad debe ser menor que existencia</b></div>")
                     return false;
                 }
-                else if(total <= existencia_m ){
+                else if (total <= existencia_m) {
                     $('#info').html("<div class='alert alert-danger'><b>La existencia minima es '+existencia_m+', por favor inserte otra cantidad.</b></div>")
                     return false;
                 }
@@ -95,23 +95,38 @@
                 style: 'btn-default',
                 size: 10
             });
-        $('.selectpicker').countSelectedText();
 
-        $('.selectpicker').change(function () {
-            /*var valor = $(this).val();*/
-            if($('.selectpicker option:selected')){
-                var sum=$('#cantidad_pedir').val();
-                sum++;
-                $('#cantidad_pedir').val(sum);
-            }else
-            {
-                $('span').addClass('uncheck');
-            var rest=$('#cantidad_pedir').val();
-            rest--;
-            $('#cantidad_pedir').val(rest);
-            }
-        });
+            /*$('.selectpicker').change(function () {
+             var selectedText = $(this).find("option:selected").prop("selected",false);
+             alert(selectedText);
+             $("#info").text(selectedText);
+             });*/
 
+
+            /*
+             $(".js-example-basic-multiple").select2();
+
+
+             <select class="js-example-basic-multiple" multiple="multiple">
+             <option value="AL">Alabama</option>
+             ...
+             <option value="WY">Wyoming</option>
+             </select>*/
+
+
+            $('.selectpicker').change(function () {
+                /*var valor = $(this).val();*/
+                if ($('.selectpicker option:selected').hasClass("")) {
+                    var sum = $('#cantidad_pedir').val();
+                    sum++;
+                    $('#cantidad_pedir').val(sum);
+                }
+                else {
+                    var rest = $('#cantidad_pedir').val();
+                    rest--;
+                    $('#cantidad_pedir').val(rest);
+                }
+            });
         });
     </script>
 @endsection

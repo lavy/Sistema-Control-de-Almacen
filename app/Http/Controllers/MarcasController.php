@@ -82,7 +82,7 @@ class MarcasController extends Controller {
         $marca->id_proveedor=\Request::Input('proveedor');
         $marca->descrip_marca=\Request::Input('descripcion');
         $marca->save();
-        return redirect('marca')->with('Se ha editado una marca');
+        return redirect('marca')->with('Se ha editado exitosamente la marca');
 	}
 
 	/**

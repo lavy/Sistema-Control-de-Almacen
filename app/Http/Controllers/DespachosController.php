@@ -47,17 +47,6 @@ class DespachosController extends Controller {
 	}
 
 	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
 	 * Muestra el Formulario para la edición del registro correspondiente.
 	 *
 	 * @param  int  $id
@@ -87,7 +76,6 @@ class DespachosController extends Controller {
             ->join('almacen','detalle_planilla_orden.id_almacen','=','almacen.id_almacen')
             ->select('almacen.descrip_almacen')
             ->get();
-
 
 
         $tecnicos = Tecnico::where('estatus','=','Activo')->lists('nombres_apellidos', 'id_tecnico');
@@ -171,18 +159,6 @@ class DespachosController extends Controller {
         return redirect('despacho')->with('message','Se han reversado la transacción, si desea hacerla nuevamente, Pulse
          el Boton Detalles');
     }*/
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
 
     public function planilla($id)
     {

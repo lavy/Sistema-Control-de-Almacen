@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', 'Crear Tipo de Articulo')
 @section('content')
     <div class="container">
         {!!Form::open(['action'=>'TiporenglonController@store','id'=>'form'])!!}

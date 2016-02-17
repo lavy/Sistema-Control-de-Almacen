@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', 'Crear Solicitud')
 @section('content')
     <div class="container">
         {!!Form::open(['action'=>'SolicitudesController@store','id'=>'form'])!!}
@@ -217,10 +217,21 @@
         });
 
 
+         $('#oficina').change(function() {
+            var Oficina=$('#oficina').val();
+            if (Oficina == 0)
+            {
+                /*$('#departamento option:selected').attr('selectedIndex',0);*/
+                $("#departamento option:selected").prop("selected",0);
+                /*$('#departamento option:eq(0)').prop('selected',0);*/
+            }
+        });
+
+
 
         $('#form').submit(function() {
             var Oficina=$('#oficina').val();
-            var Departamento=$('#Departamento').val();
+            var Departamento=$('#departamento').val();
             var Nombre = $('#nombre').val();
             var Telefono = $('#telefono').val();
             var Correo = $('#correo').val();

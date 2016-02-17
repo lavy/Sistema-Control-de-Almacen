@@ -1,4 +1,5 @@
 @extends('app')
+@section('title', 'Editar Solicitud')
 @section('content')
     <div class="container">
         {!!Form::open(['url'=>'solicitudes/'.$solicitud->id_solicitud,'id'=>'form'])!!}

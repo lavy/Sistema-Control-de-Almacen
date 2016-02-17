@@ -1,5 +1,5 @@
 @extends('reportes.index')
-
+@section('title','Historico De Inventarios')
 @section('reporte')
 
     <div class="container">

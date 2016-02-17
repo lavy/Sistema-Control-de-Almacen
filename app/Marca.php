@@ -8,10 +8,35 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Marca extends Model {
 
+    /**
+     * El Timestamp de la tabla
+     * valores: 'true','false'.
+     *
+     * @var bool
+     */
     public $timestamps=false;
+
+    /**
+     * La llave primaria de la tabla.
+     *
+     * @var string
+     */
     protected $primaryKey='id_marca';
+
+    /**
+     * La tabla de base de datos usada por el modelo
+     *
+     * @var string
+     */
 	protected $table='marca';
 
+
+    /**
+     * Relacionamiento de la Tabla Marcas con la Tabla Modelos
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return (Nombre Modelo, Foreign Key, Local Key)
+     */
     public function modelos()
     {
         //Tabla a referenciar Clave foranea del y clave local

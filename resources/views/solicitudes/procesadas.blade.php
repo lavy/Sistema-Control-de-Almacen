@@ -1,4 +1,5 @@
 @extends('app')
+@section('title', 'Solicitudes Procesadas')
 @section('content')
     <div class="container">
         @if($errors->has())

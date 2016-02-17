@@ -1,5 +1,5 @@
 @extends('reportes.index')
-
+@section('title','Solicitudes de Prestamos')
 @section('reporte')
 
     <div class="container">

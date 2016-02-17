@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title', 'Crear Almacen')
+
 @section('content')
 
         {!!Form::open(['action'=>'AlmacenController@store','id'=>'form'])!!}

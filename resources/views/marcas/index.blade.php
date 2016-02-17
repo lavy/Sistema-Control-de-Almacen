@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', 'Marcas')
 @section('content')
     <div class="container">
 

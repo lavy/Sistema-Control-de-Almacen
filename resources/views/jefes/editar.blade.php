@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', 'Editar Jefe')
 @section('content')
     <div class="container">
         @if($errors->has())
@@ -12,7 +12,7 @@
         {!!Form::open(['url'=>'jefes/'.$jefes->id_jefe,'id'=>'form'])!!}
             <div id="info"></div>
         <div class="panel panel-primary">
-            <div class="panel-heading" style="text-align:center;">EDITAR JEFES</div>
+            <div class="panel-heading" style="text-align:center;">EDITAR SUPERVISOR</div>
             <div class="panel-body">
                 <div class="col-md-6">
                     {!!Form::label('oficina','Oficina:')!!}
@@ -92,10 +92,10 @@
                  return false;
              }
              else if(Cedula.length > 8 || Cedula.length == ""){
-                 $('#info').html("<div class='alert alert-danger'><b>El Campo Cedula debe ser menor a 11 caracteres</b></div>")
+                 $('#info').html("<div class='alert alert-danger'><b>El Campo Cedula debe ser menor o igual a 8 caracteres</b></div>")
                  return false;
              }
-             else if(Disponible != true  ){
+             else if(Disponible == false){
                  $('#info').html("<div class='alert alert-danger'><b>La Cedula ya se encuentra registrada</b></div>")
                  return false;
              }

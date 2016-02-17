@@ -14,14 +14,31 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	use Authenticatable, CanResetPassword;
 
-	/**
-	 * The database table used by the model.
+    /**
+     * El Timestamp de la tabla
+     * valores: 'true','false'.
+     *
+     * @var bool
+     */
+
+    public $timestamps=false;
+
+    /**
+     * La llave primaria de la tabla.
+     *
+     * @var string
+     */
+    protected $primaryKey='cod_usua';
+
+
+    /**
+	 * La tabla de base de datos usada por el modelo.
 	 *
 	 * @var string
 	 */
-    public $timestamps=false;
-    protected $primaryKey='cod_usua';
-	protected $table = 'users';
+    protected $table = 'users';
+
+
 
 	/**
 	 * The attributes that are mass assignable.

@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', 'Crear Proveedor')
 @section('content')
     <div class="container">
         {!!Form::open(['action'=>'ProveedorController@store','id'=>'form'])!!}

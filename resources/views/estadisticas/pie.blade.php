@@ -1,4 +1,5 @@
 @extends('app')
+@section('title', 'Estadisticas por Oficinas de Nivel Superior')
 @section('content')
 
 <div id="container" style="min-width: 800px; height: 600px; max-width: 1200px; margin-top:20px"></div>

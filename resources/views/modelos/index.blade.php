@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', 'Modelos')
 @section('content')
     <div class="container">
         @if($errors->has())

@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', 'Crear Usuario')
 @section('content')
     <div class="container">
         {!!Form::open(['action'=>'UsuariosController@store','id'=>'form'])!!}

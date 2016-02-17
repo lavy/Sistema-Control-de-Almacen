@@ -1,4 +1,5 @@
 @extends('app')
+@section('title', 'Crear Jefe')
 @section('content')
     <div class="container">
         {!!Form::open(['action'=>'JefesController@store','id'=>'form'])!!}
@@ -18,7 +19,7 @@
         <div id="info"></div>
 
         <div class="panel panel-primary">
-            <div class="panel-heading" style="text-align:center;">CREAR JEFE</div>
+            <div class="panel-heading" style="text-align:center;">CREAR SUPERVISOR</div>
             <div class="panel-body">
                 <div class="col-md-6">
                     {!!Form::label('oficina','Oficina:')!!}
@@ -65,8 +66,8 @@
                         success: function (data) {
                             if(data == 'Disponible'){
                                 $('#info').html("<input type='hidden' id='disponible' value='true' name='disponible'><div class='alert alert-success'><b>Disponible</b></div>");
-                            }else{
-                                $('#info').html("<input type='hidden' id='disponible' value='false' name='disponible'><div class='alert alert-danger'><b>Ya la Cedula Existe</b></div>");
+                            }else if (data == 'No Disponible'){
+                                $('#info').html("<input type='hidden' id='no_disponible' value='false' name='disponible'><div class='alert alert-danger'><b>Ya la Cedula Existe</b></div>");
                             }
                         }
                     });
@@ -84,7 +85,7 @@
                 var Oficina=$('#oficina').val();
                 var Nombre=$('#nombre').val();
                 var Cedula=$('#cedula').val();
-                var Disponible=$('#disponible').val();
+                var Disponible=$('#no_disponible').val();
 
                 /*var ()
                 var rxDatePattern = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/;
@@ -99,10 +100,10 @@
                     return false;
                 }
                 else if(Cedula.length > 8 || Cedula.length == "" || isNaN(Cedula)){
-                    $('#info').html("<div class='alert alert-danger'><b>El Campo Cedula debe ser menor a 11 caracteres y Numerico</b></div>")
+                    $('#info').html("<div class='alert alert-danger'><b>El Campo Cedula debe ser menor a 8 caracteres y Numerico</b></div>")
                     return false;
                 }
-                else if(Disponible != true  ){
+                else if(Disponible == true ){
                     $('#info').html("<div class='alert alert-danger'><b>La Cedula ya se encuentra registrada</b></div>")
                     return false;
                 }

@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', 'Inventario Almacen')
 @section('content')
     <div class="container">
         <div class="panel panel-primary">

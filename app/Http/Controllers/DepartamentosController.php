@@ -51,7 +51,7 @@ class DepartamentosController extends Controller {
         $departamentos->id_oficina=\Request::Input('oficina');
         $departamentos->descrip_departamento=\Request::Input('descripcion');
         $departamentos->save();
-        return redirect('departamento')->with('message','Post Saved');
+        return redirect('departamento')->with('message','Se ha Creado un Nuevo Departamento');
 	}
 
 	/**
@@ -79,7 +79,7 @@ class DepartamentosController extends Controller {
         $departamento->id_oficina=\Request::Input('oficina');
         $departamento->descrip_departamento=\Request::Input('descripcion');
         $departamento->save();
-        return redirect('departamento')->with('message','El registro fue editado Exitosamente');
+        return redirect('departamento')->with('message','Se ha editado exitosamente el departamento');
 	}
 
 	/**

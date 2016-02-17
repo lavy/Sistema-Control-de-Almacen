@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', 'Crear Serial')
 @section('content')
     <div class="container">
         {!!Form::open(['action'=>'SerialesController@store'])!!}

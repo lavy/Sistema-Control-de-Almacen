@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', 'Crear Modelo')
 @section('content')
     <div class="container">
         {!!Form::open(['action'=>'ModelosController@store','id'=>'form'])!!}

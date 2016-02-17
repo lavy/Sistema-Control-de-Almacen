@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('title', 'Transferencia de Solicitud')
 @section('content')
     <div class="container">
         {!! Form::open(array('url' =>'solicitudes/eliminar/'.$solicitudes->id_solicitud, 'method' => 'DELETE')) !!}

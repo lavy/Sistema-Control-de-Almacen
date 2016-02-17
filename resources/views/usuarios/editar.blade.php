@@ -1,4 +1,5 @@
 @extends('app')
+@section('title', 'Editar Usuario')
 @section('content')
     <div class="container">
         @if($errors->has())

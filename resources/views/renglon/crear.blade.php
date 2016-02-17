@@ -1,4 +1,5 @@
 @extends('app')
+@section('title', 'Crear Articulos')
 @section('content')
     <div class="container">
         {!!Form::open(['action'=>'RenglonController@store','files'=>'true','id'=>'form'])!!}
@@ -35,9 +36,10 @@
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('modelo','Modelo:')!!}
-                    {!!Form::select('modelo',$modelo,'',['class'=>'form-control','id'=>'modelo'])!!}
+                    <select name="modelo" class="form-control" id="modelo">
+                        <option>Seleccione un modelo</option>
+                    </select>
                 </div>
-
 
                     <div class="input_fields_wrap">
                         <div class="col-md-6">
@@ -88,7 +90,6 @@
                         });
             });
 
-//                var max_fields      = 10; //maximum input boxes allowed
                 var wrapper         = $(".input_fields_wrap"); //Fields wrapper
                 var add_button      = $(".add_field_button"); //Add button ID
 
@@ -97,7 +98,7 @@
                     e.preventDefault();
                     /*if(x < max_fields){ //max input box allowed*/
                         x++; //text box increment
-                        $(wrapper).append('<div class="col-md-6"><label for="serial[]">Serial '+x+'</label><div class="input-group"><input type="text" title="Si quiere quitar este producto, Presione el boton (-)" data-toggle="tooltip" name="serial['+x+']" class="form-control"/></div><a href="#" class="remove_field btn btn-danger">-</a>'); //add input box
+                        $(wrapper).append('<div class="col-md-6"><label for="serial[]">Serial '+x+'</label><input type="text" title="Si quiere quitar este producto, Presione el boton (-)" data-toggle="tooltip" name="serial['+x+']" class="form-control"/><a href="#" class="remove_field btn btn-danger">-</a></div>'); //add input box
                     /*}*/
                 });
 

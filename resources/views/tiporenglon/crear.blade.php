@@ -36,8 +36,8 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#tipo_articulo").keyup(function () {
-                var tipo_articulo = $('#tipo_articulo').val();
+            $("#tipo_articulo").blur(function () {
+                var tipo_articulo = $('#tipo_articulo').val().trim();
                 if (tipo_articulo != "") {
                     $.ajax({
                         method: "GET",
@@ -45,9 +45,9 @@
                         data: "t_articulo="+tipo_articulo,
                         success: function (data) {
                             if(data == 'Disponible'){
-                                $('#info').html("<input type='hidden' id='disponible' value='true' name='disponible'><div class='alert alert-success'><b>Disponible</b></div>");
+                                $('#info').html("<input type='hidden' id='disponible' value='si' name='disponible'><div class='alert alert-success'><b>Disponible</b></div>");
                             }else{
-                                $('#info').html("<input type='hidden' id='disponible' value='false' name='disponible'><div class='alert alert-danger'><b>El Tipo de Articulo ya existe</b></div>");
+                                $('#info').html("<input type='hidden' id='disponible' value='no' name='disponible'><div class='alert alert-danger'><b>El Tipo de Articulo ya existe</b></div>");
                             }
                         }
                     });
@@ -64,8 +64,8 @@
                     $('#info').html("<div class='alert alert-danger'><b>El Campo Descripcion debe ser menor a 150 Caracteres</b></div>");
                     return false;
                 }
-                else if(Disponible != true  ){
-                    $('#info').html("<div class='alert alert-danger'><b>El Tipo de Articulo ya esta registrado</b></div>")
+                else if(Disponible =='no'){
+                    $('#info').html("<input type='hidden' id='disponible' value='no' name='disponible'><div class='alert alert-danger'><b>El Tipo de Articulo ya esta registrado</b></div>");
                     return false;
                 }
             });

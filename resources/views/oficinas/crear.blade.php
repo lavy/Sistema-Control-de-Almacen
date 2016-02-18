@@ -36,7 +36,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $("#oficina").keyup(function () {
-                var oficina = $('#oficina').val();
+                var oficina = $('#oficina').val().trim();
                 if (oficina != "") {
                     $.ajax({
                         method: "GET",
@@ -44,9 +44,9 @@
                         data: "ofic="+oficina,
                         success: function (data) {
                             if(data == 'Disponible'){
-                                $('#info').html("<input type='hidden' id='disponible' value='true' name='disponible'><div class='alert alert-success'><b>Disponible</b></div>");
+                                $('#info').html("<input type='hidden' id='disponible' value='si' name='disponible'><div class='alert alert-success'><b>Disponible</b></div>");
                             }else{
-                                $('#info').html("<input type='hidden' id='disponible' value='false' name='disponible'><div class='alert alert-danger'><b>Ya esta Oficina esta registrada</b></div>");
+                                $('#info').html("<input type='hidden' id='disponible' value='no' name='disponible'><div class='alert alert-danger'><b>Ya esta Oficina esta registrada</b></div>");
                             }
                         }
                     });
@@ -61,8 +61,8 @@
                     $('#info').html("<div class='alert alert-danger'><b>El Campo Descripción debe ser menor a 250 Caracteres</b></div>");
                     return false;
                 }
-                else if(Disponible != true  ){
-                    $('#info').html("<div class='alert alert-danger'><b>La Oficina ya se encuentra registrada</b></div>")
+                else if(Disponible == 'no'){
+                    $('#info').html("<input type='hidden' id='disponible' value='no' name='disponible'><div class='alert alert-danger'><b>La Oficina ya se encuentra Registrada</b></div>");
                     return false;
                 }
 

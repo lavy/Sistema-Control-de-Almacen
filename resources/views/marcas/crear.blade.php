@@ -42,7 +42,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $("#marca").keyup(function () {
-                var marca = $('#marca').val();
+                var marca = $('#marca').val().trim();
                 if (marca != "") {
                     $.ajax({
                         method: "GET",
@@ -50,9 +50,9 @@
                         data: "marca="+marca,
                         success: function (data) {
                             if(data == 'Disponible'){
-                                $('#info').html("<input type='hidden' id='disponible' value='true' name='disponible'><div class='alert alert-success'><b>Disponible</b></div>");
+                                $('#info').html("<input type='hidden' id='disponible' value='si' name='disponible'><div class='alert alert-success'><b>Disponible</b></div>");
                             }else{
-                                $('#info').html("<input type='hidden' id='disponible' value='false' name='disponible'><div class='alert alert-danger'><b>Ya esta Marca ha sido registrada</b></div>");
+                                $('#info').html("<input type='hidden' id='disponible' value='no' name='disponible'><div class='alert alert-danger'><b>Ya esta Marca ha sido registrada</b></div>");
                             }
                         }
                     });
@@ -72,8 +72,8 @@
                     $('#info').html("<div class='alert alert-danger'><b>El Campo Descripción debe ser menor a 250 caracteres</b></div>")
                     return false;
                 }
-                else if(Disponible != true  ){
-                    $('#info').html("<div class='alert alert-danger'><b>La Marca ya se encuentra registrada</b></div>")
+                else if(Disponible =='no'  ){
+                    $('#info').html("<input type='hidden' id='disponible' value='no' name='disponible'><div class='alert alert-danger'><b>La Marca ya se encuentra Registrada</b></div>");
                     return false;
                 }
 

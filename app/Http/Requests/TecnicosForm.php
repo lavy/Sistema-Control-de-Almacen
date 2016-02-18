@@ -22,8 +22,8 @@ class TecnicosForm extends Request {
 	public function rules()
 	{
 		return [
-            'nombre_tecnico'=>'required|min:2|max:20',
-            'fecha_nacimiento'=>'date'
+            'nombre_tecnico'=>'required|min:2|max:60',
+            'fecha_nacimiento'=>'required|date'
             /*'foto'=>'required'*/
 		];
 	}

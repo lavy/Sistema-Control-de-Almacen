@@ -28,6 +28,7 @@
             <table class="table table-bordered">
                 <tr>
                     <th style="text-align:center;">PDF</th>
+                    <th style="text-align:center;">PDF</th>
                     <th style="text-align:center;">DETALLE ORDEN</th>
                     <th style="text-align:center;">DEVOLUCIONES</th>
                     <th style="text-align:center;"># TRANSACCIÓN</th>

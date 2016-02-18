@@ -49,7 +49,7 @@
                 </div>
 
             <div class="col-md-offset-5">
-                {!!Form::submit('Aceptar',['class'=>'btn btn-primary','name'=>'Aceptar'])!!}
+                {!!Form::submit('Aceptar',['class'=>'btn btn-primary','name'=>'Aceptar','id'=>'aceptar'])!!}
                 {!!link_to('menu','Salir',['class'=>'btn btn-primary'])!!}
             </div>
         </div>
@@ -59,8 +59,8 @@
 
     <script type="text/javascript">
        $(document).ready(function() {
-            $("#cedula").keyup(function () {
-                var cedula = $('#cedula').val();
+            $("#cedula").blur(function () {
+                var cedula = $('#cedula').val().trim();
                 if (cedula != "") {
                     $.ajax({
                         method: "GET",
@@ -68,9 +68,9 @@
                         data: "cedula=" + cedula,
                         success: function (data) {
                             if (data == 'Disponible') {
-                                $('#info').html("<input type='hidden' id='disponible' value='true' name='disponible'><div class='alert alert-success'><b>Disponible</b></div>");
+                                $('#info').html("<input type='hidden' id='disponible' value='si' name='disponible'><div class='alert alert-success'><b>Disponible</b></div>");
                             } else {
-                                $('#info').html("<input type='hidden' id='disponible' value='false' name='disponible'><div class='alert alert-danger'><b>La Cedula ya existe</b></div>");
+                                $('#info').html("<input type='hidden' id='disponible' value='no' name='disponible'><div class='alert alert-danger'><b>La Cedula ya existe</b></div>");
                             }
                         }
                     });
@@ -88,16 +88,16 @@
                    var Cedula=$('#cedula').val();
                    var Disponible=$('#disponible').val();
 
-                   if(Nombre.length > 60 || Nombre == ""){
+                   if(Nombre.length > 60 || Nombre.length == ""){
                        $('#info').html("<div class='alert alert-danger'><b>El Campo Nombre debe ser menor a 60 Caracteres</b></div>");
                        return false;
                    }
-                   else if(Cedula.length > 8 || Cedula == ""){
-                       $('#info').html("<div class='alert alert-danger'><b>El Campo Cedula debe ser menor a 11 Caracteres</b></div>")
+                   else if(Cedula.length > 8 || Cedula.length == ""){
+                       $('#info').html("<div class='alert alert-danger'><b>El Campo Cedula debe ser menor o igual a 8 Caracteres</b></div>")
                        return false;
                    }
-                   else if(Disponible != true  ){
-                       $('#info').html("<div class='alert alert-danger'><b>La Cedula ya se encuentra registrada</b></div>")
+                   else if(Disponible =='no'){
+                       $('#info').html("<input type='hidden' id='disponible' value='no' name='disponible'><div class='alert alert-danger'><b>La Cedula ya esta registrada</b></div>");
                        return false;
                    }
                });

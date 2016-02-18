@@ -56,8 +56,8 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#cedula").keyup(function (){
-                var cedula = $('#cedula').val();
+            $("#cedula").blur(function (){
+                var cedula = $('#cedula').val().trim();
                 if (cedula != "") {
                     $.ajax({
                         method: "GET",
@@ -65,9 +65,9 @@
                         data: "cedula="+cedula,
                         success: function (data) {
                             if(data == 'Disponible'){
-                                $('#info').html("<input type='hidden' id='disponible' value='true' name='disponible'><div class='alert alert-success'><b>Disponible</b></div>");
-                            }else if (data == 'No Disponible'){
-                                $('#info').html("<input type='hidden' id='no_disponible' value='false' name='disponible'><div class='alert alert-danger'><b>Ya la Cedula Existe</b></div>");
+                                $('#info').html("<input type='hidden' id='disponible' value='si' name='disponible'><div class='alert alert-success'><b>Disponible</b></div>");
+                            }else{
+                                $('#info').html("<input type='hidden' id='disponible' value='no' name='disponible'><div class='alert alert-danger'><b>Ya la Cedula Existe</b></div>");
                             }
                         }
                     });
@@ -85,7 +85,7 @@
                 var Oficina=$('#oficina').val();
                 var Nombre=$('#nombre').val();
                 var Cedula=$('#cedula').val();
-                var Disponible=$('#no_disponible').val();
+                var Disponible=$('#disponible').val();
 
                 /*var ()
                 var rxDatePattern = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/;
@@ -103,8 +103,8 @@
                     $('#info').html("<div class='alert alert-danger'><b>El Campo Cedula debe ser menor a 8 caracteres y Numerico</b></div>")
                     return false;
                 }
-                else if(Disponible == true ){
-                    $('#info').html("<div class='alert alert-danger'><b>La Cedula ya se encuentra registrada</b></div>")
+                else if(Disponible =='no'){
+                    $('#info').html("<input type='hidden' id='disponible' value='no' name='disponible'><div class='alert alert-danger'><b>La Cedula ya se encuentra Registrada</b></div>");
                     return false;
                 }
             })

@@ -230,13 +230,11 @@ Route::get('articulo',function() {
 
 Route::get('modal/{id}',function($id)
 {
-
     $seriales=\Illuminate\Support\Facades\DB::table('inventario_seriales')
         ->join('renglones','inventario_seriales.id_renglon','=','renglones.id_renglon')
         ->select('inventario_seriales.serial','renglones.descrip_renglon')
         ->where('inventario_seriales.id_renglon','=',$id)
         ->get();
-    /*$seriales=\App\Seriales::where('id_renglon','=',$id)->get();*/
 
     $cantidad=count($seriales);
 
@@ -245,14 +243,16 @@ Route::get('modal/{id}',function($id)
       echo "<tr>";
          echo "<td style='text-align:center;'>".'<b>Articulo</b>'."</td>";
          echo "<td style='text-align:center;'>".'<b>Seriales</b>'."</td>";
-         /*echo "<td style='text-align:center;'>".'<b>Seriales</b>'."</td>";*/
       echo "</tr>";
 
     foreach($seriales as $serial) {
         echo "<tr>";
             echo "<td style='text-align:center;'>".$serial->descrip_renglon."</td>";
+        if($serial->serial != null){
             echo "<td style='text-align:center;'>".$serial->serial."</td>";
-            /*echo "<td><a href='modal' class='btn btn-danger'></a></td>";*/
+        }else{
+            echo "<td style='text-align:center;'>".'Sin Serial'."</td>";
+        }
         echo "</tr>";
 
     }

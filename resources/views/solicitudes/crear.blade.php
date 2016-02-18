@@ -219,11 +219,17 @@
 
          $('#oficina').change(function() {
             var Oficina=$('#oficina').val();
-            if (Oficina == 0)
-            {
-                /*$('#departamento option:selected').attr('selectedIndex',0);*/
-                $("#departamento option:selected").prop("selected",0);
-                /*$('#departamento option:eq(0)').prop('selected',0);*/
+            if (Oficina == 0) {
+                $('#departamento').empty();
+                $('#departamento').append("<option value='0'>Debe Seleccionar un Departamento</option>");
+            }
+        });
+
+        $('#t_articulos').change(function() {
+            var Tipo_articulo=$('#t_articulos').val();
+            if (Tipo_articulo == 0) {
+                $('#articulos').empty();
+                $('#articulos').append("<option value='0'>Debe Seleccionar un Articulo</option>");
             }
         });
 
@@ -236,6 +242,8 @@
             var Telefono = $('#telefono').val();
             var Correo = $('#correo').val();
             var Tipo_Solicitud=$('#tipo_solicitud').val();
+            var Tipo_articulo=$('#t_articulos').val();
+            var Articulo=$('#articulos').val();
             var Detalle = $('#detalle').val();
             var Observacion = $('#observacion').val();
             var desde=$('#datetimepicker54').val();
@@ -265,6 +273,14 @@
             }
             else if(Tipo_Solicitud == 0){
                 $('#info').html("<div class='alert alert-danger'><b>Debe Seleccionar Un tipo de Solicitud</b></div>");
+                return false;
+            }
+            else if(Tipo_articulo == 0){
+                $('#info').html("<div class='alert alert-danger'><b>Debe Seleccionar Un Tipo de Articulo</b></div>");
+                return false;
+            }
+            else if(Articulo == 0){
+                $('#info').html("<div class='alert alert-danger'><b>Debe Seleccionar Un Articulo</b></div>");
                 return false;
             }
             else if (Detalle.length > 250 || Detalle.length == "") {

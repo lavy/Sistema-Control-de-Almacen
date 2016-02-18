@@ -37,7 +37,7 @@
                 <div class="col-md-6">
                     {!!Form::label('modelo','Modelo:')!!}
                     <select name="modelo" class="form-control" id="modelo">
-                        <option>Seleccione un modelo</option>
+                        <option value="0">Debe Seleccionar un modelo</option>
                     </select>
                 </div>
 
@@ -121,7 +121,37 @@
 
                 $(function () {
                     $('[data-toggle="tooltip"]').tooltip()
-                })
+                });
+
+
+
+            /*var Marca=$('#marca option:selected').text();
+            var Modelo=$('#modelo option:selected').text();
+            $('#tipo_articulo').change(function(){
+                var Tipo_Articulo=$('#tipo_articulo option:selected').text();
+               $('#articulo').val(Tipo_Articulo);
+            });
+
+            $('#marca').change(function(){
+                var Marca=$('#marca option:selected').text();
+                var Articulo=$('#articulo').val();
+                $('#articulo').val(Articulo+'""'+Marca);
+            });*/
+
+            /*$('#marca').change(function(){
+                var Marca=$('#marca option:selected').text();
+                $('#articulo').val(Tipo_Articulo+Marca+Modelo);
+
+            });*/
+
+
+            $('#marca').change(function() {
+                var Marca=$('#marca').val();
+                if (Marca == 0) {
+                    $('#modelo').empty();
+                    $('#modelo').append("<option value='0'>Debe Seleccionar un Modelo</option>");
+                }
+            });
 
 
             $('#form').submit(function(){

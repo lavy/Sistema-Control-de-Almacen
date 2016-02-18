@@ -62,13 +62,10 @@
                             <td>{{$renglon->unidad_medida}}</td>
                             <td>{{$renglon->cantidad}}</td>
                             <td>{{$renglon->existencia_minima}}</td>
-                            <td><center><img src="articulos/{{$renglon->foto_producto}}" width="80px" height="80px"></center></td>
-
+                            <td style="text-align:center;"><img src="articulos/{{$renglon->foto_producto}}" width="80px" height="80px" alt="Foto del Producto"></td>
 
                             <td width="40" align="center">
-                                {{--<a href='modal/'.$renglon->id_renglon id='$renglon->id_renglon' data-toggle='modal'   class='modalLoad btn btn-primary btn-xs' data-target='#myModal'>Detalles</a>;--}}
-                                {!! Html::link('modal/'.$renglon->id_renglon, '', array('class'=>'modalLoad glyphicon glyphicon-eye-open btn btn-primary btn-xs','data-toggle'=>'modal','data-target'=>'#myModal','id'=>'$renglon->id_renglon')) !!}
-
+                                {!! Html::link('modal/'.$renglon->id_renglon, '', array('class'=>'modalLoad glyphicon glyphicon-eye-open btn btn-primary btn-xs','data-toggle'=>'modal','data-target'=>'#myModal','id'=>'$renglon->id_renglon','title'=>'Lista de Articulos','data-toggle'=>'tooltip')) !!}
                                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -85,14 +82,11 @@
                                         </div>
                                     </div>
                                 </div>
-                            {{--</td>--}}
 
-                            {{--<td width="60" align="center">--}}
-                                {!! Html::link('renglones/editar/'.$renglon->id_renglon, '', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}
-                                {!! Html::link('seriales/'.$renglon->id_renglon, '', array('class' => 'glyphicon glyphicon-zoom-in btn btn-info btn-xs')) !!}
-                            {{--</td>
-                            <td width="60" align="center">--}}
-                                {!! Form::open(array('url' =>'renglones/eliminar/'.$renglon->id_renglon, 'method' => 'DELETE')) !!}
+                                {!! Html::link('renglones/editar/'.$renglon->id_renglon, '', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs','title'=>'Editar Caracteristica Articulo','data-toggle'=>'tooltip')) !!}
+
+                                {!! Html::link('seriales/'.$renglon->id_renglon, '', array('class' => 'glyphicon glyphicon-zoom-in btn btn-info btn-xs','title'=>'Seriales del Articulo','data-toggle'=>'tooltip')) !!}
+                                {!! Form::open(array('url' =>'renglones/eliminar/'.$renglon->id_renglon, 'method' => 'DELETE','title'=>'Eliminar Articulo','data-toggle'=>'tooltip')) !!}
                                 <button type="submit" class="glyphicon glyphicon-trash btn btn-danger btn-xs"></button>
                                 {!! Form::close() !!}
 
@@ -109,12 +103,18 @@
     </div>
     </div>
 
-    <script>
-        $('.modalLoad').click(function() {
-            $('#myModal').modal('show') // evento que lanza la ventana
-            $('#modalContent').val('');
-            $('#bodys').load($(this).attr('href'));
-            return false;
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.modalLoad').click(function() {
+                $('#myModal').modal('show') // evento que lanza la ventana
+                $('#modalContent').val('');
+                $('#bodys').load($(this).attr('href'));
+                return false;
+            });
+
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
         });
     </script>
 @endsection

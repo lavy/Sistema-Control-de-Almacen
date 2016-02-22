@@ -159,6 +159,7 @@
                var Articulo=$('#articulo').val();
                var Marca=$('#marca').val();
                var Modelo= $('#modelo').val();
+               var Cantidad=$('#cantidad').val();
                var Existencia_Minima=$('#existencia_minima').val();
 
                 if(Tipo_Articulo == 0){
@@ -177,7 +178,15 @@
                     $('#info').html("<div class='alert alert-danger'><b>Debe Seleccionar una Modelo</b></div>")
                     return false;
                 }
-                else if(Existencia_Minima.length > 11 && isNaN(Existencia_Minima)){
+                else if(Cantidad.length == "" || isNaN(Cantidad) || Cantidad < 0){
+                    $('#info').html("<div class='alert alert-danger'><b>La cantidad es Obligatoria, debe ser númerica y mayor que cero</b></div>")
+                    return false;
+                }
+                else if(Existencia_Minima >= Cantidad){
+                    $('#info').html("<div class='alert alert-danger'><b>La existencia minima debe ser menor que la cantidad</b></div>")
+                    return false;
+                }
+                else if(Existencia_Minima.length > 11 && isNaN(Existencia_Minima) || Existencia_Minima < 0 ){
                     $('#info').html("<div class='alert alert-danger'><b>El campo Existencia Minima debe ser Numerico y menor a 11 caracteres </b></div>")
                     return false;
                 }

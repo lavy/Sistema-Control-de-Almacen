@@ -213,4 +213,14 @@ class DespachosController extends Controller {
         return $pdf->stream('planilla');
 
     }
+
+    public function cerrar($id)
+    {
+        DB::table('planilla_orden')
+            ->where('id_orden', $id)
+            ->update(['estatus_orden' => 'Cerrada']);
+
+        return redirect('despacho')->with('message','Se ha bloqueado la planilla de la orden');
+
+    }
 }

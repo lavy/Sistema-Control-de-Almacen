@@ -54,7 +54,7 @@
 
                     <td width="160" class="ws9" style="text-align: center"><?php echo $beneficiarios->beneficiario?></td>
                     <td width="152" class="ws9" style="text-align: center"><?php echo $beneficiarios->telef_beneficiario?></td>
-                    <td width="181" class="ws9" style="text-align: center"><a href="mailto:<?php echo $beneficiarios->email?>"><?php echo $beneficiarios->email?></td>
+                    <td width="181" class="ws9" style="text-align: center"><a href="mailto:<?php echo $beneficiarios->email?>"></a><?php echo $beneficiarios->email?></td>
                     <?php
                     }
                     ?>
@@ -204,20 +204,20 @@
 
 <div id="text4" style="position:absolute; overflow:hidden; left:0px; top:81px; width:177px; height:20px; z-index:4">
     <div class="wpmd">
-        <div><font class="ws10">GDC-OTIT-AE-{{\Carbon\Carbon::now()->format('Ym')}}-<?php echo $despacho->id_orden ?></font></div>
+        <div><font class="ws10">GDC-OTIT-AE-<?php echo date("Ym",strtotime($despacho->fecha_orden))?>-<?php echo $despacho->id_orden ?></font></div>
     </div>
 </div>
 
 <?php
-foreach($jefe as $jefe)
+foreach($jefe as $jefes)
 {
 ?>
 <div id="text5" style="position:absolute; overflow:hidden; left:20px; top:730px; width:291px; height:92px; z-index:6">
     <div class="wpmd">
         <div align="center"><font class="ws11">Entrega:</font></div>
-        <div align="center"><font class="ws10"><?php echo $jefe->nombre ?><br></font></div>
-        <div align="center"><font class="ws10">CI <?php echo $jefe->cedula?></font></div>
-        <div align="center"><font class="ws10">Jefe De La <?php echo $jefe->descrip_oficina?></font></div>
+        <div align="center"><font class="ws10"><?php echo $jefes->nombre ?><br></font></div>
+        <div align="center"><font class="ws10">CI <?php echo $jefes->cedula?></font></div>
+        <div align="center"><font class="ws10">Jefe De La <?php echo $jefes->descrip_oficina?></font></div>
         <div align="center"><font class="ws11"></font></div>
     </div>
 </div>
@@ -261,7 +261,7 @@ foreach($tecnicos as $tec)
 
 <div id="text8" style="position:absolute; overflow:hidden; left:625px; top:99px; width:70px; height:19px; z-index:9">
     <div class="wpmd">
-        <div><?php echo $despacho->fecha_orden ?></div>
+        <div><?php echo date("d-m-Y",strtotime($despacho->fecha_orden)); ?></div>
     </div></div>
 
 <div id="text9" style="position:absolute; overflow:hidden; left:637px; top:81px; width:52px; height:17px; z-index:10">

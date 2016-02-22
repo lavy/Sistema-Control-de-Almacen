@@ -38,7 +38,7 @@
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('telef_beneficiario','Telefono Beneficiario:')!!}
-                    {!!Form::text('telef_beneficiario',null,['class'=>'form-control','type'=>'text','placeholder'=>'04262566545','id'=>'telefono'])!!}
+                    {!!Form::text('telef_beneficiario',null,['class'=>'form-control','type'=>'text','placeholder'=>'Ej: 04262566545','id'=>'telefono'])!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('email_beneficiario','Email Beneficiario:')!!}
@@ -147,6 +147,7 @@
                     format:'DD-MM-YYYY',
                     locale:'es'
                 });
+                
 
                 $("#datetimepicker5").on("dp.change", function (e) {
                     $('#datetimepicker6').data("DateTimePicker").minDate(e.date);

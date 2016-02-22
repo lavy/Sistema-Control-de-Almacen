@@ -27,7 +27,7 @@
             <p>POR FAVOR PULSE EL BOTON <b>DETALLES</b> PARA COMPLEMENTAR LA ORDEN DE SUMINISTROS</p>
             <table class="table table-bordered">
                 <tr>
-                    <th style="text-align:center;">PDF</th>
+                    <th style="text-align:center;">BLOQUEAR PDF</th>
                     <th style="text-align:center;">PDF</th>
                     <th style="text-align:center;">DETALLE ORDEN</th>
                     <th style="text-align:center;">DEVOLUCIONES</th>
@@ -41,29 +41,46 @@
                 </tr>
                 @foreach($orden as $ord )
                     <tr>
+                        @if(Auth::user()->UserLevel ==0 && $ord->estatus_orden !='Cerrada')
+                            <td>
+                                <a href="{{URL::to('cerrar_planilla/'.$ord->id_orden)}}"><i class="fa fa-close fa-2x" style="margin-left: 20px;" title="Bloquear Planilla" data-toggle="tooltip"></i></a>
+                            </td>
+                        @elseif($ord->estatus_orden =='Cerrada')
+                            <td>
+                                <i class="fa fa-check fa-2x" style="margin-left: 20px;" title="Planilla Bloqueada" data-toggle="tooltip"></i>
+                            </td>
+                        @endif
                         @if($ord->cantidad !=NULL && $ord->estatus_orden !='Cerrada')
-                            <td>{!!link_to('despacho/pdf/'.$ord->id_orden,'Planilla',['class'=>'btn btn-primary btn-md'])!!}</td>
+                            <td>
+                                <a href="{{URL::to('despacho/pdf/'.$ord->id_orden)}}"><i class="fa fa-file-pdf-o fa-2x" title="Planilla Orden" data-toggle="tooltip"></i></a>
+                            </td>
                         @else
-                            <td>{!!link_to('#','Planilla',['class'=>'btn btn-primary btn-md','disabled'=>'true'])!!}</td>
+                            <td>
+                                <i class="fa fa-file-pdf-o fa-2x"  title="Planilla Bloqueada" data-toggle="tooltip"></i>
+                            </td>
                         @endif
 
                         @if($ord->cantidad ===NULL)
                         <td width="60" align="center">
-                            {!! Html::link('despacho/detalle/'.$ord->id_transaccion,'Detalles',array('class' => 'btn btn-success btn-md')) !!}
+                            <a href="{{URL::to('despacho/detalle/'.$ord->id_transaccion)}}"><i class="fa fa-pencil fa-2x" title="Complementar Orden" data-toggle="tooltip"></i></a>
+                            {{--{!! Html::link('despacho/detalle/'.$ord->id_transaccion,'Detalles',array('class' => 'btn btn-success btn-md')) !!}--}}
                         </td>
                         @else
                         <td width="60" align="center">
-                            {!! Html::link('#','Detalles',array('class' => 'btn btn-success btn-md','disabled'=>'true')) !!}
+                            <i class="fa fa-pencil fa-2x" title="Complementar Orden" data-toggle="tooltip"></i>
+                            {{--{!! Html::link('#','Detalles',array('class' => 'btn btn-success btn-md','disabled'=>'true')) !!}--}}
                         </td>
                         @endif
 
                         @if($ord->cantidad ===NULL && Auth::user()->UserLevel ==0)
                         <td width="60" align="center">
-                           {!! Html::link('#','Devolucion',array('class' => 'btn btn-warning btn-md','disabled'=>'true')) !!}
+                            <a href="{{URL::to('devolucion/'.$ord->id_transaccion)}}"><i class="fa fa-undo fa-2x" title="Devoluciones" data-toggle="tooltip"></i></a>
+                           {{--{!! Html::link('#','Devolucion',array('class' => 'btn btn-warning btn-md','disabled'=>'true')) !!}--}}
                         </td>
                         @elseif($ord->cantidad != NULL && Auth::user()->UserLevel ==0)
                         <td width="60" align="center">
-                            {!! Html::link('devolucion/'.$ord->id_transaccion,'Devolucion',array('class' => 'btn btn-warning btn-md')) !!}
+                            <i class="fa fa-undo fa-2x" title="Devoluciones" data-toggle="tooltip"></i>
+                            {{--{!! Html::link('devolucion/'.$ord->id_transaccion,'Devolucion',array('class' => 'btn btn-warning btn-md')) !!}--}}
                         </td>
                         @endif
 
@@ -81,4 +98,12 @@
         </div>
     </div>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
+        });
+
+    </script>
 @endsection

@@ -30,6 +30,9 @@ Route::get('menu',function()
   }
 });
 
+
+Route::get('cerrar_planilla/{id}',['uses' => 'DespachosController@cerrar','middleware' => ['operador']]);
+
 Route::get('oficina',['uses' => 'OficinasController@index', 'middleware' => ['operador']]);
 Route::get('crear_oficinas',['uses' => 'OficinasController@create', 'middleware' => ['operador']]);
 Route::post('oficinas',['uses' => 'OficinasController@store', 'middleware' => ['operador']]);

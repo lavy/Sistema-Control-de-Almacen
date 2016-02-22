@@ -52,7 +52,7 @@
                             <td style="text-align:center;">{{$prov->telef_proveedor}}</td>
                             <td style="text-align:center;">{{$prov->contacto}}</td>
                             <td style="text-align:center;">{{$prov->telef_contacto}}</td>
-                            <td style="text-align:center;">{{$prov->email}}</td>
+                            <td style="text-align:center;"><a href="mailto:<?php echo $prov->email?>"><?php echo $prov->email?></a></td>
                             <td width="60" align="center">
                                 {!! Html::link('proveedor/editar/'.$prov->id_proveedor, 'Editar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}
                             </td>

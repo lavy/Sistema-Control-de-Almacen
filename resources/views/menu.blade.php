@@ -2,18 +2,6 @@
 @section('title', 'Menú Principal')
 @section('content')
 
-    @if($errors->has())
-        <div class='alert alert-danger'>
-            @foreach ($errors->all('<p>:message</p>') as $message)
-                {!! $message !!}
-            @endforeach
-        </div>
-    @endif
-
-    @if (Session::has('message'))
-        <div class="alert alert-danger">{{ Session::get('message') }}</div>
-    @endif
-
     <script type="text/javascript">
         $('.modalLoad').click(function() {
             $.get("prueba",function(data) {
@@ -34,7 +22,7 @@
     </style>
 
 
-    <div class="container" style="margin-top: 30px;" onload="carga()">
+    <div class="container" style="margin-top: 30px;">
         <br>
 
 

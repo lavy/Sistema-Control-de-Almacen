@@ -52,7 +52,7 @@
                     </div>
                 <div class="col-md-6">
                     {!!Form::label('unidad_medida','Unidad de Medida:')!!}
-                    {!!Form::select('unidad_medida',['Kilogramos'=>'Kilogramos','Unidades'=>'Unidades','Litros'=>'Litros','Metros'=>'Metros'],'1',['class'=>'form-control','id'=>'unidades'])!!}
+                    {!!Form::select('unidad_medida',['Unidades'=>'Unidades','Kilogramos'=>'Kilogramos','Litros'=>'Litros','Metros'=>'Metros'],'1',['class'=>'form-control','id'=>'unidades'])!!}
                 </div>
                 <div class="col-md-6">
                     {!!Form::label('cantidad','Cantidad:')!!}

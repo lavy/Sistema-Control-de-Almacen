@@ -5,7 +5,7 @@ use App\Http\Requests\Request;
 class RenglonesForm extends Request {
 
 	/**
-	 * Determine if the user is authorized to make this request.
+	 * Determina si el usuario esta autorizado para hacer esta petición.
 	 *
 	 * @return bool
 	 */
@@ -15,7 +15,7 @@ class RenglonesForm extends Request {
 	}
 
 	/**
-	 * Get the validation rules that apply to the request.
+	 * Obtiene las reglas de validación para aplicar a la petición.
 	 *
 	 * @return array
 	 */
@@ -29,10 +29,15 @@ class RenglonesForm extends Request {
             'marca'=>'required|not_in:0',
             'modelo'=>'required|not_in:0',
             'existencia_minima'=>'required|numeric',
-            'foto_articulo'=>'required|image'
+            'foto_articulo'=>'image'
 		];
 	}
 
+    /**
+     * Obtiene el mensaje que mostrara al aplicar la petición.
+     *
+     * @return array
+     */
     public function message()
     {
         return[
@@ -49,7 +54,6 @@ class RenglonesForm extends Request {
             'existencia_minima.required'=>'La existencia minima es requerida',
             'existencia_minima.numeric'=>'La existencia minima debe ser un campo numerico',
             'foto_articulo.image'=>'La foto del articulo debe ser de tipo imagen',
-            'foto_articulo.required'=>'La foto del articulo debe ser obligatoria'
         ];
     }
 }

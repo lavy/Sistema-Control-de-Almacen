@@ -8,12 +8,34 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Oficinas extends Model {
 
+    /**
+     * El Timestamp de la tabla
+     * valores: 'true','false'.
+     *
+     * @var bool
+     */
     public $timestamps=false;
-    protected $primaryKey = 'id_oficina';
-    protected $table='oficinas';
-	protected $fillable=['descrip_oficina'];
-    protected $guarded=['id_oficina'];
 
+    /**
+     * La llave primaria de la tabla.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id_oficina';
+
+    /**
+     * La tabla de base de datos usada por el modelo
+     *
+     * @var string
+     */
+    protected $table='oficinas';
+
+
+    /**
+     * Relacionamiento de la Tabla Oficina con la Tabla Departamentos
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function departamentos()
     {
         //Tabla a referenciar Clave foranea del y clave local

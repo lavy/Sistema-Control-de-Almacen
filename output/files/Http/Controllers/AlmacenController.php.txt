@@ -60,7 +60,7 @@ class AlmacenController extends Controller {
         }
         $almacen->save();
 
-        return redirect('almacen')->with('message');
+        return redirect('almacen')->with('message','Se ha creado un Almacen');
 	}
 
 	/**
@@ -92,7 +92,7 @@ class AlmacenController extends Controller {
         $almacen->celular_contacto_almacen=\Request::input('celular_contacto');
         $almacen->email_contacto_almacen=\Request::input('correo_contacto');
         $almacen->save();
-        return redirect('almacen')->with('message');
+        return redirect('almacen')->with('message','Se ha editado un Almacen');
 	}
 
 	/**
@@ -105,7 +105,7 @@ class AlmacenController extends Controller {
 	{
 		$almacen=\App\Almacen::find($id);
         $almacen->delete();
-        return redirect('almacen')->with('message','borrado');
+        return redirect('almacen')->with('message','Se ha borrado un Almacen');
 	}
 
 }

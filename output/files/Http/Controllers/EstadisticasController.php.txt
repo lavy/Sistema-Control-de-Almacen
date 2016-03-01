@@ -67,59 +67,41 @@ class EstadisticasController extends Controller {
         return view('estadisticas.columns')->with(['oficina'=>$oficinas,'departamentos'=>$departamento]);
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
+    /**
+     *
+     *
+     */
+    public function prestamos()
+    {
+        $prestamos= DB::select("SELECT ofic.descrip_oficina AS oficina,
+                COALESCE ((SELECT COUNT(tipo_solicitud)
+                     FROM solicitudes_almacen
+                       WHERE tipo_solicitud='Prestamo'
+                       AND id_oficina = ofic.id_oficina
+                       GROUP BY ofic.descrip_oficina),
+                       0) AS cantidad_prestamos
+                FROM oficinas ofic
+                ORDER BY oficina DESC");
+        return view('estadisticas.prestamo')->with('prestamos',$prestamos);
+    }
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
+    /**
+     *
+     *
+     */
+    public function asignados()
+    {
+        $asignados= DB::select("SELECT ofic.descrip_oficina AS oficina,
+                COALESCE ((SELECT COUNT(tipo_solicitud)
+                     FROM solicitudes_almacen
+                       WHERE tipo_solicitud='Asignacion'
+                       AND id_oficina = ofic.id_oficina
+                       GROUP BY ofic.descrip_oficina),
+                       0) AS cantidad_asignados
+                FROM oficinas ofic
+                ORDER BY oficina DESC");
+        return view('estadisticas.asignados')->with('asignados',$asignados);
+    }
 
 }
 

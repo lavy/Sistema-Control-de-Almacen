@@ -103,6 +103,14 @@ Route::post('despacho/{id}','DespachosController@update');
 Route::get('devolucion/{id}',['uses'=>'DespachosController@devolucion','middleware'=>['operador']]);
 Route::get('reversar/{id}','DespachosController@reversar');
 
+Route::get('categoria',['uses' => 'CategoriasController@index', 'middleware' => ['operador']]);
+Route::get('crear_categorias',['uses' => 'CategoriasController@create', 'middleware' => ['operador']]);
+Route::post('categorias',['uses' => 'CategoriasController@store', 'middleware' => ['operador']]);
+Route::delete('categorias/eliminar/{id}',['uses' => 'CategoriasController@destroy', 'middleware' => ['operador']]);
+Route::get('categorias/editar/{id}',['uses' => 'CategoriasController@edit', 'middleware' => ['operador']]);
+Route::post('categorias/{id}',['uses' => 'CategoriasController@update', 'middleware' => ['operador']]);
+
+
 Route::get('articulos','ArticulosController@index');
 Route::get('articulos/crear','ArticulosController@create');
 Route::post('articulos','ArticulosController@store');

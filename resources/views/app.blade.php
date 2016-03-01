@@ -61,6 +61,7 @@
                         <li><a href="{{URL::to('marca')}}"><i class="fa fa-registered"></i>Marcas</a></li>
                         <li><a href="{{URL::to('modelos')}}"><i class="fa fa-registered"></i>Modelos</a></li>
                         <li><a href="{{URL::to('proveedor')}}"><i class="fa fa-bus"></i>Proveedores</a></li>
+                        <li><a href="{{URL::to('categoria')}}"><i class="fa fa-bars"></i>Categorias</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">

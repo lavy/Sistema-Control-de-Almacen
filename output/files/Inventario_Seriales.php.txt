@@ -8,11 +8,33 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Inventario_Seriales extends Model {
 
+    /**
+     * El Timestamp de la tabla
+     * valores: 'true','false'.
+     *
+     * @var bool
+     */
     public $timestamps=false;
+
+    /**
+     * La llave primaria de la tabla.
+     *
+     * @var string
+     */
     protected $primaryKey='id_serial';
+
+    /**
+     * La tabla de base de datos usada por el modelo
+     *
+     * @var string
+     */
     protected $table='inventario_seriales';
 
-
+    /**
+     * Relacionamiento de la Tabla Inventario Seriales con Renglones(Articulos).
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
 
     public function Renglon(){
         return $this->belongsToMany('\App\Renglon','seriales','id_serial','serial');

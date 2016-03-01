@@ -8,10 +8,34 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Renglon extends Model {
 
+    /**
+     * El Timestamp de la tabla
+     * valores: 'true','false'.
+     *
+     * @var bool
+     */
     public $timestamps=false;
+
+    /**
+     * La llave primaria de la tabla.
+     *
+     * @var string
+     */
     protected $primaryKey='id_renglon';
+
+    /**
+     * La tabla de base de datos usada por el modelo
+     *
+     * @var string
+     */
     protected $table='renglones';
 
+
+    /**
+     * Relacionamiento de la Tabla Renglon con la tabla Tipo Renglon.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function Tipo_Renglon()
     {
         return $this->belongsTo('App\TipoRenglon','id_tipo_renglon','id_renglon');

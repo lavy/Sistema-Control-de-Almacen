@@ -68,13 +68,13 @@ class ReportesController extends Controller {
 	 */
 	public function prestamos()
 	{
-        $prestamos= DB::select("SELECT ofic.descrip_oficina as oficina,
-                COALESCE ((SELECT count(tipo_solicitud)
-                     from solicitudes_almacen
+        $prestamos= DB::select("SELECT ofic.descrip_oficina AS oficina,
+                COALESCE ((SELECT COUNT(tipo_solicitud)
+                     FROM solicitudes_almacen
                        WHERE tipo_solicitud='Prestamo'
                        AND id_oficina = ofic.id_oficina
                        GROUP BY ofic.descrip_oficina),
-                       0) as cantidad_prestamos
+                       0) AS cantidad_prestamos
                 FROM oficinas ofic
                 ORDER BY oficina DESC");
         return view('reportes.prestamo')->with('prestamos',$prestamos);

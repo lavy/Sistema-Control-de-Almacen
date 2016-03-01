@@ -30,6 +30,9 @@ Route::get('menu',function()
   }
 });
 
+
+Route::get('cerrar_planilla/{id}',['uses' => 'DespachosController@cerrar','middleware' => ['operador']]);
+
 Route::get('oficina',['uses' => 'OficinasController@index', 'middleware' => ['operador']]);
 Route::get('crear_oficinas',['uses' => 'OficinasController@create', 'middleware' => ['operador']]);
 Route::post('oficinas',['uses' => 'OficinasController@store', 'middleware' => ['operador']]);
@@ -159,6 +162,8 @@ Route::delete('permisos/eliminar/{id}','PermisosController@destroy');
 
 Route::get('estadisticas',['uses'=>'EstadisticasController@index','middleware'=>['operador']]);
 Route::get('estadisticas/X',['uses'=>'EstadisticasController@create','middleware'=>['operador']]);
+Route::get('estadisticas/prestamos',['uses'=>'EstadisticasController@prestamos','middleware'=>['operador']]);
+Route::get('estadisticas/asignados',['uses'=>'EstadisticasController@asignados','middleware'=>['operador']]);
 
 Route::get('niveles',['uses'=>'NivelesController@index','middleware'=>['operador']]);
 Route::get('crear_nivel',['uses'=>'NivelesController@create','middleware'=>['operador']]);
@@ -228,13 +233,11 @@ Route::get('articulo',function() {
 
 Route::get('modal/{id}',function($id)
 {
-
     $seriales=\Illuminate\Support\Facades\DB::table('inventario_seriales')
         ->join('renglones','inventario_seriales.id_renglon','=','renglones.id_renglon')
         ->select('inventario_seriales.serial','renglones.descrip_renglon')
         ->where('inventario_seriales.id_renglon','=',$id)
         ->get();
-    /*$seriales=\App\Seriales::where('id_renglon','=',$id)->get();*/
 
     $cantidad=count($seriales);
 
@@ -243,14 +246,16 @@ Route::get('modal/{id}',function($id)
       echo "<tr>";
          echo "<td style='text-align:center;'>".'<b>Articulo</b>'."</td>";
          echo "<td style='text-align:center;'>".'<b>Seriales</b>'."</td>";
-         /*echo "<td style='text-align:center;'>".'<b>Seriales</b>'."</td>";*/
       echo "</tr>";
 
     foreach($seriales as $serial) {
         echo "<tr>";
             echo "<td style='text-align:center;'>".$serial->descrip_renglon."</td>";
+        if($serial->serial != null){
             echo "<td style='text-align:center;'>".$serial->serial."</td>";
-            /*echo "<td><a href='modal' class='btn btn-danger'></a></td>";*/
+        }else{
+            echo "<td style='text-align:center;'>".'Sin Serial'."</td>";
+        }
         echo "</tr>";
 
     }
@@ -350,6 +355,20 @@ Route::get('nivels',function(){
 
         $nivel=Input::get('nivel');
         $verificar=\App\UserLevel::where('UserLevelName','=',$nivel)->count();
+
+        if ($verificar == 0) {
+            echo "Disponible";
+        } else {
+            echo "No Disponible";
+        }
+    }
+});
+
+Route::get('provs',function(){
+    if(Request::ajax()){
+
+        $provs=Input::get('proveedor');
+        $verificar=\App\Proveedor::where('nombre_proveedor','=',$provs)->count();
 
         if ($verificar == 0) {
             echo "Disponible";

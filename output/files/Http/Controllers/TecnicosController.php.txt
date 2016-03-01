@@ -48,16 +48,20 @@ class TecnicosController extends Controller {
 	 */
 	public function store(TecnicosForm $tecnicosForm)
 	{
-        $foto_tecnico=Input::file('foto_t');
-        $ruta=public_path().'/tecnicos/';
-        $url_foto=$foto_tecnico->getClientOriginalName();
-        $subir=$foto_tecnico->move($ruta,$foto_tecnico->getClientOriginalName());
-
         $tecnicos=new \App\Tecnico();
+
+        $foto_tecnico=Input::file('foto_t');
+        if($foto_tecnico != null)
+        {
+            $ruta=public_path().'/tecnicos/';
+            $url_foto=$foto_tecnico->getClientOriginalName();
+            $subir=$foto_tecnico->move($ruta,$foto_tecnico->getClientOriginalName());
+            $tecnicos->foto_tecnico=$url_foto;
+        }
+
         $tecnicos->nombres_apellidos=\Request::input('nombre_tecnico');
         $tecnicos->cedula=\Request::input('cedula');
         $tecnicos->fecha_nacimiento=date("Y-m-d",strtotime(\Request::input('fecha_nacimiento')));
-        $tecnicos->foto_tecnico=$url_foto;
         $tecnicos->save();
         return redirect('tecnico')->with('message','Se ha registrado un tecnico exitosamente');
 	}
@@ -83,16 +87,21 @@ class TecnicosController extends Controller {
 	 */
 	public function update($id)
 	{
-        $foto_tecnico=Input::file('foto_t');
-        $ruta=public_path().'/tecnicos/';
-        $url_foto=$foto_tecnico->getClientOriginalName();
-        $subir=$foto_tecnico->move($ruta,$foto_tecnico->getClientOriginalName());
-
         $tecnicos=\App\Tecnico::find($id);
+
+        $foto_tecnico=Input::file('foto_t');
+        if($foto_tecnico != null)
+        {
+            $ruta=public_path().'/tecnicos/';
+            $url_foto=$foto_tecnico->getClientOriginalName();
+            $subir=$foto_tecnico->move($ruta,$foto_tecnico->getClientOriginalName());
+            $tecnicos->foto_tecnico=$url_foto;
+        }
+
         $tecnicos->nombres_apellidos=\Request::input('nombre_tecnico');
         $tecnicos->cedula=\Request::input('cedula');
         $tecnicos->estatus=\Request::input('estatus');
-        $tecnicos->foto_tecnico=$url_foto;
+
         $tecnicos->save();
         return redirect('tecnico')->with('message','Se ha Actualizado el registro satisfactoriamente');
 	}

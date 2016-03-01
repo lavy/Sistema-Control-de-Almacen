@@ -52,7 +52,7 @@ class OficinasController extends Controller {
 		$oficinas=new\App\Oficinas;
         $oficinas->descrip_oficina=\Request::Input('descripcion');
         $oficinas->save();
-        return redirect('oficina')->with('message','post saved');
+        return redirect('oficina')->with('message','Se ha creado una oficina');
 	}
 
 	/**
@@ -89,7 +89,7 @@ class OficinasController extends Controller {
 		$oficinas=\App\Oficinas::find($id);
         $oficinas->descrip_oficina=\Request::Input('descripcion');
         $oficinas->save();
-        return redirect ('oficina');
+        return redirect ('oficina')->with('message','Se ha editado la oficina');
 	}
 
 	/**

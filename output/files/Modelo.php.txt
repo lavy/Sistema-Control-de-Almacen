@@ -8,9 +8,29 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Modelo extends Model {
 
+    /**
+     * El Timestamp de la tabla
+     * valores: 'true','false'.
+     *
+     * @var bool
+     */
     public $timestamps=false;
-    protected $table='modelo';
+
+    /**
+     * La llave primaria de la tabla.
+     *
+     * @var string
+     */
+
     protected $primaryKey='id_modelo';
+
+    /**
+     * La tabla de base de datos usada por el modelo
+     *
+     * @var string
+     */
+    protected $table='modelo';
+
 
 
     public function marcas()

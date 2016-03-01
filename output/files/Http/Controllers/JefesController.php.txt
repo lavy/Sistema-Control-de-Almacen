@@ -57,7 +57,7 @@ class JefesController extends Controller {
         $jefes->cedula=\Request::input('cedula');
         $jefes->fecha_ingreso=date("Y-m-d",strtotime(\Request::input('fecha_ingreso')));
         $jefes->save();
-        return redirect('jefes');
+        return redirect('jefes')->with('message','Se ha creado un Nuevo Jefe');
 	}
 
 	/**
@@ -88,7 +88,7 @@ class JefesController extends Controller {
         $jefes->cedula = \Request::input('cedula');
         $jefes->fecha_ingreso =date("Y-m-d",strtotime(\Request::input('fecha_ingreso')));
         $jefes->save();
-        return redirect('jefes')->with('message');
+        return redirect('jefes')->with('message','Se ha editado un Jefe');
 
     }
 

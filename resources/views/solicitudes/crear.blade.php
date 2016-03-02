@@ -98,12 +98,12 @@
 
                 <div class="col-md-6">
                     {!!Form::label('detalle','Detalles del Pedido:')!!}
-                    {!!Form::text('detalle',null,['class'=>'form-control','type'=>'text','id'=>'detalle'])!!}
+                    {!!Form::text('detalle',null,['class'=>'form-control','type'=>'text','id'=>'detalle','placeholder'=>'Importancia'])!!}
                 </div>
 
                 <div class="col-md-6">
                     {!!Form::label('observaciones','Observaciones:')!!}
-                    {!!Form::text('observaciones',null,['class'=>'form-control','type'=>'text','id'=>'observacion'])!!}
+                    {!!Form::text('observaciones',null,['class'=>'form-control','type'=>'text','id'=>'observacion','placeholder'=>'Se necesita para:'])!!}
                 </div>
 
                 <div class="col-md-6 col-md-offset-5 col-center-block" style="margin-top: 20px">

@@ -35,7 +35,7 @@ class ReportesController extends Controller {
                        0) AS cantidad
                 FROM oficinas ofic
                 ORDER BY cantidad ASC");
-        $oficina->setPath('oficinas');
+        /*$oficina->setPath('oficinas');*/
 
         return view('reportes.oficina')->with('oficinas',$oficina);
 	}

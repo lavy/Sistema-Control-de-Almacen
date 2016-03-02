@@ -31,7 +31,7 @@
                         <div class="form-group">
                             <label for="fecha_ingreso">Fecha Ingreso</label>
                             <div class='input-group date' id='datetimepicker5'>
-                                {!!Form::text('fecha_ingreso',$jefes->fecha_ingreso,array('class'=>'form-control','type'=>'text','readonly'=>'true'))!!}
+                                {!!Form::text('fecha_ingreso',$jefes->fecha_ingreso,array('class'=>'form-control','type'=>'text'))!!}
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>

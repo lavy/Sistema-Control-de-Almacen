@@ -41,11 +41,11 @@
                             <td width="60" align="center">
                                 {!! Html::link('seriales/editar/'.$seriales->id_serial, '', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}
                             </td>
-                            <td width="60" align="center">
+                            {{--<td width="60" align="center">
                                 {!! Form::open(array('url' =>'seriales/eliminar/'.$seriales->id_serial, 'method' => 'DELETE')) !!}
                                 <button type="submit" class="glyphicon glyphicon-trash btn btn-danger btn-xs"></button>
                                 {!! Form::close() !!}
-                            </td>
+                            </td>--}}
                         </tr>
                     @endforeach
 

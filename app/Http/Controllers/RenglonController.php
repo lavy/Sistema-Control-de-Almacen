@@ -54,12 +54,9 @@ class RenglonController extends Controller {
         $trenglon=\App\TipoRenglon::all()->lists('descrip_tipo_renglon','id_tipo_renglon');
         $marca=\App\Marca::all()->lists('descrip_marca','id_marca');
         $modelo=\App\Modelo::all()->lists('descrip_modelo','id_modelo');
-        $unidades=\App\Unidades::all()->lists('descrip_unidad','id_unidad');
-        array_unshift($unidades,'Por Favor Seleccione una unidad de medida');
         array_unshift($trenglon,'Por Favor Seleccione un Tipo de Articulo');
         array_unshift($marca,'Por Favor Seleccione una Marca');
-		return view('renglon.crear')->with(['almacen'=>$almacen,'trenglon'=>$trenglon,'marca'=>$marca,'modelo'=>$modelo,
-        'unidades'=>$unidades]);
+		return view('renglon.crear')->with(['almacen'=>$almacen,'trenglon'=>$trenglon,'marca'=>$marca,'modelo'=>$modelo]);
 	}
 
 	/**
@@ -119,11 +116,11 @@ class RenglonController extends Controller {
         $trenglon=\App\TipoRenglon::all()->lists('descrip_tipo_renglon','id_tipo_renglon');
         $marca=\App\Marca::all()->lists('descrip_marca','id_marca');
         $modelo=\App\Modelo::all()->lists('descrip_modelo','id_modelo');
-        $seriales=DB::table('renglones')
-            ->join('seriales','renglones.id_renglon','=','seriales.id_renglon')
-            ->select('seriales.seriales','seriales.id_serial')
-            ->where('seriales.id_renglon','=',$id)
-            ->get();
+        /*$seriales=DB::table('renglones')
+            ->join('inventario_seriales','renglones.id_renglon','=','inventario_seriales.id_renglon')
+            ->select('inventario_seriales.seriales','inventario_seriales.id_serial')
+            ->where('inventario_seriales.id_renglon','=',$id)
+            ->get();*/
         /*$seriales = Renglon::join('seriales','renglones.id_renglon','=','seriales.id_renglon')
             ->where('seriales.id_renglon','=',$id)
             ->lists('seriales.seriales', 'seriales.id_serial');*/
@@ -131,7 +128,7 @@ class RenglonController extends Controller {
    ->join('users','users.id','=','friends_table.user_id')  // join users table to..
     ->where('friends_table.user_id', $user->id)
         ->lists(DB::raw('concat(first_name," ",last_name)'), 'friend_id')  // ...concatenate its fields*/
-        return view('renglon.editar')->with(['renglon'=>$renglon,'marca'=>$marca,'modelo'=>$modelo,'tipo_renglon'=>$trenglon,'seriales'=>$seriales]);
+        return view('renglon.editar')->with(['renglon'=>$renglon,'marca'=>$marca,'modelo'=>$modelo,'tipo_renglon'=>$trenglon]);
 	}
 
 	/**

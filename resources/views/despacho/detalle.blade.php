@@ -79,40 +79,21 @@
                     $('#info').html("<div class='alert alert-danger'><b>La cantidad debe ser númerica, mayor que cero</b></div>")
                     return false;
                 }
-                else if (cantidad > existencia || cantidad == existencia) {
-                    $('#info').html("<div class='alert alert-danger'><b>La cantidad debe ser menor que existencia</b></div>")
+                else if (existencia < cantidad) {
+                    $('#info').html("<div class='alert alert-danger'><b>La cantidad debe ser menor que la existencia</b></div>")
                     return false;
                 }
-                else if (total <= existencia_m) {
-                    $('#info').html("<div class='alert alert-danger'><b>La existencia minima es '+existencia_m+', por favor inserte otra cantidad.</b></div>")
+                else if (total < existencia_m) {
+                    $('#info').html("<div class='alert alert-danger'><b>La existencia minima es "+existencia_m+", por favor inserte otra cantidad.</b></div>")
                     return false;
                 }
 
             });
-
 
             $('.selectpicker').selectpicker({
                 style: 'btn-default',
                 size: 10
             });
-
-            /*$('.selectpicker').change(function () {
-             var selectedText = $(this).find("option:selected").prop("selected",false);
-             alert(selectedText);
-             $("#info").text(selectedText);
-             });*/
-
-
-            /*
-             $(".js-example-basic-multiple").select2();
-
-
-             <select class="js-example-basic-multiple" multiple="multiple">
-             <option value="AL">Alabama</option>
-             ...
-             <option value="WY">Wyoming</option>
-             </select>*/
-
 
             $('.selectpicker').change(function () {
                 /*var valor = $(this).val();*/

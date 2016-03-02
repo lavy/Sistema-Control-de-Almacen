@@ -38,7 +38,10 @@
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand">{{Auth::user()->nombre.'   '.Auth::user()->apellido}}</a>
+            <?php
+            $nombre=Auth::user()->nombre;
+            ?>
+            <a class="navbar-brand">{{strtoupper($nombre[0]).'   '.Auth::user()->apellido}}</a>
         </div>
         <div>
             <ul class="nav navbar-nav">
@@ -61,7 +64,7 @@
                         <li><a href="{{URL::to('marca')}}"><i class="fa fa-registered"></i>Marcas</a></li>
                         <li><a href="{{URL::to('modelos')}}"><i class="fa fa-registered"></i>Modelos</a></li>
                         <li><a href="{{URL::to('proveedor')}}"><i class="fa fa-bus"></i>Proveedores</a></li>
-                        <li><a href="{{URL::to('categoria')}}"><i class="fa fa-bars"></i>Categorias</a></li>
+                        {{--<li><a href="{{URL::to('categoria')}}"><i class="fa fa-bars"></i>Categorias</a></li>--}}
                     </ul>
                 </li>
                 <li class="dropdown">

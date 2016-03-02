@@ -86,9 +86,9 @@
                                 {!! Html::link('renglones/editar/'.$renglon->id_renglon, '', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs','title'=>'Editar Caracteristica Articulo','data-toggle'=>'tooltip')) !!}
 
                                 {!! Html::link('seriales/'.$renglon->id_renglon, '', array('class' => 'glyphicon glyphicon-zoom-in btn btn-info btn-xs','title'=>'Seriales del Articulo','data-toggle'=>'tooltip')) !!}
-                                {!! Form::open(array('url' =>'renglones/eliminar/'.$renglon->id_renglon, 'method' => 'DELETE','title'=>'Eliminar Articulo','data-toggle'=>'tooltip')) !!}
+                                {{--{!! Form::open(array('url' =>'renglones/eliminar/'.$renglon->id_renglon, 'method' => 'DELETE','title'=>'Eliminar Articulo','data-toggle'=>'tooltip')) !!}
                                 <button type="submit" class="glyphicon glyphicon-trash btn btn-danger btn-xs"></button>
-                                {!! Form::close() !!}
+                                {!! Form::close() !!}--}}
 
                             </td>
                         </tr>

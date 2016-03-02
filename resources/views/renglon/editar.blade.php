@@ -31,22 +31,7 @@
                     {!!Form::select('modelo',$modelo,'',['class'=>'form-control','id'=>'modelo'])!!}
                 </div>
 
-
-                @foreach($seriales as $serial)
-                <div class="input_fields_wrap">
-                    <div class="col-md-6">
-                        <label for="serial[]">Serial</label>
-                        <div class="input-group">
-                            <div>
-
-                                <input type="hidden" name="id_serial[]" class="form-control" value="<?php echo $serial->id_serial ;?>" id="ids">
-                                <input type="text" name="serial[]" class="form-control" value="<?php echo $serial->seriales;?>" title="Si quiere agregar otro producto, Presione el boton (+)" data-toggle="tooltip" >
-                            </div>
-                            {{--<span class="input-group-btn"><button class="add_field_button btn btn-info">+</button></span>--}}
-                        </div>
-                    </div>
-                </div>
-                @endforeach
+                
                 <div class="col-md-6">
                     {!!Form::label('unidad_medida','Unidad de Medida:')!!}
                     {!!Form::select('unidad_medida',['Kilogramos'=>'Kilogramos','Unidades'=>'Unidades','Litros'=>'Litros','Metros'=>'Metros'],$renglon->unidad_medida,['class'=>'form-control','id'=>'unidades'])!!}

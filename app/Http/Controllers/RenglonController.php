@@ -175,7 +175,7 @@ class RenglonController extends Controller {
                 ->update(['seriales' => $seriales[$i]]);
         }
 
-        return redirect('renglones')->with('message','Se ha editado el artículo'.$id);
+        return redirect('renglones')->with('message','Se ha editado el artículo');
 	}
 
 	/**

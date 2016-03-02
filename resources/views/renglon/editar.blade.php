@@ -31,7 +31,7 @@
                     {!!Form::select('modelo',$modelo,'',['class'=>'form-control','id'=>'modelo'])!!}
                 </div>
 
-                
+
                 <div class="col-md-6">
                     {!!Form::label('unidad_medida','Unidad de Medida:')!!}
                     {!!Form::select('unidad_medida',['Kilogramos'=>'Kilogramos','Unidades'=>'Unidades','Litros'=>'Litros','Metros'=>'Metros'],$renglon->unidad_medida,['class'=>'form-control','id'=>'unidades'])!!}

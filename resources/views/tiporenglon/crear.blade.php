@@ -21,6 +21,10 @@
             <div class="panel-heading" style="text-align:center;">CREAR TIPO ARTICULO</div>
             <div class="panel-body">
                 <div class="col-md-6">
+                    {!!Form::label('categoria','Categoria:')!!}
+                    {!!Form::select('categoria',$categorias,'',['class'=>'form-control','id'=>'categoria'])!!}
+                </div>
+                <div class="col-md-6">
                     {!!Form::label('descripcion','Descripción:')!!}
                     {!!Form::text('descripcion',null,array('class'=>'form-control','type'=>'text','id'=>'tipo_articulo'))!!}
                 </div>
@@ -58,9 +62,14 @@
 
             $('#form').submit(function() {
                 var tipo_articulo = $('#tipo_articulo').val();
+                var categoria = $('#categoria').val();
                 var Disponible=$('#disponible').val();
 
-                if (tipo_articulo.length > 150 || tipo_articulo == "") {
+                if (categoria == 0) {
+                    $('#info').html("<div class='alert alert-danger'><b>Debe seleccionar una categoria</b></div>");
+                    return false;
+                }
+                else if (tipo_articulo.length > 150 || tipo_articulo == "") {
                     $('#info').html("<div class='alert alert-danger'><b>El Campo Descripcion debe ser menor a 150 Caracteres</b></div>");
                     return false;
                 }

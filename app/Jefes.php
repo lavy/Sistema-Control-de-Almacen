@@ -30,4 +30,8 @@ class Jefes extends Model {
      */
     protected $table='jefes';
 
+    public function oficinas()
+    {
+        return $this->belongsTo(Oficinas::class,'id_oficina','id_jefe');
+    }
 }

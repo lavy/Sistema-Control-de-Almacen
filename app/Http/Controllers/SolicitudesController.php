@@ -58,9 +58,11 @@ class SolicitudesController extends Controller {
         $oficina=\App\Oficinas::all()->lists('descrip_oficina','id_oficina');
         $tarticulo=\App\TipoRenglon::all()->lists('descrip_tipo_renglon','id_tipo_renglon');
         $marca=\App\Marca::all()->lists('descrip_marca','id_marca');
+        $categorias=Categorias::all()->lists('descrip_categoria','id_categoria');
+        array_unshift($categorias,'Seleccione una categoria');
         array_unshift($tarticulo,'Por Favor Seleccione un Tipo de Artículo');
         array_unshift($oficina,'Por Favor Seleccione una Oficina');
-        return view('solicitudes.crear')->with(['oficina'=>$oficina,'t_articulo'=>$tarticulo,'marca'=>$marca]);
+        return view('solicitudes.crear')->with(['oficina'=>$oficina,'t_articulo'=>$tarticulo,'marca'=>$marca,'categorias'=>$categorias]);
 	}
 
 	/**
@@ -96,18 +98,6 @@ class SolicitudesController extends Controller {
 	}
 
 	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-
-    public function show($id)
-	{
-		//
-	}
-
-	/**
 	 * Muestra el Formulario para la edición del registro correspondiente.
 	 *
 	 * @param  int  $id
@@ -121,8 +111,10 @@ class SolicitudesController extends Controller {
         $tarticulo=\App\TipoRenglon::all()->lists('descrip_tipo_renglon','id_tipo_renglon');
         $marca=\App\Marca::all()->lists('descrip_marca','id_marca');
         $articulo=\App\Renglon::all()->lists('descrip_renglon','id_renglon');
+        $categorias=Categorias::all()->lists('descrip_categoria','id_categoria');
         return view('solicitudes.editar')->with(['solicitud'=>$solicitudes,'oficina'=>$oficina,'t_articulo'=>$tarticulo
-                                                ,'marca'=>$marca,'articulo'=>$articulo,'departamento'=>$departamento]);
+                                                ,'marca'=>$marca,'articulo'=>$articulo,'departamento'=>$departamento,
+                                                'categorias'=>$categorias]);
 	}
 
 	/**

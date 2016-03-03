@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Categorias;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TipoRenglonesForm;
@@ -39,7 +40,9 @@ class TiporenglonController extends Controller {
 	 */
 	public function create()
 	{
-		return view('tiporenglon.crear');
+		$categorias=Categorias::all()->lists('descrip_categoria','id_categoria');
+		array_unshift($categorias,'Seleccione una categoria');
+		return view('tiporenglon.crear')->with('categorias',$categorias);
 	}
 
 	/**
@@ -51,6 +54,7 @@ class TiporenglonController extends Controller {
 	{
         $trenglon= new \App\TipoRenglon();
         $trenglon->id_almacen=Auth::User()->id_almacen;
+		$trenglon->id_categoria=\Request::Input('categoria');
         $trenglon->descrip_tipo_renglon=\Request::Input('descripcion');
         $trenglon->save();
         return redirect('tiporenglon')->with('message','Se ha Añadido un Nuevo Tipo de Articulo');
@@ -66,7 +70,9 @@ class TiporenglonController extends Controller {
 	public function edit($id)
 	{
 		$trenglon=\App\TipoRenglon::find($id);
-        return view('tiporenglon.editar')->with('trenglon',$trenglon);
+		$categorias=Categorias::all()->lists('descrip_categoria','id_categoria');
+		array_unshift($categorias,'Seleccione una categoria');
+        return view('tiporenglon.editar')->with(['trenglon'=>$trenglon,'categorias'=>$categorias]);
 	}
 
 	/**
@@ -78,6 +84,7 @@ class TiporenglonController extends Controller {
 	public function update($id)
 	{
         $trenglon=\App\TipoRenglon::find($id);
+		$trenglon->id_categoria=\Request::Input('categoria');
         $trenglon->descrip_tipo_renglon=\Request::Input('descripcion');
         $trenglon->save();
         return redirect('tiporenglon')->with('message','Se ha editado el registro');

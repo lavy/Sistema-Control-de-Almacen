@@ -42,6 +42,11 @@ class Oficinas extends Model {
         return $this->hasMany('App\Departamentos','id_oficina','id_oficina');
     }
 
+    public function jefes()
+    {
+        return $this->hasOne(Jefes::class,'id_oficina','id_oficina');
+    }
+
 
     /*public function scopeOficina($query,$tipo,$buscar)
     {

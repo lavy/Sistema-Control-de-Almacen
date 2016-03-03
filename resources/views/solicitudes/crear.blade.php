@@ -82,7 +82,10 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="col-md-6">
+                    {!!Form::label('categoria','Categoria:')!!}
+                    {!!Form::select('categoria',$categorias,'',['class'=>'form-control','id'=>'categoria'])!!}
+                </div>
 
                 <div class="col-md-6">
                     {!!Form::label('t_articulos','Tipo de Artículos:')!!}

@@ -16,6 +16,10 @@
             <div class="panel-heading" style="text-align:center;">EDITAR TIPO DE ARTICULO</div>
             <div class="panel-body">
                 <div class="col-md-6">
+                    {!!Form::label('categoria','Categoria:')!!}
+                    {!!Form::select('categoria',$categorias,$trenglon->id_categoria,['class'=>'form-control','id'=>'categoria'])!!}
+                </div>
+                <div class="col-md-6">
                     {!!Form::label('descripcion','Nueva Descripción:')!!}
                     {!!Form::text('descripcion',$trenglon->descrip_tipo_renglon,array('class'=>'form-control','id'=>'tipo_articulo'))!!}
                 </div>
